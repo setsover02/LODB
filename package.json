@@ -1,0 +1,19 @@
+{
+  "name": "lodb",
+  "version": "1.0.0",
+  "description": "My outstanding Nuxt.js project",
+  "author": "setsover02@naver.com",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
