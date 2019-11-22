@@ -17,7 +17,8 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [{ src: "//script.sheetsu.com/" }] // Google Spreadsheet
   },
   /*
    ** Customize the progress-bar color
@@ -43,9 +44,9 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
-    vuetify: {
-      treeShake: true,
-      customVariables: ["~/assets/variables.scss"],
+  vuetify: {
+    treeShake: true, // If use variable.scss
+    customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: true,
       themes: {
