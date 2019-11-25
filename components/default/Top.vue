@@ -34,12 +34,16 @@ export default {
       fixed: false,
       items: [
         {
-          title: 'Welcome',
-          to: '/'
+          title: 'items',
+          to: '/items'
         },
         {
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'Release',
+          to: '/release'
+        },
+        {
+          title: 'Var',
+          to: '/variables'
         }
       ],
       miniVariant: false,

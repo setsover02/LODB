@@ -1,6 +1,28 @@
 // Ref: https://github.com/nuxt-community/vuetify-module#customvariables
 //
 // The variables you want to modify
+// Typography
 $font-size-root: 14px;
 
+// Grid
 $grid-gutter: 8px !default;
+
+// Dark Theme color
+$theme-colors: (
+  t100: #373b76,
+  t200: #2f3365,
+  t300: #272a54,
+  t400: #1f2142,
+  t500: #171831
+);
+$shades: (
+  "white": #ffffff,
+  "black": #000000,
+  "transparent": transparent
+);
+
+// Data Table
+$data-table-regular-row-height: 40px !default;
+$data-table-regular-header-height: 40px !default;
+$data-table-dense-row-height: 32px !default;
+$data-table-dense-header-height: 32px !default;

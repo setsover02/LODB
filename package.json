@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "nuxt": "^2.0.0",
+    "nuxt-webfontloader": "^1.1.0",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0"
   },

@@ -33,18 +33,60 @@ v-row
 
     //- Character Data Table
     v-card.mt-2
-      v-data-table(v-model="selected" :headers="headers" :items="items" :search="search" sort-by="id" single-select show-select :expanded.sync="expanded" show-expand)
+      //- TODO: 페이지네이션 없애고 전체row 표기
+      v-data-table(v-model="selected" :headers="headers" :items="items" :items-per-page="100" fixed-header :search="search" sort-by="id" single-select show-select hide-default-footer height="650")
         template(v-slot:select)
           v-checkbox(color="orange")
         template(v-slot:item.avatar="{ item }")
-          v-avatar(size="36" color="grey darken-3")
+          v-avatar(size="32" color="grey darken-4")
             v-img(:src="item.avatar")
         template(v-slot:item.class="{ item }")
           v-chip(small :color="getClassColor(item.class)") {{ item.class }}
 
-  //- Calculating Form
   v-col(cols="4")
+    //- Character Info
     v-card
+      v-list-item
+        v-list-item-avatar(size="48" color="grey darken-3")
+          v-img(src="https://cdn.vuetifyjs.com/images/john.jpg")
+        v-list-item-content
+          v-list-item-title Name
+          v-list-item-subtitle A • B
+        v-row
+          v-chip(small) SS
+      v-divider
+      v-row
+        v-col
+          v-list.py-0(dense)
+            v-list-item
+              v-list-item-title Damage
+              v-list-item-subtitle.text-right 2870
+            v-list-item
+              v-list-item-title Crit
+              v-list-item-subtitle.text-right 205%
+            v-list-item
+              v-list-item-title Hit
+              v-list-item-subtitle.text-right 205%
+        v-divider(vertical)
+        v-col
+          v-list.py-0(dense)
+            v-list-item
+              v-list-item-title Hit
+              v-list-item-subtitle.text-right 205%
+            v-list-item
+              v-list-item-title Hit
+              v-list-item-subtitle.text-right 205%
+        v-divider(vertical)
+        v-col
+          v-list.py-0(dense)
+            v-list-item
+              v-list-item-title Hit
+              v-list-item-subtitle.text-right 205%
+            v-list-item
+              v-list-item-title Hit
+              v-list-item-subtitle.text-right 205%
+    //- Calculating Form
+    v-card.mt-2
       v-card-text
         label Link
         v-rating(v-model="rating" @input="" color="orange lighten-4" 
@@ -53,7 +95,7 @@ v-row
         span.overline (rating * 100%)
 </template>
 <script>
-// 데이터 테이블 계산식 적용 예시
+// vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
 const char = [
   {
@@ -77,7 +119,7 @@ const char = [
     health: '1,405',
     damage: '1,455',
     hit: '192%'
-  }
+  },
 ]
 export default {
   data: () => ({

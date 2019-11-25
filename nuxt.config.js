@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from "vuetify/es5/util/colors";
 
 export default {
   mode: "spa",
@@ -27,7 +27,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [{ src: "~assets/scss/main.scss" }],
   /*
    ** Plugins to load before mounting the App
    */
@@ -39,7 +39,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["nuxt-webfontloader"],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -51,15 +51,21 @@ export default {
       dark: true,
       themes: {
         dark: {
-          // primary: colors.blue.darken2,
-          // accent: colors.grey.darken3,
-          // secondary: colors.amber.darken3,
-          // info: colors.teal.lighten1,
-          // warning: colors.amber.base,
-          // error: colors.deepOrange.accent4,
-          // success: colors.green.accent3
+          t100: "#373B76",
+          t200: "#2F3365",
+          t300: "#272A54",
+          t400: "#1F2142",
+          t500: "#171831",
+          primary: "#647EFF",
+          secondary: "#7C60F7",
+          accent: "#DB35C7"
         }
       }
+    }
+  },
+  webfontloader: {
+    google: {
+      families: ["Noto Sans KR:100,300,400,500,700"]
     }
   },
   /*
