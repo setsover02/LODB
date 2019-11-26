@@ -34,23 +34,23 @@ export default {
       fixed: false,
       items: [
         {
-          title: 'items',
-          to: '/items'
+          title: "Char",
+          to: "/"
         },
         {
-          title: 'Release',
-          to: '/release'
+          title: "items",
+          to: "/items"
         },
         {
-          title: 'Var',
-          to: '/variables'
+          title: "Release",
+          to: "/release"
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'La Sim'
-    }
+      title: "La Sim"
+    };
   }
-}
+};
 </script>
