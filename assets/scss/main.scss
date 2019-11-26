@@ -1,4 +1,9 @@
 @charset 'utf-8';
 
-@import "base/base",
-				"base/typography";
+@import "../variables.scss",
+				"abstracts/_functions.sass",
+				"base/base",
+				"base/typography",
+				
+				"components/VChip",
+				"components/VDataTable";

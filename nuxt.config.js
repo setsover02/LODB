@@ -51,14 +51,28 @@ export default {
       dark: true,
       themes: {
         dark: {
+          // Basic theme color
           t100: "#373B76",
           t200: "#2F3365",
           t300: "#272A54",
           t400: "#1F2142",
           t500: "#171831",
-          primary: "#647EFF",
-          secondary: "#7C60F7",
-          accent: "#DB35C7"
+          // Key color
+          primary: "#647EFF", // Lilac
+          secondary: "#7C60F7", // Purple
+          accent: "#F8D4A1", // Yellow
+          // Optional color
+          purple: "#7C60F7",
+          lilac: "#647EFF",
+          blue: "#78A7F8",
+          skyblue: "#7FCBEC",
+          cyan: "#0AD8DD",
+          mint: "#7BE9CD",
+          green: "#C7F5A5",
+          yellow: "#F8D4A1",
+          orange: "#f4b771",
+          red: "#E36A98",
+          pink: "#E875C7"
         }
       }
     }

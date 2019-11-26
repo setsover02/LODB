@@ -11,17 +11,40 @@ $grid-gutter: 8px !default;
 $theme-colors: (
   t100: #373b76,
   t200: #2f3365,
-  t300: #272a54,
-  t400: #1f2142,
+  t300: #262953,
+  t400: #1b1d3c,
   t500: #171831
 );
+
+// $colors: (
+//   purple: #7C60F7,
+//   lilac: #647EFF,
+//   blue: #78A7F8,
+//   skyblue: #7FCBEC,
+//   cyan: #0AD8DD,
+//   mint: #7BE9CD,
+//   green: #C7F5A5,
+//   yellow: #F8D4A1,
+//   orange: #F49271,
+//   red: #E36A98,
+//   pink: #E875C7
+// );
+$opacity: (
+  100: 0,
+  80: 0.2,
+  54: 0.46,
+  30: 0.7,
+  20: 0.8,
+  10: 0.9,
+  5: 0.95
+);
 $shades: (
-  "white": #ffffff,
+  "white": #d4ebf7,
   "black": #000000,
   "transparent": transparent
 );
 
-@import "scss/var/_functions.sass";
+@import "scss/abstracts/_functions.sass";
 
 $material-dark: () !default;
 $material-dark: map-deep-merge(
@@ -31,25 +54,25 @@ $material-dark: map-deep-merge(
       "lights-out": rgba(map-get($shades, "black"), 0.2)
     ),
     "app-bar": map-get($theme-colors, "t500"),
-    "background": #303030,
+    "background": map-get($theme-colors, "t500"),
     "calendar": (
       "background-color": #303030,
       "outside-background-color": #202020,
-      "line-color": map-get($theme-colors, "base"),
+      "line-color": map-get($theme-colors, "t200"),
       "interval-color": map-get($theme-colors, "t100"),
       "interval-line-color": map-get($theme-colors, "t400"),
       "text-color": map-get($shades, "white"),
       "past-color": rgba(map-get($shades, "white"), 0.5)
     ),
-    "cards": map-get($theme-colors, "t300"),
-    "chips": #555,
+    "cards": map-get($theme-colors, "t400"),
+    "chips": map-get($theme-colors, "t300"),
     "dividers": rgba(map-get($shades, "white"), 0.12),
     "text": (
       "theme": map-get($shades, "white"),
       "primary": map-get($shades, "white"),
       "secondary": rgba(map-get($shades, "white"), 0.7),
       "disabled": rgba(map-get($shades, "white"), 0.5),
-      "link": #DB35C7,
+      "link": #7c60f7,
       "link-hover": map-get($theme-colors, "t100")
     ),
     "icons": (
@@ -60,16 +83,16 @@ $material-dark: map-deep-merge(
       "box": map-get($shades, "white"),
       "solo-inverted": rgba(map-get($shades, "white"), 0.16),
       "solo-inverted-focused": map-get($shades, "white"),
-      "solo-inverted-focused-text": #647EFF,
+      "solo-inverted-focused-text": #647eff
     ),
     "buttons": (
       "disabled": rgba(map-get($shades, "white"), 0.3),
       "focused": rgba(map-get($shades, "white"), 0.12),
       "focused-alt": rgba(map-get($shades, "white"), 0.1),
-      "pressed": rgba(#ccc, 0.25)
+      "pressed": rgba(map-get($theme-colors, "t100"), 0.25)
     ),
     "expansion-panels": (
-      "focus": #494949
+      "focus": map-get($theme-colors, "t200")
     ),
     "selection-controls": (
       "thumb": (
@@ -117,8 +140,8 @@ $material-dark: map-deep-merge(
       "hover": rgba(map-get($shades, "white"), 0.75)
     ),
     "table": (
-      "active": #505050,
-      "hover": map-get($theme-colors, "t400"),
+      "active": map-get($theme-colors, "t300"),
+      "hover": map-get($theme-colors, "t500"),
       "group": map-get($theme-colors, "t400")
     ),
     "picker": (
@@ -141,6 +164,34 @@ $material-dark: map-deep-merge(
     "inactive-icon-percent": 0.5
   ),
   $material-dark
+);
+
+// Chip
+$icon-sizes: () !default;
+$icon-sizes: map-deep-merge(
+  (
+    "x-small": (
+      "font-size": 10,
+      "height": 16
+    ),
+    "small": (
+      "font-size": 12,
+      "height": 24
+    ),
+    "default": (
+      "font-size": 14,
+      "height": 32
+    ),
+    "large": (
+      "font-size": 16,
+      "height": 54
+    ),
+    "x-large": (
+      "font-size": 18,
+      "height": 66
+    )
+  ),
+  $icon-sizes
 );
 
 // Data Table

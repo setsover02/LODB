@@ -2,7 +2,7 @@
 	v-row
 		v-col.mx-auto(cols="6")
 			v-timeline(dense align-top small)
-				v-timeline-item(v-for="n in 10")
+				v-timeline-item(v-for="n in 10" :key="n")
 					v-row
 						v-col(cols="auto")
 						v-col
