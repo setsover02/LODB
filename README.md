@@ -1,6 +1,6 @@
 # Setting
 
-> My outstanding Nuxt.js project
+> @nuxtjs/vuetify - 1.0.0
 
 ## Build Setup
 
