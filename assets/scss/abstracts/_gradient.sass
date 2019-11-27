@@ -1,0 +1,71 @@
+// Begin: Background linear-gradient
+// Theme Gradient
+@mixin linear-t100-t200($dir)
+  @include gradient($dir, theme-color(t100), theme-color(t200))
+
+@mixin linear-t200-t300($dir)
+  @include gradient($dir, theme-color(t200), theme-color(t300))
+
+@mixin linear-t300-t400($dir)
+  @include gradient($dir, theme-color(t300), theme-color(t400))
+
+@mixin linear-t400-t500($dir)
+  @include gradient($dir, theme-color(t400), theme-color(t500))
+
+@mixin radial-t100-t300($dir)
+  @include radial-gradient($dir, theme-color(t100), theme-color(t300))
+
+@mixin radial-t200-t400($dir)
+  @include radial-gradient($dir, theme-color(t200), theme-color(t400))
+
+@mixin radial-t300-t500($dir)
+  @include radial-gradient($dir, theme-color(t300), theme-color(t500))
+
+@mixin radial-t400-t500($dir)
+  @include radial-gradient($dir, theme-color(t400), theme-color(t500))
+  
+// Color Gradient
+@mixin linear-purple-lilac($dir)
+  @include gradient($dir, color(purple), color(lilac))
+
+@mixin linear-lilac-blue($dir)
+  @include gradient($dir, color(lilac), color(blue))
+
+@mixin linear-blue-skyblue($dir)
+  @include gradient($dir, color(blue), color(skyblue))
+
+@mixin linear-skyblue-cyan($dir)
+  @include gradient($dir, color(skyblue), color(cyan))
+
+@mixin linear-cyan-mint($dir)
+  @include gradient($dir, color(cyan), color(mint))
+
+@mixin linear-mint-green($dir)
+  @include gradient($dir, color(mint), color(green))
+
+@mixin linear-green-yellow($dir)
+  @include gradient($dir, color(green), color(yellow))
+
+@mixin linear-yellow-orange($dir)
+  @include gradient($dir, color(yellow), color(orange))
+
+@mixin linear-orange-red($dir)
+  @include gradient($dir, color(orange), color(red))
+
+@mixin linear-red-pink($dir)
+  @include gradient($dir, color(red), color(purple))
+
+@mixin linear-pink-purple($dir)
+  @include gradient($dir, color(pink), color(purple))
+
+@mixin text-transparent
+  background-clip: text
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+
+// text gradient sample
+// a {
+//   @include linear-blue-skyblue(45deg);
+//   @include text-transparent;
+// }
+// End: Background linear-gradient

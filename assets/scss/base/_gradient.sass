@@ -1,0 +1,41 @@
+.v-application
+  // Theme Gradient
+  .linear-t100
+    @include linear-t100-t200(to bottom right)
+  .linear-t200
+    @include linear-t200-t300(to bottom right)
+  .linear-t300
+    @include linear-t300-t400(to bottom right)
+  .linear-t400
+    @include linear-t400-t500(to bottom right)
+  .radial-t100
+    @include radial-t100-t300(at 33.333% 0%)
+  .radial-t200
+    @include radial-t200-t400(at 33.333% 0%)
+  .radial-t300
+    @include radial-t300-t500(at 33.333% 0%)
+  .radial-t400
+    @include radial-t400-t500(at 33.333% 0%)
+  // Color Gradient
+  .linear-purple
+    @include linear-purple-lilac(135deg)
+  .linear-lilac
+    @include linear-lilac-blue(135deg)
+  .linear-blue
+    @include linear-blue-skyblue(135deg)
+  .linear-skyblue
+    @include linear-skyblue-cyan(135deg)
+  .linear-cyan
+    @include linear-cyan-mint(135deg)
+  .linear-mint
+    @include linear-mint-green(135deg)
+  .linear-green
+    @include linear-green-yellow(135deg)
+  .linear-yellow
+    @include linear-yellow-orange(135deg)
+  .linear-orange
+    @include linear-orange-red(135deg)
+  .linear-red
+    @include linear-red-pink(135deg)
+  .linear-pink
+    @include linear-pink-purple(135deg)

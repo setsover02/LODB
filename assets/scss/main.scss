@@ -1,9 +1,15 @@
 @charset 'utf-8';
 
 @import "../variables.scss",
+				"abstracts/color",
+				"abstracts/prefix",
+				"abstracts/_gradient.sass", // mixin > helper classes in base/gradient.scss
 				"abstracts/_functions.sass",
+
 				"base/base",
 				"base/typography",
+				"base/_gradient.sass",
 				
-				"components/VChip",
-				"components/VDataTable";
+				"components/VDataTable",
+				
+				"theme/dark";

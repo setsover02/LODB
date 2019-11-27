@@ -3,6 +3,7 @@
 // The variables you want to modify
 // Typography
 $font-size-root: 14px;
+$body-font-family: 'Roboto', 'Noto Sans KR', san-serif;
 
 // Grid
 $grid-gutter: 8px !default;
@@ -16,28 +17,6 @@ $theme-colors: (
   t500: #171831
 );
 
-// $colors: (
-//   purple: #7C60F7,
-//   lilac: #647EFF,
-//   blue: #78A7F8,
-//   skyblue: #7FCBEC,
-//   cyan: #0AD8DD,
-//   mint: #7BE9CD,
-//   green: #C7F5A5,
-//   yellow: #F8D4A1,
-//   orange: #F49271,
-//   red: #E36A98,
-//   pink: #E875C7
-// );
-$opacity: (
-  100: 0,
-  80: 0.2,
-  54: 0.46,
-  30: 0.7,
-  20: 0.8,
-  10: 0.9,
-  5: 0.95
-);
 $shades: (
   "white": #d4ebf7,
   "black": #000000,
@@ -56,8 +35,8 @@ $material-dark: map-deep-merge(
     "app-bar": map-get($theme-colors, "t500"),
     "background": map-get($theme-colors, "t500"),
     "calendar": (
-      "background-color": #303030,
-      "outside-background-color": #202020,
+      "background-color": map-get($theme-colors, "t500"),
+      "outside-background-color": map-get($theme-colors, "t400"),
       "line-color": map-get($theme-colors, "t200"),
       "interval-color": map-get($theme-colors, "t100"),
       "interval-line-color": map-get($theme-colors, "t400"),
@@ -65,7 +44,7 @@ $material-dark: map-deep-merge(
       "past-color": rgba(map-get($shades, "white"), 0.5)
     ),
     "cards": map-get($theme-colors, "t400"),
-    "chips": map-get($theme-colors, "t300"),
+    "chips": map-get($theme-colors, "t200"),
     "dividers": rgba(map-get($shades, "white"), 0.12),
     "text": (
       "theme": map-get($shades, "white"),
@@ -140,20 +119,20 @@ $material-dark: map-deep-merge(
       "hover": rgba(map-get($shades, "white"), 0.75)
     ),
     "table": (
-      "active": map-get($theme-colors, "t300"),
-      "hover": map-get($theme-colors, "t500"),
+      "active": rgba(#7c60f7, 0.3),
+      "hover": rgba(map-get($shades, "white"), 0.15),
       "group": map-get($theme-colors, "t400")
     ),
     "picker": (
       "body": map-get($theme-colors, "t300"),
       "clock": map-get($theme-colors, "t400"),
-      "indeterminateTime": map-get($theme-colors, "darken-1"),
+      "indeterminateTime": map-get($theme-colors, "t100"),
       "title": map-get($theme-colors, "t400")
     ),
     "color-picker": (
       "checkerboard": rgba(map-get($shades, "white"), 0.12)
     ),
-    "bg-color": #303030,
+    "bg-color": map-get($theme-colors, "t500"),
     "fg-color": map-get($shades, "white"),
     "text-color": map-get($shades, "white"),
     "primary-text-percent": 1,

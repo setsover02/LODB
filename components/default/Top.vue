@@ -8,7 +8,7 @@
             v-list-item-content
               v-list-item-title(v-text="item.title")
 
-    v-app-bar(:clipped-left="clipped" fixed app)
+    v-app-bar(:clipped-left="clipped" fixed app color="t300" elevate-on-scroll)
       //- v-app-bar-nav-icon(@click.stop="drawer = !drawer")
       //- v-btn(icon @click.stop="miniVariant = !miniVariant")
         //- v-icon mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}

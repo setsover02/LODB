@@ -1,0 +1,18 @@
+// Dark theme background color changed
+.theme--dark {
+  &.v-application {
+    @include radial-t400-t500(at 50% 0%);
+  }
+
+  &.v-chip {
+    color: theme-color(t500) !important;
+  }
+
+  &.v-data-table {
+    background-color: transparent !important;
+    // Fixed Header color
+    &.v-data-table--fixed-header thead th {
+      background-color: theme-color(t300) !important;
+    }
+  }
+}

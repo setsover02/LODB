@@ -70,10 +70,9 @@
   @return $result
 
 @function color($key, $tone: 100)
-  $color: transparentize(map-get($light-colors, $key), (map-get($opacity, $tone)))
+  $color: transparentize(map-get($dark-colors, $key), (map-get($opacity, $tone)))
   @return $color
 
 @function theme-color($key, $tone: 100)
   $theme-color: transparentize(map-get($theme-colors, $key), (map-get($opacity, $tone)))
   @return $theme-color
-
