@@ -21,3 +21,9 @@ $ yarn generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
+
+
+{% embed url="https://sheetsu.com/" caption="Google Sheet 연동 시" %}
+
+
+
