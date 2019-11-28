@@ -1,9 +1,9 @@
 <template lang="pug">
 v-row
-  v-col(cols="8")
+  v-col(cols="9")
     v-card.radial-t200.pl-1
       //- TODO: Search Config
-      v-form(ref="form")
+      v-form(ref="formSearch")
         v-row
           v-col
             //- 검색 필터: 테이블 데이터와 동기화 중
@@ -63,9 +63,12 @@ v-row
             v-img(:src="item.equip.e3")
           v-avatar(size="18" tile color="t500")
             v-img(:src="item.equip.e4")
-
+      v-card.radial-t200
+        v-card-text
+          v-btn(href="https://app.gitbook.com/@setsover02/s/lodb/" target="blank" color="primary") GitBook  
+  v-col(cols="3")
     //- Character Info
-    v-card.mt-2.radial-t200
+    v-card.radial-t200
       v-list-item
         v-list-item-avatar(size="48" color="t500")
           v-img(src="https://cdn.vuetifyjs.com/images/john.jpg")
@@ -75,47 +78,52 @@ v-row
         v-list-item-icon
           v-chip(label small color="yellow") SS
       v-divider
-      //- Calculating Form
-      v-card-title.overline Enh
-      v-form.pa-4.pt-0(ref="formEnh")
+      //- Enhance Form
+      v-card-title.caption.pb-0 Enh
+        span.ml-auto.yellow--text.caption {{ getEnhTotal }}
+      v-form.pa-4(ref="formEnh")
         v-row
           v-col
-            v-text-field(label="Damage" v-model="formEnh.damageEnh" 
-            dense flat
-            type="number" counter maxlength="3")
+            label.overline Damage
+            v-text-field(v-model="formEnh.damageEnh" 
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
           v-col
+            label.overline Health
             v-text-field(label="Health" v-model="formEnh.healthEnh" 
-            dense flat
-            type="number" counter maxlength="3")
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
           v-col
+            label.overline Defense
             v-text-field(label="Defense" v-model="formEnh.defenseEnh" 
-            dense flat
-            type="number" counter maxlength="3")
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
           v-col
+            label.overline Hit
             v-text-field(label="Hit" v-model="formEnh.hitEnh" 
-            dense flat
-            type="number" counter maxlength="3")
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
           v-col
+            label.overline Crit
             v-text-field(label="Crit" v-model="formEnh.critEnh" 
-            dense flat
-            type="number" counter maxlength="3")
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
           v-col
+            label.overline Dodge
             v-text-field(label="Dodge" v-model="formEnh.dodgeEnh" 
-            dense flat
-            type="number" counter maxlength="3")
-    //- Calculating Form
-    //- v-card.mt-2.radial-t200
-    //-   v-card-text
-    //-     label Link
-    //-     v-rating(v-model="rating" color="accent" 
-    //-     full-icon="mdi-link-variant" empty-icon="mdi-link-variant-off"
-    //-     clearable background-color="t500")
-    //-     span.overline (rating * 100%)
-  //- 임시
-  Terms
+            dense flat solo hide-details
+            type="number" counter maxlength="3" autocomplete="off")
+      v-divider
+      v-card-title.caption.pb-0 Link
+      //- 링크 퍼센티지
+      v-card-text
+        v-slider(v-model="link" :color="linkColor" thumb-label min="0" max="5" step="0.25" ticks="always")
+          template(v-slot:prepend)
+            v-icon(@click="linkMin") mdi-minus
+          template(v-slot:append)
+            v-icon(@click="linkMax") mdi-plus
 </template>
 <script>
-import Terms from '~/components/Terms'
 // vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
 // {{ Math.floor( value.atkbase + value.atkcoef * (level - 1) + atkEnh * 1.5 ) }}
@@ -197,7 +205,7 @@ export default {
       dodgeEnh: 0 // *
     },
     enhPoint: true,
-    rating: null,
+    link: 5,
     headers: [
       {
         text: 'ID',
@@ -294,10 +302,37 @@ export default {
       else if (rarity === 'S') return 'yellow'
       else if (rarity === 'A') return 'blue'
       else return 'green' // B
+    },
+    // Link percentage S;ider
+    // 풀링크
+    linkMax() {
+      this.link = 5
+    },
+    // 링크 제거
+    linkMin() {
+      this.link = 0
     }
   },
-  components: {
-    Terms
+  computed: {
+    // 스탯 잔여포인트 계산
+    getEnhTotal() {
+        return 270 - // Level * 3
+        (parseInt(this.formEnh.damageEnh) +
+        parseInt(this.formEnh.healthEnh) +
+        parseInt(this.formEnh.defenseEnh) +
+        parseInt(this.formEnh.hitEnh) +
+        parseInt(this.formEnh.critEnh) +
+        parseInt(this.formEnh.dodgeEnh))
+    },
+    // 링크 슬라이더 색상
+    linkColor() {
+      if (this.link < 1) return 'red'
+      if (this.link < 2) return 'yellow'
+      if (this.link < 3) return 'green'
+      if (this.link < 4) return 'mint'
+      if (this.link < 4.99) return 'cyan'
+      return 'blue'
+    }
   }
 }
 </script>
