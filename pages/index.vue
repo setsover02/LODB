@@ -50,7 +50,7 @@ v-row
           v-avatar(size="32" color="t500")
             v-img(:src="item.avatar")
         template(v-slot:item.rarity="{ item }")
-          v-chip(small :color="getRarityColor(item.rarity)") {{ item.rarity }}
+          RarityChip(v-bind:rarity="item.rarity")
         template(v-slot:item.damage="{ item }")
           span {{ Math.floor(item.damage + (formEnh.damageEnh * 1.5)) }}
         template(v-slot:item.equip="{ item }")
@@ -63,26 +63,44 @@ v-row
             v-img(:src="item.equip.e3")
           v-avatar(size="18" tile color="t500")
             v-img(:src="item.equip.e4")
+        //- TODO: Description 수정
+        template(v-slot:item.desc="props")
+          v-edit-dialog(:return-value.sync="props.item.desc" @save="descSave" @cancel="descCancel" @open="descOpen" @close="descClose" large persistent)
+            span {{ props.item.desc }}
+            template(v-slot:input)
+              v-text-field(v-model="props.item.desc" :rules="[max8chars]" counter="8" autofocus)
       v-card.radial-t200
         v-card-text
           v-btn(href="https://app.gitbook.com/@setsover02/s/lodb/" target="blank" color="primary") GitBook  
   v-col(cols="3")
-    //- Character Info
-    v-card.radial-t200
-      v-list-item
-        v-list-item-avatar(size="48" color="t500")
-          v-img(src="https://cdn.vuetifyjs.com/images/john.jpg")
-        v-list-item-content
-          v-list-item-title Name
-          v-list-item-subtitle A • B
-        v-list-item-icon
-          v-chip(label small color="yellow") SS
-      v-divider
-      //- Enhance Form
-      v-card-title.caption.pb-0 Enh
-        span.ml-auto.yellow--text.caption {{ getEnhTotal }}
-      v-form.pa-4(ref="formEnh")
-        v-row
+    v-form(ref="formEnh")
+      //- Character Info
+      v-card.radial-t200
+        v-list-item
+          v-list-item-avatar(size="48" color="t500")
+            v-img(src="https://cdn.vuetifyjs.com/images/john.jpg")
+          v-list-item-content
+            v-list-item-title Name
+            v-list-item-subtitle A • B
+          v-list-item-conetnt.align-center
+            //- 더미데이터 바인드 됨
+            RarityChip(v-bind:rarity="rarity")
+          v-list-item-action
+            v-btn(icon)
+              v-icon mdi-bookmark-outline
+        v-divider
+        //- Enhance Form
+        //- 강화 수치
+        v-row.pa-4(align="center" no-gutter)
+          v-col.caption Level
+          v-col
+            v-text-field(dense flat solo hide-details
+            type="number" autocomplete="off")
+        v-divider
+        v-row.pa-4.pb-2
+          v-col.caption Enh
+          v-col(cols="auto").yellow--text.caption {{ getEnhTotal }}
+        v-row.px-4.pb-4
           v-col
             label.overline Damage
             v-text-field(v-model="formEnh.damageEnh" 
@@ -113,17 +131,31 @@ v-row
             v-text-field(label="Dodge" v-model="formEnh.dodgeEnh" 
             dense flat solo hide-details
             type="number" counter maxlength="3" autocomplete="off")
-      v-divider
-      v-card-title.caption.pb-0 Link
-      //- 링크 퍼센티지
-      v-card-text
-        v-slider(v-model="link" :color="linkColor" thumb-label min="0" max="5" step="0.25" ticks="always")
-          template(v-slot:prepend)
-            v-icon(@click="linkMin") mdi-minus
-          template(v-slot:append)
-            v-icon(@click="linkMax") mdi-plus
+        v-divider
+        //- 링크 퍼센티지
+        v-card-title.caption Link
+        v-card-text
+          v-slider(v-model="link" :color="linkColor" thumb-label min="0" max="5" step="0.25" ticks="always")
+            template(v-slot:prepend)
+              v-icon(@click="linkMin") mdi-minus
+            template(v-slot:append)
+              v-icon(@click="linkMax") mdi-plus
+        v-divider
+        v-row.pa-4
+          v-col(cols="12").caption Item
+          v-col(cols="6")
+            v-select(:items="typeFilter" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+          v-col(cols="6")
+            v-select(:items="typeFilter" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+          v-col(cols="6")
+            v-select(:items="typeFilter" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
+          v-col(cols="6")
+            v-select(:items="typeFilter" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
+  v-snackbar(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
+    v-btn(text @click="snack = false") Close
 </template>
 <script>
+import RarityChip from '~/components/RarityChip'
 // vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
 // {{ Math.floor( value.atkbase + value.atkcoef * (level - 1) + atkEnh * 1.5 ) }}
@@ -148,7 +180,8 @@ const char = [
       e2: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
       e3: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
       e4: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
-    }
+    },
+    desc: '가나다라마바사'
   },
   {
     id: '003',
@@ -188,6 +221,9 @@ const char = [
   }
 ]
 export default {
+  components: {
+    RarityChip
+  },
   data: () => ({
     search: '',
     gradesFilter: ['SS', 'S', 'A', 'B'],
@@ -195,6 +231,11 @@ export default {
     roleFilter: ['공격기', '보호기', '지원기'],
     items: char,
     selected: [],
+    snack: false,
+    snackColor: '',
+    snackText: '',
+    max8char: v => v.length <= 8 || 'Input too long!',
+    rarity: 'SS',
     // 강화 수치 폼
     formEnh: {
       damageEnh: 0, // * 1.5
@@ -204,7 +245,6 @@ export default {
       critEnh: 0, // * 0.4%
       dodgeEnh: 0 // *
     },
-    enhPoint: true,
     link: 5,
     headers: [
       {
@@ -292,18 +332,35 @@ export default {
         align: 'right',
         sortable: false,
         value: 'equip'
+      },
+      {
+        text: 'desc',
+        sortable: false,
+        value: 'desc'
       }
     ]
   }),
   methods: {
-    // 데이터 테이블 rarity 칩 색상
-    getRarityColor(rarity) {
-      if (rarity === 'SS') return 'orange'
-      else if (rarity === 'S') return 'yellow'
-      else if (rarity === 'A') return 'blue'
-      else return 'green' // B
+    // Desc
+    descSve() {
+      this.snack = true
+      this.snackColor = 'green'
+      this.snackText = 'Data saved'
     },
-    // Link percentage S;ider
+    descCancel() {
+      this.snack = true
+      this.snackColor = 'red'
+      this.snackText = 'Canceled'
+    },
+    descOpen() {
+      this.snack = true
+      this.snackColor = 'lilac'
+      this.snackText = 'Dialog opened'
+    },
+    descClose() {
+      console.log('Dialog closed')
+    },
+    // Link percentage Slider
     // 풀링크
     linkMax() {
       this.link = 5
@@ -316,13 +373,15 @@ export default {
   computed: {
     // 스탯 잔여포인트 계산
     getEnhTotal() {
-        return 270 - // Level * 3
+      return (
+        270 - // = Level * 3
         (parseInt(this.formEnh.damageEnh) +
-        parseInt(this.formEnh.healthEnh) +
-        parseInt(this.formEnh.defenseEnh) +
-        parseInt(this.formEnh.hitEnh) +
-        parseInt(this.formEnh.critEnh) +
-        parseInt(this.formEnh.dodgeEnh))
+          parseInt(this.formEnh.healthEnh) +
+          parseInt(this.formEnh.defenseEnh) +
+          parseInt(this.formEnh.hitEnh) +
+          parseInt(this.formEnh.critEnh) +
+          parseInt(this.formEnh.dodgeEnh))
+      )
     },
     // 링크 슬라이더 색상
     linkColor() {
