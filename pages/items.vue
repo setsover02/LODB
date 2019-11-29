@@ -4,7 +4,7 @@ div
 		v-col
 			v-data-iterator(:items="items" :search="search" hide-default-footer)
 				template(v-slot:header)
-					v-card.mb-1
+					v-card.mb-1.radial-t200
 						v-row
 							v-col.pl-3(cols="auto")
 								//- TODO: 장비 종류
@@ -20,15 +20,15 @@ div
 									v-chip(label small active-class="blue--text") A
 									v-chip(label small active-class="mint--text") B
 							v-divider(vertical)
-							v-col
+							v-col.pr-2
 								v-text-field(v-model="search" label="Search" prepend-inner-icon="mdi-magnify"
-								hide-details color="primary" solo flat)
+								hide-details color="primary" background-color="transparent" solo flat)
 				template(v-slot:default="props")
 					//- Item Card
 					v-row
 						//- TODO: key 값 수정해야함. item.name, item.class 두 개를 되게하면 좋음, 또는 아이템 고유아이디 사용
 						v-col(cols="3" v-for="item in props.items" :key="item.name")
-							v-card
+							v-card.radial-t200
 								v-list-item
 									v-list-item-avatar(size="48" color="t500" tile)
 										v-img(src="https://cdn.vuetifyjs.com/images/john.jpg")

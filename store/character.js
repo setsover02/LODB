@@ -1,4 +1,10 @@
 // Character Json, Search, etc...
 export const state = () => ({
-  name: ""
+  name: null,
 });
+
+export const getters = {
+  getName(state) {
+    return state.name;
+  }
+};

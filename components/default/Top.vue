@@ -49,7 +49,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "La Sim"
+      title: "Sim"
     };
   }
 };
