@@ -1,7 +1,6 @@
 <template lang="pug">
 v-row
   DataTable
-    v-btn.mt-4(href="https://app.gitbook.com/@setsover02/s/lodb/" target="blank" color="primary") GitBook  
   v-col(cols="3")
     //- Input Form
     SimulatingForm
