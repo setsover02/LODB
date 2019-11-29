@@ -1,9 +1,13 @@
 <template lang="pug">
 v-card
-	v-card-title {{ this.$store.state.counter }}
+	v-card-title {{ counter }}
 </template>
 <script>
 export default {
-
+	computed: {
+		counter() {
+			return this.$store.state.stat.counter
+		}
+	}
 }
 </script>

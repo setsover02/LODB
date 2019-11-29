@@ -1,49 +1,12 @@
 <template lang="pug">
 v-row
   v-col(cols="9")
-    v-card.radial-t200.pl-1
-      //- TODO: Search Config
-      v-form(ref="formSearch")
-        v-row
-          v-col
-            //- 검색 필터: 테이블 데이터와 동기화 중
-            v-autocomplete(v-model="search" :items="items" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
-              //- 선택 데이터 표기(삭제시 이름만 출력)
-              template(v-slot:selection="data")
-                v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
-                  v-avatar(left)
-                    v-img(:src="data.item.avatar")
-                  | {{ data.item.name }}
-              //- 리스트에 아바타 추가
-              template(v-slot:item="data")
-                template(v-if="typeof data.item !== 'object'")
-                  v-list-item-content(v-text="data.item")
-                template(v-else)
-                  v-list-item-avatar(size="24")
-                    v-img(:src="data.item.avatar")
-                  v-list-item-content
-                    v-list-item-title(v-html="data.item.name")
-
-          v-divider(vertical)
-          v-col.pl-3(cols="auto")
-            //- TODO: 등급 필터
-            v-chip-group.pt-1(multiple active-class="accent--text")
-              v-chip(label small v-for="rarity in gradesFilter" :key="rarity") {{ rarity }}
-          v-divider(vertical)
-          v-col.pl-3(cols="auto")
-            //- TODO: 타입 필터
-            v-chip-group.pt-1(multiple active-class="accent--text")
-              v-chip(label small v-for="type in typeFilter" :key="type") {{ type }}
-          v-divider(vertical)
-          v-col.pl-3(cols="auto")
-            //- TODO: 역힐 필터
-            v-chip-group.pt-1(multiple active-class="accent--text")
-              v-chip(label small v-for="role in roleFilter" :key="role") {{ role }}
-
+    //- Character Search
+    SearchForm
     //- Character Data Table
     v-card.mt-2.radial-t200
       //- TODO: 페이지네이션 없애고 전체row 표기
-      v-data-table(v-model="selected" :headers="headers" :items="items" :items-per-page="100" fixed-header :search="search" sort-by="id" single-select show-select hide-default-footer height="430")
+      v-data-table(v-model="selected" :headers="headers" :items="items" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430")
         template(v-slot:select)
           v-checkbox(color="orange")
         template(v-slot:item.avatar="{ item }")
@@ -64,11 +27,11 @@ v-row
           v-avatar(size="18" tile color="t500")
             v-img(:src="item.equip.e4")
         //- TODO: Description 수정
-        template(v-slot:item.desc="props")
-          v-edit-dialog(:return-value.sync="props.item.desc" @save="descSave" @cancel="descCancel" @open="descOpen" @close="descClose" large persistent)
-            span {{ props.item.desc }}
+        template(v-slot:item.memo="props")
+          v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
+            span {{ props.item.memo }}
             template(v-slot:input)
-              v-text-field(v-model="props.item.desc" :rules="[max8chars]" counter="8" autofocus)
+              v-text-field(v-model="props.item.memo" :rules="[max8chars]" counter="8" autofocus)
       v-card.radial-t200
         v-card-text
           v-btn(href="https://app.gitbook.com/@setsover02/s/lodb/" target="blank" color="primary") GitBook  
@@ -82,7 +45,7 @@ v-row
           v-list-item-content
             v-list-item-title Name
             v-list-item-subtitle A • B
-          v-list-item-conetnt.align-center
+          v-list-item-content.align-center
             //- 더미데이터 바인드 됨
             RarityChip(v-bind:rarity="rarity")
           v-list-item-action
@@ -144,18 +107,22 @@ v-row
         v-row.pa-4
           v-col(cols="12").caption Item
           v-col(cols="6")
-            v-select(:items="typeFilter" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+            v-select(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
           v-col(cols="6")
-            v-select(:items="typeFilter" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+            v-select(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
           v-col(cols="6")
-            v-select(:items="typeFilter" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
+            v-select(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
           v-col(cols="6")
-            v-select(:items="typeFilter" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
-  v-snackbar(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
-    v-btn(text @click="snack = false") Close
+            v-select(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
+    Todo
+  //- Data Table Memo 관련 스낵바
+  v-snackbar.t500--text(v-model="snack" :timeout="3000" :color="snackColor" top right) {{ snackText }}
+    v-btn(text @click="snack = false" color="t500") 닫기
 </template>
 <script>
+import SearchForm from '~/components/character/SearchForm'
 import RarityChip from '~/components/RarityChip'
+import Todo from '~/components/Todo'
 // vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
 // {{ Math.floor( value.atkbase + value.atkcoef * (level - 1) + atkEnh * 1.5 ) }}
@@ -181,7 +148,7 @@ const char = [
       e3: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
       e4: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
     },
-    desc: '가나다라마바사'
+    memo: '가나다라마바사'
   },
   {
     id: '003',
@@ -222,19 +189,19 @@ const char = [
 ]
 export default {
   components: {
-    RarityChip
+    SearchForm,
+    RarityChip,
+    Todo
   },
   data: () => ({
     search: '',
-    gradesFilter: ['SS', 'S', 'A', 'B'],
-    typeFilter: ['기동형', '경장형', '중장형'],
-    roleFilter: ['공격기', '보호기', '지원기'],
     items: char,
     selected: [],
+    dummy: [ '1', '2', '3',],
     snack: false,
     snackColor: '',
     snackText: '',
-    max8char: v => v.length <= 8 || 'Input too long!',
+    max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rarity: 'SS',
     // 강화 수치 폼
     formEnh: {
@@ -334,30 +301,30 @@ export default {
         value: 'equip'
       },
       {
-        text: 'desc',
+        text: 'memo',
         sortable: false,
-        value: 'desc'
+        value: 'memo'
       }
     ]
   }),
   methods: {
-    // Desc
-    descSve() {
+    // Memo
+    memoSave() {
       this.snack = true
       this.snackColor = 'green'
-      this.snackText = 'Data saved'
+      this.snackText = '저장되었습니다.'
     },
-    descCancel() {
+    memoCancel() {
       this.snack = true
       this.snackColor = 'red'
-      this.snackText = 'Canceled'
+      this.snackText = '작성이 취소되었습니다.'
     },
-    descOpen() {
-      this.snack = true
+    memoOpen() {
+      this.snack = false
       this.snackColor = 'lilac'
       this.snackText = 'Dialog opened'
     },
-    descClose() {
+    memoClose() {
       console.log('Dialog closed')
     },
     // Link percentage Slider
@@ -371,6 +338,9 @@ export default {
     }
   },
   computed: {
+    name() {
+      this.$store.state.character.name
+    },
     // 스탯 잔여포인트 계산
     getEnhTotal() {
       return (
