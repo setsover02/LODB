@@ -43,28 +43,28 @@
 | ehn | 강화 포인트 \(입력\) Level \* 3 최대값 |
 | ehnCoef | 강화 포인트 1당 증가 수치 |
 | itemCoef | 아이템으로 증가하는 수치 |
-| linkCoef | 1링크  시 증가하는 수 |
+| linkCoef | 1링크 시 증가하는 수 |
 | buffCoef | 기타 버프로 증가하는 수치 |
 
 데미지 계산식
 
 ```text
-// Level up
+// 1레벨 데미지 + (레벨업 증가 데미지 * (레벨 - 1)) = D
 DamageBase + (DamageCoef * (Level- 1)) = D
 
-// Enhance
+// D + (데미지 강화 수치 * 강화1당 증가수치) = DEnh
 D + (DamageEhn * DamageEnhCoef) = DEnh
 
-// Item
+// DEnh + 아이템 능력치
 DEnh + DamageItemCoef = DI
 
-// Link Bonus (if percentage)
+// DI * (1 + (1 링크 시 증가 데미지 * 링크 퍼센티지 총량)) = DL
 DI * (1 + (DamageLinkCoef * Link)) = DL
 
-// Buff
+// DL * (1 + 데미지 버프(이거 아이템인 경우도 있으면 여기에 추가해야될 수도 있음)) = Damage
 DL * (1 + DamageBuffCoef) = Damage
 
-// Skill coefficient
+// Damage * 스킬계수 = 최종 스킬 데미지
 Damage * SkillCoef = SkillDamage
 ```
 

@@ -147,7 +147,8 @@ export default {
     snack: false,
     snackColor: '',
     snackText: '',
-    items: char,
+		items: char,
+		name: null,
     rarityFilter: ['SS', 'S', 'A', 'B'],
     typeFilter: ['기동형', '경장형', '중장형'],
     roleFilter: ['공격기', '보호기', '지원기'],
@@ -239,7 +240,8 @@ export default {
         value: 'equip'
       },
       {
-        text: 'memo',
+				text: 'memo',
+				align: 'right',
         sortable: false,
         value: 'memo'
       }
