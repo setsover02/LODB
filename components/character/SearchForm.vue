@@ -66,10 +66,7 @@ const char = [
 ]
 export default {
   data: () => ({
-		items: char,
-    rarityFilter: ['SS', 'S', 'A', 'B'],
-    typeFilter: ['기동형', '경장형', '중장형'],
-    roleFilter: ['공격기', '보호기', '지원기']
+
 	}),
 	methods: {
 		name() {

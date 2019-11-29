@@ -4,10 +4,13 @@ v-card
 </template>
 <script>
 export default {
-	computed: {
-		counter() {
-			return this.$store.state.stat.counter
-		}
-	}
+	methods: {
+		
+	},
+  computed: {
+    counter() {
+      return this.$store.state.simulating.counter
+    }
+  }
 }
 </script>
