@@ -74,7 +74,7 @@ v-col(cols="9")
         v-btn(@click="deleteItem(item)" icon small)
           v-icon(small) mdi-close
       //- Data Table Memo 관련 스낵바
-    v-snackbar.t500--text(v-model="snack" :timeout="3000" :color="snackColor" top right) {{ snackText }}
+    v-snackbar.body-2.t500--text(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
       v-btn(text @click="snack = false" color="t500") 닫기
     //- v-divider
     //- v-card-text 1. 전체 캐릭터 데이터가 나오는 것이 아니라 search폼에서 해당 캐릭터 검색 시 해당 캐릭터 row만 보여줌
