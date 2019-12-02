@@ -38,9 +38,12 @@ v-col(cols="9")
           //- TODO: 역할 필터
           v-chip-group.pt-1(multiple active-class="accent--text")
             v-chip(label small v-for="role in roleFilter" :key="role") {{ role }}
+
   v-card.mt-2.radial-t200
     //- TODO: 페이지네이션 없애고 전체row 표기
-    v-data-table(v-model="selected" :headers="headers" :items="items" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430")
+    //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
+    //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
+    v-data-table(v-model="selected" :headers="headers" :items="items" :key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430" @click:row="")
       template(v-slot:select)
         v-checkbox(color="orange")
       template(v-slot:item.avatar="{ item }")
@@ -52,13 +55,13 @@ v-col(cols="9")
         span {{ item.damage + damageEnh * 1.5 }}
       template(v-slot:item.equip="{ item }")
         //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
-        v-avatar.mr-1.radius-4(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
           v-img(:src="item.equip.e1")
-        v-avatar.mr-1.radius-4(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
           v-img(:src="item.equip.e2")
-        v-avatar.mr-1.radius-4(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
           v-img(:src="item.equip.e3")
-        v-avatar.radius-4(size="18" tile color="t500")
+        v-avatar.radius-4(size="24" tile color="t500")
           v-img(:src="item.equip.e4")
       //- TODO: Description 수정
       template(v-slot:item.memo="props")
@@ -99,9 +102,9 @@ const char = [
     ap: '4.05',
     equip: {
       e1: '',
-      e2: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-      e3: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-      e4: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
+      e2: require('~/assets/img/items/414.png'),
+      e3: require('~/assets/img/items/414.png'),
+      e4: require('~/assets/img/items/414.png'),
     },
     memo: '기본',
     actions: ''
@@ -299,8 +302,6 @@ export default {
     }
   },
   computed: {
-    // REVIEW: 스토어로 옮기고부터 동기화 안됨. 검색필터 수정해야함
-
     damageEnh() {
       return this.$store.state.damageEnh
     }

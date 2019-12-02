@@ -1,5 +1,6 @@
 <template lang="pug">
 //- Character Info
+//- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200
   v-form(ref="form")
     v-list-item.py-2
@@ -8,8 +9,10 @@ v-card.radial-t200
       v-list-item-content
         v-list-item-title 라비아타 프로토타입
         v-list-item-subtitle Type • Role
+      //- TODO: 초기화 시 하단 폼에 입력한 내용 전체 초기화(우선순위 낮음)
       v-list-item-action
         v-btn(text color="primary") 초기화
+      //- TODO: 저장 시 해당 폼의 정보가 DataTable에 추가되어야 함  
       v-list-item-action
         v-btn(color="primary") 저장
     v-divider
@@ -25,6 +28,7 @@ v-card.radial-t200
         v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
         type="number" autocomplete="off")
       v-col(cols="4").px-4
+        //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
         v-switch.mt-0.pt-0(color="accent" hide-details)
           template(v-slot:label)
             span.overline 자버프 적용
@@ -36,22 +40,23 @@ v-card.radial-t200
     //- 강화 수치
     v-row.px-4.pb-4
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
+        span.pr-4.caption.accent--text 1431
         v-text-field(v-model="damageEnh"
             dense flat solo hide-details suffix="공격력"
             type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        span.pr-4.caption.accent--text 7654
         v-text-field(v-model="healthEnh" 
             dense flat solo hide-details suffix="체력"
             type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        span.pr-4.caption.accent--text 431
         v-text-field(v-model="defenseEnh" 
             dense flat solo hide-details suffix="방어력"
             type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        span.pr-4.caption.accent--text 202%
         v-text-field(v-model="hitEnh" 
             dense flat solo hide-details suffix="적중"
             type="number" counter maxlength="3" autocomplete="off")
@@ -73,8 +78,8 @@ v-card.radial-t200
         v-chip.ml-3.white--text(small color='primary') 500%
       v-col(cols="auto")
         v-btn(small text color="primary") Max
-    //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
     v-row.px-4
+      //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
         v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
@@ -86,6 +91,7 @@ v-card.radial-t200
       v-col
         v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
     v-row.pa-4(align="center")
+      //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
         v-select(:items="dummy" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
     v-divider
@@ -103,32 +109,36 @@ v-card.radial-t200
     v-row.px-4.py-2
       v-col(cols="12").subtitle-2 기타 능력치
       v-col(cols="4")
-        v-list-item.px-0
-          v-list-item-content
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
             v-list-item-title.body-1 행동력
-            v-list-item-subtitle 4.01
-        v-list-item.px-0
-          v-list-item-content
+          v-list-item-content.caption 4.01
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
             v-list-item-title.body-1 방어 관통
-            v-list-item-subtitle 67%
+          v-list-item-content.caption 67%
       v-col(cols="4")
-        v-list-item.px-0
-          v-list-item-content
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
             v-list-item-title.body-1 효과 저항
-            v-list-item-subtitle 50%
-        v-list-item.px-0
-          v-list-item-content
-            v-list-item-title.body-1 전기 저항
-            v-list-item-subtitle 67%
+          v-list-item-content.caption 50%
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
+            v-list-item-title.body-1 피해 감소
+          v-list-item-content.caption 50%
       v-col(cols="4")
-        v-list-item.px-0
-          v-list-item-content
-            v-list-item-title.body-1 효과 저항
-            v-list-item-subtitle 50%
-        v-list-item.px-0
-          v-list-item-content
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
             v-list-item-title.body-1 전기 저항
-            v-list-item-subtitle 67%
+          v-list-item-content.caption 67%
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
+            v-list-item-title.body-1 화염 저항
+          v-list-item-content.caption 50%
+        v-list-item.px-0(dense)
+          v-list-item-content.py-0
+            v-list-item-title.body-1 냉기 저항
+          v-list-item-content.caption 67%
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
