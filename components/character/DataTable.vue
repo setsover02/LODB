@@ -43,7 +43,7 @@ v-col(cols="9")
     //- TODO: 페이지네이션 없애고 전체row 표기
     //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
     //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-    v-data-table(v-model="selected" :headers="headers" :items="items" :key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430" @click:row="")
+    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430" @click:row="")
       template(v-slot:select)
         v-checkbox(color="orange")
       template(v-slot:item.avatar="{ item }")

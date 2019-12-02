@@ -95,7 +95,7 @@ v-card.radial-t200
       v-col
         v-select(:items="dummy" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
     v-divider
-    v-row.px-4.py-2
+    v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
       v-col(cols="6")
         v-select(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
