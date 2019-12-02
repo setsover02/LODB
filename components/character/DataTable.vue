@@ -52,13 +52,13 @@ v-col(cols="9")
         span {{ item.damage + damageEnh * 1.5 }}
       template(v-slot:item.equip="{ item }")
         //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
-        v-avatar.mr-1(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="18" tile color="t500")
           v-img(:src="item.equip.e1")
-        v-avatar.mr-1(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="18" tile color="t500")
           v-img(:src="item.equip.e2")
-        v-avatar.mr-1(size="18" tile color="t500")
+        v-avatar.mr-1.radius-4(size="18" tile color="t500")
           v-img(:src="item.equip.e3")
-        v-avatar(size="18" tile color="t500")
+        v-avatar.radius-4(size="18" tile color="t500")
           v-img(:src="item.equip.e4")
       //- TODO: Description 수정
       template(v-slot:item.memo="props")
@@ -67,6 +67,9 @@ v-col(cols="9")
           template(v-slot:input)
             //- :rules="[max8chars]"
             v-text-field(v-model="props.item.memo"  counter="8" autofocus)
+      template(v-slot:item.actions="{ items }")
+        v-btn(@click="deleteItem(item)" icon small)
+          v-icon(small) mdi-close
       //- Data Table Memo 관련 스낵바
     v-snackbar.t500--text(v-model="snack" :timeout="3000" :color="snackColor" top right) {{ snackText }}
       v-btn(text @click="snack = false" color="t500") 닫기
@@ -87,6 +90,8 @@ const char = [
     level: '90',
     health: 7405,
     damage: 2405,
+    skill1: '3452',
+    skill2: '3452',
     hit: '201%',
     crit: '12%',
     dodge: '132%',
@@ -98,7 +103,8 @@ const char = [
       e3: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
       e4: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
     },
-    memo: '가나다라마바사'
+    memo: '기본',
+    actions: ''
   },
   {
     id: '003',
@@ -147,107 +153,130 @@ export default {
     snack: false,
     snackColor: '',
     snackText: '',
-		items: char,
-		name: null,
+    name: null,
+    editedIndex: -1,
     rarityFilter: ['SS', 'S', 'A', 'B'],
     typeFilter: ['기동형', '경장형', '중장형'],
     roleFilter: ['공격기', '보호기', '지원기'],
     headers: [
       {
-        text: 'ID',
+        text: '번호',
         align: 'right',
         sortable: true,
         value: 'id'
       },
       {
-        text: 'Img',
+        text: '아바타',
         sortable: false,
         value: 'avatar'
       },
       {
-        text: 'Name',
+        text: '이름',
         sortable: true,
         value: 'name'
       },
       {
-        text: 'rarity',
+        text: '등급',
         sortable: false,
         value: 'rarity'
       },
       {
-        text: 'Type',
+        text: '유형',
         sortable: false,
         value: 'type'
       },
 
       {
-        text: 'Role',
+        text: '역할',
         sortable: false,
         value: 'role'
       },
       {
-        text: 'level',
+        text: '레벨',
         align: 'right',
         sortable: false,
         value: 'level'
       },
       {
-        text: 'Health',
+        text: '체력',
         align: 'right',
         sortable: true,
         value: 'health'
       },
       {
-        text: 'Damage',
+        text: '공격력',
         align: 'right',
         sortable: true,
         value: 'damage'
       },
       {
-        text: 'Hit',
+        text: '1스킬',
+        align: 'right',
+        sortable: true,
+        value: 'skill1'
+      },
+      {
+        text: '2스킬',
+        align: 'right',
+        sortable: true,
+        value: 'skill2'
+      },
+      {
+        text: '적중',
         align: 'right',
         sortable: true,
         value: 'hit'
       },
       {
-        text: 'Crit',
+        text: '치명',
         align: 'right',
         sortable: true,
         value: 'crit'
       },
       {
-        text: 'Dodge',
+        text: '회피',
         align: 'right',
         sortable: true,
         value: 'dodge'
       },
       {
-        text: 'Defense',
+        text: '방어력',
         align: 'right',
         sortable: true,
         value: 'def'
       },
       {
-        text: 'AP',
+        text: '행동력',
         align: 'right',
         sortable: true,
         value: 'ap'
       },
       {
-        text: 'Item',
+        text: '장비',
         align: 'right',
         sortable: false,
         value: 'equip'
       },
       {
-				text: 'memo',
-				align: 'right',
+        text: '메모',
+        align: 'right',
         sortable: false,
         value: 'memo'
+      },
+      {
+        text: '',
+        align: 'right',
+        sortable: false,
+        value: 'actions'
       }
     ]
   }),
   methods: {
+    deleteItem(item) {
+      const index = this.items.indexOf(item)
+      confirm('Are you sure you want to delete this item?') &&
+        this.items.splice(index, 1)
+    },
     // Memo
     memoSave() {
       this.snack = true
@@ -271,11 +300,9 @@ export default {
   },
   computed: {
     // REVIEW: 스토어로 옮기고부터 동기화 안됨. 검색필터 수정해야함
-    name() {
-      return this.$store.state.character.name
-    },
+
     damageEnh() {
-      return this.$store.state.simulating.damageEnh
+      return this.$store.state.damageEnh
     }
   }
 }
