@@ -43,7 +43,7 @@ v-col(cols="9")
     //- TODO: 페이지네이션 없애고 전체row 표기
     //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
     //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" single-select show-select @click:row="")
+    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select @click:row="")
       template(v-slot:item.avatar="{ item }")
         v-avatar(size="32" color="t500")
           v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -97,6 +97,9 @@ v-col(cols="9")
       v-pagination.justify-start(v-model="page" :length="pageCount" total-visible="12")
       v-spacer
       v-text-field(:value="itemsPerPage" type="number" min="10" max="200" @input="itemsPerPage = parseInt($event, 10)" dense solo flat suffix="개 표시" hide-details)
+  v-btn.mt-4(large target="blank" href="https://discord.gg/kJJjbP" color="primary")
+    v-icon(left) mdi-discord
+    | Discord / Vue.js 개발자를 찾습니다 / 피드백도 환영
     v-snackbar.body-2.t500--text(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
       v-btn(text @click="snack = false" color="t500") 닫기
     //- v-divider

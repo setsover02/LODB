@@ -81,15 +81,15 @@ v-card.radial-t200
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
     v-row.pa-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
@@ -98,13 +98,13 @@ v-card.radial-t200
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down" autocomplete="off")
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down" autocomplete="off")
     v-divider
     v-row.px-4.py-2
       v-col(cols="12").subtitle-2 기타 능력치
@@ -149,6 +149,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
+    linkPercentage: [100, 75, 50, 25, 10],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     // rarity: 'SS',
     rarity: [
@@ -168,7 +169,7 @@ export default {
         text: 'B',
         color: 'green'
       }
-    ],
+    ]
   }),
   methods: {
     // Link percentage Slider
@@ -240,7 +241,7 @@ export default {
     },
     enhTotalLimit() {
       return this.$store.getters.enhTotalLimit
-    },
+    }
     // 스탯 잔여포인트 계산
     // getEnhTotal() {
     //   return (
