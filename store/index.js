@@ -1,5 +1,6 @@
+const character = require("~/data/character.json");
+
 export const state = () => ({
-  // character: [],
   level: 0, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * ?
@@ -9,11 +10,11 @@ export const state = () => ({
   critEnh: 0, // * 0.4%
   dodgeEnh: 0, // * 0.4%
   // 링크 슬롯
-  linkSlot1: 1,
-  linkSlot2: 1,
-  linkSlot3: 1,
-  linkSlot4: 1,
-  linkSlot5: 1
+  linkSlot1: '100',
+  linkSlot2: '100',
+  linkSlot3: '100',
+  linkSlot4: '100',
+  linkSlot5: '100'
 });
 
 export const getters = {
@@ -29,14 +30,14 @@ export const getters = {
         parseInt(state.dodgeEnh))
     );
   },
-  // 링크 퍼센티지 합산
+  // 링크 퍼센티지 합산, 소수점 표기
   totalLink: state => {
     return (
-      parseInt(state.linkSlot1) +
-      parseInt(state.linkSlot2) +
-      parseInt(state.linkSlot3) +
-      parseInt(state.linkSlot4) +
-      parseInt(state.linkSlot5)
+      parseFloat(state.linkSlot1 / 100) +
+      parseFloat(state.linkSlot2 / 100) +
+      parseFloat(state.linkSlot3 / 100) +
+      parseFloat(state.linkSlot4 / 100) +
+      parseFloat(state.linkSlot5 / 100)
     );
   }
 };

@@ -75,9 +75,9 @@ v-card.radial-t200
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small color='primary') {{ totalLink + '%' }}
+        v-chip.ml-3.white--text(small color='primary') {{ (totalLink * 100) + '%' }}
       v-col(cols="auto")
-        v-btn(small text color="primary") Max
+        v-btn(@click="" small text color="primary") Max
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
@@ -141,7 +141,7 @@ v-card.radial-t200
           v-list-item-content.caption 67%
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import RankChip from '~/components/RankChip'
 export default {
   components: {
@@ -149,7 +149,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
-    linkPercentage: [1, 0.75, 0.5, 0.25, 0.1],
+    linkPercentage: ['100', '75', '50', '25', '10'],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     // rarity: 'SS',
     rarity: [
@@ -175,7 +175,7 @@ export default {
     // Link percentage Slider
     // 풀링크
     linkMax() {
-      this.link = 5
+      // this.$store.state.linkSlot1 = 1
     },
     // 링크 제거
     linkMin() {
@@ -240,9 +240,6 @@ export default {
       }
     },
     // 잔여 강화 포인트 계산
-    enhTotalLimit() {
-      return this.$store.getters.enhTotalLimit
-    },
     // 링크 슬롯(퍼센티지 합산 해야 함)
     linkSlot1: {
       get() {
@@ -284,10 +281,8 @@ export default {
         this.$store.commit('updateLinkSlot5', value)
       }
     },
-    // 링크 퍼센티지 합산
-    totalLink() {
-      return this.$store.getters.totalLink
-    }
+    // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
+    ...mapGetters(['enhTotalLimit', 'totalLink'])
   }
 }
 </script>

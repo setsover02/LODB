@@ -107,6 +107,7 @@ v-col(cols="9")
     //- v-card-text 2. 우측 패널에서 시뮬레이션 적용 후 저장 시 해당 캐릭터 row에 저장됨 (여러개가 저장될 수 있음)
 </template>
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import RankChip from '~/components/RankChip'
 import character from '~/data/character.json'
 
@@ -279,33 +280,18 @@ export default {
     // }
   },
   computed: {
-    // Level 불러오기
-    level() {
-      return this.$store.state.level
-    },
-    // 강화 수치 불러오기
-    damageEnh() {
-      return this.$store.state.damageEnh
-    },
-    defenseEnh() {
-      return this.$store.state.defenseEnh
-    },
-    healthEnh() {
-      return this.$store.state.healthEnh
-    },
-    hitEnh() {
-      return this.$store.state.hitEnh
-    },
-    critEnh() {
-      return this.$store.state.critEnh
-    },
-    dodgeEnh() {
-      return this.$store.state.dodgeEnh
-    },
-    // 링크 퍼센티지 합산
-    totalLink() {
-      return this.$store.getters.totalLink
-    }
+    ...mapState([
+      'level', // 레벨
+      'damageEnh', // 강화수치
+      'defenseEnh',
+      'healthEnh',
+      'hitEnh',
+      'critEnh',
+      'dodgeEnh'
+    ]),
+    ...mapGetters([
+      'totalLink'
+    ])
   }
 }
 </script>
