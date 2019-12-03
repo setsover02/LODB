@@ -43,26 +43,32 @@ v-col(cols="9")
     //- TODO: 페이지네이션 없애고 전체row 표기
     //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
     //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="680" @click:row="")
-      template(v-slot:select)
-        v-checkbox(color="orange")
+    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" single-select show-select @click:row="")
       template(v-slot:item.avatar="{ item }")
         v-avatar(size="32" color="t500")
           v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
       template(v-slot:item.rank="{ item }")
-        rankChip(v-bind:rank="item.rank")
+        RankChip(v-bind:rank="item.rank")
+      template(v-slot:item.level="{ item }")
+        span {{ level }}
+      template(v-slot:item.health="{ item }")
+        span {{ Math.floor(item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3)}}
+      //- 데미지 계산
       template(v-slot:item.damage="{ item }")
-        span {{ item.damage + damageEnh * 1.5 }}
-      //- template(v-slot:item.equip="{ item }")
-      //-   //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
-      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
-      //-     v-img(:src="item.equip.e1")
-      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
-      //-     v-img(:src="item.equip.e2")
-      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
-      //-     v-img(:src="item.equip.e3")
-      //-   v-avatar.radius-4(size="24" tile color="t500")
-      //-     v-img(:src="item.equip.e4")
+        span {{ Math.floor(item.damageBase + ((level - 1) * item.damageCoef) + damageEnh * 1.5) }}
+      //- 방어력 계산
+      template(v-slot:item.defense="{ item }")
+        span {{ Math.floor(item.defenseBase + ((level -1) * item.defenseCoef) + defenseEnh * 3) }}
+      template(v-slot:item.equip="{ item }")
+        //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
+          //- v-img(:src="")
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
+          //- v-img(:src="")
+        v-avatar.mr-1.radius-4(size="24" tile color="t500")
+          //- v-img(:src="")
+        v-avatar.radius-4(size="24" tile color="t500")
+          //- v-img(:src="")
       //- TODO: Description 수정
       template(v-slot:item.memo="props")
         v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
@@ -70,10 +76,17 @@ v-col(cols="9")
           template(v-slot:input)
             //- :rules="[max8chars]"
             v-text-field(v-model="props.item.memo"  counter="8" autofocus)
+      //- 삭제 버튼
       template(v-slot:item.actions="{ items }")
         v-btn(@click="deleteItem(item)" icon small)
           v-icon(small) mdi-close
       //- Data Table Memo 관련 스낵바
+    //-Data Table Pagination
+    v-divider
+    v-list-item.py-4
+      v-pagination.justify-start(v-model="page" :length="pageCount")
+      v-spacer
+      v-text-field(:value="itemsPerPage" type="number" min="10" max="200" @input="itemsPerPage = parseInt($event, 10)" dense solo flat suffix="개 표시" hide-details)
     v-snackbar.body-2.t500--text(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
       v-btn(text @click="snack = false" color="t500") 닫기
     //- v-divider
@@ -89,8 +102,11 @@ export default {
     RankChip
   },
   data: () => ({
-    items: character,
-    selected: [],
+    items: character, // 테이블 데이터
+    selected: [], // 테이블 선택 체크박스
+    page: 1, // 페이지 네이션
+    pageCount: 0,
+    itemsPerPage: 10,
     snack: false,
     snackColor: '',
     snackText: '',
@@ -103,7 +119,7 @@ export default {
       {
         text: '번호',
         align: 'right',
-        sortable: true,
+        sortable: false,
         value: 'id'
       },
       {
@@ -118,6 +134,7 @@ export default {
       },
       {
         text: '등급',
+        align: 'center',
         sortable: false,
         value: 'rank'
       },
@@ -126,7 +143,6 @@ export default {
         sortable: false,
         value: 'type'
       },
-
       {
         text: '역할',
         sortable: false,
@@ -145,6 +161,7 @@ export default {
         value: 'health'
       },
       {
+        // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
         text: '공격력',
         align: 'right',
         sortable: true,
@@ -184,7 +201,7 @@ export default {
         text: '방어력',
         align: 'right',
         sortable: true,
-        value: 'def'
+        value: 'defense'
       },
       {
         text: '행동력',
@@ -238,10 +255,30 @@ export default {
     memoClose() {
       console.log('Dialog closed')
     }
+    // load() {
+    //   const character = this
+    //   character.data.push(
+    //     {
+    //       id: i,
+    //       damage: Math.floor(this.damageBase + this.$store.state.level)
+    //     }
+    //   )
+    // }
   },
   computed: {
+    // Level 불러오기
+    level() {
+      return this.$store.state.level
+    },
+    // 강화 수치 불러오기
     damageEnh() {
       return this.$store.state.damageEnh
+    },
+    defenseEnh() {
+      return this.$store.state.defenseEnh
+    },
+    healthEnh() {
+      return this.$store.state.healthEnh
     }
   }
 }

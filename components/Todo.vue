@@ -4,13 +4,6 @@
 </template>
 <script>
 export default {
-	methods: {
-		
-	},
-  computed: {
-    counter() {
-      return this.$store.state.counter
-    }
-  }
+  methods: {}
 }
 </script>

@@ -1,5 +1,4 @@
 export const state = () => ({
-  counter: 1,
   level: 0,
   damageEnh: 0, // * ?
   healthEnh: 0, // * 3
