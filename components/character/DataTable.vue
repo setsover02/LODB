@@ -51,11 +51,21 @@ v-col(cols="9")
         RankChip(v-bind:rank="item.rank")
       template(v-slot:item.level="{ item }")
         span {{ level }}
+      //- 체력계산
       template(v-slot:item.health="{ item }")
         span {{ Math.floor(item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3)}}
       //- 데미지 계산
       template(v-slot:item.damage="{ item }")
         span {{ Math.floor(item.damageBase + ((level - 1) * item.damageCoef) + damageEnh * 1.5) }}
+      //- 적중 계산
+      template(v-slot:item.hit="{ item }")
+        span {{ item.hit + (hitEnh * 1.5) + '%' }}
+      //- 치명타 계산 TODO: 소수점 나오는데 도대체 이해가 잘
+      template(v-slot:item.crit="{ item }")
+        span {{ (item.crit + (critEnh * 0.4)) + '%'}}
+      //- 회피 계산 TODO: 소수점 나오는데 도대체 이해가 잘
+      template(v-slot:item.dodge="{ item }")
+        span {{ (item.dodge + (dodgeEnh * 0.4)) + '%'}}
       //- 방어력 계산
       template(v-slot:item.defense="{ item }")
         span {{ Math.floor(item.defenseBase + ((level -1) * item.defenseCoef) + defenseEnh * 3) }}
@@ -69,7 +79,7 @@ v-col(cols="9")
           //- v-img(:src="")
         v-avatar.radius-4(size="24" tile color="t500")
           //- v-img(:src="")
-      //- TODO: Description 수정
+      //- TODO: Memo 수정, 입력
       template(v-slot:item.memo="props")
         v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
           span {{ props.item.memo }}
@@ -84,7 +94,7 @@ v-col(cols="9")
     //-Data Table Pagination
     v-divider
     v-list-item.py-4
-      v-pagination.justify-start(v-model="page" :length="pageCount")
+      v-pagination.justify-start(v-model="page" :length="pageCount" total-visible="12")
       v-spacer
       v-text-field(:value="itemsPerPage" type="number" min="10" max="200" @input="itemsPerPage = parseInt($event, 10)" dense solo flat suffix="개 표시" hide-details)
     v-snackbar.body-2.t500--text(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
@@ -279,6 +289,15 @@ export default {
     },
     healthEnh() {
       return this.$store.state.healthEnh
+    },
+    hitEnh() {
+      return this.$store.state.hitEnh
+    },
+    critEnh() {
+      return this.$store.state.critEnh
+    },
+    dodgeEnh() {
+      return this.$store.state.dodgeEnh
     }
   }
 }
