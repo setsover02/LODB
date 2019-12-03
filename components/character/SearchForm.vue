@@ -26,7 +26,7 @@ v-card.radial-t200.pl-1
 			v-col.pl-3(cols="auto")
 				//- TODO: 등급 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="rarity in rarityFilter" :key="rarity") {{ rarity }}
+					v-chip(label small v-for="rank in rankFilter" :key="rank") {{ rank }}
 			v-divider(vertical)
 			v-col.pl-3(cols="auto")
 				//- TODO: 타입 필터
@@ -44,7 +44,7 @@ const char = [
     id: '002',
     avatar: require('~/assets/img/avatar/002.png'),
     name: '라비아타 프로토타입',
-    rarity: 'SS',
+    rank: 'SS',
     type: '중장형',
     role: '공격기',
     level: '90',

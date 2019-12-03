@@ -16,6 +16,7 @@
         //- v-icon mdi-application
       //- v-btn(icon @click.stop="fixed = !fixed")
         //- v-icon mdi-minus
+        
       v-toolbar-items
         v-btn(text to="/") {{ title }}
       v-spacer
@@ -24,7 +25,8 @@
       //- v-btn(icon @click.stop="rightDrawer = !rightDrawer")
       //-   v-icon mdi-menu
       v-spacer
-      v-btn(href="https://app.gitbook.com/@setsover02/s/lodb/" target="blank" color="primary") GitBook  
+      v-btn.mr-2(target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit#gid=1106653633" color="secondary") Sheet  
+      v-btn(target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook  
 </template>
 <script>
 export default {

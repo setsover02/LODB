@@ -10,7 +10,6 @@ v-row
 import SearchForm from '~/components/character/SearchForm'
 import DataTable from '~/components/character/DataTable'
 import SimulatingForm from '~/components/character/SimulatingForm'
-import RarityChip from '~/components/RarityChip'
 import Todo from '~/components/Todo'
 // vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
@@ -20,7 +19,6 @@ export default {
     SearchForm,
     DataTable,
     SimulatingForm,
-    RarityChip,
     Todo
   }
 }

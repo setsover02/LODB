@@ -11,7 +11,7 @@ v-col(cols="9")
             template(v-slot:selection="data")
               v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
                 v-avatar(left)
-                  v-img(:src="data.item.avatar")
+                  v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.png')")
                 | {{ data.item.name }}
             //- 리스트에 아바타 추가
             template(v-slot:item="data")
@@ -19,7 +19,7 @@ v-col(cols="9")
                 v-list-item-content(v-text="data.item")
               template(v-else)
                 v-list-item-avatar(size="24")
-                  v-img(:src="data.item.avatar")
+                  v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.png')")
                 v-list-item-content
                   v-list-item-title(v-html="data.item.name")
 
@@ -27,7 +27,7 @@ v-col(cols="9")
         v-col.pl-3(cols="auto")
           //- TODO: 등급 필터
           v-chip-group.pt-1(multiple active-class="accent--text")
-            v-chip(label small v-for="rarity in rarityFilter" :key="rarity") {{ rarity }}
+            v-chip(label small v-for="rank in rankFilter" :key="rank") {{ rank }}
         v-divider(vertical)
         v-col.pl-3(cols="auto")
           //- TODO: 타입 필터
@@ -43,26 +43,26 @@ v-col(cols="9")
     //- TODO: 페이지네이션 없애고 전체row 표기
     //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
     //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="430" @click:row="")
+    v-data-table(v-model="selected" :headers="headers" :items="items" item-key="id" :items-per-page="100" fixed-header :search="name" sort-by="id" single-select show-select hide-default-footer height="680" @click:row="")
       template(v-slot:select)
         v-checkbox(color="orange")
       template(v-slot:item.avatar="{ item }")
         v-avatar(size="32" color="t500")
-          v-img(:src="item.avatar")
-      template(v-slot:item.rarity="{ item }")
-        RarityChip(v-bind:rarity="item.rarity")
+          v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
+      template(v-slot:item.rank="{ item }")
+        rankChip(v-bind:rank="item.rank")
       template(v-slot:item.damage="{ item }")
         span {{ item.damage + damageEnh * 1.5 }}
-      template(v-slot:item.equip="{ item }")
-        //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
-        v-avatar.mr-1.radius-4(size="24" tile color="t500")
-          v-img(:src="item.equip.e1")
-        v-avatar.mr-1.radius-4(size="24" tile color="t500")
-          v-img(:src="item.equip.e2")
-        v-avatar.mr-1.radius-4(size="24" tile color="t500")
-          v-img(:src="item.equip.e3")
-        v-avatar.radius-4(size="24" tile color="t500")
-          v-img(:src="item.equip.e4")
+      //- template(v-slot:item.equip="{ item }")
+      //-   //- TODO: 장착아이템 썸네일 : For문 돌릴수 있으면
+      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
+      //-     v-img(:src="item.equip.e1")
+      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
+      //-     v-img(:src="item.equip.e2")
+      //-   v-avatar.mr-1.radius-4(size="24" tile color="t500")
+      //-     v-img(:src="item.equip.e3")
+      //-   v-avatar.radius-4(size="24" tile color="t500")
+      //-     v-img(:src="item.equip.e4")
       //- TODO: Description 수정
       template(v-slot:item.memo="props")
         v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
@@ -81,84 +81,22 @@ v-col(cols="9")
     //- v-card-text 2. 우측 패널에서 시뮬레이션 적용 후 저장 시 해당 캐릭터 row에 저장됨 (여러개가 저장될 수 있음)
 </template>
 <script>
-import RarityChip from '~/components/RarityChip'
-const char = [
-  {
-    id: '002',
-    avatar: require('~/assets/img/avatar/002.png'),
-    name: '라비아타 프로토타입',
-    rarity: 'SS',
-    type: '중장형',
-    role: '공격기',
-    level: '90',
-    health: 7405,
-    damage: 2405,
-    skill1: '3452',
-    skill2: '3452',
-    hit: '201%',
-    crit: '12%',
-    dodge: '132%',
-    def: '138',
-    ap: '4.05',
-    equip: {
-      e1: '',
-      e2: require('~/assets/img/items/414.png'),
-      e3: require('~/assets/img/items/414.png'),
-      e4: require('~/assets/img/items/414.png'),
-    },
-    memo: '기본',
-    actions: ''
-  },
-  {
-    id: '003',
-    avatar: require('~/assets/img/avatar/003.png'),
-    name: '콘스탄챠 S2',
-    rarity: 'A',
-    type: 'Light',
-    role: 'Defender',
-    health: 1405,
-    damage: 1455,
-    hit: '192%',
-    equip: ''
-  },
-  {
-    id: '004',
-    avatar: require('~/assets/img/avatar/004.png'),
-    name: '세라피아스 앨리스',
-    rarity: 'SS',
-    type: 'Light',
-    role: 'Defender',
-    health: 1405,
-    damage: 1455,
-    hit: '192%',
-    equip: ''
-  },
-  {
-    id: '005',
-    avatar: require('~/assets/img/avatar/005.png'),
-    name: '바닐라 A1',
-    rarity: 'B',
-    type: 'Light',
-    role: 'Defender',
-    health: 1405,
-    damage: 1455,
-    hit: '192%',
-    equip: ''
-  }
-]
+import RankChip from '~/components/RankChip'
+import character from '~/data/character.json'
+
 export default {
   components: {
-    RarityChip
+    RankChip
   },
   data: () => ({
-    items: char,
+    items: character,
     selected: [],
     snack: false,
     snackColor: '',
     snackText: '',
     name: null,
     editedIndex: -1,
-    rarityFilter: ['SS', 'S', 'A', 'B'],
+    rankFilter: ['SS', 'S', 'A', 'B'],
     typeFilter: ['기동형', '경장형', '중장형'],
     roleFilter: ['공격기', '보호기', '지원기'],
     headers: [
@@ -181,7 +119,7 @@ export default {
       {
         text: '등급',
         sortable: false,
-        value: 'rarity'
+        value: 'rank'
       },
       {
         text: '유형',

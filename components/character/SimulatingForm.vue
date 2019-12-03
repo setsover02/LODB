@@ -98,20 +98,20 @@ v-card.radial-t200
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
       v-col(cols="6")
-        v-select(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
       v-col(cols="6")
-        v-select(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down")
       v-col(cols="6")
-        v-select(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down")
       v-col(cols="6")
-        v-select(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
+        v-autocomplete(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down")
     v-divider
     v-row.px-4.py-2
       v-col(cols="12").subtitle-2 기타 능력치
       v-col(cols="4")
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 행동력
+            v-list-item-subtitle 행동력
           v-list-item-content.caption 4.01
         v-list-item.px-0(dense)
           v-list-item-content.py-0
@@ -142,10 +142,10 @@ v-card.radial-t200
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
-import RarityChip from '~/components/RarityChip'
+import RankChip from '~/components/RankChip'
 export default {
   components: {
-    RarityChip
+    RankChip
   },
   data: () => ({
     dummy: ['1', '2', '3'],
