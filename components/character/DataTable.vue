@@ -99,7 +99,7 @@ v-col(cols="9")
       v-text-field(:value="itemsPerPage" type="number" min="10" max="200" @input="itemsPerPage = parseInt($event, 10)" dense solo flat suffix="개 표시" hide-details)
   v-btn.mt-4(large target="blank" href="https://discord.gg/kJJjbP" color="primary")
     v-icon(left) mdi-discord
-    | Discord / Vue.js 개발자를 찾습니다 / 피드백도 환영
+    | Discord / Vue.js, 웹 개발자를 찾습니다 / 피드백도 환영
     v-snackbar.body-2.t500--text(v-model="snack" :timeout="3000" :color="snackColor") {{ snackText }}
       v-btn(text @click="snack = false" color="t500") 닫기
     //- v-divider
