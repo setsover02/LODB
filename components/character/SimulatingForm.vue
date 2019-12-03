@@ -75,21 +75,21 @@ v-card.radial-t200
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small color='primary') 500%
+        v-chip.ml-3.white--text(small color='primary') {{ totalLink + '%' }}
       v-col(cols="auto")
         v-btn(small text color="primary") Max
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
-        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot1" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot2" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot3" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot4" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot5" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
     v-row.pa-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
@@ -149,7 +149,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
-    linkPercentage: [100, 75, 50, 25, 10],
+    linkPercentage: [1, 0.75, 0.5, 0.25, 0.1],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     // rarity: 'SS',
     rarity: [
@@ -239,21 +239,55 @@ export default {
         this.$store.commit('updateDodgeEnh', value)
       }
     },
+    // 잔여 강화 포인트 계산
     enhTotalLimit() {
       return this.$store.getters.enhTotalLimit
+    },
+    // 링크 슬롯(퍼센티지 합산 해야 함)
+    linkSlot1: {
+      get() {
+        return this.$store.state.linkSlot1
+      },
+      set(value) {
+        this.$store.commit('updateLinkSlot1', value)
+      }
+    },
+    linkSlot2: {
+      get() {
+        return this.$store.state.linkSlot2
+      },
+      set(value) {
+        this.$store.commit('updateLinkSlot2', value)
+      }
+    },
+    linkSlot3: {
+      get() {
+        return this.$store.state.linkSlot3
+      },
+      set(value) {
+        this.$store.commit('updateLinkSlot3', value)
+      }
+    },
+    linkSlot4: {
+      get() {
+        return this.$store.state.linkSlot4
+      },
+      set(value) {
+        this.$store.commit('updateLinkSlot4', value)
+      }
+    },
+    linkSlot5: {
+      get() {
+        return this.$store.state.linkSlot5
+      },
+      set(value) {
+        this.$store.commit('updateLinkSlot5', value)
+      }
+    },
+    // 링크 퍼센티지 합산
+    totalLink() {
+      return this.$store.getters.totalLink
     }
-    // 스탯 잔여포인트 계산
-    // getEnhTotal() {
-    //   return (
-    //     270 - // = Level * 3
-    //     (parseInt(this.damageEnh) +
-    //       parseInt(this.healthEnh) +
-    //       parseInt(this.defenseEnh) +
-    //       parseInt(this.hitEnh) +
-    //       parseInt(this.critEnh) +
-    //       parseInt(this.dodgeEnh))
-    //   )
-    // },
   }
 }
 </script>

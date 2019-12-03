@@ -1,15 +1,23 @@
 export const state = () => ({
-  level: 0,
+  // character: [],
+  level: 0, // 레벨 설정
+  // 강화 스탯
   damageEnh: 0, // * ?
   healthEnh: 0, // * 3
   defenseEnh: 0, // * ?
   hitEnh: 0, // * 1.5%
   critEnh: 0, // * 0.4%
-  dodgeEnh: 0 // * 0.4%
+  dodgeEnh: 0, // * 0.4%
+  // 링크 슬롯
+  linkSlot1: 1,
+  linkSlot2: 1,
+  linkSlot3: 1,
+  linkSlot4: 1,
+  linkSlot5: 1
 });
 
 export const getters = {
-  // skadms
+  // 남은 스탯강화 포인트
   enhTotalLimit: state => {
     return (
       parseInt(state.level) * 3 -
@@ -19,6 +27,16 @@ export const getters = {
         parseInt(state.hitEnh) +
         parseInt(state.critEnh) +
         parseInt(state.dodgeEnh))
+    );
+  },
+  // 링크 퍼센티지 합산
+  totalLink: state => {
+    return (
+      parseInt(state.linkSlot1) +
+      parseInt(state.linkSlot2) +
+      parseInt(state.linkSlot3) +
+      parseInt(state.linkSlot4) +
+      parseInt(state.linkSlot5)
     );
   }
 };
@@ -45,10 +63,19 @@ export const mutations = {
   updateDodgeEnh(state, dodgeEnh) {
     state.dodgeEnh = dodgeEnh;
   },
-  addCounter(state) {
-    state.counter++;
+  updateLinkSlot1(state, linkSlot1) {
+    state.linkSlot1 = linkSlot1;
   },
-  subCounter(state) {
-    state.counter--;
+  updateLinkSlot2(state, linkSlot2) {
+    state.linkSlot2 = linkSlot2;
+  },
+  updateLinkSlot3(state, linkSlot3) {
+    state.linkSlot3 = linkSlot3;
+  },
+  updateLinkSlot4(state, linkSlot4) {
+    state.linkSlot4 = linkSlot4;
+  },
+  updateLinkSlot5(state, linkSlot5) {
+    state.linkSlot5 = linkSlot5;
   }
 };

@@ -62,7 +62,7 @@ v-col(cols="9")
         span {{ item.hit + (hitEnh * 1.5) + '%' }}
       //- 치명타 계산 TODO: 소수점 나오는데 도대체 이해가 잘
       template(v-slot:item.crit="{ item }")
-        span {{ (item.crit + (critEnh * 0.4)) + '%'}}
+        span {{ (item.crit + (critEnh * 0.4)) + (item.linkCrit * totalLink) }}
       //- 회피 계산 TODO: 소수점 나오는데 도대체 이해가 잘
       template(v-slot:item.dodge="{ item }")
         span {{ (item.dodge + (dodgeEnh * 0.4)) + '%'}}
@@ -301,6 +301,10 @@ export default {
     },
     dodgeEnh() {
       return this.$store.state.dodgeEnh
+    },
+    // 링크 퍼센티지 합산
+    totalLink() {
+      return this.$store.getters.totalLink
     }
   }
 }
