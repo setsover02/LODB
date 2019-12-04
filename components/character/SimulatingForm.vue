@@ -19,7 +19,7 @@ v-card.radial-t200
     //- Enhance Form
     v-row.px-4.py-2(align="center")
       v-col(cols="4")
-        v-select(:items="rarity" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
+        v-select(:items="rank" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
           template(v-slot:selection="data")
             v-chip(:input-value="data.selected" :color="data.item.color" small) {{ data.item.text }}
           template(v-slot:item="data")
@@ -151,8 +151,7 @@ export default {
     dummy: ['1', '2', '3'],
     linkPercentage: ['100', '75', '50', '25', '10'],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
-    // rarity: 'SS',
-    rarity: [
+    rank: [
       {
         text: 'SS',
         color: 'orange'

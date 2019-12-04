@@ -1,6 +1,11 @@
 <template lang="pug">
 v-row
-  DataTable
+  v-col(cols="9")
+    SearchForm
+    DataTable
+    v-btn.mt-4(large target="blank" href="https://discord.gg/kJJjbP" color="primary")
+      v-icon(left) mdi-discord
+      | Discord / Vue.js, 웹 개발자를 찾습니다 / 피드백도 환영
   v-col(cols="3")
     //- Input Form
     SimulatingForm

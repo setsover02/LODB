@@ -1,6 +1,7 @@
 const character = require("~/data/character.json");
 
 export const state = () => ({
+  name: null,
   level: 0, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * ?
@@ -43,6 +44,9 @@ export const getters = {
 };
 
 export const mutations = {
+  searchName(state, name) {
+    state.name = name;
+  },
   updateLevel(state, level) {
     state.level = level;
   },

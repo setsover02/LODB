@@ -10,7 +10,7 @@ v-card.radial-t200.pl-1
 					template(v-slot:selection="data")
 						v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
 							v-avatar(left)
-								v-img(:src="data.item.avatar")
+								v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.png')")
 							| {{ data.item.name }}
 					//- 리스트에 아바타 추가
 					template(v-slot:item="data")
@@ -18,7 +18,7 @@ v-card.radial-t200.pl-1
 							v-list-item-content(v-text="data.item")
 						template(v-else)
 							v-list-item-avatar(size="24")
-								v-img(:src="data.item.avatar")
+								v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.png')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
 
@@ -39,39 +39,29 @@ v-card.radial-t200.pl-1
 					v-chip(label small v-for="role in roleFilter" :key="role") {{ role }}
 </template>
 <script>
-const char = [
-  {
-    id: '002',
-    avatar: require('~/assets/img/avatar/002.png'),
-    name: '라비아타 프로토타입',
-    rank: 'SS',
-    type: '중장형',
-    role: '공격기',
-    level: '90',
-    health: 7405,
-    damage: 2405,
-    hit: '201%',
-    crit: '12%',
-    dodge: '132%',
-    def: '138',
-    ap: '4.05',
-    equip: {
-      e1: '',
-      e2: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-      e3: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-      e4: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
-    },
-    memo: '가나다라마바사'
-  }
-]
+import { mapState, mapGetters, mapMutations } from 'vuex'
+import character from '~/data/character.json'
 export default {
   data: () => ({
-
-	}),
-	methods: {
-		name() {
-			this.$store.state.character.name
-		}
-	}
+    items: character, // 테이블 데이터
+    rankFilter: ['SS', 'S', 'A', 'B'],
+    typeFilter: ['기동형', '경장형', '중장형'],
+    roleFilter: ['공격기', '보호기', '지원기']
+  }),
+  // methods: {
+  //   name() {
+  //     this.$store.state.character.name
+  //   }
+  // },
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.name
+      },
+      set(value) {
+        this.$store.commit('searchName', value)
+      }
+    }
+  }
 }
 </script>
