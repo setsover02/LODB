@@ -1,8 +1,9 @@
 const character = require("~/data/character.json");
-
+const equipment = require("~/data/equipment.json");
 export const state = () => ({
   name: null,
   character: character, // character.json
+  equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * ?
@@ -35,15 +36,8 @@ export const getters = {
         parseInt(state.dodgeEnh))
     );
   },
-  // 링크 퍼센티지 합산, 소수점 표기
+  // 링크 퍼센티지 합산, 소수점 2자리
   totalLink: state => {
-    // var e =
-    //   parseFloat(state.linkSlot1 / 100) +
-    //   parseFloat(state.linkSlot2 / 100) +
-    //   parseFloat(state.linkSlot3 / 100) +
-    //   parseFloat(state.linkSlot4 / 100) +
-    //   parseFloat(state.linkSlot5 / 100);
-    // return Math.floor(e * 100) / 100
     return (
       state.linkSlot1 / 100 +
       state.linkSlot2 / 100 +

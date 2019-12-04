@@ -44,23 +44,23 @@ v-card.radial-t200
         //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
         span.pr-4.caption.accent--text 1431
         v-text-field(v-model="damageEnh"
-            dense flat solo hide-details suffix="공격력"
-            type="number" counter maxlength="3" autocomplete="off")
+          dense flat solo hide-details suffix="공격력"
+          type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 7654
         v-text-field(v-model="healthEnh" 
-            dense flat solo hide-details suffix="체력"
-            type="number" counter maxlength="3" autocomplete="off")
+          dense flat solo hide-details suffix="체력"
+          type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 431
         v-text-field(v-model="defenseEnh" 
-            dense flat solo hide-details suffix="방어력"
-            type="number" counter maxlength="3" autocomplete="off")
+          dense flat solo hide-details suffix="방어력"
+          type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 202%
         v-text-field(v-model="hitEnh" 
-            dense flat solo hide-details suffix="적중"
-            type="number" counter maxlength="3" autocomplete="off")
+          dense flat solo hide-details suffix="적중"
+          type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 102%
         v-text-field(v-model="critEnh" 
@@ -68,7 +68,7 @@ v-card.radial-t200
             type="number" counter maxlength="3" autocomplete="off")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 102%
-        v-text-field(v-model="dodgeEnh" 
+        v-text-field(v-model="dodgeEnh"
           dense flat solo hide-details suffix="회피"
             type="number" counter maxlength="3" autocomplete="off")
     v-divider
@@ -76,7 +76,7 @@ v-card.radial-t200
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small color='primary') {{ Math.floor(totalLink * 100) + '%' }}
+        v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(totalLink * 100) + '%' }}
       v-col(cols="auto")
         v-btn(@click="" small text color="primary") Max
     v-row.px-4
@@ -99,7 +99,21 @@ v-card.radial-t200
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            span.white--text(small v-bind="data.attrs" :input-value="data.selected")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+
       v-col(cols="6")
         v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
       v-col(cols="6")
@@ -143,7 +157,6 @@ v-card.radial-t200
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import character from '~/data/character.json'
 import RankChip from '~/components/RankChip'
 export default {
   components: {
@@ -151,6 +164,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
+    equipmentSelect: null,
     linkPercentage: [100, 75, 50, 25, 10, 0],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
@@ -185,7 +199,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'character' // json
+      'character',
+      'equipment' // json
     ]),
     level: {
       get() {
@@ -286,7 +301,12 @@ export default {
       }
     },
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
-    ...mapGetters(['enhTotalLimit', 'totalLink'])
+    ...mapGetters(['enhTotalLimit', 'totalLink']),
+    // totalLink 칩 색상
+    totalLinkColor() {
+      if (this.$store.getters.totalLink < 5) return 'red'
+      return 'primary'
+    }
   }
 }
 </script>
