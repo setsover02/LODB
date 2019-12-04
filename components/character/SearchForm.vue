@@ -26,25 +26,25 @@ v-card.radial-t200.pl-1
 			v-col.pl-3(cols="auto")
 				//- TODO: 등급 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="rank in rankFilter" :key="rank") {{ rank }}
+					v-chip(label small v-for="rank in rankItems" :key="rank" :value="rank") {{ rank }}
 			v-divider(vertical)
 			v-col.pl-3(cols="auto")
 				//- TODO: 타입 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="type in typeFilter" :key="type") {{ type }}
+					v-chip(label small v-for="type in typeItems" :key="type") {{ type }}
 			v-divider(vertical)
 			v-col.pl-3(cols="auto")
 				//- TODO: 역할 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="role in roleFilter" :key="role") {{ role }}
+					v-chip(label small v-for="role in roleItems" :key="role") {{ role }}
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
-    rankFilter: ['SS', 'S', 'A', 'B'],
-    typeFilter: ['기동형', '경장형', '중장형'],
-    roleFilter: ['공격기', '보호기', '지원기']
+    rankItems: ['SS', 'S', 'A', 'B'],
+    typeItems: ['기동형', '경장형', '중장형'],
+    roleItems: ['공격기', '보호기', '지원기']
   }),
   // methods: {
   //   name() {

@@ -12,14 +12,17 @@ export const state = () => ({
   critEnh: 0, // * 0.4%
   dodgeEnh: 0, // * 0.4%
   // 링크 슬롯
-  linkSlot1: '100',
-  linkSlot2: '100',
-  linkSlot3: '100',
-  linkSlot4: '100',
-  linkSlot5: '100'
+  linkSlot1: 100,
+  linkSlot2: 100,
+  linkSlot3: 100,
+  linkSlot4: 100,
+  linkSlot5: 100
 });
 
 export const getters = {
+  // getCharacterById: state => id => {
+  //   return state.character.find(character => character.id === id);
+  // },
   // 남은 스탯강화 포인트
   enhTotalLimit: state => {
     return (
@@ -34,12 +37,19 @@ export const getters = {
   },
   // 링크 퍼센티지 합산, 소수점 표기
   totalLink: state => {
+    // var e =
+    //   parseFloat(state.linkSlot1 / 100) +
+    //   parseFloat(state.linkSlot2 / 100) +
+    //   parseFloat(state.linkSlot3 / 100) +
+    //   parseFloat(state.linkSlot4 / 100) +
+    //   parseFloat(state.linkSlot5 / 100);
+    // return Math.floor(e * 100) / 100
     return (
-      parseFloat(state.linkSlot1 / 100) +
-      parseFloat(state.linkSlot2 / 100) +
-      parseFloat(state.linkSlot3 / 100) +
-      parseFloat(state.linkSlot4 / 100) +
-      parseFloat(state.linkSlot5 / 100)
+      state.linkSlot1 / 100 +
+      state.linkSlot2 / 100 +
+      state.linkSlot3 / 100 +
+      state.linkSlot4 / 100 +
+      state.linkSlot5 / 100
     );
   }
 };

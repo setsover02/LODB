@@ -76,7 +76,7 @@ v-card.radial-t200
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small color='primary') {{ (totalLink * 100) + '%' }}
+        v-chip.ml-3.white--text(small color='primary') {{ (totalLink) + '%' }}
       v-col(cols="auto")
         v-btn(@click="" small text color="primary") Max
     v-row.px-4
@@ -151,7 +151,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
-    linkPercentage: ['100', '75', '50', '25', '10', '0'],
+    linkPercentage: [100, 75, 50, 25, 10, 0],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
       {
