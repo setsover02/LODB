@@ -5,7 +5,7 @@ v-card.radial-t200.pl-1
 		v-row
 			v-col
 				//- 검색 필터: 테이블 데이터와 동기화 중
-				v-autocomplete(v-model="name" :items="items" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
+				v-autocomplete(v-model="name" :items="character" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
 					//- 선택 데이터 chip 형태로 표기
 					template(v-slot:selection="data")
 						v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -40,10 +40,8 @@ v-card.radial-t200.pl-1
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import character from '~/data/character.json'
 export default {
   data: () => ({
-    items: character, // 테이블 데이터
     rankFilter: ['SS', 'S', 'A', 'B'],
     typeFilter: ['기동형', '경장형', '중장형'],
     roleFilter: ['공격기', '보호기', '지원기']
@@ -54,6 +52,9 @@ export default {
   //   }
   // },
   computed: {
+    ...mapState([
+      'character' // json
+    ]),
     // 이름으로 검색
     name: {
       get() {

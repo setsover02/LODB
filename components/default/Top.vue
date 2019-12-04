@@ -25,7 +25,7 @@
       //- v-btn(icon @click.stop="rightDrawer = !rightDrawer")
       //-   v-icon mdi-menu
       v-spacer
-      v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit#gid=1106653633" color="green")
+      v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
         v-icon(left) mdi-google-spreadsheet
         | Google Sheet  
       //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook 

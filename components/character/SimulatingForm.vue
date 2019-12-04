@@ -3,6 +3,7 @@
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200
   v-form(ref="form")
+    //- v-list-item(v-for="(data , id) in character" :key="id" v-bind:text="data.name") {{ data.name }}
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
         v-img(:src="require('~/assets/img/avatar/002.png')")
@@ -142,6 +143,7 @@ v-card.radial-t200
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import character from '~/data/character.json'
 import RankChip from '~/components/RankChip'
 export default {
   components: {
@@ -149,7 +151,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
-    linkPercentage: ['100', '75', '50', '25', '10'],
+    linkPercentage: ['100', '75', '50', '25', '10', '0'],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
       {
@@ -182,6 +184,9 @@ export default {
     }
   },
   computed: {
+    ...mapState([
+      'character' // json
+    ]),
     level: {
       get() {
         return this.$store.state.level
