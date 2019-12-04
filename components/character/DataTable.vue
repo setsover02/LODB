@@ -26,15 +26,15 @@ v-card.mt-2.radial-t200
 
     //- 적중 계산
     template(v-slot:item.hit="{ item }")
-      span {{ (item.hit + (hitEnh * 1.5) + (item.linkHit * totalLink)) + '%' }}
+      span {{ (item.hit + (hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }}
       //- 강화 및 링크로 추가된 적중 (추후 아이템 포함)
-      span.green--text (+{{ (hitEnh * 1.5) + (item.linkHit * totalLink) + '%' }})
+      span.green--text (+{{ ((hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }})
 
     //- 치명타 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.crit="{ item }")
-      span {{ ((item.crit + (critEnh * 0.4)) + (item.linkCrit * totalLink)) + '%'}}
+      span {{ ((item.crit + (critEnh * 0.4)) + (item.linkCrit * totalLink)).toFixed(1) + '%'}}
       //- 강화 및 링크로 추가된 치명 (추후 아이템 포함)
-      span.green--text (+{{ (critEnh * 0.4) + (item.linkCrit * totalLink) + '%' }})
+      span.green--text (+{{ ((critEnh * 0.4) + (item.linkCrit * totalLink)).toFixed(1) + '%' }})
 
     //- 회피 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.dodge="{ item }")
@@ -50,9 +50,9 @@ v-card.mt-2.radial-t200
 
     //- AP 계산
     template(v-slot:item.ap="{ item }")
-      span {{ (item.ap + (item.linkAp * totalLink)) }}
+      span {{ (item.ap + (item.linkAp * totalLink)).toFixed(3) }}
       //- 강화 및 링크로 추가된 ap (추후 아이템 포함)
-      span(v-if="item.linkAp > 0").green--text (+{{ (item.linkAp * totalLink) }})
+      span(v-if="item.linkAp > 0").green--text (+{{ (item.linkAp * totalLink).toFixed(3) }})
 
     template(v-slot:item.equip="{ item }")
       //- TODO: 장착아이템 썸네일

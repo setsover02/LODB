@@ -76,7 +76,7 @@ v-card.radial-t200
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small color='primary') {{ (totalLink) + '%' }}
+        v-chip.ml-3.white--text(small color='primary') {{ Math.floor(totalLink * 100) + '%' }}
       v-col(cols="auto")
         v-btn(@click="" small text color="primary") Max
     v-row.px-4
