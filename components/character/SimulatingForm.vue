@@ -27,7 +27,7 @@ v-card.radial-t200
             v-chip(:color="data.item.color" small) {{ data.item.text }}
       v-col(cols="4")
         v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
-        type="number" autocomplete="off")
+        type="number" autocomplete="off" min="1" max="90")
       v-col(cols="4").px-4
         //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
         v-switch.mt-0.pt-0(color="accent" hide-details)

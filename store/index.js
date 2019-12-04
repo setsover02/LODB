@@ -3,7 +3,7 @@ const character = require("~/data/character.json");
 export const state = () => ({
   name: null,
   character: character, // character.json
-  level: 0, // 레벨 설정
+  level: 1, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * ?
   healthEnh: 0, // * 3
