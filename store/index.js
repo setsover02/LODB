@@ -44,9 +44,11 @@ export const getters = {
 };
 
 export const mutations = {
+  // 이름 검색필터
   searchName(state, name) {
     state.name = name;
   },
+  // 레벨 및 강화스텟 업데이트
   updateLevel(state, level) {
     state.level = level;
   },
@@ -68,6 +70,7 @@ export const mutations = {
   updateDodgeEnh(state, dodgeEnh) {
     state.dodgeEnh = dodgeEnh;
   },
+  // 링크 퍼센티지 적용
   updateLinkSlot1(state, linkSlot1) {
     state.linkSlot1 = linkSlot1;
   },
