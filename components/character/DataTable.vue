@@ -16,43 +16,43 @@ v-card.mt-2.radial-t200
     template(v-slot:item.health="{ item }")
       span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3) * (1 + item.linkHealth * totalLink)) }}
       //- 강화 및 링크로 추가된 체력 (추후 아이템 포함)
-      span.green--text (+{{ Math.round((healthEnh * 8) * (1 + item.linkHealth * totalLink)) }})
+      span(v-if="healthEnh > 0").green--text (+{{ Math.round((healthEnh * 8) * (1 + item.linkHealth * totalLink)) }})
 
     //- 데미지 계산
     template(v-slot:item.damage="{ item }")
       span {{ Math.round((item.damageBase + ((level - 1) * item.damageCoef) + damageEnh * 1.5) * (1 + item.linkDamage * totalLink)) }}
       //- 강화 및 링크로 추가된 데미지 (추후 아이템 포함)
-      span.green--text (+{{ Math.round((damageEnh * 1.5) * (1 + item.linkDamage * totalLink))}})
+      span(v-if="damageEnh > 0").green--text (+{{ Math.round((damageEnh * 1.5) * (1 + item.linkDamage * totalLink))}})
 
     //- 적중 계산
     template(v-slot:item.hit="{ item }")
       span {{ (item.hit + (hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }}
       //- 강화 및 링크로 추가된 적중 (추후 아이템 포함)
-      span.green--text (+{{ ((hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }})
+      span(v-if="hitEnh > 0").green--text (+{{ ((hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }})
 
     //- 치명타 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.crit="{ item }")
       span {{ ((item.crit + (critEnh * 0.4)) + (item.linkCrit * totalLink)).toFixed(1) + '%'}}
       //- 강화 및 링크로 추가된 치명 (추후 아이템 포함)
-      span.green--text (+{{ ((critEnh * 0.4) + (item.linkCrit * totalLink)).toFixed(1) + '%' }})
+      span(v-if="critEnh > 0").green--text (+{{ ((critEnh * 0.4) + (item.linkCrit * totalLink)).toFixed(1) + '%' }})
 
     //- 회피 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.dodge="{ item }")
-      span {{ ((item.dodge + (dodgeEnh * 0.4)) + (item.linkDodge * totalLink)) + '%'}}
+      span {{ ((item.dodge + (dodgeEnh * 0.4)) + (item.linkDodge * totalLink)).toFixed(1) + '%'}}
       //- 강화 및 링크로 추가된 회피 (추후 아이템 포함)
-      span.green--text (+{{ (dodgeEnh * 0.4) + (item.linkDodge * totalLink) + '%' }})
+      span(v-if="dodgeEnh > 0").green--text (+{{ ((dodgeEnh * 0.4) + (item.linkDodge * totalLink)).toFixed(1) + '%' }})
 
     //- 방어력 계산
     template(v-slot:item.defense="{ item }")
       span {{ Math.round(((item.defenseBase + ((level - 1 ) * item.defenseCoef)) + defenseEnh * 1.5) * (1 + item.linkDefense * totalLink)) }}
       //- 강화 및 링크로 추가된 방어 (추후 아이템 포함)
-      span.green--text (+{{ Math.round((defenseEnh * 3) * (1 + item.linkDefense * totalLink)) }})
+      span(v-if="defenseEnh > 0").green--text (+{{ Math.round((defenseEnh * 3) * (1 + item.linkDefense * totalLink)) }})
 
     //- AP 계산
     template(v-slot:item.ap="{ item }")
-      span {{ (item.ap + (item.linkAp * totalLink)).toFixed(3) }}
+      span {{ (item.ap + (item.linkAP * totalLink)).toFixed(3) }}
       //- 강화 및 링크로 추가된 ap (추후 아이템 포함)
-      span(v-if="item.linkAp > 0").green--text (+{{ (item.linkAp * totalLink).toFixed(3) }})
+      span(v-if="item.linkAP > 0").green--text (+{{ (item.linkAP * totalLink).toFixed(3) }})
 
     template(v-slot:item.equip="{ item }")
       //- TODO: 장착아이템 썸네일

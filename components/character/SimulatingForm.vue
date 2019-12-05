@@ -26,7 +26,7 @@ v-card.radial-t200(width="470")
             v-chip(:color="data.item.color" small) {{ data.item.text }}
       v-col(cols="4")
         v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
-        type="number" autocomplete="off" min="1" max="90")
+        type="number" autocomplete="off" min="1" max="90" append-icon="mdi-chevron-double-up" prepend-icon="mdi-chevron-double-down" @click:prepend="level = 1" @click:append="level = 90")
       v-col(cols="4").px-4
         //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
         v-switch.mt-0.pt-0(color="accent" hide-details)
@@ -44,32 +44,32 @@ v-card.radial-t200(width="470")
         span.pr-4.caption.accent--text 1431
         v-text-field(v-model="damageEnh"
           dense flat solo hide-details suffix="공격력"
-          type="number" counter maxlength="3" autocomplete="off")
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 7654
         v-text-field(v-model="healthEnh" 
           dense flat solo hide-details suffix="체력"
-          type="number" counter maxlength="3" autocomplete="off")
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 431
         v-text-field(v-model="defenseEnh" 
           dense flat solo hide-details suffix="방어력"
-          type="number" counter maxlength="3" autocomplete="off")
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 202%
         v-text-field(v-model="hitEnh" 
           dense flat solo hide-details suffix="적중"
-          type="number" counter maxlength="3" autocomplete="off")
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 102%
         v-text-field(v-model="critEnh" 
           dense flat solo hide-details suffix="치명"
-            type="number" counter maxlength="3" autocomplete="off")
+            type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
         span.pr-4.caption.accent--text 102%
         v-text-field(v-model="dodgeEnh"
           dense flat solo hide-details suffix="회피"
-            type="number" counter maxlength="3" autocomplete="off")
+            type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
     v-divider
     //- 링크 퍼센티지
     v-row.px-4.py-2(align="center")
@@ -210,7 +210,7 @@ export default {
     ]
   }),
   methods: {
-    ...mapMutations(['updateMaxLink', 'updateMinLink']),
+    ...mapMutations(['updateMaxLink', 'updateMinLink'])
   },
   computed: {
     ...mapState([
