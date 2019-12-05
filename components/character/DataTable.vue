@@ -16,7 +16,7 @@ v-card.mt-2.radial-t200
     template(v-slot:item.health="{ item }")
       span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3) * (1 + item.linkHealth * totalLink)) }}
       //- 강화 및 링크로 추가된 체력 (추후 아이템 포함)
-      span.green--text (+{{ Math.round((healthEnh * 3) * (1 + item.linkHealth * totalLink)) }})
+      span.green--text (+{{ Math.round((healthEnh * 8) * (1 + item.linkHealth * totalLink)) }})
 
     //- 데미지 계산
     template(v-slot:item.damage="{ item }")
@@ -44,7 +44,7 @@ v-card.mt-2.radial-t200
 
     //- 방어력 계산
     template(v-slot:item.defense="{ item }")
-      span {{ Math.round(((item.defenseBase + ((level - 1 ) * item.defenseCoef)) + defenseEnh * 3) * (1 + item.linkDefense * totalLink)) }}
+      span {{ Math.round(((item.defenseBase + ((level - 1 ) * item.defenseCoef)) + defenseEnh * 1.5) * (1 + item.linkDefense * totalLink)) }}
       //- 강화 및 링크로 추가된 방어 (추후 아이템 포함)
       span.green--text (+{{ Math.round((defenseEnh * 3) * (1 + item.linkDefense * totalLink)) }})
 
