@@ -46,11 +46,6 @@ export default {
     typeItems: ['기동형', '경장형', '중장형'],
     roleItems: ['공격기', '보호기', '지원기']
   }),
-  // methods: {
-  //   name() {
-  //     this.$store.state.character.name
-  //   }
-  // },
   computed: {
     ...mapState([
       'character' // json

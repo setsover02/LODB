@@ -3,7 +3,6 @@
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200(width="470")
   v-form(ref="form")
-    //- v-list-item(v-for="(data , id) in character" :key="id" v-bind:text="data.name") {{ data.name }}
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
         v-img(:src="require('~/assets/img/avatar/002.png')")
@@ -37,7 +36,7 @@ v-card.radial-t200(width="470")
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 강화
       v-col(cols="auto").primary--text.subtitle-2 잔여포인트
-        v-chip.ml-3.white--text(small color='primary') {{ enhTotalLimit }}
+        v-chip.ml-3.white--text(small color='primary' v-text="enhTotalLimit")
     //- 강화 수치
     v-row.px-4.pb-4
       v-col(cols="4").text-right
@@ -78,7 +77,8 @@ v-card.radial-t200(width="470")
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
         v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(totalLink * 100) + '%' }}
       v-col(cols="auto")
-        v-btn(@click="" small text color="primary") Max
+        v-btn(v-if="totalLink < 5" @click="updateMaxLink" small text color="primary") Max
+        v-btn(v-else @click="updateMinLink" small text color="red") Min
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
@@ -101,7 +101,22 @@ v-card.radial-t200(width="470")
       v-col(cols="6")
         v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
           template(v-slot:selection="data")
-            span.white--text(small v-bind="data.attrs" :input-value="data.selected")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+      v-col(cols="6")
+        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
               v-avatar.border-4(size="24" left tile)
                 v-img(:src="require('~/assets/img/items/414.png')")
               | {{ data.item.name + '/' + data.item.rank }}
@@ -115,11 +130,9 @@ v-card.radial-t200(width="470")
                 v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
 
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(:items="equipment" dense solo flat prefix="OS" append-icon="mdi-chevron-down" autocomplete="off")
       v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="OS" append-icon="mdi-chevron-down" autocomplete="off")
-      v-col(cols="6")
-        v-autocomplete(:items="dummy" dense solo flat prefix="장비" append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(:items="equipment" dense solo flat prefix="장비" append-icon="mdi-chevron-down" autocomplete="off")
     v-divider
     v-row.px-4.py-2
       v-col(cols="12").subtitle-2 기타 능력치
@@ -163,8 +176,17 @@ export default {
     RankChip
   },
   data: () => ({
-    dummy: ['1', '2', '3'],
-    fullLinkBonusSelect: ['자원감소 20%', '스킬데미지 15%', '적중 75%', '치명 20%', '체력 20%', '회피 20%','행동력 0.1', '버프 +2레벨', '사거리 +1'],
+    fullLinkBonusSelect: [
+      '자원감소 20%',
+      '스킬데미지 15%',
+      '적중 75%',
+      '치명 20%',
+      '체력 20%',
+      '회피 20%',
+      '행동력 0.1',
+      '버프 +2레벨',
+      '사거리 +1'
+    ],
     equipmentSelect: null,
     linkPercentage: [100, 75, 50, 25, 10, 0],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
@@ -188,15 +210,7 @@ export default {
     ]
   }),
   methods: {
-    // Link percentage Slider
-    // 풀링크
-    linkMax() {
-      // this.$store.state.linkSlot1 = 1
-    },
-    // 링크 제거
-    linkMin() {
-      this.link = 0
-    }
+    ...mapMutations(['updateMaxLink', 'updateMinLink']),
   },
   computed: {
     ...mapState([
@@ -300,6 +314,14 @@ export default {
       },
       set(value) {
         this.$store.commit('updateLinkSlot5', value)
+      }
+    },
+    fullLinkBonus: {
+      get() {
+        return this.$store.state.fullLinkBonus
+      },
+      set(value) {
+        this.$store.commit('updateFullLinkBonus', value)
       }
     },
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산

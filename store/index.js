@@ -76,7 +76,22 @@ export const mutations = {
   updateDodgeEnh(state, dodgeEnh) {
     state.dodgeEnh = dodgeEnh;
   },
-  // 링크 퍼센티지 적용
+  // 링크 최대치
+  updateMaxLink(state) {
+    state.linkSlot1 = 100,
+    state.linkSlot2 = 100,
+    state.linkSlot3 = 100,
+    state.linkSlot4 = 100,
+    state.linkSlot5 = 100
+  },
+  // 링크 미니멈
+  updateMinLink(state) {
+    state.linkSlot1 = 0,
+    state.linkSlot2 = 0,
+    state.linkSlot3 = 0,
+    state.linkSlot4 = 0,
+    state.linkSlot5 = 0
+  },
   updateLinkSlot1(state, linkSlot1) {
     state.linkSlot1 = linkSlot1;
   },
@@ -91,5 +106,9 @@ export const mutations = {
   },
   updateLinkSlot5(state, linkSlot5) {
     state.linkSlot5 = linkSlot5;
+  },
+  // 풀링 보너스 선택값
+  updateFullLinkBonus(state, fullLinkBonus) {
+    state.fullLinkBonus = fullLinkBonus;
   }
 };

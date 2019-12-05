@@ -42,12 +42,13 @@ div
 										thead
 											tr
 												th 강화레벨
-												th 공격력
-												th 적중
+												th.text-right(v-if="item.damage") 공격력
+												th.text-right(v-if="item.hit") 적중
 										tbody
 											tr(v-for="(damage, i) in item.damage" :key="i" v-if="i < 10")
 												td {{ i + 1 }}
-												td {{ item.damage[i]}}
+												td.text-right {{ item.damage[i] }}
+												//- td {{ item.hit[i] }}
 				
 </template>
 <script>
