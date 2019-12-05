@@ -6,9 +6,9 @@ export const state = () => ({
   equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
-  damageEnh: 0, // * ?
-  healthEnh: 0, // * 3
-  defenseEnh: 0, // * ?
+  damageEnh: 0, // * 1.5
+  healthEnh: 0, // * 8
+  defenseEnh: 0, // * 1.5
   hitEnh: 0, // * 1.5%
   critEnh: 0, // * 0.4%
   dodgeEnh: 0, // * 0.4%

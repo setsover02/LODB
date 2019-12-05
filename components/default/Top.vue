@@ -25,6 +25,9 @@
       //- v-btn(icon @click.stop="rightDrawer = !rightDrawer")
       //-   v-icon mdi-menu
       v-spacer
+      v-btn(text target="blank" href="https://discord.gg/kJJjbP" color="primary")
+        v-icon(left) mdi-discord
+        | Discord / Vue.js, 웹 개발자를 찾습니다 / 조언도 환영
       v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
         v-icon(left) mdi-google-spreadsheet
         | Google Sheet  

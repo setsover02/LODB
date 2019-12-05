@@ -3,9 +3,6 @@ v-row
   v-col
     SearchForm
     DataTable
-    v-btn.mt-4(large target="blank" href="https://discord.gg/kJJjbP" color="primary")
-      v-icon(left) mdi-discord
-      | Discord / Vue.js, 웹 개발자를 찾습니다 / 조언도 환영
   v-col(cols="auto")
     //- Input Form
     SimulatingForm
