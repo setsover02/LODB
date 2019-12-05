@@ -1,7 +1,7 @@
 <template lang="pug">
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-v-card.radial-t200
+v-card.radial-t200(width="470")
   v-form(ref="form")
     //- v-list-item(v-for="(data , id) in character" :key="id" v-bind:text="data.name") {{ data.name }}
     v-list-item.py-2
