@@ -94,7 +94,7 @@ v-card.radial-t200(width="470")
     v-row.pa-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
-        v-select(:items="dummy" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
+        v-select(v-model="fullLinkBonus" :items="fullLinkBonusSelect" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
     v-divider
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
@@ -164,6 +164,7 @@ export default {
   },
   data: () => ({
     dummy: ['1', '2', '3'],
+    fullLinkBonusSelect: ['자원감소 20%', '스킬데미지 15%', '적중 75%', '치명 20%', '체력 20%', '회피 20%','행동력 0.1', '버프 +2레벨', '사거리 +1'],
     equipmentSelect: null,
     linkPercentage: [100, 75, 50, 25, 10, 0],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
@@ -200,7 +201,8 @@ export default {
   computed: {
     ...mapState([
       'character',
-      'equipment' // json
+      'equipment',
+      'fullLinkBonus' // json
     ]),
     level: {
       get() {

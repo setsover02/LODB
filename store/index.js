@@ -17,7 +17,8 @@ export const state = () => ({
   linkSlot2: 100,
   linkSlot3: 100,
   linkSlot4: 100,
-  linkSlot5: 100
+  linkSlot5: 100,
+  fullLinkBonus: "적중 75%"
 });
 
 export const getters = {

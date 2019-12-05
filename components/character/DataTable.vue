@@ -269,7 +269,8 @@ export default {
       'healthEnh',
       'hitEnh',
       'critEnh',
-      'dodgeEnh'
+      'dodgeEnh',
+      'fullLinkBonus'
     ]),
     ...mapGetters(['totalLink'])
   }

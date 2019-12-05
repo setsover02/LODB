@@ -2,7 +2,7 @@
 div
 	v-row
 		v-col
-			v-data-iterator(:items="items" :search="search" hide-default-footer)
+			v-data-iterator(:items="equipment" :search="search" hide-default-footer)
 				template(v-slot:header)
 					v-card.mb-1.radial-t200
 						v-row
@@ -26,40 +26,43 @@ div
 				template(v-slot:default="props")
 					//- Item Card
 					v-row
-						//- TODO: key 값 수정해야함. item.name, item.class 두 개를 되게하면 좋음, 또는 아이템 고유아이디 사용
-						v-col(cols="2" v-for="item in props.items" :key="item.name")
+						v-col(cols="2" v-for="item in props.items" :key="item.id")
 							v-card.radial-t200
 								v-list-item
 									v-list-item-avatar.radius-4(size="48" color="t500" tile)
 										v-img(:src="require('~/assets/img/items/414.png')")
 									v-list-item-content
 										v-list-item-title {{ item.name }}
-										v-list-item-subtitle {{ item.type }}
+										v-list-item-subtitle {{ item.part }}
 									v-list-item-action
-										v-chip(label small color="orange") {{ item.rarity }}
-								v-divider
+										v-chip(label small color="orange") {{ item.rank }}
 								//- TODO: Data Table
-								v-card-text 1523
+								v-simple-table(dense)
+									template(v-slot:default)
+										thead
+											tr
+												th 강화레벨
+												th 공격력
+												th 적중
+										tbody
+											tr(v-for="(damage, i) in item.damage" :key="i" v-if="i < 10")
+												td {{ i + 1 }}
+												td {{ item.damage[i]}}
+				
 </template>
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
       search: '',
-      filter: {},
-      items: [
-        {
-          name: '출력 안정 회로',
-          rarity: 'SS',
-          type: '칩'
-        },
-        {
-          name: 'Ice cream sandwich',
-          rarity: 'SS',
-          type: 'OS'
-        }
-      ]
+      filter: {}
     }
-	}
+  },
+  computed: {
+    ...mapState([
+      'equipment', // json
+		]),
+  }
 }
 </script>
