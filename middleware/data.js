@@ -7,3 +7,9 @@
 //     store.commit("SET_CHARACTERS", response.data.results);
 //   });
 // }
+
+import characters from '~/data/character.json';
+
+export default function({ params, store }) {
+   store.commit("SET_CHARACTERS", characters);
+}

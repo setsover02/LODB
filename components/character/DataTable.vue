@@ -3,7 +3,7 @@ v-card.mt-2.radial-t200
   //- TODO: 페이지네이션 없애고 전체row 표기
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-  v-data-table(v-model="selected" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select)
+  v-data-table(v-model="selectIDs" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select)
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -97,14 +97,14 @@ export default {
     RankChip
   },
   data: () => ({
-    selected: [], // 테이블 선택 체크박스
+    // selected: [], // 테이블 선택 체크박스
     page: 1, // 페이지 네이션
     pageCount: 0,
     itemsPerPage: 10,
     snack: false,
     snackColor: '',
     snackText: '',
-    editedIndex: -1,
+    editedIndex: -1
     // rankFilter: ['SS', 'S', 'A', 'B'],
     // typeFilter: ['기동형', '경장형', '중장형'],
     // roleFilter: ['공격기', '보호기', '지원기'],
@@ -161,8 +161,16 @@ export default {
     ...mapGetters([
       'character', // json
       'finalDamage',
-      'totalLink',
-    ])
+      'totalLink'
+    ]),
+    selectIDs: {
+      get() {
+        return this.$store.state.selectIDs
+      },
+      set(value) {
+        this.$store.commit('updateSelectIDs', value)
+      }
+    }
   }
 }
 </script>

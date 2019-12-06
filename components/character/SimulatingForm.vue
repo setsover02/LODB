@@ -175,6 +175,12 @@ export default {
   components: {
     RankChip
   },
+  // props: {
+  //   characterID: {
+  //     type: String,
+  //     required: true,
+  //   }
+  // },
   data: () => ({
     fullLinkBonusSelect: [
       '자원감소 20%',
@@ -214,7 +220,6 @@ export default {
   },
   computed: {
     ...mapState([
-      'character',
       'equipment',
       'fullLinkBonus' // json
     ]),

@@ -34,6 +34,7 @@ export const state = () => ({
     { text: "메모", align: "right", sortable: false, value: "memo" },
     { text: "", align: "right", sortable: false, value: "actions" }
   ],
+  selectIDs: [],
   // character: [], // character.json
   equipment: equipment,
   level: 1, // 레벨 설정
@@ -55,11 +56,11 @@ export const state = () => ({
 
 export const getters = {
   character: () => characters,
-  getCharacter: (state, getters) =>{
-    return getters.character
+  getCharacter: (state, getters) => {
+    return getters.character;
   },
   getEnhDamage: state => {
-    return (state.damageEnh * damageEnhCoef);
+    return state.damageEnh * damageEnhCoef;
   },
   // getCharacterById: state => id => {
   //   return state.character.find(character => character.id === id);
@@ -92,6 +93,10 @@ export const mutations = {
   // 이름 검색필터
   searchName(state, name) {
     state.name = name;
+  },
+  updateSelectIDs(state, selectIDs) {
+    state.selectIDs = selectIDs;
+    // selectNode("m" + payload, true);
   },
   // 레벨 및 강화스텟 업데이트
   updateLevel(state, level) {

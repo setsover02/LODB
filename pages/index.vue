@@ -5,9 +5,10 @@ v-row
     DataTable
   v-col(cols="auto")
     //- Input Form
-    SimulatingForm
+    SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
 </template>
 <script>
+import { mapState, mapGetters } from 'vuex'
 import SearchForm from '~/components/character/SearchForm'
 import DataTable from '~/components/character/DataTable'
 import SimulatingForm from '~/components/character/SimulatingForm'
@@ -18,7 +19,15 @@ export default {
   components: {
     SearchForm,
     DataTable,
-    SimulatingForm,
+    SimulatingForm
+  },
+  computed: {
+    ...mapState({
+      selectIDs: state => state.selectIDs
+    }),
+    ...mapGetters([
+      'character' // json
+    ])
   }
 }
 </script>
