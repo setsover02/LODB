@@ -3,7 +3,7 @@ v-card.mt-2.radial-t200
   //- TODO: 페이지네이션 없애고 전체row 표기
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-  v-data-table(v-model="selected" :headers="headers" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select)
+  v-data-table(v-model="selected" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select)
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -91,7 +91,6 @@ v-card.mt-2.radial-t200
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import RankChip from '~/components/RankChip'
-// import character from '~/data/character.json'
 
 export default {
   components: {
@@ -109,119 +108,6 @@ export default {
     // rankFilter: ['SS', 'S', 'A', 'B'],
     // typeFilter: ['기동형', '경장형', '중장형'],
     // roleFilter: ['공격기', '보호기', '지원기'],
-    headers: [
-      {
-        text: '번호',
-        align: 'right',
-        sortable: false,
-        value: 'id'
-      },
-      {
-        text: '아바타',
-        sortable: false,
-        value: 'avatar'
-      },
-      {
-        text: '이름',
-        sortable: true,
-        value: 'name'
-      },
-      {
-        text: '등급',
-        align: 'center',
-        sortable: false,
-        value: 'rank'
-      },
-      {
-        text: '유형',
-        sortable: false,
-        value: 'type'
-      },
-      {
-        text: '역할',
-        sortable: false,
-        value: 'role'
-      },
-      {
-        text: '레벨',
-        align: 'right',
-        sortable: false,
-        value: 'level'
-      },
-      {
-        text: '체력',
-        align: 'right',
-        sortable: true,
-        value: 'health'
-      },
-      {
-        // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
-        text: '공격력',
-        align: 'right',
-        sortable: true,
-        value: 'damage'
-      },
-      {
-        text: '1스킬',
-        align: 'right',
-        sortable: true,
-        value: 'skill1'
-      },
-      {
-        text: '2스킬',
-        align: 'right',
-        sortable: true,
-        value: 'skill2'
-      },
-      {
-        text: '적중',
-        align: 'right',
-        sortable: true,
-        value: 'hit'
-      },
-      {
-        text: '치명',
-        align: 'right',
-        sortable: true,
-        value: 'crit'
-      },
-      {
-        text: '회피',
-        align: 'right',
-        sortable: true,
-        value: 'dodge'
-      },
-      {
-        text: '방어력',
-        align: 'right',
-        sortable: true,
-        value: 'defense'
-      },
-      {
-        text: '행동력',
-        align: 'right',
-        sortable: true,
-        value: 'ap'
-      },
-      {
-        text: '장비',
-        align: 'right',
-        sortable: false,
-        value: 'equip'
-      },
-      {
-        text: '메모',
-        align: 'right',
-        sortable: false,
-        value: 'memo'
-      },
-      {
-        text: '',
-        align: 'right',
-        sortable: false,
-        value: 'actions'
-      }
-    ]
   }),
   methods: {
     deleteItem(item) {
@@ -262,7 +148,7 @@ export default {
   computed: {
     ...mapState([
       'name',
-      'character', // json
+      'charactersCol',
       'level', // 레벨
       'damageEnh', // 강화수치
       'defenseEnh',
@@ -272,7 +158,11 @@ export default {
       'dodgeEnh',
       'fullLinkBonus'
     ]),
-    ...mapGetters(['totalLink'])
+    ...mapGetters([
+      'character', // json
+      'finalDamage',
+      'totalLink',
+    ])
   }
 }
 </script>

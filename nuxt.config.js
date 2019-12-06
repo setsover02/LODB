@@ -39,7 +39,17 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+
+  axios: {
+    baseURL: process.env.BASE_URL
+    //  baseURL: 'point_to_your_URI'
+  },
+  webfontloader: {
+    google: {
+      families: ["Noto Sans KR:100,300,400,500,700"]
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -75,11 +85,6 @@ export default {
           pink: "#E875C7"
         }
       }
-    }
-  },
-  webfontloader: {
-    google: {
-      families: ["Noto Sans KR:100,300,400,500,700"]
     }
   },
   /*

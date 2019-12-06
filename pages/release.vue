@@ -9,3 +9,8 @@
 						v-card-title Bug Fixes
 						v-card-text Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
 </template>
+<script>
+export default {
+
+}
+</script>

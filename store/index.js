@@ -1,8 +1,40 @@
-const character = require("~/data/character.json");
+// const character = require("~/data/character.json");
+const characters = require("~/data/character.json");
 const equipment = require("~/data/equipment.json");
+
+// 강화 1포인트 당 증가치
+const damageEnhCoef = 1.5;
+const healthEnhCoef = 8;
+const defenseEnhCoef = 1.5;
+const hitEnhCoef = 1.5;
+const critEnhCoef = 0.4;
+const dodgeEnhCoef = 0.4;
+
 export const state = () => ({
-  name: null,
-  character: character, // character.json
+  name: null, // Name Search
+  charactersCol: [
+    // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
+    { text: "번호", align: "right", sortable: false, value: "id" },
+    { text: "아바타", sortable: false, value: "avatar" },
+    { text: "이름", sortable: true, value: "name" },
+    { text: "등급", align: "center", sortable: false, value: "rank" },
+    { text: "유형", sortable: false, value: "type" },
+    { text: "역할", sortable: false, value: "role" },
+    { text: "레벨", align: "right", sortable: false, value: "level" },
+    { text: "체력", align: "right", sortable: true, value: "health" },
+    { text: "공격력", align: "right", sortable: true, value: "damage" },
+    { text: "1스킬", align: "right", sortable: true, value: "skill1" },
+    { text: "2스킬", align: "right", sortable: true, value: "skill2" },
+    { text: "적중", align: "right", sortable: true, value: "hit" },
+    { text: "치명", align: "right", sortable: true, value: "crit" },
+    { text: "회피", align: "right", sortable: true, value: "dodge" },
+    { text: "방어력", align: "right", sortable: true, value: "defense" },
+    { text: "행동력", align: "right", sortable: true, value: "ap" },
+    { text: "장비", align: "right", sortable: false, value: "equip" },
+    { text: "메모", align: "right", sortable: false, value: "memo" },
+    { text: "", align: "right", sortable: false, value: "actions" }
+  ],
+  // character: [], // character.json
   equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
@@ -22,6 +54,13 @@ export const state = () => ({
 });
 
 export const getters = {
+  character: () => characters,
+  getCharacter: (state, getters) =>{
+    return getters.character
+  },
+  getEnhDamage: state => {
+    return (state.damageEnh * damageEnhCoef);
+  },
   // getCharacterById: state => id => {
   //   return state.character.find(character => character.id === id);
   // },
@@ -78,19 +117,19 @@ export const mutations = {
   },
   // 링크 최대치
   updateMaxLink(state) {
-    state.linkSlot1 = 100,
-    state.linkSlot2 = 100,
-    state.linkSlot3 = 100,
-    state.linkSlot4 = 100,
-    state.linkSlot5 = 100
+    (state.linkSlot1 = 100),
+      (state.linkSlot2 = 100),
+      (state.linkSlot3 = 100),
+      (state.linkSlot4 = 100),
+      (state.linkSlot5 = 100);
   },
   // 링크 미니멈
   updateMinLink(state) {
-    state.linkSlot1 = 0,
-    state.linkSlot2 = 0,
-    state.linkSlot3 = 0,
-    state.linkSlot4 = 0,
-    state.linkSlot5 = 0
+    (state.linkSlot1 = 0),
+      (state.linkSlot2 = 0),
+      (state.linkSlot3 = 0),
+      (state.linkSlot4 = 0),
+      (state.linkSlot5 = 0);
   },
   updateLinkSlot1(state, linkSlot1) {
     state.linkSlot1 = linkSlot1;
@@ -112,3 +151,18 @@ export const mutations = {
     state.fullLinkBonus = fullLinkBonus;
   }
 };
+
+// const setCharacterToStore = () => {
+//   axios.get(require("~/data/character.json")).then(response => {
+//     store.state("character", response.data.character);
+//   });
+// };
+
+// // setCharacterToStore()
+// export const actions = {
+//   async browserInit({ commit }) {
+//     const { data } = await axios.get(require("~/data/character.json"));
+//     commit("SET_CHARACTERS", data);
+//     return dispatch("browserInit");
+//   }
+// };
