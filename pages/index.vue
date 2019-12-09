@@ -5,7 +5,8 @@ v-row
     DataTable
   v-col(cols="auto")
     //- Input Form
-    SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
+    //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
+    SimulatingForm
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex'
