@@ -13,7 +13,7 @@ v-card.mt-2.radial-t200
       span {{ level }}
     //- 체력계산 : 소수점 버림인지 검증(라비아타 기준 올림으로 계산되는듯)
     template(v-slot:item.health="{ item }")
-      span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3) * (1 + item.linkHealth * totalLink)) }}
+      span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 8) * (1 + item.linkHealth * totalLink)) }}
       //- 강화 및 링크로 추가된 체력 (추후 아이템 포함)
       span(v-if="healthEnh > 0").green--text (+{{ Math.round((healthEnh * 8) * (1 + item.linkHealth * totalLink)) }})
 
@@ -43,7 +43,7 @@ v-card.mt-2.radial-t200
     template(v-slot:item.defense="{ item }")
       span {{ Math.round(((item.defenseBase + ((level - 1 ) * item.defenseCoef)) + defenseEnh * 1.5) * (1 + item.linkDefense * totalLink)) }}
       //- 강화 및 링크로 추가된 방어 (추후 아이템 포함)
-      span(v-if="defenseEnh > 0 || (item.linkDefense * totalLink) > 0").green--text (+{{ Math.round((defenseEnh * 3) * (1 + (item.linkDefense * totalLink))) }})
+      span(v-if="defenseEnh > 0 || (item.linkDefense * totalLink) > 0").green--text (+{{ Math.round((defenseEnh * 1.5) * (1 + (item.linkDefense * totalLink))) }})
 
     //- AP 계산
     template(v-slot:item.ap="{ item }")
