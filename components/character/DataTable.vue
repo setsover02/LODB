@@ -11,7 +11,6 @@ v-card.mt-2.radial-t200
       RankChip(v-bind:rank="item.rank")
     template(v-slot:item.level="{ item }")
       span {{ level }}
-
     //- 체력계산 : 소수점 버림인지 검증(라비아타 기준 올림으로 계산되는듯)
     template(v-slot:item.health="{ item }")
       span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 3) * (1 + item.linkHealth * totalLink)) }}
@@ -28,31 +27,29 @@ v-card.mt-2.radial-t200
     template(v-slot:item.hit="{ item }")
       span {{ (item.hit + (hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }}
       //- 강화 및 링크로 추가된 적중 (추후 아이템 포함)
-      span(v-if="hitEnh > 0").green--text (+{{ ((hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }})
-
+      span(v-if="hitEnh > 0 || (item.linkHit * totalLink) > 0").green--text (+{{ ((hitEnh * 1.5) + (item.linkHit * totalLink)).toFixed(1) + '%' }})
     //- 치명타 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.crit="{ item }")
       span {{ ((item.crit + (critEnh * 0.4)) + (item.linkCrit * totalLink)).toFixed(1) + '%'}}
       //- 강화 및 링크로 추가된 치명 (추후 아이템 포함)
-      span(v-if="critEnh > 0").green--text (+{{ ((critEnh * 0.4) + (item.linkCrit * totalLink)).toFixed(1) + '%' }})
-
+      span(v-if="critEnh > 0 || (item.linkCrit * totalLink) > 0").green--text (+{{ ((critEnh * 0.4) + (item.linkCrit * totalLink)).toFixed(1) + '%' }})
     //- 회피 계산 TODO: 소수점 나오는데 도대체 이해가 잘
     template(v-slot:item.dodge="{ item }")
       span {{ ((item.dodge + (dodgeEnh * 0.4)) + (item.linkDodge * totalLink)).toFixed(1) + '%'}}
       //- 강화 및 링크로 추가된 회피 (추후 아이템 포함)
-      span(v-if="dodgeEnh > 0").green--text (+{{ ((dodgeEnh * 0.4) + (item.linkDodge * totalLink)).toFixed(1) + '%' }})
+      span(v-if="dodgeEnh > 0 || (item.linkDodge * totalLink) > 0").green--text (+{{ ((dodgeEnh * 0.4) + (item.linkDodge * totalLink)).toFixed(1) + '%' }})
 
     //- 방어력 계산
     template(v-slot:item.defense="{ item }")
       span {{ Math.round(((item.defenseBase + ((level - 1 ) * item.defenseCoef)) + defenseEnh * 1.5) * (1 + item.linkDefense * totalLink)) }}
       //- 강화 및 링크로 추가된 방어 (추후 아이템 포함)
-      span(v-if="defenseEnh > 0").green--text (+{{ Math.round((defenseEnh * 3) * (1 + item.linkDefense * totalLink)) }})
+      span(v-if="defenseEnh > 0 || (item.linkDefense * totalLink) > 0").green--text (+{{ Math.round((defenseEnh * 3) * (1 + (item.linkDefense * totalLink))) }})
 
     //- AP 계산
     template(v-slot:item.ap="{ item }")
       span {{ (item.ap + (item.linkAP * totalLink)).toFixed(3) }}
       //- 강화 및 링크로 추가된 ap (추후 아이템 포함)
-      span(v-if="item.linkAP > 0").green--text (+{{ (item.linkAP * totalLink).toFixed(3) }})
+      span(v-if="item.linkAP * totalLink > 0").green--text (+{{ (item.linkAP * totalLink).toFixed(3) }})
 
     template(v-slot:item.equip="{ item }")
       //- TODO: 장착아이템 썸네일
@@ -70,7 +67,7 @@ v-card.mt-2.radial-t200
         span {{ props.item.memo }}
         template(v-slot:input)
           //- :rules="[max8chars]"
-          v-text-field(v-model="props.item.memo"  counter="8" autofocus)
+          v-text-field.mt-4(v-model="props.item.memo" label="Memo" counter="8" autofocus)
 
     template(v-slot:item.actions="{ items }")
       //- 삭제 버튼

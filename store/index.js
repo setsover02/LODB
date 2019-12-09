@@ -1,6 +1,6 @@
 // const character = require("~/data/character.json");
-const characters = require("~/data/character.json");
-const equipment = require("~/data/equipment.json");
+const characters = require("~/static/character.json");
+const equipment = require("~/static/equipment.json");
 
 // 강화 1포인트 당 증가치
 const damageEnhCoef = 1.5;
@@ -35,7 +35,7 @@ export const state = () => ({
     { text: "", align: "right", sortable: false, value: "actions" }
   ],
   selectIDs: [],
-  // character: [], // character.json
+  character: characters, // character.json
   equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯

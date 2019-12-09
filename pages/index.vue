@@ -3,6 +3,8 @@ v-row
   v-col
     SearchForm
     DataTable
+    v-card.mt-2.radial-t200
+      v-card-title Calc
   v-col(cols="auto")
     //- Input Form
     //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
