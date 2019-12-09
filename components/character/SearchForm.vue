@@ -47,7 +47,7 @@ export default {
     roleItems: ['공격기', '보호기', '지원기']
   }),
   computed: {
-    ...mapState([
+    ...mapGetters([
       'character' // json
     ]),
     // 이름으로 검색

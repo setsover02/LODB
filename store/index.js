@@ -35,7 +35,7 @@ export const state = () => ({
     { text: "", align: "right", sortable: false, value: "actions" }
   ],
   selectIDs: [],
-  character: characters, // character.json
+  character: [], // character.json
   equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
