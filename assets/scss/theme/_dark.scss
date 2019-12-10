@@ -22,6 +22,14 @@
   .v-slider__thumb-label {
     color: theme-color(t500);
   }
+  // Switch-inset track color
+  // &.v-input--switch .v-input--switch__track {
+  //   background-color: theme-color(t500);
+  // }
+
+  &.v-timeline .v-timeline-item .v-card::before {
+    border-right-color: theme-color(t100) !important;
+  }
 
   // Solo text field custom (hover, outline)
   &.v-text-field--solo {

@@ -1,10 +1,11 @@
 .v-data-table {
   tr {
     @include transition(120ms);
-  }
-  th,
-  td {
-    font-size: 0.875rem !important;
-    white-space: nowrap;
+    th,
+    td {
+      font-size: 0.875rem;
+      white-space: nowrap;
+      padding: 0 8px;
+    }
   }
 }

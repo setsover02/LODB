@@ -2,7 +2,7 @@
   v-app(dark)
     Top
     v-content
-      v-container(fluid).px-2
+      v-container(fluid)
         nuxt
     //- <v-navigation-drawer
     //-   v-model="rightDrawer"

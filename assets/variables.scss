@@ -144,6 +144,8 @@ $material-dark: map-deep-merge(
   ),
   $material-dark
 );
+// Button
+$btn-font-weight: 700 !default;
 
 // Chip
 $icon-sizes: () !default;
