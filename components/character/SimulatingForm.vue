@@ -2,6 +2,8 @@
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200(width="470")
+  v-card-title selectIDs: {{ getCharacterById }}
+  v-card-subtitle Slot: {{ getLinkSlot }}
   v-form(ref="form")
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
@@ -82,15 +84,15 @@ v-card.radial-t200(width="470")
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
-        v-select(v-model="linkSlot1" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot1" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot2" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot2" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot3" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot3" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot4" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
-        v-select(v-model="linkSlot5" :items="linkPercentage" solo flat dense append-icon="" suffix="%" hide-details)
+        v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
     v-row.pa-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
@@ -169,7 +171,7 @@ v-card.radial-t200(width="470")
           v-list-item-content.caption 67%
 </template>
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import RankChip from '~/components/RankChip'
 export default {
   components: {
@@ -194,7 +196,6 @@ export default {
       '사거리 +1'
     ],
     equipmentSelect: null,
-    linkPercentage: [100, 75, 50, 25, 10, 0],
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
       {
@@ -216,13 +217,10 @@ export default {
     ]
   }),
   methods: {
-    ...mapMutations(['updateMaxLink', 'updateMinLink'])
+    ...mapMutations(['updateMinLink', 'updateMaxLink'])
   },
   computed: {
-    ...mapState([
-      'equipment',
-      'fullLinkBonus' // json
-    ]),
+    ...mapState(['equipment', 'linkSlotItem', 'fullLinkBonus']),
     level: {
       get() {
         return this.$store.state.level
@@ -330,7 +328,7 @@ export default {
       }
     },
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
-    ...mapGetters(['enhTotalLimit', 'totalLink']),
+    ...mapGetters(['getCharacterById', 'getLinkSlot', 'enhTotalLimit', 'totalLink']),
     // totalLink 칩 색상
     totalLinkColor() {
       if (this.$store.getters.totalLink < 5) return 'red'
