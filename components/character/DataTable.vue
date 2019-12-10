@@ -3,7 +3,7 @@ v-card.mt-2.radial-t200
   //- TODO: 페이지네이션 없애고 전체row 표기
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
-  v-data-table(v-model="selectIDs" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select )
+  v-data-table(v-model="selectIDs" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select)
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -11,7 +11,7 @@ v-card.mt-2.radial-t200
       RankChip(v-bind:rank="item.rank")
     template(v-slot:item.level="{ item }")
       span {{ level }}
-    //- 체력계산 : 소수점 버림인지 검증(라비아타 기준 올림으로 계산되는듯)
+    //- 체력계산 : 소수점 버림인지 검증
     template(v-slot:item.health="{ item }")
       span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 8) * (1 + item.linkHealth * totalLink)) }}
       //- 강화 및 링크로 추가된 체력 (추후 아이템 포함)
@@ -92,13 +92,7 @@ export default {
     RankChip
   },
   data: () => ({
-    dialog: false,
-    editedItem: {
-      name: ''
-    },
-    editedIndex: -1,
-    // selected: [], // 테이블 선택 체크박스
-    page: 1, // 페이지 네이션
+    page: 1, // 페이지네이션
     pageCount: 0,
     itemsPerPage: 10,
     snack: false,
@@ -129,15 +123,6 @@ export default {
     memoClose() {
       console.log('Dialog closed')
     }
-    // load() {
-    //   const character = this
-    //   character.data.push(
-    //     {
-    //       id: i,
-    //       damage: Math.floor(this.damageBase + this.$store.state.level)
-    //     }
-    //   )
-    // }
   },
   computed: {
     ...mapState([
@@ -157,6 +142,7 @@ export default {
       'finalDamage',
       'totalLink'
     ]),
+    // 테이블 선택 시 store로
     selectIDs: {
       get() {
         return this.$store.state.selectIDs

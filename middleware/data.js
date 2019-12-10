@@ -8,8 +8,8 @@
 //   });
 // }
 
-import characters from '~/static/character.json';
+// import characters from '~/static/character.json';
 
-export default function({ params, store }) {
-   store.commit("SET_CHARACTERS", characters);
-}
+// export default function({ params, store }) {
+//    store.commit("SET_CHARACTERS", characters);
+// }

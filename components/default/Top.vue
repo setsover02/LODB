@@ -52,6 +52,10 @@ export default {
         {
           title: "Release",
           to: "/release"
+        },
+        {
+          title: "Test",
+          to: "/test"
         }
       ],
       miniVariant: false,
