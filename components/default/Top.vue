@@ -25,7 +25,7 @@
       //- v-btn(icon @click.stop="rightDrawer = !rightDrawer")
       //-   v-icon mdi-menu
       v-spacer
-      v-btn(text target="blank" href="https://discord.gg/kJJjbP" color="white")
+      v-btn(text target="blank" href="https://discord.gg/RR8W9Dp" color="white")
         v-icon(left) mdi-discord
         | Discord
       v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
