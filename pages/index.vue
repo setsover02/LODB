@@ -3,7 +3,7 @@ v-row
   v-col
     SearchForm
     DataTable
-    v-card.mt-2.radial-t200
+    v-card.mt-2.radial-t200.flex-grow-1
       v-card-title Calc
   v-col(cols="auto")
     //- Input Form

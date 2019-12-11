@@ -1,18 +1,10 @@
 // https://medium.com/locale-ai/architecting-vuex-store-for-large-scale-vue-js-applications-24c36137e251
-const characters = require("~/static/character.json");
-const equipment = require("~/static/equipment.json");
-
-// 강화 1포인트 당 증가치
-const damageEnhCoef = 1.5;
-const healthEnhCoef = 8;
-const defenseEnhCoef = 1.5;
-const hitEnhCoef = 1.5;
-const critEnhCoef = 0.4;
-const dodgeEnhCoef = 0.4;
+import { CONST } from "~/static/const";
+const CHARACTER = require("~/static/character.json");
+const EQUIPMENT = require("~/static/equipment.json");
 
 export const state = () => ({
   name: null, // Name Search
-  character: [], // character.json
   charactersCol: [
     // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
     { text: "번호", align: "right", sortable: false, value: "id" },
@@ -36,7 +28,6 @@ export const state = () => ({
     { text: "", align: "right", sortable: false, value: "actions" }
   ],
   selection: [0], // DataTable selection, 빈값으로 할경우 선택된 내용이 없어서 에러
-  equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * 1.5
@@ -46,18 +37,18 @@ export const state = () => ({
   critEnh: 0, // * 0.4%
   dodgeEnh: 0, // * 0.4%
   // 링크 슬롯
-  linkSlotItem: [100, 75, 50, 25, 10, 0], // 링크 퍼센티지 선택
+  linkSlotItem: CONST.LINK_SLOT, // 링크 퍼센티지 선택
   linkSlot1: 100,
   linkSlot2: 100,
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
-  totalLink: 5,
   fullLinkBonus: "적중 75%"
 });
 
 export const getters = {
-  character: () => characters, // Get JSON
+  character: () => CHARACTER, // Get JSON
+  equipment: () => EQUIPMENT,
   // Json Data: DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
   // getters > SimulatingForm.vue
   getCharacterId: state => {
@@ -80,23 +71,75 @@ export const getters = {
   getCharacterRole: state => {
     return state.selection[0].role;
   },
-  // 이하 부터는 강화값 포함하여 반환
-  getCharacterDamage: state => {
-    const data = state.selection[0];
-    const totalLink =
-      state.linkSlot1 / 100 +
-      state.linkSlot2 / 100 +
-      state.linkSlot3 / 100 +
-      state.linkSlot4 / 100 +
-      state.linkSlot5 / 100;
+  // 링크 퍼센티지 합산, 소수점 2자리 // 추후 const값 이랑 중복되는거 정리해야함
+  getTotalLink: state => {
     return (
-      Math.round(
+      (state.linkSlot1 +
+        state.linkSlot2 +
+        state.linkSlot3 +
+        state.linkSlot4 +
+        state.linkSlot5) /
+      100
+    );
+  },
+  // 이하 부터는 강화값 포함하여 반환 (강화, 링크보너스 까지 적용되어 있음)
+  // DataTable: Only selected row data > SimulatingForm
+  getCharacterDamage: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      Math.round((
         data.damageBase +
           (state.level - 1) * data.damageCoef +
-          state.damageEnh * damageEnhCoef
+          state.damageEnh * CONST.ENH.DAMAGE
       ) *
-      (1 + data.linkDamage * totalLink)
+      (1 + data.linkDamage * getters.getTotalLink))
     );
+  },
+  getCharacterHealth: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      Math.round((
+        data.healthBase +
+          (state.level - 1) * data.healthCoef +
+          state.healthEnh * CONST.ENH.HEALTH
+      ) *
+      (1 + data.linkHealth * getters.getTotalLink))
+    );
+  },
+  getCharacterDefense: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      Math.round((
+        data.defenseBase +
+          (state.level - 1) * data.defenseCoef +
+          state.defenseEnh * CONST.ENH.DEFENSE
+      ) *
+      (1 + data.linkDefense * getters.getTotalLink))
+    );
+  },
+  getCharacterHit: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      data.hit +
+      state.hitEnh * CONST.ENH.HIT +
+      data.linkHit * getters.getTotalLink
+    ).toFixed(1);
+  },
+  getCharacterCrit: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      data.crit +
+      state.critEnh * CONST.ENH.CRIT +
+      data.linkCrit * getters.getTotalLink
+    ).toFixed(1);
+  },
+  getCharacterDodge: (state, getters) => {
+    const data = state.selection[0];
+    return (
+      data.dodge +
+      state.dodgeEnh * CONST.ENH.DODGE +
+      data.linkDodge * getters.getTotalLink
+    ).toFixed(1);
   },
   // 남은 스탯강화 포인트
   enhTotalLimit: state => {
@@ -108,16 +151,6 @@ export const getters = {
         parseInt(state.hitEnh) +
         parseInt(state.critEnh) +
         parseInt(state.dodgeEnh))
-    );
-  },
-  // 링크 퍼센티지 합산, 소수점 2자리 // 추후 const값 이랑 중복되는거 정리해야함
-  totalLink: state => {
-    return (
-      state.linkSlot1 / 100 +
-      state.linkSlot2 / 100 +
-      state.linkSlot3 / 100 +
-      state.linkSlot4 / 100 +
-      state.linkSlot5 / 100
     );
   }
 };

@@ -1,8 +1,8 @@
 <template lang="pug">
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-v-card.radial-t200(width="470")
-  v-card-title(v-if="getCharacterId === 'undefined'") Select character first.
+v-card.fill-height.radial-t200(width="470")
+  v-card-title.fill-height(v-if="getCharacterId === 'undefined'") Select character first.
   v-form(v-else ref="form")
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
@@ -49,32 +49,32 @@ v-card.radial-t200(width="470")
     v-row.px-4.pb-4
       v-col(cols="4").text-right
         //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
-        span(v-text="getCharacterDamage").pr-4.caption.accent--text
+        span.pr-2.body-2.accent--text(v-text="getCharacterDamage")
         v-text-field(v-model="damageEnh"
           dense flat solo hide-details suffix="공격력"
           type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 7654
+        span.pr-2.body-2.accent--text(v-text="getCharacterHealth")
         v-text-field(v-model="healthEnh" 
           dense flat solo hide-details suffix="체력"
           type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 431
+        span.pr-2.body-2.accent--text(v-text="getCharacterDefense")
         v-text-field(v-model="defenseEnh" 
           dense flat solo hide-details suffix="방어력"
           type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 202%
+        span.pr-2.body-2.accent--text(v-text="getCharacterHit + '%'")
         v-text-field(v-model="hitEnh" 
           dense flat solo hide-details suffix="적중"
           type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        span.pr-2.body-2.accent--text(v-text="getCharacterCrit + '%'")
         v-text-field(v-model="critEnh" 
           dense flat solo hide-details suffix="치명"
             type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
       v-col(cols="4").text-right
-        span.pr-4.caption.accent--text 102%
+        span.pr-2.body-2.accent--text(v-text="getCharacterDodge + '%'")
         v-text-field(v-model="dodgeEnh"
           dense flat solo hide-details suffix="회피"
             type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
@@ -83,9 +83,9 @@ v-card.radial-t200(width="470")
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
-        v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(totalLink * 100) + '%' }}
+        v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(getTotalLink * 100) + '%' }}
       v-col(cols="auto")
-        v-btn(v-if="totalLink < 5" @click="updateMaxLink" small text color="primary") Max
+        v-btn(v-if="getTotalLink < 5" @click="updateMaxLink" small text color="primary") Max
         v-btn(v-else @click="updateMinLink" small text color="red") Min
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
@@ -226,16 +226,22 @@ export default {
     ...mapMutations(['updateMinLink', 'updateMaxLink'])
   },
   computed: {
-    ...mapState(['selection', 'equipment', 'linkSlotItem', 'fullLinkBonus']),
+    ...mapState(['selection', 'linkSlotItem', 'fullLinkBonus']),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
+      'getTotalLink',
       'getCharacterId',
       'getCharacterName',
       'getCharacterType',
       'getCharacterRole',
       'getCharacterDamage',
+      'getCharacterHealth',
+      'getCharacterDefense',
+      'getCharacterHit',
+      'getCharacterCrit',
+      'getCharacterDodge',
       'enhTotalLimit',
-      'totalLink'
+      'equipment'
     ]),
     level: {
       get() {
@@ -345,7 +351,7 @@ export default {
     },
     // totalLink 칩 색상
     totalLinkColor() {
-      if (this.$store.getters.totalLink < 5) return 'red'
+      if (this.$store.getters.getTotalLink < 5) return 'red'
       return 'primary'
     }
   }
