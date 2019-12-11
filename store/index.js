@@ -52,12 +52,14 @@ export const state = () => ({
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
+  totalLink: 5,
   fullLinkBonus: "적중 75%"
 });
 
 export const getters = {
-  character: () => characters,
-  // DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
+  character: () => characters, // Get JSON
+  // Json Data: DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
+  // getters > SimulatingForm.vue
   getCharacterId: state => {
     if (state.selection[0].id === undefined) {
       return "undefined";
@@ -66,7 +68,11 @@ export const getters = {
     }
   },
   getCharacterName: state => {
-    return state.selection[0].name;
+    if (state.selection[0].name === undefined) {
+      return "Error";
+    } else {
+      return state.selection[0].name;
+    }
   },
   getCharacterType: state => {
     return state.selection[0].type;
@@ -74,8 +80,23 @@ export const getters = {
   getCharacterRole: state => {
     return state.selection[0].role;
   },
-  getEnhDamage: state => {
-    return state.damageEnh * damageEnhCoef;
+  // 이하 부터는 강화값 포함하여 반환
+  getCharacterDamage: state => {
+    const data = state.selection[0];
+    const totalLink =
+      state.linkSlot1 / 100 +
+      state.linkSlot2 / 100 +
+      state.linkSlot3 / 100 +
+      state.linkSlot4 / 100 +
+      state.linkSlot5 / 100;
+    return (
+      Math.round(
+        data.damageBase +
+          (state.level - 1) * data.damageCoef +
+          state.damageEnh * damageEnhCoef
+      ) *
+      (1 + data.linkDamage * totalLink)
+    );
   },
   // 남은 스탯강화 포인트
   enhTotalLimit: state => {
@@ -89,7 +110,7 @@ export const getters = {
         parseInt(state.dodgeEnh))
     );
   },
-  // 링크 퍼센티지 합산, 소수점 2자리
+  // 링크 퍼센티지 합산, 소수점 2자리 // 추후 const값 이랑 중복되는거 정리해야함
   totalLink: state => {
     return (
       state.linkSlot1 / 100 +

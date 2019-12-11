@@ -2,7 +2,8 @@
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200(width="470")
-  v-form(ref="form")
+  v-card-title(v-if="getCharacterId === 'undefined'") Select character first.
+  v-form(v-else ref="form")
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + getCharacterId + '.png')")
@@ -18,21 +19,28 @@ v-card.radial-t200(width="470")
     v-divider
     //- Enhance Form
     v-row.px-4.py-2(align="center")
+      //- TODO: Rank Select, 승급관련 처리 필요
       v-col(cols="4")
         v-select(:items="rank" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
           template(v-slot:selection="data")
             v-chip(:input-value="data.selected" :color="data.item.color" small) {{ data.item.text }}
           template(v-slot:item="data")
             v-chip(:color="data.item.color" small) {{ data.item.text }}
+
+      //- 레벨 입력 폼
       v-col(cols="4")
         v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
         type="number" autocomplete="off" min="1" max="90" append-icon="mdi-chevron-double-up" prepend-icon="mdi-chevron-double-down" @click:prepend="level = 1" @click:append="level = 90")
+
+      //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
       v-col(cols="4").px-4
-        //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
         v-switch.mt-0.pt-0(color="accent" hide-details)
           template(v-slot:label)
             span.overline 자버프 적용
+
     v-divider
+
+    //- 이하 강화 포인트 입력 폼
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 강화
       v-col(cols="auto").primary--text.subtitle-2 잔여포인트
@@ -41,7 +49,7 @@ v-card.radial-t200(width="470")
     v-row.px-4.pb-4
       v-col(cols="4").text-right
         //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
-        span.pr-4.caption.accent--text 1431
+        span(v-text="getCharacterDamage").pr-4.caption.accent--text
         v-text-field(v-model="damageEnh"
           dense flat solo hide-details suffix="공격력"
           type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
@@ -225,6 +233,7 @@ export default {
       'getCharacterName',
       'getCharacterType',
       'getCharacterRole',
+      'getCharacterDamage',
       'enhTotalLimit',
       'totalLink'
     ]),
