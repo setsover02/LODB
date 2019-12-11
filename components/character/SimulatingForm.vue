@@ -2,21 +2,19 @@
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.radial-t200(width="470")
-  v-card-title selectIDs: {{ getCharacterById }}
-  v-card-subtitle Slot: {{ getLinkSlot }}
   v-form(ref="form")
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
-        v-img(:src="require('~/assets/img/avatar/002.png')")
+        v-img(:src="require('~/assets/img/avatar/' + getCharacterId + '.png')")
       v-list-item-content
-        v-list-item-title 라비아타 프로토타입
-        v-list-item-subtitle Type • Role
+        v-list-item-title.title(v-text="getCharacterName")
+        v-list-item-subtitle {{ getCharacterType }} • {{ getCharacterRole }}
       //- TODO: 초기화 시 하단 폼에 입력한 내용 전체 초기화(우선순위 낮음)
       v-list-item-action
-        v-btn(text color="primary") 초기화
+        v-btn(text color="primary" disabled) 초기화
       //- TODO: 저장 시 해당 폼의 정보가 DataTable에 추가되어야 함  
       v-list-item-action
-        v-btn(color="primary") 저장
+        v-btn(color="primary" disabled) 저장
     v-divider
     //- Enhance Form
     v-row.px-4.py-2(align="center")
@@ -221,6 +219,15 @@ export default {
   },
   computed: {
     ...mapState(['equipment', 'linkSlotItem', 'fullLinkBonus']),
+    // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
+    ...mapGetters([
+      'getCharacterId',
+      'getCharacterName',
+      'getCharacterType',
+      'getCharacterRole',
+      'enhTotalLimit',
+      'totalLink'
+    ]),
     level: {
       get() {
         return this.$store.state.level
@@ -327,8 +334,6 @@ export default {
         this.$store.commit('updateFullLinkBonus', value)
       }
     },
-    // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
-    ...mapGetters(['getCharacterById', 'getLinkSlot', 'enhTotalLimit', 'totalLink']),
     // totalLink 칩 색상
     totalLinkColor() {
       if (this.$store.getters.totalLink < 5) return 'red'

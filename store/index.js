@@ -35,7 +35,7 @@ export const state = () => ({
     { text: "메모", align: "right", sortable: false, value: "memo" },
     { text: "", align: "right", sortable: false, value: "actions" }
   ],
-  selection: [ 1 ],
+  selection: [0], // DataTable selection, 빈값으로 할경우 선택된 내용이 없어서 에러
   equipment: equipment,
   level: 1, // 레벨 설정
   // 강화 스탯
@@ -52,17 +52,23 @@ export const state = () => ({
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
-  fullLinkBonus: "적중 75%",
+  fullLinkBonus: "적중 75%"
 });
 
 export const getters = {
   character: () => characters,
-  getCharacterById: state => {
-    // DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
-    if (state.selection === []) {
-      return "Not selected"
-    }
-    return state.selection[0].id
+  // DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
+  getCharacterId: state => {
+    return state.selection[0].id;
+  },
+  getCharacterName: state => {
+    return state.selection[0].name;
+  },
+  getCharacterType: state => {
+    return state.selection[0].type;
+  },
+  getCharacterRole: state => {
+    return state.selection[0].role;
   },
   getEnhDamage: state => {
     return state.damageEnh * damageEnhCoef;
@@ -92,13 +98,6 @@ export const getters = {
 };
 
 export const mutations = {
-  // getCharacterById: (getters, character) => {
-  //   var index = getters.character.findIndex(function(item, i) {
-  //     return item.id === character.id;
-  //   });
-  //   getters.character[index] = character;
-  //   getters.character = JSON.parse(JSON.stringify(item));
-  // },
   // 이름 검색필터
   searchName(state, name) {
     state.name = name;
