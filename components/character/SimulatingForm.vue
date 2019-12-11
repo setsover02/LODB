@@ -218,7 +218,7 @@ export default {
     ...mapMutations(['updateMinLink', 'updateMaxLink'])
   },
   computed: {
-    ...mapState(['equipment', 'linkSlotItem', 'fullLinkBonus']),
+    ...mapState(['selection', 'equipment', 'linkSlotItem', 'fullLinkBonus']),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
       'getCharacterId',

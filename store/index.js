@@ -59,7 +59,11 @@ export const getters = {
   character: () => characters,
   // DataTable selection row 값 반환 테스트 : 값이 없을경우 텍스트 반환
   getCharacterId: state => {
-    return state.selection[0].id;
+    if (state.selection[0].id === undefined) {
+      return "undefined";
+    } else {
+      return state.selection[0].id;
+    }
   },
   getCharacterName: state => {
     return state.selection[0].name;
