@@ -1,7 +1,7 @@
 // Dark theme color changed **only color css
 .theme--dark {
   &.v-application {
-    @include radial-t400-t500(at 50% 0%);
+    @include linear-t300-t400(to bottom right)
   }
 
   // Chip basic color
