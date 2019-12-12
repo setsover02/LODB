@@ -44,7 +44,7 @@ v-card.fill-height.radial-t200(width="470")
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 강화
       v-col(cols="auto").primary--text.subtitle-2 잔여포인트
-        v-chip.ml-3.white--text(small color='primary' v-text="enhTotalLimit")
+        v-chip.ml-3.white--text(small color='primary' v-text="getEnhLimit")
     //- 강화 수치
     v-row.px-4.pb-4
       v-col(cols="4").text-right
@@ -102,7 +102,8 @@ v-card.fill-height.radial-t200(width="470")
     v-row.pa-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택
       v-col
-        v-select(v-model="fullLinkBonus" :items="fullLinkBonusSelect" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
+        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details) 
+        span value : {{ fullLinkBonus }}
     v-divider
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
@@ -190,17 +191,6 @@ export default {
   //   }
   // },
   data: () => ({
-    fullLinkBonusSelect: [
-      '자원감소 20%',
-      '스킬데미지 15%',
-      '적중 75%',
-      '치명 20%',
-      '체력 20%',
-      '회피 20%',
-      '행동력 0.1',
-      '버프 +2레벨',
-      '사거리 +1'
-    ],
     equipmentSelect: null,
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
@@ -240,7 +230,8 @@ export default {
       'getCharacterHit',
       'getCharacterCrit',
       'getCharacterDodge',
-      'enhTotalLimit',
+      'getEnhLimit',
+      'getCharacterFullLinkBonus',
       'equipment'
     ]),
     level: {
@@ -346,7 +337,7 @@ export default {
         return this.$store.state.fullLinkBonus
       },
       set(value) {
-        this.$store.commit('updateFullLinkBonus', value)
+        this.$store.commit('SET_FULLLINK_BONUS', value)
       }
     },
     // totalLink 칩 색상

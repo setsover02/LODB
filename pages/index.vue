@@ -1,6 +1,6 @@
 <template lang="pug">
 v-row
-  v-col
+  v-col.removed-max-width
     SearchForm
     DataTable
     v-card.mt-2.radial-t200.flex-grow-1
@@ -10,6 +10,11 @@ v-row
     //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
     SimulatingForm
 </template>
+<style scoped>
+.removed-max-width {
+  max-width: calc(100% - 478px);
+}
+</style>
 <script>
 import { mapState, mapGetters } from 'vuex'
 import SearchForm from '~/components/character/SearchForm'

@@ -3,7 +3,7 @@
   width: 8px;
   height: 8px;
   &-track {
-    background-color: theme-color(white, 10);
+    background-color: theme-color(t300);
   }
   &-thumb {
     background-color: theme-color(white, 54);
@@ -13,9 +13,9 @@
     }
   }
   &-button {
-    background-color: theme-color(white, 10);
+    background-color: theme-color(t300);
   }
   &-corner {
-    background-color: theme-color(white, 10);
+    background-color: theme-color(t300);
   }
 }

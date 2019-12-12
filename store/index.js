@@ -43,7 +43,7 @@ export const state = () => ({
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
-  fullLinkBonus: "적중 75%"
+  fullLinkBonus: ""
 });
 
 export const getters = {
@@ -111,6 +111,7 @@ export const getters = {
         (1 + data.linkDefense * getters.getTotalLink)
     );
   },
+  // (getters.getSelectedFullLinkBonus == "적중 75%")
   getCharacterHit: (state, getters) => {
     const data = state.characterSelect[0];
     return (
@@ -136,7 +137,7 @@ export const getters = {
     ).toFixed(1);
   },
   // 남은 스탯강화 포인트
-  enhTotalLimit: state => {
+  getEnhLimit: state => {
     return (
       parseInt(state.level) * 3 -
       (parseInt(state.damageEnh) +
@@ -146,7 +147,22 @@ export const getters = {
         parseInt(state.critEnh) +
         parseInt(state.dodgeEnh))
     );
-  }
+  },
+  // 캐릭터 고유의 풀링크 보너스 selectbox용 배열로 불러오기
+  getCharacterFullLinkBonus: state => {
+    const data = state.characterSelect[0];
+    return [
+      "자원감소 " + data.fullLinkRes,
+      "행동력 " + data.fullLinkAP,
+      "스킬피해 " + data.fullLinkSkill * 100 + "%",
+      "적중 " + data.fullLinkHit + "%",
+      "치명 " + data.fullLinkCrit + "%",
+      "회피 " + data.fullLinkDodge + "%",
+      "방어력 " + data.fullLinkDefense * 100 + "%",
+      "버프/디버프 + " + data.fullLinkBuff + "레벨",
+      "사거리 + " + data.fullLinkRange
+    ];
+  },
 };
 
 export const mutations = {
@@ -212,7 +228,7 @@ export const mutations = {
     state.linkSlot5 = linkSlot5;
   },
   // 풀링 보너스 선택값
-  updateFullLinkBonus(state, fullLinkBonus) {
+  SET_FULLLINK_BONUS(state, fullLinkBonus) {
     state.fullLinkBonus = fullLinkBonus;
   }
 };
