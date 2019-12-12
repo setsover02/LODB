@@ -1,9 +1,9 @@
 <template lang="pug">
   v-app(dark)
-    v-card.card-frame.ma-8(shaped elevation="24")
+    v-card.radial-t200.card-frame.ma-8(shaped elevation="24")
       Layout
       v-content.fill-height
-        v-container(fluid)
+        v-container(fluid).fill-height.align-start.pa-0
           nuxt
 </template>
 

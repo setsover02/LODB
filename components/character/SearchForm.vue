@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card.radial-t200.pl-1
+v-card(color="transparent" elevation="0").pl-1
 	//- TODO: Search Config
 	v-form(ref="formSearch")
 		v-row

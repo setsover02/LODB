@@ -1,18 +1,17 @@
 <template lang="pug">
-v-row
-  v-col.removed-max-width
+v-row.fill-height
+  v-col.removed-max-width.py-0
     SearchForm
     DataTable
-    v-card.mt-2.radial-t200.flex-grow-1
-      v-card-title Calc
-  v-col(cols="auto")
+  v-divider(vertical).fill-height
+  v-col(cols="auto").py-0
     //- Input Form
     //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
     SimulatingForm
 </template>
 <style scoped>
 .removed-max-width {
-  max-width: calc(100% - 478px);
+  max-width: calc(100% - 479px);
 }
 </style>
 <script>

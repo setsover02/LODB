@@ -1,7 +1,7 @@
 <template lang="pug">
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-v-card.fill-height.radial-t200(width="470")
+v-card.fill-height(width="470" color="transparent" elevation="0")
   v-card-title.fill-height(v-if="getCharacterId === 'undefined'") Select character first.
   v-form(v-else ref="form")
     v-list-item.py-2

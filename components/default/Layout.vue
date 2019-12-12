@@ -15,8 +15,9 @@ div
     v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
       v-icon(left) mdi-google-spreadsheet
       | Google Sheet  
-    //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook 
-  v-navigation-drawer(width="160" v-model="drawer" :mini-variant="miniVariant" floating clipped absolute app flat)
+    //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook
+
+  v-navigation-drawer(v-model="drawer" color="transparent" width="160" :mini-variant="miniVariant"  clipped absolute app flat)
     v-list.py-12.mt-4.py-lg-0.mt-lg-0
       v-list-item(v-for="(item, i) in items" :key="i" :to="item.to" router exact)
         v-list-item-content
@@ -31,27 +32,27 @@ export default {
       fixed: false,
       items: [
         {
-          title: 'Simulate',
-          to: '/'
+          title: "Simulate",
+          to: "/"
         },
         {
-          title: 'items',
-          to: '/items'
+          title: "items",
+          to: "/items"
         },
         {
-          title: 'Release',
-          to: '/release'
+          title: "Release",
+          to: "/release"
         },
         {
-          title: 'Test',
-          to: '/test'
+          title: "Test",
+          to: "/test"
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'LODB'
-    }
+      title: "LODB"
+    };
   }
-}
+};
 </script>
