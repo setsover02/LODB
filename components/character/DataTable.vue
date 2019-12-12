@@ -4,7 +4,7 @@ v-card.mt-2.radial-t200
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키 값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
   //- TODO: 동일한 row 재선택시 올바르게 선택이 안됨
-  v-data-table(v-model="selection" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="name" sort-by="id" height="450" single-select show-select @item-selected="itemSelected($event)")
+  v-data-table(v-model="characterSelect" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="450" single-select show-select @item-selected="itemSelected($event)")
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -108,7 +108,7 @@ export default {
   }),
   computed: {
     ...mapState([
-      'name',
+      'characterName',
       'charactersCol',
       'level', // 레벨
       'damageEnh', // 강화수치
@@ -126,12 +126,12 @@ export default {
       'getCharacterDamage'
     ]),
     // 테이블 선택 시 mutations
-    selection: {
+    characterSelect: {
       get() {
-        return this.$store.state.selection
+        return this.$store.state.characterSelect
       },
       set(value) {
-        this.$store.commit('updateSelection', value)
+        this.$store.commit('SET_CHARACTER_SELECT', value)
       }
     }
   },
@@ -157,7 +157,7 @@ export default {
       console.log('Dialog closed')
     },
     itemSelected() {
-      this.$store.commit('updateSelection', this.$store.state.selection)
+      this.$store.commit('SET_CHARACTER_SELECT', this.$store.state.characterSelect)
       console.log('Select row')
     }
   }

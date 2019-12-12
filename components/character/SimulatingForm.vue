@@ -85,8 +85,8 @@ v-card.fill-height.radial-t200(width="470")
       v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
         v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(getTotalLink * 100) + '%' }}
       v-col(cols="auto")
-        v-btn(v-if="getTotalLink < 5" @click="updateMaxLink" small text color="primary") Max
-        v-btn(v-else @click="updateMinLink" small text color="red") Min
+        v-btn(v-if="getTotalLink < 5" @click="SET_LINK_MAX" small text color="primary") Max
+        v-btn(v-else @click="SET_LINK_MIN" small text color="red") Min
     v-row.px-4
       //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
@@ -223,10 +223,10 @@ export default {
     ]
   }),
   methods: {
-    ...mapMutations(['updateMinLink', 'updateMaxLink'])
+    ...mapMutations(['SET_LINK_MAX', 'SET_LINK_MIN'])
   },
   computed: {
-    ...mapState(['selection', 'linkSlotItem', 'fullLinkBonus']),
+    ...mapState(['characterSelect', 'linkSlotItem', 'fullLinkBonus']),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
       'getTotalLink',
@@ -248,7 +248,7 @@ export default {
         return this.$store.state.level
       },
       set(value) {
-        this.$store.commit('updateLevel', value)
+        this.$store.commit('SET_LEVEL', value)
       }
     },
     damageEnh: {
@@ -256,7 +256,7 @@ export default {
         return this.$store.state.damageEnh
       },
       set(value) {
-        this.$store.commit('updateDamageEnh', value)
+        this.$store.commit('SET_DAMAGE_ENH', value)
       }
     },
     healthEnh: {
@@ -264,7 +264,7 @@ export default {
         return this.$store.state.healthEnh
       },
       set(value) {
-        this.$store.commit('updateHealthEnh', value)
+        this.$store.commit('SET_HEALTH_ENH', value)
       }
     },
     defenseEnh: {
@@ -272,7 +272,7 @@ export default {
         return this.$store.state.defenseEnh
       },
       set(value) {
-        this.$store.commit('updateDefenseEnh', value)
+        this.$store.commit('SET_DEFENSE_ENH', value)
       }
     },
     hitEnh: {
@@ -280,7 +280,7 @@ export default {
         return this.$store.state.hitEnh
       },
       set(value) {
-        this.$store.commit('updateHitEnh', value)
+        this.$store.commit('SET_HIT_ENH', value)
       }
     },
     critEnh: {
@@ -288,7 +288,7 @@ export default {
         return this.$store.state.critEnh
       },
       set(value) {
-        this.$store.commit('updateCritEnh', value)
+        this.$store.commit('SET_CRIT_ENH', value)
       }
     },
     dodgeEnh: {
@@ -296,7 +296,7 @@ export default {
         return this.$store.state.dodgeEnh
       },
       set(value) {
-        this.$store.commit('updateDodgeEnh', value)
+        this.$store.commit('SET_DODGE_ENH', value)
       }
     },
     // 잔여 강화 포인트 계산
@@ -306,7 +306,7 @@ export default {
         return this.$store.state.linkSlot1
       },
       set(value) {
-        this.$store.commit('updateLinkSlot1', value)
+        this.$store.commit('SET_LINK_SLOT1', value)
       }
     },
     linkSlot2: {
@@ -314,7 +314,7 @@ export default {
         return this.$store.state.linkSlot2
       },
       set(value) {
-        this.$store.commit('updateLinkSlot2', value)
+        this.$store.commit('SET_LINK_SLOT2', value)
       }
     },
     linkSlot3: {
@@ -322,7 +322,7 @@ export default {
         return this.$store.state.linkSlot3
       },
       set(value) {
-        this.$store.commit('updateLinkSlot3', value)
+        this.$store.commit('SET_LINK_SLOT3', value)
       }
     },
     linkSlot4: {
@@ -330,7 +330,7 @@ export default {
         return this.$store.state.linkSlot4
       },
       set(value) {
-        this.$store.commit('updateLinkSlot4', value)
+        this.$store.commit('SET_LINK_SLOT4', value)
       }
     },
     linkSlot5: {
@@ -338,7 +338,7 @@ export default {
         return this.$store.state.linkSlot5
       },
       set(value) {
-        this.$store.commit('updateLinkSlot5', value)
+        this.$store.commit('SET_LINK_SLOT5', value)
       }
     },
     fullLinkBonus: {

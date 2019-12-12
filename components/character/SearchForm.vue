@@ -5,7 +5,7 @@ v-card.radial-t200.pl-1
 		v-row
 			v-col
 				//- 검색 필터: 테이블 데이터와 동기화 중
-				v-autocomplete(v-model="name" :items="character" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
+				v-autocomplete(v-model="characterName" :items="character" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
 					//- 선택 데이터 chip 형태로 표기
 					template(v-slot:selection="data")
 						v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -51,12 +51,12 @@ export default {
       'character' // json
     ]),
     // 이름으로 검색
-    name: {
+    characterName: {
       get() {
-        return this.$store.state.name
+        return this.$store.state.characterName
       },
       set(value) {
-        this.$store.commit('searchName', value)
+        this.$store.commit('SET_SEARCH_NAME', value)
       }
     }
   }

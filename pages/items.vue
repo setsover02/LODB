@@ -49,7 +49,6 @@ div
 												td {{ i + 1 }}
 												td.text-right {{ item.damage[i] }}
 												//- td {{ item.hit[i] }}
-				
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
@@ -61,7 +60,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
+    ...mapGetters([
       'equipment', // json
 		]),
   }
