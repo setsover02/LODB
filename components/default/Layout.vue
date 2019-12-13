@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  v-app-bar(clipped-left app absolute color="transparent" elevate-on-scroll)
+  v-app-bar(clipped-left app absolute elevate-on-scroll)
     v-app-bar-nav-icon.ml-n2.mr-2(aria-label="Navigation list open." @click.stop="drawer = !drawer")
     //- v-btn(icon @click.stop="miniVariant = !miniVariant")
     //-   v-icon mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}

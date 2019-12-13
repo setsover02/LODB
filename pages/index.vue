@@ -1,10 +1,11 @@
 <template lang="pug">
-v-row.fill-height
-  v-col.removed-max-width.py-0
+v-row.fill-height(no-gutters)
+  v-col.fill-height.removed-max-width.py-0
     SearchForm
+    v-divider
     DataTable
   v-divider(vertical).fill-height
-  v-col(cols="auto").py-0
+  v-col(cols="auto").fill-height.pa-0.overflow-x-hidden.overflow-y-auto
     //- Input Form
     //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
     SimulatingForm

@@ -61,11 +61,11 @@ export default {
       themes: {
         dark: {
           // Basic theme color
-          t100: "#373B76",
-          t200: "#2F3365",
-          t300: "#272A54",
-          t400: "#1F2142",
-          t500: "#171831",
+          t100: "#5D658E",
+          t200: "#4D557A",
+          t300: "#444A6D",
+          t400: "#2D324D",
+          t500: "#272B45",
           // Key color
           primary: "#647EFF", // Lilac
           secondary: "#7C60F7", // Purple

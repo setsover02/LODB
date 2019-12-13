@@ -1,10 +1,10 @@
 <template lang="pug">
-v-card(color="transparent" elevation="0")
+v-card(color="transparent" elevation="0").fill-height__n7
   //- TODO: 페이지네이션 없애고 전체row 표기
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키 값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
   //- TODO: 동일한 row 재선택시 올바르게 선택이 안됨
-  v-data-table(v-model="characterSelect" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="450" single-select show-select @item-selected="itemSelected($event)")
+  v-data-table(v-model="characterSelect" :headers="charactersCol" :items="character" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="100%" single-select show-select @item-selected="itemSelected($event)").fill-height__n7
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -79,7 +79,7 @@ v-card(color="transparent" elevation="0")
       //-   v-icon(small) mdi-close
   //-Data Table Pagination
   v-divider
-  v-list-item.py-4
+  v-list-item.py-2
     v-pagination.justify-start(v-model="page" :length="pageCount" total-visible="12")
     v-spacer
     v-text-field(:value="itemsPerPage" type="number" min="10" max="200" @input="itemsPerPage = parseInt($event, 10)" dense solo flat suffix="개 표시" hide-details)

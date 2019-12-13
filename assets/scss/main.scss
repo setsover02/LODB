@@ -6,13 +6,15 @@
 				"abstracts/_gradient.sass", // mixin > helper classes in base/gradient.scss
 				"abstracts/_functions.sass",
 
-				"base/base",
-				"base/typography",
-				"base/_gradient.sass",
-				"base/helper",
+				"base/base.sass",
+				"base/typography.sass",
+				"base/environment.sass",
+				"base/helper.sass",
 				
+				"components/VContent.sass",
 				"components/VDataTable.sass",
 				"components/VDivider.sass",
+				"components/VPagination.sass",
 				"components/VTextField.sass",
 				
-				"theme/Dark.sass";
+				"theme/dark.sass";

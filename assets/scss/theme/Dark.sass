@@ -1,12 +1,14 @@
 // Dark theme color changed **only color css
 .theme--dark
   &.v-application
-    @include radial-t100-t500(at 50% 66%)
-
+    @include linear-t300-t500(126.87deg)
   // Chip basic color
+  &.v-app-bar
+    background-color: transparent !important
+    border-bottom: 1px solid rgba(0,0,0,0.15) !important
+
   &.v-chip
     color: theme-color(t500) !important
-
   // Data table Background remove
   &.v-data-table
     background-color: transparent !important
@@ -15,13 +17,13 @@
       background-color: theme-color(t300) !important
   // Divider add reflect effect
   &.v-divider
-    // Vertical border width modify
+    @include box-shadow(0px 1px 0 theme-color(t300, 54))
     &--vertical
-      @include box-shadow(-1px 0px 0 theme-color(t200))
+      @include box-shadow(1px 0px 0 theme-color(t300, 54))
   // Slider Thumb label text color
   .v-slider__thumb-label
     color: theme-color(t500)
-    
+
   .v-navigation-drawer__border
     @include box-shadow(-1px 0px 0 theme-color(t200))
   // Switch-inset track color
@@ -59,3 +61,9 @@
     &.v-input--is-disabled > .v-input__control > .v-input__slot,
     &.v-input--is-readonly > .v-input__control > .v-input__slot
       background: theme-color(t200)
+
+// Custom class
+.theme--dark
+  .dashboard
+    @include radial-t200-t400(100% 197.75% at 0% 0%)
+    @include multi-shadow(34px 34px 64px theme-color(t600), -32px -32px 48px theme-color(t100, 20), inset 2px 2px 2px theme-color(t100, 30), inset -1px -1px 4px theme-color(t500))

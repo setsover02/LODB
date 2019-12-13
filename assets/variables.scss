@@ -3,22 +3,22 @@
 // The variables you want to modify
 // Typography
 $font-size-root: 14px;
-$body-font-family: 'Roboto', 'Noto Sans KR', san-serif;
+$body-font-family: "Roboto", "Noto Sans KR", san-serif;
 
 // Grid
 $grid-gutter: 8px !default;
 
 // Dark Theme color
 $theme-colors: (
-  t100: #373b76,
-  t200: #2f3365,
-  t300: #262953,
-  t400: #1b1d3c,
-  t500: #171831
+  t100: #5d658e,
+  t200: #4d557a,
+  t300: #444a6d,
+  t400: #2d324d,
+  t500: #272b45
 );
 
 $shades: (
-  "white": #d4ebf7,
+  "white": #d2d6ef,
   "black": #000000,
   "transparent": transparent
 );
@@ -45,7 +45,7 @@ $material-dark: map-deep-merge(
     ),
     "cards": map-get($theme-colors, "t400"),
     "chips": map-get($theme-colors, "t200"),
-    "dividers": map-get($theme-colors, "t500"),
+    "dividers": rgba(0,0,0,0.15),
     "text": (
       "theme": map-get($shades, "white"),
       "primary": map-get($shades, "white"),

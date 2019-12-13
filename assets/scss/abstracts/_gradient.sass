@@ -5,9 +5,15 @@
 
 @mixin linear-t200-t300($dir)
   @include gradient($dir, theme-color(t200), theme-color(t300))
+  
+@mixin linear-t200-t400($dir)
+  @include gradient($dir, theme-color(t200), theme-color(t400))
 
 @mixin linear-t300-t400($dir)
   @include gradient($dir, theme-color(t300), theme-color(t400))
+
+@mixin linear-t300-t500($dir)
+  @include gradient($dir, theme-color(t300), theme-color(t500))
 
 @mixin linear-t400-t500($dir)
   @include gradient($dir, theme-color(t400), theme-color(t500))
@@ -17,7 +23,7 @@
 
 @mixin radial-t100-t500($dir)
   @include radial-gradient($dir, theme-color(t100), theme-color(t500))
-  
+
 @mixin radial-t200-t400($dir)
   @include radial-gradient($dir, theme-color(t200), theme-color(t400))
 
@@ -26,7 +32,7 @@
 
 @mixin radial-t400-t500($dir)
   @include radial-gradient($dir, theme-color(t400), theme-color(t500))
-  
+
 // Color Gradient
 @mixin linear-purple-lilac($dir)
   @include gradient($dir, color(purple), color(lilac))

@@ -3,7 +3,7 @@
   .linear-t100
     @include linear-t100-t200(to bottom right)
   .linear-t200
-    @include linear-t200-t300(to bottom right)
+    @include linear-t200-t400(to bottom right)
   .linear-t300
     @include linear-t300-t400(to bottom right)
   .linear-t400
@@ -39,3 +39,9 @@
     @include linear-red-pink(135deg)
   .linear-pink
     @include linear-pink-purple(135deg)
+
+.dashboard
+  height: calc(100vh - 64px)
+  width: calc(100vw - 64px)
+  overflow: hidden
+  border-radius: 32px 8px !important
