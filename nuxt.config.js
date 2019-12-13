@@ -38,12 +38,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  modules: ["nuxt-webfontloader"],
 
-  axios: {
-    baseURL: process.env.BASE_URL
-    //  baseURL: 'point_to_your_URI'
-  },
+  // axios: {
+  //   baseURL: process.env.BASE_URL
+  //   //  baseURL: 'point_to_your_URI'
+  // },
   webfontloader: {
     google: {
       families: ["Noto Sans KR:100,300,400,500,700"]
