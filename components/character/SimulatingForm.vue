@@ -1,12 +1,15 @@
 <template lang="pug">
 //- Character Info
 //- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-v-card.fill-height(width="470" color="transparent" elevation="0")
-  v-card-title.fill-height(v-if="getCharacterId === 'undefined'") Select character first.
-  v-form(v-else ref="form")
+v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getCharacterId === 'undefined'" width="470" color="transparent" elevation="0") 
+  v-avatar(size="144")
+    v-img(:src="require('~/assets/img/avatar/undefined.png')")
+  span.title Select character first.
+v-card.fill-height(v-else width="470" color="transparent" elevation="0")
+  v-form(ref="form")
     v-list-item.py-2
       v-list-item-avatar.radius-4(size="48" color="t500")
-        v-img(:src="require('~/assets/img/avatar/' + getCharacterId + '.png')")
+        v-img(:src="require('~/assets/img/avatar/' + getCharacterId + '.png')" :lazy-src="require('~/assets/img/avatar/undefined.png')")
       v-list-item-content
         v-list-item-title.title(v-text="getCharacterName")
         v-list-item-subtitle {{ getCharacterType }} • {{ getCharacterRole }}

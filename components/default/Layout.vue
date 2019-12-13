@@ -17,11 +17,11 @@ div
       | Google Sheet  
     //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook
 
-  v-navigation-drawer(v-model="drawer" color="transparent" width="160" :mini-variant="miniVariant"  clipped absolute app flat)
+  v-navigation-drawer(v-model="drawer" color="transparent" width="160" :mini-variant="miniVariant"  clipped absolute app flat mobile-break-point="0")
     v-list.py-12.mt-4.py-lg-0.mt-lg-0
       v-list-item(v-for="(item, i) in items" :key="i" :to="item.to" router exact)
         v-list-item-content
-          v-list-item-title.overline(v-text="item.title")
+          v-list-item-title.body-2.font-weight-black(v-text="item.title")
 </template>
 <script>
 export default {
@@ -32,27 +32,27 @@ export default {
       fixed: false,
       items: [
         {
-          title: "Simulate",
-          to: "/"
+          title: '캐릭터',
+          to: '/'
         },
         {
-          title: "items",
-          to: "/items"
+          title: '아이템',
+          to: '/items'
         },
         {
-          title: "Release",
-          to: "/release"
+          title: '업데이트',
+          to: '/release'
         },
         {
-          title: "Test",
-          to: "/test"
+          title: 'Test',
+          to: '/test'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "LODB"
-    };
+      title: 'LODB'
+    }
   }
-};
+}
 </script>

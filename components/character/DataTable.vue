@@ -98,7 +98,7 @@ export default {
   data: () => ({
     page: 1, // 페이지네이션
     pageCount: 0,
-    itemsPerPage: 10,
+    itemsPerPage: 16,
     snack: false,
     snackColor: '',
     snackText: ''

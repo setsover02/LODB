@@ -1,4 +1,12 @@
-// VDivider add reflect effect
+// theme
+.theme--dark
+	// Divider add reflect effect
+	&.v-divider
+		@include box-shadow(0px 1px 0 theme-color(t300, 54))
+		&--vertical
+			@include box-shadow(1px 0px 0 theme-color(t300, 54))
+
+// block
 .v-divider
 	// Vertical border width modify
 	&--vertical

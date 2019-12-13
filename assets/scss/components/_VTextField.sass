@@ -1,5 +1,36 @@
+// theme
+.theme--dark
+  // Solo text field custom (hover, outline)
+  &.v-text-field--solo
+    // 1. Default outline added
+    & > .v-input__control > .v-input__slot
+      border: 1px solid theme-color(t200)
+      @include transition(200ms)
+
+    // 2. If solo textfield has error
+    &.v-input--has-state > .v-input__control > .v-input__slot
+      border: 1px solid color(red)
+
+    // 3. If solo textfield focused
+    &.v-input--is-focused
+      // Normal
+      & > .v-input__control > .v-input__slot
+        border: 1px solid color(lilac)
+        @include box-shadow(0 0 4px 4px (color(lilac, 30)))
+
+      // Error
+      &.v-input--has-state > .v-input__control > .v-input__slot
+        border: 1px solid color(red)
+        @include box-shadow(0 0 4px 4px (color(red, 30)))
+
+    // 4. Disabled, Readonly
+    &.v-input--is-disabled > .v-input__control > .v-input__slot,
+    &.v-input--is-readonly > .v-input__control > .v-input__slot
+      background: theme-color(t200)
+
+// block
 // Textfield Dense > font-size modify
 .v-input.v-input--dense
-	font-size: 0.875rem
-	.v-input__slot
-		padding: 0 8px !important
+  font-size: 0.875rem
+  .v-input__slot
+    padding: 0 8px !important

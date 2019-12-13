@@ -14,7 +14,8 @@ $theme-colors: (
   t200: #4d557a,
   t300: #444a6d,
   t400: #2d324d,
-  t500: #272b45
+  t500: #272b45,
+  t600: #212330
 );
 
 $shades: (
@@ -45,7 +46,7 @@ $material-dark: map-deep-merge(
     ),
     "cards": map-get($theme-colors, "t400"),
     "chips": map-get($theme-colors, "t200"),
-    "dividers": rgba(0,0,0,0.15),
+    "dividers": rgba(0, 0, 0, 0.15),
     "text": (
       "theme": map-get($shades, "white"),
       "primary": map-get($shades, "white"),

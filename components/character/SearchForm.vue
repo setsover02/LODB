@@ -22,18 +22,18 @@ v-card(color="transparent" elevation="0").pl-1
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
 
-			v-divider(vertical)
-			v-col.pl-3(cols="auto")
+			v-divider(vertical).d-none.d-lg-flex
+			v-col.d-none.d-lg-block.pl-3(cols="auto")
 				//- TODO: 등급 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
 					v-chip(label small v-for="rank in rankItems" :key="rank" :value="rank") {{ rank }}
-			v-divider(vertical)
-			v-col.pl-3(cols="auto")
+			v-divider(vertical).d-none.d-lg-flex
+			v-col.d-none.d-lg-block.pl-3(cols="auto")
 				//- TODO: 타입 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
 					v-chip(label small v-for="type in typeItems" :key="type") {{ type }}
-			v-divider(vertical)
-			v-col.pl-3(cols="auto")
+			v-divider(vertical).d-none.d-lg-flex
+			v-col.d-none.d-lg-block.pl-3(cols="auto")
 				//- TODO: 역할 필터
 				v-chip-group.pt-1(multiple active-class="accent--text")
 					v-chip(label small v-for="role in roleItems" :key="role") {{ role }}
@@ -43,8 +43,8 @@ import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
     rankItems: ['SS', 'S', 'A', 'B'],
-    typeItems: ['기동형', '경장형', '중장형'],
-    roleItems: ['공격기', '보호기', '지원기']
+    typeItems: ['기동', '경장', '중장'],
+    roleItems: ['공격', '보호', '지원']
   }),
   computed: {
     ...mapGetters([

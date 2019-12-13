@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app(dark)
-    v-card.dashboard.ma-8(shaped)
+    v-card.dashboard.ma-0.ma-lg-8(shaped)
       Layout
       v-content.fill-height
         v-container(fluid).fill-height.align-start.pa-0
