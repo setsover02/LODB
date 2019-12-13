@@ -37,9 +37,9 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
 
       //- TODO: 조건 여부랑 관계없이 본인에게 적용될 수 있는 버프 적용
       v-col(cols="4").px-4
-        v-switch.mt-0.pt-0(color="accent" hide-details)
+        v-switch.mt-0.pt-0(color="primary" hide-details inset)
           template(v-slot:label)
-            span.overline 자버프 적용
+            span.caption 자버프 적용
 
     v-divider
 
@@ -47,7 +47,7 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 강화
       v-col(cols="auto").primary--text.subtitle-2 잔여포인트
-        v-chip.ml-3.white--text(small color='primary' v-text="getEnhLimit")
+        v-chip.ml-3.white--text(small :color="enhLimitColor" v-text="getEnhLimit")
     //- 강화 수치
     v-row.px-4.pb-4
       v-col(cols="4").text-right
@@ -103,10 +103,9 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
       v-col
         v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
     v-row.pa-4(align="center")
-      //- TODO: 해당 캐릭터 풀링 보너스 선택
+      //- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
       v-col
-        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details) 
-        span value : {{ fullLinkBonus }}
+        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
     v-divider
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
@@ -151,34 +150,34 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
       v-col(cols="4")
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-subtitle 행동력
-          v-list-item-content.caption 4.01
+            v-list-item-title.body-2 행동력
+          v-list-item-content.body-2.accent--text(v-text="getCharacterAP")
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 방어 관통
-          v-list-item-content.caption 67%
+            v-list-item-title.body-2 방어 관통
+          v-list-item-content.body-2.accent--text 67%
       v-col(cols="4")
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 효과 저항
-          v-list-item-content.caption 50%
+            v-list-item-title.body-2 효과 저항
+          v-list-item-content.body-2.accent--text 50%
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 피해 감소
-          v-list-item-content.caption 50%
+            v-list-item-title.body-2 피해 감소
+          v-list-item-content.body-2.accent--text 50%
       v-col(cols="4")
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 전기 저항
-          v-list-item-content.caption 67%
+            v-list-item-title.body-2 전기 저항
+          v-list-item-content.body-2.accent--text 67%
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 화염 저항
-          v-list-item-content.caption 50%
+            v-list-item-title.body-2 화염 저항
+          v-list-item-content.body-2.accent--text 50%
         v-list-item.px-0(dense)
           v-list-item-content.py-0
-            v-list-item-title.body-1 냉기 저항
-          v-list-item-content.caption 67%
+            v-list-item-title.body-2 냉기 저항
+          v-list-item-content.body-2.accent--text 67%
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
@@ -233,6 +232,7 @@ export default {
       'getCharacterHit',
       'getCharacterCrit',
       'getCharacterDodge',
+      'getCharacterAP',
       'getEnhLimit',
       'getCharacterFullLinkBonus',
       'equipment'
@@ -343,10 +343,15 @@ export default {
         this.$store.commit('SET_FULLLINK_BONUS', value)
       }
     },
+    // 잔여스탯 색상
+    enhLimitColor() {
+      if (this.$store.getters.getEnhLimit < 0) return 'red'
+      else return 'primary'
+    },
     // totalLink 칩 색상
     totalLinkColor() {
       if (this.$store.getters.getTotalLink < 5) return 'red'
-      return 'primary'
+      else return 'primary'
     }
   }
 }

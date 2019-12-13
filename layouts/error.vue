@@ -4,7 +4,7 @@ v-row(no-gutters).fill-height
     span.t200--text.display-2.font-weight-bold(v-if="error.statusCode === 404") {{ pageNotFound }}
     span.t200--text.display-2.font-weight-bold(v-else) {{ otherError }}
     div.mt-3
-      v-btn(to="/" text color="primary") Go to home
+      v-btn(to="/" color="primary") Go to home
       span.ml-2.caption or please refresh
 </template>
 

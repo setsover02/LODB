@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app(dark)
+  v-app(light)
     v-card.dashboard.ma-0.ma-lg-8(shaped)
       Layout
       v-content.fill-height

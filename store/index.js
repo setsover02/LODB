@@ -95,46 +95,77 @@ export const getters = {
   },
   getCharacterHealth: (state, getters) => {
     const data = state.characterSelect[0];
-    return Math.round(
+    const healthFormula =
       (data.healthBase +
         (state.level - 1) * data.healthCoef +
         state.healthEnh * CONST.ENH.HEALTH) *
-        (1 + data.linkHealth * getters.getTotalLink)
-    );
+      (1 + data.linkHealth * getters.getTotalLink);
+    if (
+      state.fullLinkBonus == "체력 20%" ||
+      state.fullLinkBonus == "체력 25%"
+    ) {
+      return Math.round(healthFormula * (1 + data.fullLinkHealth));
+    } else {
+      return Math.round(healthFormula);
+    }
   },
   getCharacterDefense: (state, getters) => {
     const data = state.characterSelect[0];
-    return Math.round(
+    const defenseFormula =
       (data.defenseBase +
         (state.level - 1) * data.defenseCoef +
         state.defenseEnh * CONST.ENH.DEFENSE) *
-        (1 + data.linkDefense * getters.getTotalLink)
-    );
+      (1 + data.linkDefense * getters.getTotalLink);
+    return Math.round(defenseFormula);
   },
   // (getters.getSelectedFullLinkBonus == "적중 75%")
   getCharacterHit: (state, getters) => {
     const data = state.characterSelect[0];
-    return (
+    const hitFormula =
       data.hit +
       state.hitEnh * CONST.ENH.HIT +
-      data.linkHit * getters.getTotalLink
-    ).toFixed(1);
+      data.linkHit * getters.getTotalLink;
+    if (state.fullLinkBonus == "적중 75%") {
+      return (hitFormula + 75).toFixed(1);
+    } else {
+      return hitFormula.toFixed(1);
+    }
   },
   getCharacterCrit: (state, getters) => {
     const data = state.characterSelect[0];
-    return (
+    const critFomula =
       data.crit +
       state.critEnh * CONST.ENH.CRIT +
-      data.linkCrit * getters.getTotalLink
-    ).toFixed(1);
+      data.linkCrit * getters.getTotalLink;
+    if (state.fullLinkBonus == "치명 20%") {
+      return (critFomula + data.fullLinkCrit).toFixed(1);
+    } else {
+      return critFomula.toFixed(1);
+    }
   },
   getCharacterDodge: (state, getters) => {
     const data = state.characterSelect[0];
-    return (
+    const dodgeFomula =
       data.dodge +
       state.dodgeEnh * CONST.ENH.DODGE +
-      data.linkDodge * getters.getTotalLink
-    ).toFixed(1);
+      data.linkDodge * getters.getTotalLink;
+    if (state.fullLinkBonus == "회피 20%") {
+      return (dodgeFomula + data.fullLinkDodge).toFixed(1);
+    } else {
+      return dodgeFomula.toFixed(1);
+    }
+  },
+  getCharacterAP: state => {
+    const data = state.characterSelect[0];
+    if (
+      state.fullLinkBonus == "행동력 0.1" ||
+      state.fullLinkBonus == "행동력 0.15" ||
+      state.fullLinkBonus == "행동력 0.2"
+    ) {
+      return (data.ap + data.fullLinkAP).toFixed(3);
+    } else {
+      return data.ap.toFixed(3);
+    }
   },
   // 남은 스탯강화 포인트
   getEnhLimit: state => {
@@ -158,11 +189,12 @@ export const getters = {
       "적중 " + data.fullLinkHit + "%",
       "치명 " + data.fullLinkCrit + "%",
       "회피 " + data.fullLinkDodge + "%",
+      "체력 " + data.fullLinkHealth * 100 + "%",
       "방어력 " + data.fullLinkDefense * 100 + "%",
       "버프/디버프 + " + data.fullLinkBuff + "레벨",
       "사거리 + " + data.fullLinkRange
     ];
-  },
+  }
 };
 
 export const mutations = {

@@ -3138,7 +3138,7 @@
 		"fullLinkSkill": 0.15,
 		"fullLinkHit": 0,
 		"fullLinkCrit": 0,
-		"fullLinkHealth": 0,
+		"fullLinkHealth": 0.25,
 		"fullLinkDodge": 0,
 		"fullLinkDefense": 0,
 		"fullLinkBuff": 2,
