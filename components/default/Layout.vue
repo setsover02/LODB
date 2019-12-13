@@ -9,12 +9,10 @@ div
     v-toolbar-items
       v-btn(text to="/") {{ title }}
     v-spacer
-    v-btn(text target="blank" href="https://discord.gg/RR8W9Dp" color="white")
-      v-icon(left) mdi-discord
-      | Discord
-    v-btn.mr-2(text target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
-      v-icon(left) mdi-google-spreadsheet
-      | Google Sheet  
+    v-btn(icon target="blank" href="https://discord.gg/RR8W9Dp" color="white")
+      v-icon mdi-discord
+    v-btn.ml-2.mr-n2(icon target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
+      v-icon mdi-google-spreadsheet
     //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook
 
   v-navigation-drawer(v-model="drawer" color="transparent" width="160" :mini-variant="miniVariant"  clipped absolute app flat mobile-break-point="0")
