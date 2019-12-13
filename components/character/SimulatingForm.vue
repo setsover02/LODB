@@ -4,7 +4,7 @@
 v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getCharacterId === 'undefined'" width="470" color="transparent" elevation="0") 
   v-avatar(size="144")
     v-img(:src="require('~/assets/img/avatar/undefined.png')")
-  span.title Select character first.
+  span.overline Select character first
 v-card.fill-height(v-else width="470" color="transparent" elevation="0")
   v-form(ref="form")
     v-list-item.py-2

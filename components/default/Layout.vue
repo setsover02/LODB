@@ -6,12 +6,13 @@ div
     //-   v-icon mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}
     //- v-btn.mr-2(icon @click="backward")
     //-   v-icon mdi-arrow-left
-    v-toolbar-items
-      v-btn(text to="/") {{ title }}
+    v-toolbar-title.font-weight-bold {{ title }}
+    //- v-toolbar-items
+      v-btn(text) {{ title }}
     v-spacer
     v-btn(icon target="blank" href="https://discord.gg/RR8W9Dp" color="white")
       v-icon mdi-discord
-    v-btn.ml-2.mr-n2(icon target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="green")
+    v-btn.ml-2.mr-n2(icon target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="white")
       v-icon mdi-google-spreadsheet
     //- v-btn(text target="blank" href="https://app.gitbook.com/@setsover02/s/lodb/" color="primary") GitBook
 
@@ -49,7 +50,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'LODB'
+      title: 'Last Origin'
     }
   }
 }

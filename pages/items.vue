@@ -1,10 +1,9 @@
 <template lang="pug">
-div
-	v-row
-		v-col
+v-row
+	v-col
 			v-data-iterator(:items="equipment" :search="search" hide-default-footer)
 				template(v-slot:header)
-					v-card.mb-1.radial-t200
+					v-card.mb-1(color="transparent" elevation="0")
 						v-row
 							v-col.pl-3(cols="auto")
 								//- TODO: 장비 종류
@@ -23,11 +22,12 @@ div
 							v-col.pr-2
 								v-text-field(v-model="search" label="Search" prepend-inner-icon="mdi-magnify"
 								hide-details color="primary" background-color="transparent" solo flat)
+					v-divider
 				template(v-slot:default="props")
 					//- Item Card
 					v-row
 						v-col(cols="2" v-for="item in props.items" :key="item.id")
-							v-card.radial-t200
+							v-card(color="transparent" elevation="0")
 								v-list-item
 									v-list-item-avatar.radius-4(size="48" color="t500" tile)
 										v-img(:src="require('~/assets/img/items/414.png')")

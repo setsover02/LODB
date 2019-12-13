@@ -10,7 +10,7 @@ export default {
       if (rank === 'SS') return 'orange'
       else if (rank === 'S') return 'yellow'
       else if (rank === 'A') return 'blue'
-      else return 'green' // B
+      else return 'mint' // B
     }
   }
 }

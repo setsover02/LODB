@@ -1,15 +1,11 @@
-<template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+<template lang="pug">
+v-row(no-gutters).fill-height
+  v-col.fill-height.d-flex.flex-column.align-center.justify-center
+    span.t200--text.display-2.font-weight-bold(v-if="error.statusCode === 404") {{ pageNotFound }}
+    span.t200--text.display-2.font-weight-bold(v-else) {{ otherError }}
+    div.mt-3
+      v-btn(to="/" text color="primary") Go to home
+      span.ml-2.caption or please refresh
 </template>
 
 <script>
