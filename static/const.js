@@ -3,7 +3,7 @@ export const CONST = {
 	ENH: {
 		DAMAGE: 1.5,
 		HEALTH: 8,
-		DEFENSE: 1.5,
+		DEFENSE: 1.25,
 		HIT: 1.5,
 		CRIT: 0.4,
 		DODGE: 0.4
