@@ -66,17 +66,17 @@ v-card(color="transparent" elevation="0").fill-height__n7
       v-avatar.radius-4(size="24" tile color="t500")
         //- v-img(:src="")
     //- TODO: Memo 수정, 입력
-    template(v-slot:item.memo="props")
-      v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
-        span {{ props.item.memo }}
-        template(v-slot:input)
-          //- :rules="[max8chars]"
-          v-text-field.mt-4(v-model="props.item.memo" label="Memo" counter="8" autofocus)
+    //- template(v-slot:item.memo="props")
+    //-   v-edit-dialog(:return-value.sync="props.item.memo" @save="memoSave" @cancel="memoCancel" @open="memoOpen" @close="memoClose" large persistent)
+    //-     span {{ props.item.memo }}
+    //-     template(v-slot:input)
+    //-       //- :rules="[max8chars]"
+    //-       v-text-field.mt-4(v-model="props.item.memo" label="Memo" counter="8" autofocus)
 
-    template(v-slot:item.actions="{ items }")
+    //- template(v-slot:item.actions="{ items }")
       //- 삭제 버튼
-      //- v-btn(@click="deleteItem(item)" icon small)
-      //-   v-icon(small) mdi-close
+      v-btn(@click="deleteItem(item)" icon small)
+        v-icon(small) mdi-close
   //-Data Table Pagination
   v-divider
   v-list-item.py-2

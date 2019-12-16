@@ -5,6 +5,7 @@ v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getChara
   v-avatar(size="144")
     v-img(:src="require('~/assets/img/avatar/undefined.png')")
   span.overline Select character first
+
 v-card.fill-height(v-else width="470" color="transparent" elevation="0")
   v-form(ref="form")
     v-list-item.py-2
@@ -48,8 +49,7 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
       v-col.subtitle-2 강화
       v-col(cols="auto").primary--text.subtitle-2 잔여포인트
         v-chip.ml-3.white--text(small :color="enhLimitColor" v-text="getEnhLimit")
-    //- 강화 수치
-    v-row.px-4.pb-4
+    v-row.px-4
       v-col(cols="4").text-right
         //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
         span.pr-2.body-2.accent--text(v-text="getCharacterDamage")
@@ -81,7 +81,7 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
         v-text-field(v-model="dodgeEnh"
           dense flat solo hide-details suffix="회피"
             type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-    v-divider
+    v-divider.mt-4
     //- 링크 퍼센티지
     v-row.px-4.py-2(align="center")
       v-col.subtitle-2 링크
@@ -102,49 +102,97 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
         v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
       v-col
         v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-    v-row.pa-4(align="center")
+    v-row.px-4(align="center")
       //- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
       v-col
-        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" prefix="풀링크 보너스" hide-details)
-    v-divider
+        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
+          //- template(v-slot:selection="data")
+          //-   span(v-bind='data.attrs') {{ data.item }}
+          //- template(v-slot:item="data")
+          //-   template(v-if="typeof data.item !== 0")
+          //-     v-list-item-title(v-text="data.item")
+    v-divider.mt-4
+
+    //- TODO: 아이템 슬롯
     v-row.px-4.py-2(no-gutter)
       v-col(cols="12").subtitle-2 아이템
-      v-col(cols="6")
-        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
-          template(v-slot:selection="data")
-            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-              v-avatar.border-4(size="24" left tile)
-                v-img(:src="require('~/assets/img/items/414.png')")
-              | {{ data.item.name + '/' + data.item.rank }}
-          template(v-slot:item="data")
-            template(v-if="typeof data.item !== 'object'")
-              v-list-item-content(v-text="data.item.name")
-            template(v-else)
-              v-list-item-avatar.border-4(size="24" tile)
-                v-img(:src="require('~/assets/img/items/414.png')")
-              v-list-item-content
-                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
-      v-col(cols="6")
-        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat prefix="칩" append-icon="mdi-chevron-down" autocomplete="off")
-          template(v-slot:selection="data")
-            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-              v-avatar.border-4(size="24" left tile)
-                v-img(:src="require('~/assets/img/items/414.png')")
-              | {{ data.item.name + '/' + data.item.rank }}
-          template(v-slot:item="data")
-            template(v-if="typeof data.item !== 'object'")
-              v-list-item-content(v-text="data.item.name")
-            template(v-else)
-              v-list-item-avatar.border-4(size="24" tile)
-                v-img(:src="require('~/assets/img/items/414.png')")
-              v-list-item-content
-                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
 
-      v-col(cols="6")
-        v-autocomplete(:items="equipment" dense solo flat prefix="OS" append-icon="mdi-chevron-down" autocomplete="off")
-      v-col(cols="6")
-        v-autocomplete(:items="equipment" dense solo flat prefix="장비" append-icon="mdi-chevron-down" autocomplete="off")
-    v-divider
+    v-row.px-4
+      v-col
+        v-autocomplete(v-model="equipChip1" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+      v-col(cols='auto')
+        v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+
+    v-row.px-4
+      v-col
+        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+      v-col(cols='auto')
+        v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+    
+    v-row.px-4
+      v-col
+        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+      v-col(cols='auto')
+        v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+    
+    v-row.px-4
+      v-col
+        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach append-icon="mdi-chevron-down" autocomplete="off")
+          template(v-slot:selection="data")
+            v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
+              v-avatar.border-4(size="24" left tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              | {{ data.item.name + '/' + data.item.rank }}
+          template(v-slot:item="data")
+            template(v-if="typeof data.item !== 'object'")
+              v-list-item-content(v-text="data.item.name")
+            template(v-else)
+              v-list-item-avatar.border-4(size="24" tile)
+                v-img(:src="require('~/assets/img/items/414.png')")
+              v-list-item-content
+                v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+      v-col(cols='auto')
+        v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+    v-divider.mt-4
     v-row.px-4.py-2
       v-col(cols="12").subtitle-2 기타 능력치
       v-col(cols="4")
@@ -218,7 +266,12 @@ export default {
     ...mapMutations(['SET_LINK_MAX', 'SET_LINK_MIN'])
   },
   computed: {
-    ...mapState(['characterSelect', 'linkSlotItem', 'fullLinkBonus']),
+    ...mapState([
+      'characterSelect',
+      'linkSlotItem',
+      'fullLinkBonus',
+      'equipChip1'
+    ]),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
       'getTotalLink',
@@ -341,6 +394,14 @@ export default {
       },
       set(value) {
         this.$store.commit('SET_FULLLINK_BONUS', value)
+      }
+    },
+    equipChip1: {
+      get() {
+        return this.$store.state.equipChip1
+      },
+      set(value) {
+        this.$store.commit('SET_EQUIP_CHIP_1', value)
       }
     },
     // 잔여스탯 색상

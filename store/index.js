@@ -43,7 +43,11 @@ export const state = () => ({
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
-  fullLinkBonus: ""
+  fullLinkBonus: "",
+  equipChip1: null,
+  equipChip2: null,
+  equipOs: null,
+  equipGear: null,
 });
 
 export const getters = {
@@ -182,6 +186,16 @@ export const getters = {
   // 캐릭터 고유의 풀링크 보너스 selectbox용 배열로 불러오기
   getCharacterFullLinkBonus: state => {
     const data = state.characterSelect[0];
+    // const array = (value) => {
+    //   if (data.fullLinkRes === !0) return "자원감소 " + data.fullLinkRes;
+    // }
+
+    // if (data.fullLinkHit == 0) {
+    //   return null;
+    // } else {
+    //   return "적중 " + data.fullLinkHit + "%";
+    // }
+
     return [
       "자원감소 " + data.fullLinkRes,
       "행동력 " + data.fullLinkAP,
@@ -194,7 +208,7 @@ export const getters = {
       "버프/디버프 + " + data.fullLinkBuff + "레벨",
       "사거리 + " + data.fullLinkRange
     ];
-  }
+  },
 };
 
 export const mutations = {
@@ -262,6 +276,11 @@ export const mutations = {
   // 풀링 보너스 선택값
   SET_FULLLINK_BONUS(state, fullLinkBonus) {
     state.fullLinkBonus = fullLinkBonus;
+  },
+
+  // 아이템 장착 관련
+  SET_EQUIP_CHIP_1(state, equipChip1) {
+    state.equipChip1 = equipChip1;
   }
 };
 
