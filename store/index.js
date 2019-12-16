@@ -160,6 +160,7 @@ export const getters = {
       return dodgeFomula.toFixed(1);
     }
   },
+  // 풀링보너스 select 박스에 행동력 값이 있을경우 
   getCharacterAP: state => {
     const data = state.characterSelect[0];
     if (
@@ -211,10 +212,10 @@ export const getters = {
   getEquipChip1: state => {
     const data = state.equipChip1;
     // 선택 값이 없을 경우 0 반환
-    if (state.equipChip1 == 0) {
+    if (data == 0 || data.damage == null) {
       return 0;
     } else {
-      return data.damage[(state.equipChip1Enh - 1)];
+      return data.damage[state.equipChip1Enh - 1];
     }
     // return data.rank
   }
@@ -293,7 +294,7 @@ export const mutations = {
   },
   // 강화 수치
   SET_EQUIP_CHIP_1_ENH(state, equipChip1Enh) {
-    state.equipChip1Enh = equipChip1Enh
+    state.equipChip1Enh = equipChip1Enh;
   }
 };
 
