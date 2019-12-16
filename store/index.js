@@ -44,15 +44,16 @@ export const state = () => ({
   linkSlot4: 100,
   linkSlot5: 100,
   fullLinkBonus: "",
-  equipChip1: null,
+  equipChip1: [0],
+  equipChip1Enh: 10,
   equipChip2: null,
   equipOs: null,
-  equipGear: null,
+  equipGear: null
 });
 
 export const getters = {
-  character: () => CHARACTER, // Get JSON
-  equipment: () => EQUIPMENT,
+  getCharactersData: () => CHARACTER, // Get JSON
+  getEquipmentData: () => EQUIPMENT,
   // Json Data: DataTable characterSelect row 값 반환 테스트 : 값이 없을경우 텍스트 반환
   // getters > SimulatingForm.vue
   getCharacterId: state => {
@@ -189,13 +190,11 @@ export const getters = {
     // const array = (value) => {
     //   if (data.fullLinkRes === !0) return "자원감소 " + data.fullLinkRes;
     // }
-
     // if (data.fullLinkHit == 0) {
     //   return null;
     // } else {
     //   return "적중 " + data.fullLinkHit + "%";
     // }
-
     return [
       "자원감소 " + data.fullLinkRes,
       "행동력 " + data.fullLinkAP,
@@ -209,6 +208,16 @@ export const getters = {
       "사거리 + " + data.fullLinkRange
     ];
   },
+  getEquipChip1: state => {
+    const data = state.equipChip1;
+    // 선택 값이 없을 경우 0 반환
+    if (state.equipChip1 == 0) {
+      return 0;
+    } else {
+      return data.damage[(state.equipChip1Enh - 1)];
+    }
+    // return data.rank
+  }
 };
 
 export const mutations = {
@@ -281,6 +290,10 @@ export const mutations = {
   // 아이템 장착 관련
   SET_EQUIP_CHIP_1(state, equipChip1) {
     state.equipChip1 = equipChip1;
+  },
+  // 강화 수치
+  SET_EQUIP_CHIP_1_ENH(state, equipChip1Enh) {
+    state.equipChip1Enh = equipChip1Enh
   }
 };
 

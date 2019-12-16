@@ -118,8 +118,10 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
       v-col(cols="12").subtitle-2 아이템
 
     v-row.px-4
+      v-col(cols="12") 
+        span {{ getEquipChip1 }}
       v-col
-        v-autocomplete(v-model="equipChip1" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(v-model="equipChip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
           template(v-slot:selection="data")
             v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
               v-avatar.border-4(size="24" left tile)
@@ -134,11 +136,11 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
               v-list-item-content
                 v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
       v-col(cols='auto')
-        v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+        v-text-field(v-model="equipChip1Enh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
 
     v-row.px-4
       v-col
-        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
           template(v-slot:selection="data")
             v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
               v-avatar.border-4(size="24" left tile)
@@ -157,7 +159,7 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
     
     v-row.px-4
       v-col
-        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach append-icon="mdi-chevron-down" autocomplete="off")
           template(v-slot:selection="data")
             v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
               v-avatar.border-4(size="24" left tile)
@@ -176,7 +178,7 @@ v-card.fill-height(v-else width="470" color="transparent" elevation="0")
     
     v-row.px-4
       v-col
-        v-autocomplete(v-model="equipmentSelect" :items="equipment" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach append-icon="mdi-chevron-down" autocomplete="off")
+        v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach append-icon="mdi-chevron-down" autocomplete="off")
           template(v-slot:selection="data")
             v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
               v-avatar.border-4(size="24" left tile)
@@ -234,12 +236,6 @@ export default {
   components: {
     RankChip
   },
-  // props: {
-  //   characterID: {
-  //     type: String,
-  //     required: true,
-  //   }
-  // },
   data: () => ({
     equipmentSelect: null,
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
@@ -270,7 +266,8 @@ export default {
       'characterSelect',
       'linkSlotItem',
       'fullLinkBonus',
-      'equipChip1'
+      'equipChip1',
+      'equipChip1Enh'
     ]),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
@@ -288,7 +285,8 @@ export default {
       'getCharacterAP',
       'getEnhLimit',
       'getCharacterFullLinkBonus',
-      'equipment'
+      'getEquipmentData',
+      'getEquipChip1'
     ]),
     level: {
       get() {
@@ -402,6 +400,14 @@ export default {
       },
       set(value) {
         this.$store.commit('SET_EQUIP_CHIP_1', value)
+      }
+    },
+    equipChip1Enh: {
+      get() {
+        return this.$store.state.equipChip1Enh
+      },
+      set(value) {
+        this.$store.commit('SET_EQUIP_CHIP_1_ENH', value)
       }
     },
     // 잔여스탯 색상

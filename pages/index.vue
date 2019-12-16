@@ -6,8 +6,6 @@ v-row.fill-height(no-gutters)
     DataTable
   v-divider(vertical).fill-height
   v-col(cols="auto").fill-height.pa-0.overflow-x-hidden.overflow-y-auto
-    //- Input Form
-    //- SimulatingForm(v-if="item.id === selectIDs" v-for="item in character" :key="item.id" :class="selectIDs")
     SimulatingForm
 </template>
 <style scoped>
@@ -28,14 +26,6 @@ export default {
     SearchForm,
     DataTable,
     SimulatingForm
-  },
-  computed: {
-    ...mapState({
-      selectIDs: state => state.selectIDs
-    }),
-    ...mapGetters([
-      'character' // json
-    ])
   }
 }
 </script>

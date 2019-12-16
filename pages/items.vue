@@ -1,7 +1,7 @@
 <template lang="pug">
 v-row
 	v-col
-			v-data-iterator(:items="equipment" :search="search" hide-default-footer)
+			v-data-iterator(:items="getEquipmentData" :search="search" hide-default-footer)
 				template(v-slot:header)
 					v-card.mb-1(color="transparent" elevation="0")
 						v-row
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'equipment', // json
+      'getEquipmentData', // json
 		]),
 	},
 	methods: {
