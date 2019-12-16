@@ -5,12 +5,12 @@ v-row.fill-height(no-gutters)
     v-divider
     DataTable
   v-divider(vertical).fill-height
-  v-col(cols="auto").fill-height.pa-0.overflow-x-hidden.overflow-y-auto
+  v-col(cols="auto")
     SimulatingForm
 </template>
 <style scoped>
 .removed-max-width {
-  max-width: calc(100% - 479px);
+  max-width: calc(100% - 595px);
 }
 </style>
 <script>
