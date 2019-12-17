@@ -93,18 +93,18 @@ v-sheet(tile).linear-t400.sticky
 import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   computed: {
-    ...mapGetters([
+    ...mapGetters('enhance', [
       'getCharacterId',
       'getCharacterName',
       'getCharacterType',
       'getCharacterRole',
       'getCharacterDamage',
       'getCharacterHit',
-			'getCharacterCrit',
-			'getCharacterAP',
+      'getCharacterCrit',
+      'getCharacterAP',
       'getCharacterHealth',
       'getCharacterDefense',
-			'getCharacterDodge',
+      'getCharacterDodge'
     ])
   }
 }

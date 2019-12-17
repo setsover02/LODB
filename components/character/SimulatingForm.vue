@@ -101,9 +101,9 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
 
         v-row.px-4
           v-col(cols="12") 
-            span {{ getEquipChip1 }}
+            span {{ getChip1 }}
           v-col
-            v-autocomplete(v-model="equipChip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+            v-autocomplete(v-model="chip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
                 v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
                   v-avatar.border-4(size="24" left tile)
@@ -118,7 +118,7 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
                   v-list-item-content
                     v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
           v-col(cols='auto')
-            v-text-field(v-model="equipChip1Enh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
+            v-text-field(v-model="chip1Enh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
 
         v-row.px-4
           v-col
@@ -209,155 +209,152 @@ export default {
     ]
   }),
   methods: {
-    ...mapMutations(['SET_LINK_MAX', 'SET_LINK_MIN'])
+    ...mapMutations('enhance', ['SET_LINK_MAX', 'SET_LINK_MIN'])
   },
   computed: {
-    ...mapState([
+    ...mapState('enhance', [
       'characterSelect',
       'linkSlotItem',
-      'fullLinkBonus',
-      'equipChip1',
-      'equipChip1Enh'
+      'fullLinkBonus'
     ]),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
-    ...mapGetters([
+    ...mapGetters('enhance', [
       'getCharacterId',
-      'getTotalLink',
       'getEnhLimit',
-      'getCharacterFullLinkBonus',
-      'getEquipmentData',
-      'getEquipChip1'
+      'getTotalLink',
+      'getCharacterFullLinkBonus'
     ]),
+    ...mapGetters('equip', ['getEquipmentData', 'getChip1']),
     level: {
       get() {
-        return this.$store.state.level
+        return this.$store.state.enhance.level
       },
       set(value) {
-        this.$store.commit('SET_LEVEL', value)
+        this.$store.commit('enhance/SET_LEVEL', value)
       }
     },
     damageEnh: {
       get() {
-        return this.$store.state.damageEnh
+        return this.$store.state.enhance.damageEnh
       },
       set(value) {
-        this.$store.commit('SET_DAMAGE_ENH', value)
+        this.$store.commit('enhance/SET_DAMAGE_ENH', value)
       }
     },
     healthEnh: {
       get() {
-        return this.$store.state.healthEnh
+        return this.$store.state.enhance.healthEnh
       },
       set(value) {
-        this.$store.commit('SET_HEALTH_ENH', value)
+        this.$store.commit('enhance/SET_HEALTH_ENH', value)
       }
     },
     defenseEnh: {
       get() {
-        return this.$store.state.defenseEnh
+        return this.$store.state.enhance.defenseEnh
       },
       set(value) {
-        this.$store.commit('SET_DEFENSE_ENH', value)
+        this.$store.commit('enhance/SET_DEFENSE_ENH', value)
       }
     },
     hitEnh: {
       get() {
-        return this.$store.state.hitEnh
+        return this.$store.state.enhance.hitEnh
       },
       set(value) {
-        this.$store.commit('SET_HIT_ENH', value)
+        this.$store.commit('enhance/SET_HIT_ENH', value)
       }
     },
     critEnh: {
       get() {
-        return this.$store.state.critEnh
+        return this.$store.state.enhance.critEnh
       },
       set(value) {
-        this.$store.commit('SET_CRIT_ENH', value)
+        this.$store.commit('enhance/SET_CRIT_ENH', value)
       }
     },
     dodgeEnh: {
       get() {
-        return this.$store.state.dodgeEnh
+        return this.$store.state.enhance.dodgeEnh
       },
       set(value) {
-        this.$store.commit('SET_DODGE_ENH', value)
+        this.$store.commit('enhance/SET_DODGE_ENH', value)
       }
     },
     // 잔여 강화 포인트 계산
     // 링크 슬롯(퍼센티지 합산 해야 함)
     linkSlot1: {
       get() {
-        return this.$store.state.linkSlot1
+        return this.$store.state.enhance.linkSlot1
       },
       set(value) {
-        this.$store.commit('SET_LINK_SLOT1', value)
+        this.$store.commit('enhance/SET_LINK_SLOT1', value)
       }
     },
     linkSlot2: {
       get() {
-        return this.$store.state.linkSlot2
+        return this.$store.state.enhance.linkSlot2
       },
       set(value) {
-        this.$store.commit('SET_LINK_SLOT2', value)
+        this.$store.commit('enhance/SET_LINK_SLOT2', value)
       }
     },
     linkSlot3: {
       get() {
-        return this.$store.state.linkSlot3
+        return this.$store.state.enhance.linkSlot3
       },
       set(value) {
-        this.$store.commit('SET_LINK_SLOT3', value)
+        this.$store.commit('enhance/SET_LINK_SLOT3', value)
       }
     },
     linkSlot4: {
       get() {
-        return this.$store.state.linkSlot4
+        return this.$store.state.enhance.linkSlot4
       },
       set(value) {
-        this.$store.commit('SET_LINK_SLOT4', value)
+        this.$store.commit('enhance/SET_LINK_SLOT4', value)
       }
     },
     linkSlot5: {
       get() {
-        return this.$store.state.linkSlot5
+        return this.$store.state.enhance.linkSlot5
       },
       set(value) {
-        this.$store.commit('SET_LINK_SLOT5', value)
+        this.$store.commit('enhance/SET_LINK_SLOT5', value)
       }
     },
     fullLinkBonus: {
       get() {
-        return this.$store.state.fullLinkBonus
+        return this.$store.state.enhance.fullLinkBonus
       },
       set(value) {
-        this.$store.commit('SET_FULLLINK_BONUS', value)
+        this.$store.commit('enhance/SET_FULLLINK_BONUS', value)
       }
     },
-    equipChip1: {
+    chip1: {
       get() {
-        return this.$store.state.equipChip1
+        return this.$store.state.equip.chip1
       },
       set(value) {
-        this.$store.commit('SET_EQUIP_CHIP_1', value)
+        this.$store.commit('equip/SET_CHIP_1', value)
       }
     },
-    equipChip1Enh: {
+    chip1Enh: {
       get() {
-        return this.$store.state.equipChip1Enh
+        return this.$store.state.equip.chip1Enh
       },
       set(value) {
-        this.$store.commit('SET_EQUIP_CHIP_1_ENH', value)
+        this.$store.commit('equip/SET_CHIP_1_ENH', value)
       }
     },
     // 잔여스탯 색상
     enhLimitColor() {
-      if (this.$store.getters.getEnhLimit < 0) return 'red'
+      if (this.$store.getters['enhance/getEnhLimit'] < 0) return 'red'
       else return 'primary'
     },
     // totalLink 칩 색상
     totalLinkColor() {
-      if (this.$store.getters.getTotalLink < 5) return 'red'
+      if (this.$store.getters['enhance/getTotalLink'] < 5) return 'red'
       else return 'primary'
     }
   }

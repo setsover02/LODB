@@ -47,16 +47,16 @@ export default {
     roleItems: ['공격', '보호', '지원']
   }),
   computed: {
-    ...mapGetters([
+    ...mapGetters('character', [
       'getCharactersData' // json
     ]),
     // 이름으로 검색
     characterName: {
       get() {
-        return this.$store.state.characterName
+        return this.$store.state.character.characterName
       },
       set(value) {
-        this.$store.commit('SET_SEARCH_NAME', value)
+        this.$store.commit('character/SET_SEARCH_NAME', value)
       }
     }
   }

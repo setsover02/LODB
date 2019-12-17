@@ -107,9 +107,8 @@ export default {
     // roleFilter: ['공격기', '보호기', '지원기'],
   }),
   computed: {
-    ...mapState([
-      'characterName',
-      'charactersCol',
+    ...mapState('character', ['characterName', 'charactersCol']),
+    ...mapState('enhance', [
       'level', // 레벨
       'damageEnh', // 강화수치
       'defenseEnh',
@@ -119,18 +118,17 @@ export default {
       'dodgeEnh',
       'fullLinkBonus'
     ]),
-    ...mapGetters([
-      'getCharactersData', // json
-      'getTotalLink',
-      'getCharacterDamage'
+    ...mapGetters('enhance', ['getTotalLink']),
+    ...mapGetters('character', [
+      'getCharactersData' // json
     ]),
     // 테이블 선택 시 mutations
     characterSelect: {
       get() {
-        return this.$store.state.characterSelect
+        return this.$store.state.enhance.characterSelect
       },
       set(value) {
-        this.$store.commit('SET_CHARACTER_SELECT', value)
+        this.$store.commit('enhance/SET_CHARACTER_SELECT', value)
       }
     }
   },
@@ -156,7 +154,10 @@ export default {
       console.log('Dialog closed')
     },
     itemSelected() {
-      this.$store.commit('SET_CHARACTER_SELECT', this.$store.state.characterSelect)
+      this.$store.commit(
+        'enhance/SET_CHARACTER_SELECT',
+        this.$store.state.enhance.characterSelect
+      )
       console.log('Select row')
     }
   }

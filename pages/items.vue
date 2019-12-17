@@ -55,22 +55,16 @@ import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
-			search: '',
-			filter: {},
-			keys: [
-				'name',
-				'type',
-				'rank',
-			]
+      search: '',
+      filter: {},
+      keys: ['name', 'type', 'rank']
     }
   },
   computed: {
-    ...mapGetters([
-      'getEquipmentData', // json
-		]),
-	},
-	methods: {
-	
-	}
+    ...mapGetters('equip', [
+      'getEquipmentData' // json
+    ])
+  },
+  methods: {}
 }
 </script>

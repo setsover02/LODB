@@ -1,33 +1,6 @@
 // https://medium.com/locale-ai/architecting-vuex-store-for-large-scale-vue-js-applications-24c36137e251
 import { CONST } from "~/static/const";
-const CHARACTER = require("~/static/character.json");
-const EQUIPMENT = require("~/static/equipment.json");
-
 export const state = () => ({
-  characterName: null, // Name Search
-  charactersCol: [
-    // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
-    { text: "번호", align: "right", sortable: false, value: "id" },
-    { text: "아바타", sortable: false, value: "avatar" },
-    { text: "이름", sortable: true, value: "name" },
-    { text: "등급", align: "center", sortable: false, value: "rank" },
-    { text: "유형", sortable: false, value: "type" },
-    { text: "역할", sortable: false, value: "role" },
-    { text: "레벨", align: "right", sortable: false, value: "level" },
-    { text: "체력", align: "right", sortable: true, value: "health" },
-    { text: "공격력", align: "right", sortable: true, value: "damage" },
-    { text: "1스킬", align: "right", sortable: true, value: "skill1" },
-    { text: "2스킬", align: "right", sortable: true, value: "skill2" },
-    { text: "적중", align: "right", sortable: true, value: "hit" },
-    { text: "치명", align: "right", sortable: true, value: "crit" },
-    { text: "회피", align: "right", sortable: true, value: "dodge" },
-    { text: "방어력", align: "right", sortable: true, value: "defense" },
-    { text: "행동력", align: "right", sortable: true, value: "ap" },
-    { text: "장비", align: "right", sortable: false, value: "equip" },
-    { text: "메모", align: "right", sortable: false, value: "memo" },
-    { text: "", align: "right", sortable: false, value: "actions" }
-  ],
-  characterSelect: [0], // DataTable characterSelect, 빈값으로 할경우 선택된 내용이 없어서 에러
   level: 1, // 레벨 설정
   // 강화 스탯
   damageEnh: 0, // * 1.5
@@ -44,37 +17,24 @@ export const state = () => ({
   linkSlot4: 100,
   linkSlot5: 100,
   fullLinkBonus: "",
-  equipChip1: [0],
-  equipChip1Enh: 10,
-  equipChip2: null,
-  equipOs: null,
-  equipGear: null
 });
 
 export const getters = {
-  getCharactersData: () => CHARACTER, // Get JSON
-  getEquipmentData: () => EQUIPMENT,
   // Json Data: DataTable characterSelect row 값 반환 테스트 : 값이 없을경우 텍스트 반환
   // getters > SimulatingForm.vue
-  getCharacterId: state => {
-    if (state.characterSelect[0].id === undefined) {
-      return "undefined";
-    } else {
-      return state.characterSelect[0].id;
-    }
-  },
+
   getCharacterName: state => {
-    if (state.characterSelect[0].name === undefined) {
+    if (state.enhance.characterSelect[0].name === undefined) {
       return "Error";
     } else {
-      return state.characterSelect[0].name;
+      return state.enhance.characterSelect[0].name;
     }
   },
   getCharacterType: state => {
-    return state.characterSelect[0].type;
+    return state.enhance.characterSelect[0].type;
   },
   getCharacterRole: state => {
-    return state.characterSelect[0].role;
+    return state.enhance.characterSelect[0].role;
   },
   // 링크 퍼센티지 합산, 소수점 2자리 // 추후 const값 이랑 중복되는거 정리해야함
   getTotalLink: state => {
@@ -90,7 +50,7 @@ export const getters = {
   // 이하 부터는 강화값 포함하여 반환 (강화, 링크보너스 까지 적용되어 있음)
   // DataTable: Only selected row data > SimulatingForm
   getCharacterDamage: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     return Math.round(
       (data.damageBase +
         (state.level - 1) * data.damageCoef +
@@ -99,7 +59,7 @@ export const getters = {
     );
   },
   getCharacterHealth: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     const healthFormula =
       (data.healthBase +
         (state.level - 1) * data.healthCoef +
@@ -115,7 +75,7 @@ export const getters = {
     }
   },
   getCharacterDefense: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     const defenseFormula =
       (data.defenseBase +
         (state.level - 1) * data.defenseCoef +
@@ -125,7 +85,7 @@ export const getters = {
   },
   // (getters.getSelectedFullLinkBonus == "적중 75%")
   getCharacterHit: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     const hitFormula =
       data.hit +
       state.hitEnh * CONST.ENH.HIT +
@@ -137,7 +97,7 @@ export const getters = {
     }
   },
   getCharacterCrit: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     const critFomula =
       data.crit +
       state.critEnh * CONST.ENH.CRIT +
@@ -149,7 +109,7 @@ export const getters = {
     }
   },
   getCharacterDodge: (state, getters) => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     const dodgeFomula =
       data.dodge +
       state.dodgeEnh * CONST.ENH.DODGE +
@@ -162,7 +122,7 @@ export const getters = {
   },
   // 풀링보너스 select 박스에 행동력 값이 있을경우
   getCharacterAP: state => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     if (
       state.fullLinkBonus == "행동력 0.1" ||
       state.fullLinkBonus == "행동력 0.15" ||
@@ -187,7 +147,7 @@ export const getters = {
   },
   // 캐릭터 고유의 풀링크 보너스 selectbox용 배열로 불러오기
   getCharacterFullLinkBonus: state => {
-    const data = state.characterSelect[0];
+    const data = state.enhance.characterSelect[0];
     // const array = (value) => {
     //   if (data.fullLinkRes === !0) return "자원감소 " + data.fullLinkRes;
     // }
@@ -208,27 +168,10 @@ export const getters = {
       "사거리 + " + data.fullLinkRange
     ];
   },
-  getEquipChip1: state => {
-    const data = state.equipChip1;
-    // 선택 값이 없을 경우 0 반환
-    if (data == 0 || data.damage == null) {
-      return 0;
-    } else {
-      return data.damage[state.equipChip1Enh - 1];
-    }
-    // return data.rank
-  }
+
 };
 
 export const mutations = {
-  // 이름 검색필터
-  SET_SEARCH_NAME(state, characterName) {
-    state.characterName = characterName;
-  },
-  SET_CHARACTER_SELECT(state, characterSelect) {
-    state.characterSelect = characterSelect;
-    // selectNode("m" + payload, true);
-  },
   // 레벨 및 강화스텟 업데이트
   SET_LEVEL(state, level) {
     state.level = level;
@@ -286,15 +229,6 @@ export const mutations = {
   SET_FULLLINK_BONUS(state, fullLinkBonus) {
     state.fullLinkBonus = fullLinkBonus;
   },
-
-  // 아이템 장착 관련
-  SET_EQUIP_CHIP_1(state, equipChip1) {
-    state.equipChip1 = equipChip1;
-  },
-  // 강화 수치
-  SET_EQUIP_CHIP_1_ENH(state, equipChip1Enh) {
-    state.equipChip1Enh = equipChip1Enh;
-  }
 };
 
 export const actions = {};
