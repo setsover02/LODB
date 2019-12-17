@@ -30,7 +30,6 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
                 v-switch.mt-0.pt-0(color="primary" hide-details inset)
                   template(v-slot:label)
                     span.caption 자버프 적용
-            
         v-divider
 
         //- 이하 강화 포인트 입력 폼
@@ -42,33 +41,33 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
           v-col(cols="4").text-right
             //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
             v-text-field(v-model="damageEnh"
-              dense flat solo hide-details suffix="공격력"
+              dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
             v-text-field(v-model="hitEnh" 
-              dense flat solo hide-details suffix="적중"
+              dense flat solo hide-details suffix="적중" append-icon="mdi-chevron-double-up"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
             v-text-field(v-model="critEnh" 
-              dense flat solo hide-details suffix="치명"
+              dense flat solo hide-details suffix="치명" append-icon="mdi-chevron-double-up"
                 type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
             v-text-field(v-model="healthEnh" 
-              dense flat solo hide-details suffix="체력"
+              dense flat solo hide-details suffix="체력" append-icon="mdi-chevron-double-up"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
             v-text-field(v-model="defenseEnh" 
-              dense flat solo hide-details suffix="방어력"
+              dense flat solo hide-details suffix="방어력" append-icon="mdi-chevron-double-up"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
             v-text-field(v-model="dodgeEnh"
-              dense flat solo hide-details suffix="회피"
+              dense flat solo hide-details suffix="회피" append-icon="mdi-chevron-double-up"
                 type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
         v-divider.mt-4
         //- 링크 퍼센티지
         v-row.px-4.py-2(align="center")
           v-col.subtitle-2 링크
-          v-col(cols="auto").primary--text.subtitle-2 링크 퍼센티지
+          v-col(cols="auto").primary--text.subtitle-2 총합
             v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(getTotalLink * 100) + '%' }}
           v-col(cols="auto")
             v-btn(v-if="getTotalLink < 5" @click="SET_LINK_MAX" small text color="primary") Max
@@ -159,7 +158,7 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
           v-col(cols='auto')
             v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
 
-        v-row.px-4
+        v-row.px-4.mb-4
           v-col
             v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
