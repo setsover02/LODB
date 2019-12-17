@@ -11,184 +11,103 @@ v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="
   v-form(ref="form")
     FormPreview
     //- Enhance Form
-    v-row
+    v-row.px-4.py-2(align="center")
+      //- TODO: Rank Select, 승급관련 처리 필요
+      v-col(cols="4")
+        v-select(:items="rank" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
+          template(v-slot:selection="data")
+            v-chip(:input-value="data.selected" :color="data.item.color" small) {{ data.item.text }}
+          template(v-slot:item="data")
+            v-chip(:color="data.item.color" small) {{ data.item.text }}
+      //- 레벨 입력 폼
+      v-col(cols="4")
+        v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
+        type="number" autocomplete="off" min="1" max="90" append-icon="mdi-chevron-double-up" prepend-icon="mdi-chevron-double-down" @click:prepend="level = 1" @click:append="level = 90")
+      v-col(cols="auto").pr-0
+        v-list(min-width="124" dense color="transparent").py-0
+          v-list-item.px-2
+            v-switch.mt-0.pt-0(color="primary" hide-details inset)
+              template(v-slot:label)
+                span.caption 자버프 적용
+    v-divider
+    //- 이하 강화 포인트 입력 폼
+    v-row.px-4.py-2(align="center")
+      v-col.subtitle-2 강화
+      v-col(cols="auto").primary--text.subtitle-2 잔여포인트
+        v-chip.ml-3.white--text(small :color="enhLimitColor" v-text="getEnhLimit")
+    v-row.px-4
+      v-col(cols="4").text-right
+        //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
+        v-text-field(v-model="damageEnh"
+          dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up"
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+      v-col(cols="4").text-right
+        v-text-field(v-model="hitEnh" 
+          dense flat solo hide-details suffix="적중" append-icon="mdi-chevron-double-up"
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+      v-col(cols="4").text-right
+        v-text-field(v-model="critEnh" 
+          dense flat solo hide-details suffix="치명" append-icon="mdi-chevron-double-up"
+            type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+      v-col(cols="4").text-right
+        v-text-field(v-model="healthEnh" 
+          dense flat solo hide-details suffix="체력" append-icon="mdi-chevron-double-up"
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+      v-col(cols="4").text-right
+        v-text-field(v-model="defenseEnh" 
+          dense flat solo hide-details suffix="방어력" append-icon="mdi-chevron-double-up"
+          type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+      v-col(cols="4").text-right
+        v-text-field(v-model="dodgeEnh"
+          dense flat solo hide-details suffix="회피" append-icon="mdi-chevron-double-up"
+            type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+    v-divider.mt-4
+
+    //- 링크 퍼센티지
+    v-row.px-4.py-2(align="center")
+      v-col.subtitle-2 링크
+      v-col(cols="auto").primary--text.subtitle-2 총합
+        v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(getTotalLink * 100) + '%' }}
+      v-col(cols="auto")
+        v-btn(v-if="getTotalLink < 5" @click="SET_LINK_MAX" small text color="primary") Max
+        v-btn(v-else @click="SET_LINK_MIN" small text color="red") Min
+    v-row.px-4
+      //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
       v-col
-        v-row.px-4.py-2(align="center")
-          //- TODO: Rank Select, 승급관련 처리 필요
-          v-col(cols="4")
-            v-select(:items="rank" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
-              template(v-slot:selection="data")
-                v-chip(:input-value="data.selected" :color="data.item.color" small) {{ data.item.text }}
-              template(v-slot:item="data")
-                v-chip(:color="data.item.color" small) {{ data.item.text }}
-          //- 레벨 입력 폼
-          v-col(cols="4")
-            v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
-            type="number" autocomplete="off" min="1" max="90" append-icon="mdi-chevron-double-up" prepend-icon="mdi-chevron-double-down" @click:prepend="level = 1" @click:append="level = 90")
-          v-col(cols="auto").pr-0
-            v-list(min-width="124" dense color="transparent").py-0
-              v-list-item.px-2
-                v-switch.mt-0.pt-0(color="primary" hide-details inset)
-                  template(v-slot:label)
-                    span.caption 자버프 적용
-        v-divider
+        v-select(v-model="linkSlot1" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+      v-col
+        v-select(v-model="linkSlot2" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+      v-col
+        v-select(v-model="linkSlot3" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+      v-col
+        v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+      v-col
+        v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+    v-row.px-4(align="center")
+      //- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
+      v-col
+        v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
+          //- template(v-slot:selection="data")
+          //-   span(v-bind='data.attrs') {{ data.item }}
+          //- template(v-slot:item="data")
+          //-   template(v-if="typeof data.item !== 0")
+          //-     v-list-item-title(v-text="data.item")
+    v-divider.mt-4
+    FormEquipment
 
-        //- 이하 강화 포인트 입력 폼
-        v-row.px-4.py-2(align="center")
-          v-col.subtitle-2 강화
-          v-col(cols="auto").primary--text.subtitle-2 잔여포인트
-            v-chip.ml-3.white--text(small :color="enhLimitColor" v-text="getEnhLimit")
-        v-row.px-4
-          v-col(cols="4").text-right
-            //- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
-            v-text-field(v-model="damageEnh"
-              dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            v-text-field(v-model="hitEnh" 
-              dense flat solo hide-details suffix="적중" append-icon="mdi-chevron-double-up"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            v-text-field(v-model="critEnh" 
-              dense flat solo hide-details suffix="치명" append-icon="mdi-chevron-double-up"
-                type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            v-text-field(v-model="healthEnh" 
-              dense flat solo hide-details suffix="체력" append-icon="mdi-chevron-double-up"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            v-text-field(v-model="defenseEnh" 
-              dense flat solo hide-details suffix="방어력" append-icon="mdi-chevron-double-up"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            v-text-field(v-model="dodgeEnh"
-              dense flat solo hide-details suffix="회피" append-icon="mdi-chevron-double-up"
-                type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-        v-divider.mt-4
-        //- 링크 퍼센티지
-        v-row.px-4.py-2(align="center")
-          v-col.subtitle-2 링크
-          v-col(cols="auto").primary--text.subtitle-2 총합
-            v-chip.ml-3.white--text(small :color="totalLinkColor") {{ Math.round(getTotalLink * 100) + '%' }}
-          v-col(cols="auto")
-            v-btn(v-if="getTotalLink < 5" @click="SET_LINK_MAX" small text color="primary") Max
-            v-btn(v-else @click="SET_LINK_MIN" small text color="red") Min
-        v-row.px-4
-          //- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
-          v-col
-            v-select(v-model="linkSlot1" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-          v-col
-            v-select(v-model="linkSlot2" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-          v-col
-            v-select(v-model="linkSlot3" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-          v-col
-            v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-          v-col
-            v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
-        v-row.px-4(align="center")
-          //- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
-          v-col
-            v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
-              //- template(v-slot:selection="data")
-              //-   span(v-bind='data.attrs') {{ data.item }}
-              //- template(v-slot:item="data")
-              //-   template(v-if="typeof data.item !== 0")
-              //-     v-list-item-title(v-text="data.item")
-        v-divider.mt-4
-
-        //- TODO: 아이템 슬롯
-        v-row.px-4.py-2(no-gutter)
-          v-col(cols="12").subtitle-2 아이템
-
-        v-row.px-4
-          v-col(cols="12") 
-            span {{ getChip1 }}
-          v-col
-            v-autocomplete(v-model="chip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
-              template(v-slot:selection="data")
-                v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-                  v-avatar.border-4(size="24" left tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  | {{ data.item.name + '/' + data.item.rank }}
-              template(v-slot:item="data")
-                template(v-if="typeof data.item !== 'object'")
-                  v-list-item-content(v-text="data.item.name")
-                template(v-else)
-                  v-list-item-avatar.border-4(size="24" tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  v-list-item-content
-                    v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
-          v-col(cols='auto')
-            v-text-field(v-model="chip1Enh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
-
-        v-row.px-4
-          v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
-              template(v-slot:selection="data")
-                v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-                  v-avatar.border-4(size="24" left tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  | {{ data.item.name + '/' + data.item.rank }}
-              template(v-slot:item="data")
-                template(v-if="typeof data.item !== 'object'")
-                  v-list-item-content(v-text="data.item.name")
-                template(v-else)
-                  v-list-item-avatar.border-4(size="24" tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  v-list-item-content
-                    v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
-          v-col(cols='auto')
-            v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
-
-        v-row.px-4
-          v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
-              template(v-slot:selection="data")
-                v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-                  v-avatar.border-4(size="24" left tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  | {{ data.item.name + '/' + data.item.rank }}
-              template(v-slot:item="data")
-                template(v-if="typeof data.item !== 'object'")
-                  v-list-item-content(v-text="data.item.name")
-                template(v-else)
-                  v-list-item-avatar.border-4(size="24" tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  v-list-item-content
-                    v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
-          v-col(cols='auto')
-            v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
-
-        v-row.px-4.mb-4
-          v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
-              template(v-slot:selection="data")
-                v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-                  v-avatar.border-4(size="24" left tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  | {{ data.item.name + '/' + data.item.rank }}
-              template(v-slot:item="data")
-                template(v-if="typeof data.item !== 'object'")
-                  v-list-item-content(v-text="data.item.name")
-                template(v-else)
-                  v-list-item-avatar.border-4(size="24" tile)
-                    v-img(:src="require('~/assets/img/items/414.png')")
-                  v-list-item-content
-                    v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
-          v-col(cols='auto')
-            v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import RankChip from '~/components/RankChip'
-import FormPreview from '~/components/character/FormPreview'
+import FormPreview from '~/components/character/form/FormPreview'
+import FormEquipment from '~/components/character/form/FormEquipment'
 export default {
   components: {
     RankChip,
-    FormPreview
+    FormPreview,
+    FormEquipment
   },
   data: () => ({
-    equipmentSelect: null,
     // max8char: v => v.length <= 8 || 'Input too long!', // Memo 룰 8자
     rank: [
       {
@@ -225,7 +144,6 @@ export default {
       'getTotalLink',
       'getCharacterFullLinkBonus'
     ]),
-    ...mapGetters('equip', ['getEquipmentData', 'getChip1']),
     level: {
       get() {
         return this.$store.state.enhance.level
@@ -332,22 +250,7 @@ export default {
         this.$store.commit('enhance/SET_FULLLINK_BONUS', value)
       }
     },
-    chip1: {
-      get() {
-        return this.$store.state.equip.chip1
-      },
-      set(value) {
-        this.$store.commit('equip/SET_CHIP_1', value)
-      }
-    },
-    chip1Enh: {
-      get() {
-        return this.$store.state.equip.chip1Enh
-      },
-      set(value) {
-        this.$store.commit('equip/SET_CHIP_1_ENH', value)
-      }
-    },
+    
     // 잔여스탯 색상
     enhLimitColor() {
       if (this.$store.getters['enhance/getEnhLimit'] < 0) return 'red'
