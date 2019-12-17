@@ -14,7 +14,6 @@ v-row.fill-height(no-gutters)
 }
 </style>
 <script>
-import { mapState, mapGetters } from 'vuex'
 import SearchForm from '~/components/character/SearchForm'
 import DataTable from '~/components/character/DataTable'
 import SimulatingForm from '~/components/character/SimulatingForm'

@@ -61,6 +61,7 @@ export default {
       themes: {
         dark: {
           // Basic theme color
+          t000: "#d2d6ef",
           t100: "#5D658E",
           t200: "#4D557A",
           t300: "#444A6D",
@@ -78,6 +79,21 @@ export default {
           cyan: "#0AD8DD",
           mint: "#7BE9CD",
           green: "#C7F5A5",
+          yellow: "#F8D4A1",
+          orange: "#f4b771",
+          red: "#E36A98",
+          pink: "#E875C7"
+        },
+        light: {
+          primary: "#647EFF", // Lilac
+          secondary: "#7C60F7", // Purple
+          accent: "#E36A98", // red
+          // Optional color
+          purple: "#7C60F7",
+          lilac: "#647EFF",
+          blue: "#78A7F8",
+          skyblue: "#7FCBEC",
+          cyan: "#0AD8DD",
           yellow: "#F8D4A1",
           orange: "#f4b771",
           red: "#E36A98",

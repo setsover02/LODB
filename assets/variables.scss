@@ -10,6 +10,7 @@ $grid-gutter: 8px !default;
 
 // Dark Theme color
 $theme-colors: (
+  t000: #d2d6ef,
   t100: #5d658e,
   t200: #4d557a,
   t300: #444a6d,
@@ -19,7 +20,7 @@ $theme-colors: (
 );
 
 $shades: (
-  "white": #d2d6ef,
+  "white": #ffffff,
   "black": #000000,
   "transparent": transparent
 );
@@ -41,34 +42,34 @@ $material-dark: map-deep-merge(
       "line-color": map-get($theme-colors, "t200"),
       "interval-color": map-get($theme-colors, "t100"),
       "interval-line-color": map-get($theme-colors, "t400"),
-      "text-color": map-get($shades, "white"),
-      "past-color": rgba(map-get($shades, "white"), 0.5)
+      "text-color": map-get($theme-colors, "t000"),
+      "past-color": rgba(map-get($theme-colors, "t000"), 0.5)
     ),
     "cards": map-get($theme-colors, "t400"),
     "chips": map-get($theme-colors, "t200"),
     "dividers": rgba(0, 0, 0, 0.15),
     "text": (
-      "theme": map-get($shades, "white"),
-      "primary": map-get($shades, "white"),
-      "secondary": rgba(map-get($shades, "white"), 0.7),
-      "disabled": rgba(map-get($shades, "white"), 0.5),
+      "theme": map-get($theme-colors, "t000"),
+      "primary": map-get($theme-colors, "t000"),
+      "secondary": rgba(map-get($theme-colors, "t000"), 0.7),
+      "disabled": rgba(map-get($theme-colors, "t000"), 0.5),
       "link": #7c60f7,
       "link-hover": map-get($theme-colors, "t100")
     ),
     "icons": (
-      "active": map-get($shades, "white"),
-      "inactive": rgba(map-get($shades, "white"), 0.5)
+      "active": map-get($theme-colors, "t000"),
+      "inactive": rgba(map-get($theme-colors, "t000"), 0.5)
     ),
     "inputs": (
-      "box": map-get($shades, "white"),
-      "solo-inverted": rgba(map-get($shades, "white"), 0.16),
-      "solo-inverted-focused": map-get($shades, "white"),
+      "box": map-get($theme-colors, "t000"),
+      "solo-inverted": rgba(map-get($theme-colors, "t000"), 0.16),
+      "solo-inverted-focused": map-get($theme-colors, "t000"),
       "solo-inverted-focused-text": #647eff
     ),
     "buttons": (
-      "disabled": rgba(map-get($shades, "white"), 0.3),
-      "focused": rgba(map-get($shades, "white"), 0.12),
-      "focused-alt": rgba(map-get($shades, "white"), 0.1),
+      "disabled": rgba(map-get($theme-colors, "t000"), 0.3),
+      "focused": rgba(map-get($theme-colors, "t000"), 0.12),
+      "focused-alt": rgba(map-get($theme-colors, "t000"), 0.1),
       "pressed": rgba(map-get($theme-colors, "t100"), 0.25)
     ),
     "expansion-panels": (
@@ -80,15 +81,15 @@ $material-dark: map-deep-merge(
         "disabled": map-get($theme-colors, "t300")
       ),
       "track": (
-        "inactive": rgba(map-get($shades, "white"), 0.3),
-        "disabled": rgba(map-get($shades, "white"), 0.1)
+        "inactive": rgba(map-get($theme-colors, "t000"), 0.3),
+        "disabled": rgba(map-get($theme-colors, "t000"), 0.1)
       )
     ),
     "slider": (
-      "active": rgba(map-get($shades, "white"), 0.3),
-      "inactive": rgba(map-get($shades, "white"), 0.2),
-      "disabled": rgba(map-get($shades, "white"), 0.2),
-      "discrete": map-get($shades, "white")
+      "active": rgba(map-get($theme-colors, "t000"), 0.3),
+      "inactive": rgba(map-get($theme-colors, "t000"), 0.2),
+      "disabled": rgba(map-get($theme-colors, "t000"), 0.2),
+      "discrete": map-get($theme-colors, "t000")
     ),
     "skeleton":
       linear-gradient(
@@ -105,23 +106,23 @@ $material-dark: map-deep-merge(
       "pressed": 0.32,
       "dragged": 0.16
     ),
-    "tabs": rgba(map-get($shades, "white"), 0.6),
+    "tabs": rgba(map-get($theme-colors, "t000"), 0.6),
     "toggle-buttons": (
-      "color": map-get($shades, "white")
+      "color": map-get($theme-colors, "t000")
     ),
     "text-fields": (
       "filled": rgba(map-get($shades, "black"), 0.1),
       "filled-hover": rgba(map-get($shades, "black"), 0.2)
     ),
-    "input-bottom-line": rgba(map-get($shades, "white"), 0.7),
+    "input-bottom-line": rgba(map-get($theme-colors, "t000"), 0.7),
     "stepper": (
-      "active": rgba(map-get($shades, "white"), 1),
-      "completed": rgba(map-get($shades, "white"), 0.87),
-      "hover": rgba(map-get($shades, "white"), 0.75)
+      "active": rgba(map-get($theme-colors, "t000"), 1),
+      "completed": rgba(map-get($theme-colors, "t000"), 0.87),
+      "hover": rgba(map-get($theme-colors, "t000"), 0.75)
     ),
     "table": (
       "active": rgba(#7c60f7, 0.3),
-      "hover": rgba(map-get($shades, "white"), 0.15),
+      "hover": rgba(map-get($theme-colors, "t000"), 0.15),
       "group": map-get($theme-colors, "t400")
     ),
     "picker": (
@@ -131,11 +132,11 @@ $material-dark: map-deep-merge(
       "title": map-get($theme-colors, "t400")
     ),
     "color-picker": (
-      "checkerboard": rgba(map-get($shades, "white"), 0.12)
+      "checkerboard": rgba(map-get($theme-colors, "t000"), 0.12)
     ),
     "bg-color": map-get($theme-colors, "t500"),
-    "fg-color": map-get($shades, "white"),
-    "text-color": map-get($shades, "white"),
+    "fg-color": map-get($theme-colors, "t000"),
+    "text-color": map-get($theme-colors, "t000"),
     "primary-text-percent": 1,
     "secondary-text-percent": 0.7,
     "disabledORhints-text-percent": 0.5,
