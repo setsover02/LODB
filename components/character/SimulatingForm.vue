@@ -1,59 +1,36 @@
 <template lang="pug">
 //- Character Info
-//- TODO: DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getCharacterId === 'undefined'" width="594" color="transparent" elevation="0") 
+//- Card : 데이터 없을경우
+v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getCharacterId === 'undefined'" tile width="470" color="transparent" elevation="0") 
   v-avatar(size="144")
     v-img(:src="require('~/assets/img/avatar/undefined.png')")
   span.overline Select character first
-
-v-card.fill-height(v-else width="594" color="transparent" elevation="0")
+//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
+v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="470" color="transparent" elevation="0")
   v-form(ref="form")
-    v-list-item.py-2
-      v-list-item-avatar.radius-4(size="48" color="t500")
-        v-img(:src="require('~/assets/img/avatar/' + getCharacterId + '.png')" :lazy-src="require('~/assets/img/avatar/undefined.png')")
-      v-list-item-content
-        v-list-item-title.title(v-text="getCharacterName")
-        v-list-item-subtitle {{ getCharacterType }} • {{ getCharacterRole }}
-      //- TODO: 초기화 시 하단 폼에 입력한 내용 전체 초기화(우선순위 낮음)
-      v-list-item-action
-        v-btn(text color="primary" disabled) 초기화
-      //- TODO: 저장 시 해당 폼의 정보가 DataTable에 추가되어야 함  
-      v-list-item-action
-        v-btn(color="primary" disabled) 저장
-    v-divider
+    FormPreview
     //- Enhance Form
     v-row
-      v-col(cols="auto").pr-0
-        v-list(min-width="124" dense color="transparent").py-0
-          v-list-item.px-2
-            v-switch.mt-0.pt-0(color="primary" hide-details inset)
-              template(v-slot:label)
-                span.caption 자버프 적용
-          v-divider
-          v-list-item.px-2
-            v-list-item-content.py-0
-              v-list-item-title.body-2 공격력
-            v-list-item-content.d-inline-block.text-right.body-2.accent--text(v-text="getCharacterDamage")
-          v-list-item.px-2
-            v-list-item-content.py-0
-              v-list-item-title.body-2 행동력
-            v-list-item-content.d-inline-block.text-right.body-2.accent--text(v-text="getCharacterAP")
-            
-      v-divider(vertical)
-      v-col.fill-height.overflow-x-hidden.overflow-y-auto
+      v-col
         v-row.px-4.py-2(align="center")
           //- TODO: Rank Select, 승급관련 처리 필요
-          v-col(cols="6")
+          v-col(cols="4")
             v-select(:items="rank" value="SS" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
               template(v-slot:selection="data")
                 v-chip(:input-value="data.selected" :color="data.item.color" small) {{ data.item.text }}
               template(v-slot:item="data")
                 v-chip(:color="data.item.color" small) {{ data.item.text }}
-
           //- 레벨 입력 폼
-          v-col(cols="6")
+          v-col(cols="4")
             v-text-field(v-model="level" dense flat solo hide-details suffix="레벨"
             type="number" autocomplete="off" min="1" max="90" append-icon="mdi-chevron-double-up" prepend-icon="mdi-chevron-double-down" @click:prepend="level = 1" @click:append="level = 90")
+          v-col(cols="auto").pr-0
+            v-list(min-width="124" dense color="transparent").py-0
+              v-list-item.px-2
+                v-switch.mt-0.pt-0(color="primary" hide-details inset)
+                  template(v-slot:label)
+                    span.caption 자버프 적용
+            
         v-divider
 
         //- 이하 강화 포인트 입력 폼
@@ -68,27 +45,22 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
               dense flat solo hide-details suffix="공격력"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
-            span.pr-2.body-2.accent--text(v-text="getCharacterHealth")
-            v-text-field(v-model="healthEnh" 
-              dense flat solo hide-details suffix="체력"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            span.pr-2.body-2.accent--text(v-text="getCharacterDefense")
-            v-text-field(v-model="defenseEnh" 
-              dense flat solo hide-details suffix="방어력"
-              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
-          v-col(cols="4").text-right
-            span.pr-2.body-2.accent--text(v-text="getCharacterHit + '%'")
             v-text-field(v-model="hitEnh" 
               dense flat solo hide-details suffix="적중"
               type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
-            span.pr-2.body-2.accent--text(v-text="getCharacterCrit + '%'")
             v-text-field(v-model="critEnh" 
               dense flat solo hide-details suffix="치명"
                 type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
           v-col(cols="4").text-right
-            span.pr-2.body-2.accent--text(v-text="getCharacterDodge + '%'")
+            v-text-field(v-model="healthEnh" 
+              dense flat solo hide-details suffix="체력"
+              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+          v-col(cols="4").text-right
+            v-text-field(v-model="defenseEnh" 
+              dense flat solo hide-details suffix="방어력"
+              type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
+          v-col(cols="4").text-right
             v-text-field(v-model="dodgeEnh"
               dense flat solo hide-details suffix="회피"
                 type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
@@ -132,7 +104,7 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
           v-col(cols="12") 
             span {{ getEquipChip1 }}
           v-col
-            v-autocomplete(v-model="equipChip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+            v-autocomplete(v-model="equipChip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
                 v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
                   v-avatar.border-4(size="24" left tile)
@@ -151,7 +123,7 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
 
         v-row.px-4
           v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach append-icon="mdi-chevron-down" autocomplete="off")
+            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
                 v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
                   v-avatar.border-4(size="24" left tile)
@@ -170,7 +142,7 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
 
         v-row.px-4
           v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach append-icon="mdi-chevron-down" autocomplete="off")
+            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
                 v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
                   v-avatar.border-4(size="24" left tile)
@@ -189,7 +161,7 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
 
         v-row.px-4
           v-col
-            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach append-icon="mdi-chevron-down" autocomplete="off")
+            v-autocomplete(v-model="equipmentSelect" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
               template(v-slot:selection="data")
                 v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
                   v-avatar.border-4(size="24" left tile)
@@ -205,47 +177,15 @@ v-card.fill-height(v-else width="594" color="transparent" elevation="0")
                     v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
           v-col(cols='auto')
             v-text-field(solo flat dense hide-details type="number" suffix="강화" min="1" max="10").width__24
-        v-divider.mt-4
-        v-row.px-4.py-2
-          v-col(cols="12").subtitle-2 기타 능력치
-          v-col(cols="4")
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 행동력
-              v-list-item-content.body-2.accent--text(v-text="getCharacterAP")
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 방어 관통
-              v-list-item-content.body-2.accent--text 67%
-          v-col(cols="4")
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 효과 저항
-              v-list-item-content.body-2.accent--text 50%
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 피해 감소
-              v-list-item-content.body-2.accent--text 50%
-          v-col(cols="4")
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 전기 저항
-              v-list-item-content.body-2.accent--text 67%
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 화염 저항
-              v-list-item-content.body-2.accent--text 50%
-            v-list-item.px-0(dense)
-              v-list-item-content.py-0
-                v-list-item-title.body-2 냉기 저항
-              v-list-item-content.body-2.accent--text 67%
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import RankChip from '~/components/RankChip'
+import FormPreview from '~/components/character/FormPreview'
 export default {
   components: {
-    RankChip
+    RankChip,
+    FormPreview
   },
   data: () => ({
     equipmentSelect: null,
@@ -282,18 +222,8 @@ export default {
     ]),
     // 잔여 강화 포인트 계산, 링크 퍼센티지 합산
     ...mapGetters([
-      'getTotalLink',
       'getCharacterId',
-      'getCharacterName',
-      'getCharacterType',
-      'getCharacterRole',
-      'getCharacterDamage',
-      'getCharacterHealth',
-      'getCharacterDefense',
-      'getCharacterHit',
-      'getCharacterCrit',
-      'getCharacterDodge',
-      'getCharacterAP',
+      'getTotalLink',
       'getEnhLimit',
       'getCharacterFullLinkBonus',
       'getEquipmentData',

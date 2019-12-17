@@ -160,7 +160,7 @@ export const getters = {
       return dodgeFomula.toFixed(1);
     }
   },
-  // 풀링보너스 select 박스에 행동력 값이 있을경우 
+  // 풀링보너스 select 박스에 행동력 값이 있을경우
   getCharacterAP: state => {
     const data = state.characterSelect[0];
     if (
@@ -204,7 +204,6 @@ export const getters = {
       "치명 " + data.fullLinkCrit + "%",
       "회피 " + data.fullLinkDodge + "%",
       "체력 " + data.fullLinkHealth * 100 + "%",
-      "방어력 " + data.fullLinkDefense * 100 + "%",
       "버프/디버프 + " + data.fullLinkBuff + "레벨",
       "사거리 + " + data.fullLinkRange
     ];

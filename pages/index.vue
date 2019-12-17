@@ -10,7 +10,7 @@ v-row.fill-height(no-gutters)
 </template>
 <style scoped>
 .removed-max-width {
-  max-width: calc(100% - 595px);
+  max-width: calc(100% - 471px);
 }
 </style>
 <script>
