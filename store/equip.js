@@ -14,8 +14,23 @@ export const state = () => ({
 
 export const getters = {
   getEquipmentData: () => EQUIPMENT, // Get JSON
+  // equipment.json 에서 chip만 가져오기
   getChipData: (state, getters) => {
-    var data_filter = getters.getEquipmentData.filter( element => element.part == "chip");
+    var data_filter = getters.getEquipmentData.filter(
+      element => element.part == "chip"
+    );
+    return data_filter;
+  },
+  getOsData: (state, getters) => {
+    var data_filter = getters.getEquipmentData.filter(
+      element => element.part == "os"
+    );
+    return data_filter;
+  },
+  getGearData: (state, getters) => {
+    var data_filter = getters.getEquipmentData.filter(
+      element => element.part == "gear"
+    );
     return data_filter;
   },
   // Chip slot

@@ -21,7 +21,7 @@ v-row.px-4.py-2.pb-4(no-gutter)
 		v-text-field(v-model="chipFEnh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
 
 	v-col(cols="9")
-		v-autocomplete(v-model="chipS" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+		v-autocomplete(v-model="chipS" :items="getChipData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(left tile)
@@ -39,7 +39,7 @@ v-row.px-4.py-2.pb-4(no-gutter)
 		v-text-field(v-model="chipSEnh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
 
 	v-col(cols="9")
-		v-autocomplete(v-model="os" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+		v-autocomplete(v-model="os" :items="getOsData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(left tile)
@@ -56,7 +56,7 @@ v-row.px-4.py-2.pb-4(no-gutter)
 	v-col(cols="3")
 		v-text-field(v-model="osEnh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
 	v-col(cols="9")
-		v-autocomplete(v-model="gear" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+		v-autocomplete(v-model="gear" :items="getGearData" item-text="name" item-value="id" dense solo flat hide-details prefix="보조" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(left tile)
@@ -83,7 +83,9 @@ export default {
   computed: {
     ...mapGetters('equip', [
 			'getEquipmentData',
-			'getChipData'
+			'getChipData',
+			'getOsData',
+			'getGearData'
     ]),
     chipF: {
       get() {
