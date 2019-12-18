@@ -3,9 +3,10 @@
 v-row.px-4.py-2.pb-4(no-gutter)
 	v-col(cols="12").subtitle-2 아이템
 	v-col(cols="12") 
-		span {{ getDamage }}, {{getChip1Hit}}
+		div {{ getDamage }}
+		div {{ getHit }}
 	v-col(cols="9")
-		v-autocomplete(v-model="chip1" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+		v-autocomplete(v-model="chipF" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(size="24" left tile)
@@ -20,9 +21,10 @@ v-row.px-4.py-2.pb-4(no-gutter)
 					v-list-item-content
 						v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
 	v-col(cols="3")
-		v-text-field(v-model="chip1Enh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
+		v-text-field(v-model="chipFEnh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
+
 	v-col(cols="9")
-		v-autocomplete(v-model="chip2" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
+		v-autocomplete(v-model="chipS" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: true }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(size="24" left tile)
@@ -37,7 +39,8 @@ v-row.px-4.py-2.pb-4(no-gutter)
 					v-list-item-content
 						v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
 	v-col(cols="3")
-		v-text-field(v-model="chip2Enh" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
+		v-text-field(v-model="chipSEnh" value="10" solo flat dense hide-details type="number" suffix="강화" min="1" max="10")
+
 	v-col(cols="9")
 		v-autocomplete(v-model="os" :items="getEquipmentData" item-text="name" item-value="id" dense solo flat hide-details prefix="OS" attach :menu-props="{ top: true }" append-icon="mdi-chevron-down" autocomplete="off")
 			template(v-slot:selection="data")
@@ -83,40 +86,39 @@ export default {
   computed: {
     ...mapGetters('equip', [
       'getEquipmentData',
-			'getChip1Damage',
-			'getDamage',
-      'getChip1Hit'
+      'getDamage',
+      'getHit'
     ]),
-    chip1: {
+    chipF: {
       get() {
-        return this.$store.state.equip.chip1
+        return this.$store.state.equip.chipF
       },
       set(value) {
-        this.$store.commit('equip/SET_CHIP_1', value)
+        this.$store.commit('equip/SET_CHIP_F', value)
       }
     },
-    chip1Enh: {
+    chipFEnh: {
       get() {
-        return this.$store.state.equip.chip1Enh
+        return this.$store.state.equip.chipFEnh
       },
       set(value) {
-        this.$store.commit('equip/SET_CHIP_1_ENH', value)
+        this.$store.commit('equip/SET_CHIP_F_ENH', value)
       }
     },
-    chip2: {
+    chipS: {
       get() {
-        return this.$store.state.equip.chip2
+        return this.$store.state.equip.chipS
       },
       set(value) {
-        this.$store.commit('equip/SET_CHIP_2', value)
+        this.$store.commit('equip/SET_CHIP_S', value)
       }
     },
-    chip2Enh: {
+    chipSEnh: {
       get() {
-        return this.$store.state.equip.chip2Enh
+        return this.$store.state.equip.chipSEnh
       },
       set(value) {
-        this.$store.commit('equip/SET_CHIP_2_ENH', value)
+        this.$store.commit('equip/SET_CHIP_S_ENH', value)
       }
     },
     os: {
@@ -140,7 +142,7 @@ export default {
         return this.$store.state.equip.gear
       },
       set(value) {
-        this.$store.commit('equip/SET_OS', value)
+        this.$store.commit('equip/SET_GEAR', value)
       }
     },
     gearEnh: {

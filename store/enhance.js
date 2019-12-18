@@ -25,7 +25,7 @@ export const getters = {
   // getters > SimulatingForm.vue
   getCharacterId: state => {
     if (state.characterSelect[0].id === undefined) {
-      return "undefined";
+      return "undefined"; // undefined.png 반환
     } else {
       return state.characterSelect[0].id;
     }
@@ -56,21 +56,24 @@ export const getters = {
   },
   // 이하 부터는 강화값 포함하여 반환 (강화, 링크보너스 까지 적용되어 있음)
   // DataTable: Only selected row data > SimulatingForm
-  getCharacterDamage: (state, getters) => {
+  // equip 값 가져오려면 rootState, rootGetters 필수
+  getCharacterDamage: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     return Math.round(
       (data.damageBase +
         (state.level - 1) * data.damageCoef +
-        state.damageEnh * CONST.ENH.DAMAGE) *
+        state.damageEnh * CONST.ENH.DAMAGE +
+        rootGetters["equip/getDamage"]) *
         (1 + data.linkDamage * getters.getTotalLink)
     );
   },
-  getCharacterHealth: (state, getters) => {
+  getCharacterHealth: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     const healthFormula =
       (data.healthBase +
         (state.level - 1) * data.healthCoef +
-        state.healthEnh * CONST.ENH.HEALTH) *
+        state.healthEnh * CONST.ENH.HEALTH +
+        rootGetters["equip/getHealth"]) *
       (1 + data.linkHealth * getters.getTotalLink);
     if (
       state.fullLinkBonus == "체력 20%" ||
@@ -81,63 +84,69 @@ export const getters = {
       return Math.round(healthFormula);
     }
   },
-  getCharacterDefense: (state, getters) => {
+  getCharacterDefense: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     const defenseFormula =
       (data.defenseBase +
         (state.level - 1) * data.defenseCoef +
-        state.defenseEnh * CONST.ENH.DEFENSE) *
+        state.defenseEnh * CONST.ENH.DEFENSE +
+        rootGetters["equip/getDefense"]) *
       (1 + data.linkDefense * getters.getTotalLink);
     return Math.round(defenseFormula);
   },
   // (getters.getSelectedFullLinkBonus == "적중 75%")
-  getCharacterHit: (state, getters) => {
+  getCharacterHit: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     const hitFormula =
       data.hit +
       state.hitEnh * CONST.ENH.HIT +
-      data.linkHit * getters.getTotalLink;
+      data.linkHit * getters.getTotalLink +
+      rootGetters["equip/getHit"];
     if (state.fullLinkBonus == "적중 75%") {
       return (hitFormula + 75).toFixed(1);
     } else {
       return hitFormula.toFixed(1);
     }
   },
-  getCharacterCrit: (state, getters) => {
+  getCharacterCrit: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     const critFomula =
       data.crit +
       state.critEnh * CONST.ENH.CRIT +
-      data.linkCrit * getters.getTotalLink;
+      data.linkCrit * getters.getTotalLink +
+      rootGetters["equip/getCrit"];
     if (state.fullLinkBonus == "치명 20%") {
       return (critFomula + data.fullLinkCrit).toFixed(1);
     } else {
       return critFomula.toFixed(1);
     }
   },
-  getCharacterDodge: (state, getters) => {
+  // TODO: 소수점 0으로 처리됨 버그임
+  getCharacterDodge: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
-    const dodgeFomula =
+    const dodgeFomula = (
       data.dodge +
       state.dodgeEnh * CONST.ENH.DODGE +
-      data.linkDodge * getters.getTotalLink;
+      data.linkDodge * getters.getTotalLink +
+      rootGetters["equip/getDodge"]
+    ).toFixed(1);
     if (state.fullLinkBonus == "회피 20%") {
-      return (dodgeFomula + data.fullLinkDodge).toFixed(1);
+      return dodgeFomula + data.fullLinkDodge;
     } else {
-      return dodgeFomula.toFixed(1);
+      return dodgeFomula;
     }
   },
   // 풀링보너스 select 박스에 행동력 값이 있을경우
-  getCharacterAP: state => {
+  getCharacterAP: (state, getters, rootState, rootGetters) => {
     const data = state.characterSelect[0];
     if (
       state.fullLinkBonus == "행동력 0.1" ||
       state.fullLinkBonus == "행동력 0.15" ||
       state.fullLinkBonus == "행동력 0.2"
     ) {
-      return (data.ap + data.fullLinkAP).toFixed(3);
+      return (data.ap + rootGetters["equip/getAP"] + data.fullLinkAP).toFixed(3);
     } else {
-      return data.ap.toFixed(3);
+      return (data.ap + rootGetters["equip/getAP"]).toFixed(3);
     }
   },
   // 남은 스탯강화 포인트

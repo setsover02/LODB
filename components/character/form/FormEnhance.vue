@@ -28,27 +28,27 @@ v-sheet(color="transparent")
 		v-col(cols="4").text-right
 			//- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
 			v-text-field(v-model="damageEnh"
-				dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up" @click:append="damageEnh = getEnhLimit"
 				type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="hitEnh" 
-				dense flat solo hide-details suffix="적중" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="적중" append-icon="mdi-chevron-double-up" 
 				type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="critEnh" 
-				dense flat solo hide-details suffix="치명" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="치명" append-icon="mdi-chevron-double-up" 
 					type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="healthEnh" 
-				dense flat solo hide-details suffix="체력" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="체력" append-icon="mdi-chevron-double-up" 
 				type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="defenseEnh" 
-				dense flat solo hide-details suffix="방어력" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="방어력" append-icon="mdi-chevron-double-up" 
 				type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="dodgeEnh"
-				dense flat solo hide-details suffix="회피" append-icon="mdi-chevron-double-up"
+				dense flat solo hide-details suffix="회피" append-icon="mdi-chevron-double-up" 
 					type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 </template>
 <script>

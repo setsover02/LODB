@@ -9,30 +9,25 @@ v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getChara
 //- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="470" color="transparent" elevation="0")
   v-form(ref="form")
+    //- Status preview
     FormPreview
-    
     //- Level, Enhance
     FormEnhance
     v-divider.mt-4
-    
     //- Link, FullLink
     FormLink
     v-divider.mt-4
-    
     //- Item Equip
     FormEquipment
-
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import RankChip from '~/components/RankChip'
 import FormPreview from '~/components/character/form/FormPreview'
 import FormEnhance from '~/components/character/form/FormEnhance'
 import FormLink from '~/components/character/form/FormLink'
 import FormEquipment from '~/components/character/form/FormEquipment'
 export default {
   components: {
-    RankChip,
     FormPreview,
     FormEnhance,
     FormLink,
