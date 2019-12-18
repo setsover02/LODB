@@ -90,7 +90,7 @@ v-sheet(tile).linear-t400.sticky
 	v-divider
 </template>
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('enhance', [
