@@ -1,3 +1,12 @@
+// 계산식 참고
+// https://gall.dcinside.com/mgallery/board/view/?id=lastorigin&no=337333
+// 용어 적용해서 정리하자면
+// getCharacterDamage = 칩, 강화 다 적용된 최종 공격력
+// getCharacterDamage * skillCoef = skillDamage
+// critDamage = 1.5
+// damageInc(%) = 공격력 증가 인데 이게 어디서 오는건지 모르겠음
+// skillDamage * (critDamage) * (1 + damageInc)
+
 // 레벨, 강화 포인트, 링크 보너스 계산
 import { CONST } from "~/static/const";
 export const state = () => ({
@@ -173,7 +182,7 @@ export const getters = {
     //   return "적중 " + data.fullLinkHit + "%";
     // }
     return [
-      "자원감소 " + data.fullLinkRes,
+      "출격비용 " + "-" + data.fullLinkRes,
       "행동력 " + data.fullLinkAP,
       "스킬피해 " + data.fullLinkSkill * 100 + "%",
       "적중 " + data.fullLinkHit + "%",

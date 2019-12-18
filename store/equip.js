@@ -14,6 +14,10 @@ export const state = () => ({
 
 export const getters = {
   getEquipmentData: () => EQUIPMENT, // Get JSON
+  getChipData: (state, getters) => {
+    var data_filter = getters.getEquipmentData.filter( element => element.part == "chip");
+    return data_filter;
+  },
   // Chip slot
   // TODO: 최적화 필요함
   getChipFDamage: state => {

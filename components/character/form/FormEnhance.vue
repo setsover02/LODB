@@ -28,7 +28,7 @@ v-sheet(color="transparent")
 		v-col(cols="4").text-right
 			//- TODO: 현재 캐릭터 스탯 수치 표기(강화 등 아이템 모두 포함)
 			v-text-field(v-model="damageEnh"
-				dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up" @click:append="damageEnh = getEnhLimit"
+				dense flat solo hide-details suffix="공격력" append-icon="mdi-chevron-double-up" @wheel="damageEnh + 1"
 				type="number" counter maxlength="3" autocomplete="off" min="0" max="270")
 		v-col(cols="4").text-right
 			v-text-field(v-model="hitEnh" 

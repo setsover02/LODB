@@ -1,5 +1,5 @@
 <template lang="pug">
-v-sheet(tile).linear-t400.sticky
+v-sheet(tile).linear-t300.sticky
 	v-row
 		v-col(cols="12")
 			v-list-item
