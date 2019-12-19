@@ -86,17 +86,17 @@ export const getters = {
     }
   },
   // 승급가능 랭크 리스트 필터링
-  getCharacterRank: (state, getters) => {
+  getCharacterRankFilters: (state, getters) => {
     const rank = [
       getters.getRankSS,
       getters.getRankS,
       getters.getRankA,
       getters.getRankB
     ];
-    // 승급이 없으면 null값 반환하고 null 값 필터링
+    // 승급이 없으면 null값 반환하고 null값인 경우 표기하지 않음
     return rank.filter(element => element !== null);
   },
-  // 캐릭터 승급이전 현재 랭크 불러오기
+  // 캐릭터 초기 랭크 값 불러오기
   getCharacterCurrentRank: state => {
     const data = state.characterSelect[0];
     if (data.rankB == "TRUE") {
@@ -229,28 +229,141 @@ export const getters = {
         parseInt(state.dodgeEnh))
     );
   },
-  // 캐릭터 고유의 풀링크 보너스 selectbox용 배열로 불러오기
-  getCharacterFullLinkBonus: state => {
-    const data = state.characterSelect[0];
-    // const array = (value) => {
-    //   if (data.fullLinkRes === !0) return "자원감소 " + data.fullLinkRes;
-    // }
-    // if (data.fullLinkHit == 0) {
-    //   return null;
-    // } else {
-    //   return "적중 " + data.fullLinkHit + "%";
-    // }
-    return [
-      "출격비용 " + "-" + data.fullLinkRes,
-      "행동력 " + data.fullLinkAP,
-      "스킬피해 " + data.fullLinkSkill * 100 + "%",
-      "적중 " + data.fullLinkHit + "%",
-      "치명 " + data.fullLinkCrit + "%",
-      "회피 " + data.fullLinkDodge + "%",
-      "체력 " + data.fullLinkHealth * 100 + "%",
-      "버프/디버프 + " + data.fullLinkBuff + "레벨",
-      "사거리 + " + data.fullLinkRange
+  // 캐릭터 고유의 풀링크 보너스 배열로 불러오기
+  // 해당 풀링 보너스가 0일경우(없을경우) null로 반환
+  getFullLinkRes: state => {
+    if (state.characterSelect[0].fullLinkRes == 0) {
+      return null;
+    } else {
+      return CONST.FULL_LINK_BONUS.RES + state.characterSelect[0].fullLinkRes;
+    }
+  },
+  getFullLinkAP: state => {
+    if (state.characterSelect[0].fullLinkAP == 0) {
+      return null;
+    } else {
+      return CONST.FULL_LINK_BONUS.AP + state.characterSelect[0].fullLinkAP;
+    }
+  },
+  getFullLinkSKill: state => {
+    if (state.characterSelect[0].fullLinkSkill == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.SKILL +
+        state.characterSelect[0].fullLinkSkill * 100 +
+        "%"
+      );
+    }
+  },
+  getFullLinkHit: state => {
+    if (state.characterSelect[0].fullLinkHit == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.HIT + state.characterSelect[0].fullLinkHit + "%"
+      );
+    }
+  },
+  getFullLinkCrit: state => {
+    if (state.characterSelect[0].fullLinkCrit == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.CRIT + state.characterSelect[0].fullLinkCrit + "%"
+      );
+    }
+  },
+  getFullLinkDodge: state => {
+    if (state.characterSelect[0].fullLinkDodge == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.DODGE +
+        state.characterSelect[0].fullLinkDodge +
+        "%"
+      );
+    }
+  },
+  getFullLinkHealth: state => {
+    if (state.characterSelect[0].fullLinkHealth == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.HEALTH + state.characterSelect[0].fullLinkHealth
+      );
+    }
+  },
+  getFullLinkBuff: state => {
+    if (state.characterSelect[0].fullLinkBuff == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.BUFF +
+        state.characterSelect[0].fullLinkBuff +
+        "레벨"
+      );
+    }
+  },
+  getFullLinkRange: state => {
+    if (state.characterSelect[0].fullLinkRange == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.RANGE + state.characterSelect[0].fullLinkRange
+      );
+    }
+  },
+  getCharacterFullLinkBonus: (state, getters) => {
+    const list = [
+      getters.getFullLinkRes,
+      getters.getFullLinkAP,
+      getters.getFullLinkSKill,
+      getters.getFullLinkHit,
+      getters.getFullLinkCrit,
+      getters.getFullLinkDodge,
+      getters.getFullLinkHealth,
+      getters.getFullLinkBuff,
+      getters.getFullLinkRange
     ];
+    // 보너스 없으면 null값 반환하고 null 값 필터링
+    return list.filter(element => element !== null);
+  },
+  // 최종 스킬 계수 계산 액티브 1스킬
+  getSkill01Damage: (state, getters) => {
+    const data = state.characterSelect[0];
+    // 스킬 보너스 있을 경우 곱셈
+    if (
+      state.fullLinkBonus == "스킬피해 15%" ||
+      state.fullLinkBonus == "스킬피해 20%" ||
+      state.fullLinkBonus == "스킬피해 25%" ||
+      state.fullLinkBonus == "스킬피해 30%"
+    ) {
+      return Math.round(
+        getters.getCharacterDamage *
+          (data.skill01Coef * (1 + data.fullLinkSkill))
+      );
+    } else {
+      return Math.round(getters.getCharacterDamage * data.skill01Coef);
+    }
+  },
+  // 최종 스킬 계수 계산 액티브 2스킬
+  getSkill02Damage: (state, getters) => {
+    const data = state.characterSelect[0];
+    // 스킬 보너스 있을 경우 곱셈
+    if (
+      state.fullLinkBonus == "스킬피해 15%" ||
+      state.fullLinkBonus == "스킬피해 20%" ||
+      state.fullLinkBonus == "스킬피해 25%" ||
+      state.fullLinkBonus == "스킬피해 30%"
+    ) {
+      return Math.round(
+        getters.getCharacterDamage *
+          (data.skill02Coef * (1 + data.fullLinkSkill))
+      );
+    } else {
+      return Math.round(getters.getCharacterDamage * data.skill02Coef);
+    }
   }
 };
 

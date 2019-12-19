@@ -10,10 +10,8 @@ div
     //- v-toolbar-items
       v-btn(text) {{ title }}
     v-spacer
-    v-btn(icon target="blank" href="https://vuetifyjs.com/en/components/api-explorer" color="t100")
-      v-icon mdi-vuetify
-    v-btn.ml-2(icon target="blank" href="https://ko.nuxtjs.org/guide/" color="t100")
-      v-icon mdi-nuxt
+    v-btn(icon target="blank" href="https://www.csvjson.com/csv2json" color="t100")
+      v-icon mdi-json
     v-btn.ml-2(icon target="blank" href="https://discord.gg/RR8W9Dp" color="t000")
       v-icon mdi-discord
     v-btn.ml-2.mr-n2(icon target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="t000")

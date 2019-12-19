@@ -3,7 +3,7 @@ v-sheet(color="transparent")
   v-row.px-4.py-2(align="center")
     //- TODO: Rank Select, 승급관련 처리 필요
     v-col(cols="4")
-      v-select(:items="getCharacterRank" :value="getCharacterCurrentRank" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
+      v-select(:items="getCharacterRankFilters" :value="getCharacterCurrentRank" dense small-chips flat hide-details prefix="등급" solo append-icon="mdi-chevron-down")
         template(v-slot:selection="data")
           v-chip( :input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
         template(v-slot:item="data")
@@ -60,7 +60,7 @@ export default {
   }),
   computed: {
     ...mapGetters('enhance', [
-      'getCharacterRank',
+      'getCharacterRankFilters',
       'getCharacterCurrentRank',
       'getEnhLimit'
     ]),

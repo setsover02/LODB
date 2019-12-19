@@ -21,13 +21,13 @@ v-sheet(tile).linear-t300.sticky
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 1스킬 데미지(10레벨)
-					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="(getCharacterDamage * 1.25).toFixed(0)")
+					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="getSkill01Damage")
 		v-divider(vertical)
 		v-col
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 2스킬 데미지(10레벨)
-					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="(getCharacterDamage * 1.7).toFixed(0)")
+					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="getSkill02Damage")
 		v-divider(vertical)
 		v-col(cols="auto")
 			v-list-item(dense).px-2
@@ -123,7 +123,9 @@ export default {
       'getCharacterAP',
       'getCharacterHealth',
       'getCharacterDefense',
-      'getCharacterDodge'
+      'getCharacterDodge',
+      'getSkill01Damage',
+      'getSkill02Damage'
     ])
   }
 }
