@@ -217,6 +217,15 @@ export const getters = {
       return (data.ap + rootGetters["equip/getAP"]).toFixed(3);
     }
   },
+  // 추후 장비 값 추가
+  getCharacterRange: (state, getters, rootState, rootGetters) => {
+    const data = state.characterSelect[0];
+    if (state.fullLinkBonus == "사거리 +1") {
+      return "+" + data.fullLinkRange;
+    } else {
+      return 0;
+    }
+  },
   // 남은 스탯강화 포인트
   getEnhLimit: state => {
     return (
@@ -314,7 +323,7 @@ export const getters = {
       );
     }
   },
-  getCharacterFullLinkBonus: (state, getters) => {
+  getFullLinkBonusFilters: (state, getters) => {
     const list = [
       getters.getFullLinkRes,
       getters.getFullLinkAP,
@@ -343,6 +352,9 @@ export const getters = {
         getters.getCharacterDamage *
           (data.skill01Coef * (1 + data.fullLinkSkill))
       );
+      // 스킬계수 없을경우 (버프스킬 등)
+    } else if (data.skill01Coef == 0) {
+      return "-";
     } else {
       return Math.round(getters.getCharacterDamage * data.skill01Coef);
     }
@@ -361,6 +373,9 @@ export const getters = {
         getters.getCharacterDamage *
           (data.skill02Coef * (1 + data.fullLinkSkill))
       );
+      // 스킬계수 없을경우 (버프스킬 등)
+    } else if (data.skill02Coef == 0) {
+      return "-";
     } else {
       return Math.round(getters.getCharacterDamage * data.skill02Coef);
     }

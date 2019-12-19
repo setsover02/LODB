@@ -27,7 +27,7 @@ v-row
 					//- Item Card
 					v-row
 						v-col(cols="2" v-for="item in props.items" :key="item.id")
-							v-card(color="transparent" elevation="0")
+							v-card(color="t300")
 								v-list-item
 									v-list-item-avatar.radius-4(size="48" color="t500" tile)
 										v-img(:src="require('~/assets/img/items/414.png')")
@@ -45,8 +45,8 @@ v-row
 												th.text-right(v-if="item.damage") 공격력
 												th.text-right(v-if="item.hit") 적중
 										tbody
-											tr(v-for="(damage, i) in item.damage" :key="i" v-if="i < 10")
-												td {{ i + 1 }}
+											tr(v-for="(damage, i) in item.damage" :key="i" v-if="i < 11")
+												td {{ i }}
 												td.text-right {{ item.damage[i] }}
 												//- td {{ item.hit[i] }}
 </template>

@@ -22,7 +22,7 @@ v-sheet(color="transparent")
 			v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
 		//- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
 		v-col(cols="12")
-			v-select(v-model="fullLinkBonus" :items="getCharacterFullLinkBonus" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
+			v-select(v-model="fullLinkBonus" :items="getFullLinkBonusFilters" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
 				//- template(v-slot:selection="data")
 				//-   span(v-bind='data.attrs') {{ data.item }}
 				//- template(v-slot:item="data")
@@ -38,7 +38,7 @@ export default {
   computed: {
     ...mapState('enhance', ['linkSlotItem']),
     // 링크 퍼센티지 합산
-    ...mapGetters('enhance', ['getTotalLink', 'getCharacterFullLinkBonus']),
+    ...mapGetters('enhance', ['getTotalLink', 'getFullLinkBonusFilters']),
     // 링크 슬롯(퍼센티지 합산 해야 함)
     linkSlot1: {
       get() {

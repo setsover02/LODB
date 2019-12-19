@@ -53,7 +53,7 @@ export const getters = {
     } else if (chipS.damage == undefined) {
       return 0;
     } else if (chipS.damage != undefined) {
-      return chipS.damage[state.chipSEnh - 1];
+      return chipS.damage[state.chipSEnh];
     }
   },
   getChipFHit: state => {
@@ -73,7 +73,7 @@ export const getters = {
     } else if (chipS.hit == undefined) {
       return parseInt(0);
     } else if (chipS.hit != undefined) {
-      return chipS.hit[state.chipSEnh - 1];
+      return chipS.hit[state.chipSEnh];
     }
   },
   getChipFCrit: state => {
@@ -93,7 +93,7 @@ export const getters = {
     } else if (chipS.crit == undefined) {
       return parseInt(0);
     } else if (chipS.crit != undefined) {
-      return chipS.crit[state.chipSEnh - 1];
+      return chipS.crit[state.chipSEnh];
     }
   },
   getChipFHealth: state => {
@@ -113,7 +113,7 @@ export const getters = {
     } else if (chipS.health == undefined) {
       return parseInt(0);
     } else if (chipS.health != undefined) {
-      return chipS.health[state.chipSEnh - 1];
+      return chipS.health[state.chipSEnh];
     }
   },
   getChipFDefense: state => {
@@ -133,7 +133,7 @@ export const getters = {
     } else if (chipS.defense == undefined) {
       return parseInt(0);
     } else if (chipS.defense != undefined) {
-      return chipS.defense[state.chipSEnh - 1];
+      return chipS.defense[state.chipSEnh];
     }
   },
   getChipFDodge: state => {
@@ -153,7 +153,7 @@ export const getters = {
     } else if (chipS.dodge == undefined) {
       return parseInt(0);
     } else if (chipS.dodge != undefined) {
-      return chipS.dodge[state.chipSEnh - 1];
+      return chipS.dodge[state.chipSEnh];
     }
   },
   getChipFAP: state => {
@@ -173,7 +173,41 @@ export const getters = {
     } else if (chipS.ap == undefined) {
       return parseInt(0);
     } else if (chipS.ap != undefined) {
-      return chipS.ap[state.chipSEnh - 1];
+      return chipS.ap[state.chipSEnh];
+    }
+  },
+  // 장비(gear) 착용 스탯
+  // 냉저 계산
+  getFrostResist: state => {
+    const gear = state.gear;
+    if (gear == 0) {
+      return 0 + "%";
+    } else if (gear.frostResist == undefined) {
+      return 0 + "%";
+    } else if (gear.frostResist != undefined) {
+      return (gear.frostResist[state.gearEnh] * 100).toFixed(1) + "%";
+    }
+  },
+  // 화저 계산
+  getFireResist: state => {
+    const gear = state.gear;
+    if (gear == 0) {
+      return 0 + "%";
+    } else if (gear.fireResist == undefined) {
+      return 0 + "%";
+    } else if (gear.fireResist != undefined) {
+      return (gear.fireResist[state.gearEnh] * 100).toFixed(1) + "%";
+    }
+  }, 
+  // 전기저항 계산
+  getElecResist: state => {
+    const gear = state.gear;
+    if (gear == 0) {
+      return 0 + "%";
+    } else if (gear.elecResist == undefined) {
+      return 0 + "%";
+    } else if (gear.elecResist != undefined) {
+      return (gear.elecResist[state.gearEnh] * 100).toFixed(1) + "%";
     }
   },
   // 일단은 칩 장착만 적용

@@ -17,95 +17,105 @@ v-sheet(tile).linear-t300.sticky
 	v-divider 
 	//- TODO: 스킬 계수 및 폼변환 적용
 	v-row.py-2
-		v-col
+		v-col(v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 1스킬 데미지(10레벨)
-					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="getSkill01Damage")
+					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill01Damage")
 		v-divider(vertical)
-		v-col
+		v-col(v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 2스킬 데미지(10레벨)
-					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="getSkill02Damage")
+					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill02Damage")
 		v-divider(vertical)
 		v-col(cols="auto")
 			v-list-item(dense).px-2
 				v-btn(icon color="skyblue")
 					v-icon mdi-sync
 	v-divider
-	v-row
-		v-col(cols="3")
+	v-row.py-2
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 공격력
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDamage")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterDamage")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 적중
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterHit + '%'")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterHit + '%'")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 치명
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterCrit + '%'")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterCrit + '%'")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 방관
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1 57.5%
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1 57.5%
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 체력
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterHealth")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterHealth")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 방어력
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDefense")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterDefense")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 회피
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDodge + '%'")
-		v-col(cols="3")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterDodge + '%'")
+		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 행동력
-					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterAP")
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterAP")
 	v-divider
 	v-expansion-panels.v-expansion-panels--flat
 		v-expansion-panel
-			v-expansion-panel-header.px-4.py-3.subtitle-2 기타 능력치
-			v-expansion-panel-content
+			v-expansion-panel-header(v-ripple).px-4.py-3.subtitle-2 기타 능력치
+			v-expansion-panel-content.mx-n2
 				v-row
-					v-col(cols="3")
-						v-list-item.px-0(dense)
-							v-list-item-content.py-0
-								v-list-item-title.caption 효과 저항
-							v-list-item-content.body-2.accent--text 50%
-					v-col(cols="3")
-						v-list-item.px-0(dense)
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
 								v-list-item-title.caption 피해 감소
-							v-list-item-content.body-2.accent--text 50%
-					v-col(cols="3")
-						v-list-item.px-0(dense)
+							v-list-item-content.py-0.body-2.green--text 50%
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
-								v-list-item-title.caption 전기 저항
-							v-list-item-content.body-2.accent--text 50%
-					v-col(cols="3")
-						v-list-item.px-0(dense)
+								v-list-item-title.caption 효과 저항
+							v-list-item-content.py-0.body-2.green--text 50%
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
-								v-list-item-title.caption 화염 저항
-							v-list-item-content.body-2.accent--text 50%
-					v-col(cols="3")
-						v-list-item.px-0(dense)
+								v-list-item-title.caption 효과 해제
+							v-list-item-content.py-0.body-2.green--text 50%
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
+							v-list-item-content.py-0
+								v-list-item-title.caption 사거리
+							v-list-item-content.py-0.body-2.green--text(v-text="getCharacterRange")
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
 								v-list-item-title.caption 냉기 저항
-							v-list-item-content.body-2.accent--text 50%
+							v-list-item-content.py-0.body-2.cyan--text(v-text="getFrostResist")
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
+							v-list-item-content.py-0
+								v-list-item-title.caption 화염 저항
+							v-list-item-content.py-0.body-2.pink--text(v-text="getFireResist")
+					v-col(cols="3" v-ripple)
+						v-list-item.min-heaight__auto.px-0(dense)
+							v-list-item-content.py-0
+								v-list-item-title.caption 전기 저항
+							v-list-item-content.py-0.body-2.accent--text(v-text="getElecResist")
 	v-divider
 </template>
 <script>
@@ -124,9 +134,11 @@ export default {
       'getCharacterHealth',
       'getCharacterDefense',
       'getCharacterDodge',
+      'getCharacterRange',
       'getSkill01Damage',
       'getSkill02Damage'
-    ])
+    ]),
+    ...mapGetters('equip', ['getFrostResist', 'getFireResist', 'getElecResist'])
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card(color="transparent" elevation="0").pl-1
+v-card(color="transparent" elevation="0").px-1
 	//- TODO: Search Config
 	v-form(ref="formSearch")
 		v-row
@@ -22,21 +22,21 @@ v-card(color="transparent" elevation="0").pl-1
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
 
-			v-divider(vertical).d-none.d-lg-flex
-			v-col.d-none.d-lg-block.pl-3(cols="auto")
-				//- TODO: 등급 필터
-				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="rank in rankItems" :key="rank" :value="rank") {{ rank }}
-			v-divider(vertical).d-none.d-lg-flex
-			v-col.d-none.d-lg-block.pl-3(cols="auto")
-				//- TODO: 타입 필터
-				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="type in typeItems" :key="type") {{ type }}
-			v-divider(vertical).d-none.d-lg-flex
-			v-col.d-none.d-lg-block.pl-3(cols="auto")
-				//- TODO: 역할 필터
-				v-chip-group.pt-1(multiple active-class="accent--text")
-					v-chip(label small v-for="role in roleItems" :key="role") {{ role }}
+			//- v-divider(vertical).d-none.d-lg-flex
+			//- v-col.d-none.d-lg-block.pl-3(cols="auto")
+			//- 	//- TODO: 등급 필터
+			//- 	v-chip-group.pt-1(multiple active-class="accent--text")
+			//- 		v-chip(label small v-for="rank in rankItems" :key="rank" :value="rank") {{ rank }}
+			//- v-divider(vertical).d-none.d-lg-flex
+			//- v-col.d-none.d-lg-block.pl-3(cols="auto")
+			//- 	//- TODO: 타입 필터
+			//- 	v-chip-group.pt-1(multiple active-class="accent--text")
+			//- 		v-chip(label small v-for="type in typeItems" :key="type") {{ type }}
+			//- v-divider(vertical).d-none.d-lg-flex
+			//- v-col.d-none.d-lg-block.pl-3(cols="auto")
+			//- 	//- TODO: 역할 필터
+			//- 	v-chip-group.pt-1(multiple active-class="accent--text")
+			//- 		v-chip(label small v-for="role in roleItems" :key="role") {{ role }}
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
