@@ -43,7 +43,7 @@ export const getters = {
     } else if (chipF.damage == undefined) {
       return 0;
     } else if (chipF.damage != undefined) {
-      return chipF.damage[state.chipFEnh - 1];
+      return chipF.damage[state.chipFEnh];
     }
   },
   getChipSDamage: state => {
@@ -63,7 +63,7 @@ export const getters = {
     } else if (chipF.hit == undefined) {
       return parseInt(0);
     } else if (chipF.hit != undefined) {
-      return chipF.hit[state.chipFEnh - 1];
+      return chipF.hit[state.chipFEnh];
     }
   },
   getChipSHit: state => {
@@ -83,7 +83,7 @@ export const getters = {
     } else if (chipF.crit == undefined) {
       return parseInt(0);
     } else if (chipF.crit != undefined) {
-      return chipF.crit[state.chipFEnh - 1];
+      return chipF.crit[state.chipFEnh];
     }
   },
   getChipSCrit: state => {
@@ -103,7 +103,7 @@ export const getters = {
     } else if (chipF.health == undefined) {
       return parseInt(0);
     } else if (chipF.health != undefined) {
-      return chipF.health[state.chipFEnh - 1];
+      return chipF.health[state.chipFEnh];
     }
   },
   getChipSHealth: state => {
@@ -123,7 +123,7 @@ export const getters = {
     } else if (chipF.defense == undefined) {
       return parseInt(0);
     } else if (chipF.defense != undefined) {
-      return chipF.defense[state.chipFEnh - 1];
+      return chipF.defense[state.chipFEnh];
     }
   },
   getChipSDefense: state => {
@@ -143,7 +143,7 @@ export const getters = {
     } else if (chipF.dodge == undefined) {
       return parseInt(0);
     } else if (chipF.dodge != undefined) {
-      return chipF.dodge[state.chipFEnh - 1];
+      return chipF.dodge[state.chipFEnh];
     }
   },
   getChipSDodge: state => {
@@ -163,7 +163,7 @@ export const getters = {
     } else if (chipF.ap == undefined) {
       return parseInt(0);
     } else if (chipF.ap != undefined) {
-      return chipF.ap[state.chipFEnh - 1];
+      return chipF.ap[state.chipFEnh];
     }
   },
   getChipSAP: state => {

@@ -52,6 +52,63 @@ export const getters = {
   getCharacterRole: state => {
     return state.characterSelect[0].role;
   },
+  // 승급가능 랭크 리스트 불러오기
+  getRankSS: state => {
+    const data = state.characterSelect[0];
+    if (data.rankSS == "TRUE") {
+      return CONST.RANK.SS;
+    } else {
+      return null;
+    }
+  },
+  getRankS: state => {
+    const data = state.characterSelect[0];
+    if (data.rankS == "TRUE") {
+      return CONST.RANK.S;
+    } else {
+      return null;
+    }
+  },
+  getRankA: state => {
+    const data = state.characterSelect[0];
+    if (data.rankA == "TRUE") {
+      return CONST.RANK.A;
+    } else {
+      return null;
+    }
+  },
+  getRankB: state => {
+    const data = state.characterSelect[0];
+    if (data.rankB == "TRUE") {
+      return CONST.RANK.B;
+    } else {
+      return null;
+    }
+  },
+  // 승급가능 랭크 리스트 필터링
+  getCharacterRank: (state, getters) => {
+    const rank = [
+      getters.getRankSS,
+      getters.getRankS,
+      getters.getRankA,
+      getters.getRankB
+    ];
+    // 승급이 없으면 null값 반환하고 null 값 필터링
+    return rank.filter(element => element !== null);
+  },
+  // 캐릭터 승급이전 현재 랭크 불러오기
+  getCharacterCurrentRank: state => {
+    const data = state.characterSelect[0];
+    if (data.rankB == "TRUE") {
+      return "B";
+    } else if (data.rankA == "TRUE") {
+      return "A";
+    } else if (data.rankS == "TRUE") {
+      return "S";
+    } else {
+      return "SS";
+    }
+  },
   // 링크 퍼센티지 합산, 소수점 2자리 // 추후 const값 이랑 중복되는거 정리해야함
   getTotalLink: state => {
     return (
@@ -153,7 +210,9 @@ export const getters = {
       state.fullLinkBonus == "행동력 0.15" ||
       state.fullLinkBonus == "행동력 0.2"
     ) {
-      return (data.ap + rootGetters["equip/getAP"] + data.fullLinkAP).toFixed(3);
+      return (data.ap + rootGetters["equip/getAP"] + data.fullLinkAP).toFixed(
+        3
+      );
     } else {
       return (data.ap + rootGetters["equip/getAP"]).toFixed(3);
     }
@@ -199,7 +258,8 @@ export const mutations = {
   SET_CHARACTER_SELECT(state, characterSelect) {
     state.characterSelect = characterSelect;
     // selectNode("m" + payload, true);
-  }, // 레벨 및 강화스텟 업데이트
+  },
+  // 레벨 및 강화스텟 업데이트
   SET_LEVEL(state, level) {
     state.level = level;
   },

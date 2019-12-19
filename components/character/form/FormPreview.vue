@@ -15,47 +15,66 @@ v-sheet(tile).linear-t300.sticky
 				v-list-item-action
 					v-btn(color="primary" disabled) 저장
 	v-divider 
+	//- TODO: 스킬 계수 및 폼변환 적용
 	v-row.py-2
+		v-col
+			v-list-item(dense)
+				v-list-item-content.py-0
+					v-list-item-title.caption.mb-0 1스킬 데미지(10레벨)
+					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="(getCharacterDamage * 1.25).toFixed(0)")
+		v-divider(vertical)
+		v-col
+			v-list-item(dense)
+				v-list-item-content.py-0
+					v-list-item-title.caption.mb-0 2스킬 데미지(10레벨)
+					v-list-item-subtitle.title.cyan--text.mt-n1(v-text="(getCharacterDamage * 1.7).toFixed(0)")
+		v-divider(vertical)
+		v-col(cols="auto")
+			v-list-item(dense).px-2
+				v-btn(icon color="skyblue")
+					v-icon mdi-sync
+	v-divider
+	v-row
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 공격력
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterDamage")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDamage")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 적중
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterHit + '%'")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterHit + '%'")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 치명
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterCrit + '%'")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterCrit + '%'")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 방관
-					v-list-item-subtitle.title.accent--text.mt-n1 57.5%
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1 57.5%
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 체력
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterHealth")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterHealth")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 방어력
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterDefense")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDefense")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 회피
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterDodge + '%'")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterDodge + '%'")
 		v-col(cols="3")
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 행동력
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getCharacterAP")
+					v-list-item-subtitle.subtitle-1.accent--text.mt-n1(v-text="getCharacterAP")
 	v-divider
 	v-expansion-panels.v-expansion-panels--flat
 		v-expansion-panel

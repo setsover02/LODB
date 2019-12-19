@@ -4,7 +4,7 @@ v-card(color="transparent" elevation="0").fill-height__n7
   //- TODO: @click:row = row 선택시 해당 아이템 선택 selected와 동일
   //- TODO: 키 값이 아이디(도감번호)로 되어 있는데 이럴 경우 동일한 캐릭터를 여러 row에 저장시키는게 안됨, 검색필터 적용후 삭제 시에도 엉뚱한게 삭제됨
   //- TODO: 동일한 row 재선택시 올바르게 선택이 안됨
-  v-data-table(v-model="characterSelect" :headers="charactersCol" :items="getCharactersData" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="100%" single-select show-select @item-selected="itemSelected($event)").fill-height__n7
+  v-data-table(v-model="characterSelect" :headers="charactersCol" :items="getCharactersData" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="100%" single-select show-select @click:row="itemSelected($event)").fill-height__n7
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
         v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
@@ -13,7 +13,7 @@ v-card(color="transparent" elevation="0").fill-height__n7
     template(v-slot:item.level="{ item }")
       span {{ level }}
     //- TODO: 이 이하 계산식 들어간거 싹 다 정리해야함 > 선택된 row에서만 작동되도록 적용 필요
-    //- 체력계산 : 소수점 버림인지 검증
+    //- TODO: 전체계산식 : 소수점 버림인지 검증
     template(v-slot:item.health="{ item }")
       span {{ Math.round((item.healthBase + ((level - 1) * item.healthCoef) + healthEnh * 8) * (1 + item.linkHealth * getTotalLink)) }}
       //- 강화 및 링크로 추가된 체력 (추후 아이템 포함)
@@ -159,7 +159,7 @@ export default {
         this.$store.state.enhance.characterSelect
       )
       console.log('Select row')
-    }
+    },
   }
 }
 </script>
