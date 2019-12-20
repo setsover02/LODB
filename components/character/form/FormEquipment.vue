@@ -82,10 +82,10 @@ export default {
   }),
   computed: {
     ...mapGetters('equip', [
-			'getEquipmentData',
-			'getChipData',
-			'getOsData',
-			'getGearData'
+      'getEquipmentData',
+      'getChipData',
+      'getOsData',
+      'getGearData'
     ]),
     chipF: {
       get() {

@@ -6,9 +6,9 @@ export const state = () => ({
   chipFEnh: 10,
   chipS: [],
   chipSEnh: 10,
-  os: [0],
+  os: [],
   osEnh: 10,
-  gear: [0],
+  gear: [],
   gearEnh: 10
 });
 
@@ -176,7 +176,28 @@ export const getters = {
       return chipS.ap[state.chipSEnh];
     }
   },
+  // OS 착용 스탯
+  getOsDamage: state => {
+    const os = state.os;
+    if (os == 0) {
+      return 0;
+    } else if (os.damage == undefined) {
+      return 0;
+    } else if (os.damage != undefined) {
+      return os.damage[state.osEnh];
+    }
+  },
   // 장비(gear) 착용 스탯
+  getGearDamage: state => {
+    const gear = state.gear;
+    if (gear == 0) {
+      return 0;
+    } else if (gear.damage == undefined) {
+      return 0;
+    } else if (gear.damage != undefined) {
+      return gear.damage[state.gearEnh];
+    }
+  },
   // 냉저 계산
   getFrostResist: state => {
     const gear = state.gear;
@@ -198,7 +219,7 @@ export const getters = {
     } else if (gear.fireResist != undefined) {
       return (gear.fireResist[state.gearEnh] * 100).toFixed(1) + "%";
     }
-  }, 
+  },
   // 전기저항 계산
   getElecResist: state => {
     const gear = state.gear;

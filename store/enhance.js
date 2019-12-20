@@ -1,11 +1,5 @@
 // 계산식 참고
 // https://gall.dcinside.com/mgallery/board/view/?id=lastorigin&no=337333
-// 용어 적용해서 정리하자면
-// getCharacterDamage = 칩, 강화 다 적용된 최종 공격력
-// getCharacterDamage * skillCoef = skillDamage
-// critDamage = 1.5
-// damageInc(%) = 공격력 증가 인데 이게 어디서 오는건지 모르겠음
-// skillDamage * (critDamage) * (1 + damageInc)
 
 // 레벨, 강화 포인트, 링크 보너스 계산
 import { CONST } from "~/static/const";
@@ -338,7 +332,7 @@ export const getters = {
     // 보너스 없으면 null값 반환하고 null 값 필터링
     return list.filter(element => element !== null);
   },
-  // 최종 스킬 계수 계산 액티브 1스킬
+  // 스킬 계수 계산 액티브 1스킬
   getSkill01Damage: (state, getters) => {
     const data = state.characterSelect[0];
     // 스킬 보너스 있을 경우 곱셈
@@ -348,18 +342,18 @@ export const getters = {
       state.fullLinkBonus == "스킬피해 25%" ||
       state.fullLinkBonus == "스킬피해 30%"
     ) {
-      return Math.round(
+      return (
         getters.getCharacterDamage *
-          (data.skill01Coef * (1 + data.fullLinkSkill))
+        (data.skill01Coef * (1 + data.fullLinkSkill))
       );
-      // 스킬계수 없을경우 (버프스킬 등)
+      // 스킬 계수 없을경우 (버프스킬 등)
     } else if (data.skill01Coef == 0) {
-      return "-";
+      return 0;
     } else {
-      return Math.round(getters.getCharacterDamage * data.skill01Coef);
+      return getters.getCharacterDamage * data.skill01Coef;
     }
   },
-  // 최종 스킬 계수 계산 액티브 2스킬
+  // 스킬 계수 계산 액티브 2스킬
   getSkill02Damage: (state, getters) => {
     const data = state.characterSelect[0];
     // 스킬 보너스 있을 경우 곱셈
@@ -375,11 +369,19 @@ export const getters = {
       );
       // 스킬계수 없을경우 (버프스킬 등)
     } else if (data.skill02Coef == 0) {
-      return "-";
+      return 0;
     } else {
       return Math.round(getters.getCharacterDamage * data.skill02Coef);
     }
-  }
+  },
+  getSkill01FinalDamage: (state, getters, rootState, rootGetters) => {
+    return Math.round(
+      getters.getSkill01Damage *
+        (1 +
+          rootGetters["equip/getOsDamage"] +
+          rootGetters["equip/getGearDamage"])
+    );
+  },
 };
 
 export const mutations = {

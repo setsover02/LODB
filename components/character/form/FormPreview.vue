@@ -1,5 +1,5 @@
 <template lang="pug">
-v-sheet(tile).linear-t300.sticky
+v-sheet(elevation="16" tile).linear-t300.sticky
 	v-row
 		v-col(cols="12")
 			v-list-item
@@ -14,23 +14,51 @@ v-sheet(tile).linear-t300.sticky
 				//- TODO: 저장 시 해당 폼의 정보가 DataTable에 추가되어야 함  
 				v-list-item-action
 					v-btn(color="primary" disabled) 저장
-	v-divider 
+	v-divider
 	//- TODO: 스킬 계수 및 폼변환 적용
 	v-row.py-2
-		v-col(v-ripple)
-			v-list-item(dense)
-				v-list-item-content.py-0
-					v-list-item-title.caption.mb-0 1스킬 데미지(10레벨)
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill01Damage")
+		v-col(cols="auto").d-flex.align-center
+			v-menu(left offset-x :close-on-content-click="false" max-width="220")
+				template(v-slot:activator="{ on }")
+					v-list-item(dense).px-2.pl-3
+						v-btn(v-on="on" icon)
+							v-icon mdi-settings
+				v-list(dense).linear-t400.pb-4
+					v-subheader.px-4 버프 설정
+					v-list-item.px-5
+						v-switch.mt-0.pt-0(color="primary" hide-details inset)
+							template(v-slot:label)
+								span.caption 자버프 적용
+					v-divider.my-2
+					v-subheader.px-4 철충 설정
+					v-list-item
+						v-text-field(v-model="enemyDefense" prepend-icon="mdi-shield-account-outline" dense flat solo hide-details prefix="방어력" @wheel=" + 1" type="number" counter autocomplete="off")
+					v-list-item.mt-2
+						v-text-field(v-model="enemyReduce" prepend-icon="mdi-call-missed" dense flat solo hide-details prefix="피해감소" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+					v-list-item.mt-2
+						v-text-field(v-model="enemyFrostResist" prepend-icon="mdi-water" dense flat solo hide-details prefix="냉기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+					v-list-item.mt-2
+						v-text-field(v-model="enemyFireResist" prepend-icon="mdi-fire" dense flat solo hide-details prefix="화염저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+					v-list-item.mt-2
+						v-text-field(v-model="enemyElecResist" prepend-icon="mdi-flash" dense flat solo hide-details prefix="전기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
 		v-divider(vertical)
 		v-col(v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
-					v-list-item-title.caption.mb-0 2스킬 데미지(10레벨)
+					v-list-item-title.caption.mb-0 1스킬 예상데미지(10레벨)
+					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill01FinalDamage")
+					//- 아래는 일반데미지
+					v-list-item-subtitle.caption.mt-n1(v-text="getSkill01FinalDamage")
+		v-divider(vertical)
+		v-col(v-ripple)
+			v-list-item(dense)
+				v-list-item-content.py-0
+					v-list-item-title.caption.mb-0 2스킬 예상데미지(10레벨)
 					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill02Damage")
+					v-list-item-subtitle.caption.mt-n1(v-text="getSkill02Damage")
 		v-divider(vertical)
-		v-col(cols="auto")
-			v-list-item(dense).px-2
+		v-col(cols="auto").d-flex.align-center
+			v-list-item(dense).px-2.pr-3
 				v-btn(icon color="skyblue")
 					v-icon mdi-sync
 	v-divider
@@ -135,10 +163,55 @@ export default {
       'getCharacterDefense',
       'getCharacterDodge',
       'getCharacterRange',
-      'getSkill01Damage',
+      'getSkill01FinalDamage',
       'getSkill02Damage'
     ]),
-    ...mapGetters('equip', ['getFrostResist', 'getFireResist', 'getElecResist'])
+    ...mapGetters('equip', [
+      'getFrostResist',
+      'getFireResist',
+      'getElecResist'
+    ]),
+    // enemy setting
+    enemyDefense: {
+      get() {
+        return this.$store.state.enemy.enemyDefense
+      },
+      set(value) {
+        this.$store.commit('enemy/SET_ENEMY_DEFENSE', value)
+      }
+    },
+    enemyReduce: {
+      get() {
+        return this.$store.state.enemy.enemyReduce
+      },
+      set(value) {
+        this.$store.commit('enemy/SET_ENEMY_REDUCE', value)
+      }
+    },
+    enemyFrostResist: {
+      get() {
+        return this.$store.state.enemy.enemyFrostResist
+      },
+      set(value) {
+        this.$store.commit('enemy/SET_ENEMY_FROST_RESIST', value)
+      }
+    },
+    enemyFireResist: {
+      get() {
+        return this.$store.state.enemy.enemyFireResist
+      },
+      set(value) {
+        this.$store.commit('enemy/SET_ENEMY_FIRE_RESIST', value)
+      }
+    },
+    enemyElecResist: {
+      get() {
+        return this.$store.state.enemy.enemyElecResist
+      },
+      set(value) {
+        this.$store.commit('enemy/SET_ENEMY_ELEC_RESIST', value)
+      }
+    }
   }
 }
 </script>
