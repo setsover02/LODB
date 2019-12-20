@@ -27,8 +27,8 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 					v-subheader.px-4 버프 설정
 					v-list-item.px-5
 						v-switch.mt-0.pt-0(color="primary" hide-details inset)
-							template(v-slot:label)
-								span.caption 자버프 적용
+
+						v-text-field(suffix="중첩" dense flat solo hide-details @wheel=" + 1" type="number" counter autocomplete="off")
 					v-divider.my-2
 					v-subheader.px-4 철충 설정
 					v-list-item
@@ -46,7 +46,7 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 1스킬 예상데미지(10레벨)
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill01FinalDamage")
+					v-list-item-subtitle.title.green--text.mt-n1(v-text="getSkill01FinalDamage")
 					//- 아래는 일반데미지
 					v-list-item-subtitle.caption.mt-n1(v-text="getSkill01FinalDamage")
 		v-divider(vertical)
@@ -54,7 +54,7 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 2스킬 예상데미지(10레벨)
-					v-list-item-subtitle.title.accent--text.mt-n1(v-text="getSkill02Damage")
+					v-list-item-subtitle.title.green--text.mt-n1(v-text="getSkill02Damage")
 					v-list-item-subtitle.caption.mt-n1(v-text="getSkill02Damage")
 		v-divider(vertical)
 		v-col(cols="auto").d-flex.align-center
