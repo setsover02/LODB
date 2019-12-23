@@ -151,7 +151,8 @@ export const getters = {
         (state.level - 1) * data.defenseCoef +
         state.defenseEnh * CONST.ENH.DEFENSE +
         rootGetters["equip/getDefense"]) *
-      (1 + data.linkDefense * getters.getTotalLink);
+      ((1 + data.linkDefense * getters.getTotalLink) *
+        (1 + rootGetters["equip/getOsDefense"]));
     return Math.round(defenseFormula);
   },
   // (getters.getSelectedFullLinkBonus == "적중 75%")
@@ -210,6 +211,12 @@ export const getters = {
     } else {
       return (data.ap + rootGetters["equip/getAP"]).toFixed(3);
     }
+  },
+  getCharacterPanetration: (state, getters, rootState, rootGetters) => {
+    return (rootGetters["equip/getGearPenetration"] * 100) + "%";
+  },
+  getCharacterReduce: (state, getters, rootState, rootGetters) => {
+    return rootGetters["equip/getOsReduce"] + "%";
   },
   // 추후 장비 값 추가
   getCharacterRange: (state, getters, rootState, rootGetters) => {
@@ -382,6 +389,15 @@ export const getters = {
           rootGetters["equip/getGearDamage"])
     );
   },
+  getSkill01FinalCritDamage: (state, getters, rootState, rootGetters) => {
+    return Math.round(
+      getters.getSkill01Damage *
+        1.5 *
+        (1 +
+          rootGetters["equip/getOsDamage"] +
+          rootGetters["equip/getGearDamage"])
+    );
+  }
 };
 
 export const mutations = {

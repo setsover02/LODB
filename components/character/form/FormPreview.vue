@@ -46,16 +46,16 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 1스킬 예상데미지(10레벨)
-					v-list-item-subtitle.title.green--text.mt-n1(v-text="getSkill01FinalDamage")
+					v-list-item-subtitle.title.green--text(v-text="getSkill01FinalCritDamage + ' (치명)'")
 					//- 아래는 일반데미지
-					v-list-item-subtitle.caption.mt-n1(v-text="getSkill01FinalDamage")
+					v-list-item-subtitle.caption.mt-n2(v-text="getSkill01FinalDamage + ' (일반)'") 
 		v-divider(vertical)
 		v-col(v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 2스킬 예상데미지(10레벨)
-					v-list-item-subtitle.title.green--text.mt-n1(v-text="getSkill02Damage")
-					v-list-item-subtitle.caption.mt-n1(v-text="getSkill02Damage")
+					v-list-item-subtitle.title.green--text(v-text="getSkill02Damage")
+					v-list-item-subtitle.caption.mt-n2(v-text="getSkill02Damage")
 		v-divider(vertical)
 		v-col(cols="auto").d-flex.align-center
 			v-list-item(dense).px-2.pr-3
@@ -82,7 +82,7 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 			v-list-item(dense)
 				v-list-item-content.py-0
 					v-list-item-title.caption.mb-0 방관
-					v-list-item-subtitle.subtitle-1.mint--text.mt-n1 57.5%
+					v-list-item-subtitle.subtitle-1.mint--text.mt-n1(v-text="getCharacterPanetration")
 		v-col(cols="3" v-ripple)
 			v-list-item(dense)
 				v-list-item-content.py-0
@@ -113,7 +113,7 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
 								v-list-item-title.caption 피해 감소
-							v-list-item-content.py-0.body-2.green--text 50%
+							v-list-item-content.py-0.body-2.green--text(v-text="getCharacterReduce")
 					v-col(cols="3" v-ripple)
 						v-list-item.min-heaight__auto.px-0(dense)
 							v-list-item-content.py-0
@@ -158,13 +158,16 @@ export default {
       'getCharacterDamage',
       'getCharacterHit',
       'getCharacterCrit',
-      'getCharacterAP',
       'getCharacterHealth',
       'getCharacterDefense',
-      'getCharacterDodge',
+			'getCharacterDodge',
+      'getCharacterAP',
+			'getCharacterPanetration',
       'getCharacterRange',
       'getSkill01FinalDamage',
-      'getSkill02Damage'
+      'getSkill01FinalCritDamage',
+      'getSkill02Damage',
+      'getCharacterReduce'
     ]),
     ...mapGetters('equip', [
       'getFrostResist',

@@ -159,7 +159,7 @@ export default {
         this.$store.state.enhance.characterSelect
       )
       console.log('Select row')
-    },
+    }
   }
 }
 </script>
