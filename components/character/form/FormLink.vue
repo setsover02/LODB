@@ -11,15 +11,15 @@ v-sheet(color="transparent")
 	v-row.px-4
 		//- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
 		v-col
-			v-select(v-model="linkSlot1" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+			v-select(v-model="linkSlot1" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		v-col
-			v-select(v-model="linkSlot2" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+			v-select(v-model="linkSlot2" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		v-col
-			v-select(v-model="linkSlot3" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+			v-select(v-model="linkSlot3" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		v-col
-			v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+			v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		v-col
-			v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense append-icon="" suffix="%" hide-details)
+			v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		//- TODO: 해당 캐릭터 풀링 보너스 선택 : 값이 0 일 경우 표기하지 않는 방법 찾기
 		v-col(cols="12")
 			v-select(v-model="fullLinkBonus" :items="getFullLinkBonusFilters" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)

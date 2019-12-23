@@ -8,7 +8,7 @@ v-row.px-4.py-2.pb-4(no-gutter)
 				v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
 					v-avatar.border-4(left tile)
 						v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
-					| {{ data.item.name + '/' + data.item.rank }}
+					| {{ data.item.name + ' / ' + data.item.rank }}
 			template(v-slot:item="data")
 				template(v-if="typeof data.item !== 'object'")
 					v-list-item-content(v-text="data.item.name")

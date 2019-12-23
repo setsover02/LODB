@@ -36,11 +36,11 @@ v-sheet(elevation="16" tile).linear-t300.sticky
 					v-list-item.mt-2
 						v-text-field(v-model="enemyReduce" prepend-icon="mdi-call-missed" dense flat solo hide-details prefix="피해감소" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
 					v-list-item.mt-2
-						v-text-field(v-model="enemyFrostResist" prepend-icon="mdi-water" dense flat solo hide-details prefix="냉기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+						v-text-field(color="blue" v-model="enemyFrostResist" prepend-icon="mdi-water" dense flat solo hide-details prefix="냉기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
 					v-list-item.mt-2
-						v-text-field(v-model="enemyFireResist" prepend-icon="mdi-fire" dense flat solo hide-details prefix="화염저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+						v-text-field(color="red" v-model="enemyFireResist" prepend-icon="mdi-fire" dense flat solo hide-details prefix="화염저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
 					v-list-item.mt-2
-						v-text-field(v-model="enemyElecResist" prepend-icon="mdi-flash" dense flat solo hide-details prefix="전기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
+						v-text-field(color="yellow" v-model="enemyElecResist" prepend-icon="mdi-flash" dense flat solo hide-details prefix="전기저항" suffix="%" @wheel=" + 1" type="number" counter autocomplete="off")
 		v-divider(vertical)
 		v-col(v-ripple)
 			v-list-item(dense)

@@ -30,7 +30,7 @@ v-row
 							v-card(color="t300")
 								v-list-item
 									v-list-item-avatar.radius-4(size="48" color="t500" tile)
-										v-img(:src="require('~/assets/img/items/10034.png')")
+										v-img(:src="require('~/assets/img/items/' + item.id + '.png')")
 									v-list-item-content
 										v-list-item-title {{ item.name }}
 										v-list-item-subtitle {{ item.part }}

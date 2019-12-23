@@ -162,8 +162,10 @@ export const getters = {
       return 0;
     } else if (chipF.ap == undefined || chipF.ap == "") {
       return 0;
-    } else if (chipF.ap != undefined) {
+    } else if (chipF.ap == Array.isArray) {
       return chipF.ap[state.chipFEnh];
+    } else {
+      return chipF.ap;
     }
   },
   getChipSAP: state => {
@@ -172,8 +174,10 @@ export const getters = {
       return 0;
     } else if (chipS.ap == undefined || chipS.ap == "") {
       return 0;
-    } else if (chipS.ap != undefined) {
+    } else if (chipS.ap == Array.isArray) {
       return chipS.ap[state.chipSEnh];
+    } else {
+      return chipS.ap;
     }
   },
   // OS 착용 스탯
@@ -231,7 +235,7 @@ export const getters = {
     const os = state.os;
     if (os == 0) {
       return 0;
-    } else if (os.ap == undefined || os.ap == "" ) {
+    } else if (os.ap == undefined || os.ap == "") {
       return 0;
     } else if (os.ap != undefined) {
       return os.ap[state.osEnh];
@@ -242,7 +246,7 @@ export const getters = {
     const os = state.os;
     if (os == 0) {
       return 0;
-    } else if (os.reduce == undefined || os.reduce == "" ) {
+    } else if (os.reduce == undefined || os.reduce == "") {
       return 0;
     } else if (os.reduce != undefined) {
       return os.reduce[state.osEnh];
@@ -253,7 +257,7 @@ export const getters = {
     const gear = state.gear;
     if (gear == 0) {
       return 0;
-    } else if (gear.damage == undefined || gear.damage == "" ) {
+    } else if (gear.damage == undefined || gear.damage == "") {
       return 0;
     } else if (gear.damage != undefined) {
       return gear.damage[state.gearEnh];
