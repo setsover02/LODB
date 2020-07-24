@@ -1,11 +1,10 @@
 <template lang="pug">
-v-card(color="transparent" elevation="0").px-1
 	//- TODO: Search Config
-	v-form(ref="formSearch")
+	v-form(ref="formSearch").px-1
 		v-row
 			v-col
 				//- 검색 필터: 테이블 데이터와 동기화 중
-				v-autocomplete(v-model="characterName" :items="getCharactersData" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
+				v-autocomplete(:value="characterSelect" :items="getCharactersData" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
 					//- 선택 데이터 chip 형태로 표기
 					template(v-slot:selection="data")
 						v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -41,22 +40,17 @@ v-card(color="transparent" elevation="0").px-1
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
-  data: () => ({
-    rankItems: ['SS', 'S', 'A', 'B'],
-    typeItems: ['기동', '경장', '중장'],
-    roleItems: ['공격', '보호', '지원']
-  }),
   computed: {
     ...mapGetters('character', [
       'getCharactersData' // json
     ]),
     // 이름으로 검색
-    characterName: {
+    characterSelect: {
       get() {
-        return this.$store.state.character.characterName
+        return this.$store.state.character.characterSelect
       },
       set(value) {
-        this.$store.commit('character/SET_SEARCH_NAME', value)
+        this.$store.commit('enhance/SET_CHARACTER_SELECT', value)
       }
     }
   }

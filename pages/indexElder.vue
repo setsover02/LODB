@@ -16,7 +16,7 @@ v-row.fill-height(no-gutters)
 <script>
 import SearchForm from "~/components/character/SearchForm";
 import DataTable from "~/components/character/DataTable";
-import SimulatingForm from "~/components/character/SimulatingForm";
+import SimulatingForm from "~/components/character/SimulatingFormElder";
 // vuetify 데이터 테이블 계산식 적용 예시
 // https://stackoverflow.com/questions/57170568/how-to-update-v-data-table-data-in-real-time
 // {{ Math.floor( value.atkbase + value.atkcoef * (level - 1) + atkEnh * 1.5 ) }}
