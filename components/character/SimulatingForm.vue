@@ -10,7 +10,7 @@ v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getChara
 v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile width="470" color="transparent" elevation="0")
   v-form(ref="form")
     //- Status preview
-    FormPreview
+    //- FormPreview
     //- Level, Enhance
     FormEnhance
     v-divider.mt-4
