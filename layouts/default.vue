@@ -3,7 +3,7 @@
     v-card.dashboard.mx-auto.my-lg-8(shaped)
       AppBar
       NavigationDrawer
-      v-content.fill-height
+      v-main.fill-height
         v-container(fluid).fill-height.align-start.pa-0
           nuxt
 </template>
