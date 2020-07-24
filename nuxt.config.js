@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ["~/plugins/axios"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -38,7 +38,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
 
   // axios: {
   //   baseURL: process.env.BASE_URL
@@ -47,6 +47,7 @@ export default {
   webfontloader: {
     google: {
       families: ["Noto Sans KR:100,300,400,500,700"]
+      // families: ["Quicksand: 300,400,500,600,700"]
     }
   },
   /*
