@@ -53,6 +53,7 @@ v-row
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
+	transition: 'slide-y-transition',
   data() {
     return {
       search: '',

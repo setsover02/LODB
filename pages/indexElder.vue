@@ -1,7 +1,9 @@
 <template lang="pug">
 v-row.fill-height(no-gutters)
   v-col.fill-height.removed-max-width.py-0
-    | New file
+    SearchForm
+    v-divider
+    DataTable
   v-divider(vertical).fill-height
   v-col(cols="auto")
     SimulatingForm

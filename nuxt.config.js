@@ -46,8 +46,10 @@ export default {
   // },
   webfontloader: {
     google: {
-      families: ["Noto Sans KR:100,300,400,500,700"]
-      // families: ["Quicksand: 300,400,500,600,700"]
+      families: [
+        "Noto Sans KR:100,300,400,500,700",
+        "Quicksand: 300,400,500,600,700"
+      ]
     }
   },
   /*
