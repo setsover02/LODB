@@ -1,9 +1,10 @@
 <template lang="pug">
 v-row.fill-height(no-gutters)
-	v-col(cols="3")
-		SearchForm
-		v-divider
-		SimulatingForm
+	v-col(cols="auto")
+		v-sheet(width="480" color="transparent")
+			SearchForm
+			v-divider
+			SimulatingForm
 	v-divider(vertical).fill-height
 </template>
 <script>
