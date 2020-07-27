@@ -1,9 +1,6 @@
 <template lang="pug">
 v-row.fill-height(no-gutters)
 	v-col(cols="auto")
-		//- div(v-for="article in articles" :keys="article")
-		//-   p {{ article.name }}
-		//-   p.caption {{ article.rank }}
 		v-row
 			v-col
 				SearchForm
@@ -22,50 +19,23 @@ const _ = require("lodash");
 //  your spreadsheet has to be PUBLIC and SHARED with everybody to be accessed this way
 //  https://sheets.googleapis.com/v4/spreadsheets/{SPREASHEET_ID}/values/{SHEET_TAB_NAME}!{CELLS}?key={GOOGLE_API_KEY}
 const url =
-  "https://sheets.googleapis.com/v4/spreadsheets/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/values/dataHeroes!A1:AQ1000?key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To";
+	"https://sheets.googleapis.com/v4/spreadsheets/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/values/dataHeroes!A1:AQ1000?key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To";
 
 export default {
-  transition: "slide-y-transition",
-  async asyncData() {
-    const response = await axios.get(url);
-    const rows = response.data.values;
-    const properties = rows.shift();
-    const articles = [];
-    for (const i in rows) {
-      articles.push(_.zipObject(properties, rows[i]));
-    }
-    return { articles };
-  },
-  components: {
+	transition: "slide-y-transition",
+	async asyncData() {
+		const response = await axios.get(url);
+		const rows = response.data.values;
+		const properties = rows.shift();
+		const articles = [];
+		for (const i in rows) {
+			articles.push(_.zipObject(properties, rows[i]));
+		}
+		return { articles };
+	},
+	components: {
 		SearchForm,
-    SimulatingForm
-  },
-  data: () => ({
-    characterName: ""
-  }),
-  watch: {
-    isUpdating(val) {
-      if (val) {
-        setTimeout(() => (this.isUpdating = false), 3000);
-      }
-    }
-  },
-
-  methods: {
-    remove(item) {
-      const index = this.character.indexOf(item.name);
-      if (index >= 0) this.character.splice(index, 1);
-    }
-  },
-  computed: {
-    characterSelect: {
-      get() {
-        return this.$store.state.enhance.characterSelect;
-      },
-      set(value) {
-        this.$store.commit("enhance/SET_CHARACTER_SELECT", value);
-      }
-    }
-  }
+		SimulatingForm
+	}
 };
 </script>
