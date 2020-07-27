@@ -1,11 +1,19 @@
 // LODB 2.0 Character store
+// 01 Get Google Sheet
+// 02 SearchForm Component state
 export const state = () => ({
-  characterData: []
+  characterData: [],
+  characterSelect: [0] // require default value
 });
 
 export const mutations = {
+  // Google Sheet
   SET_CHARACTERS_DATA(state, payload) {
     state.characterData = payload;
+  },
+  // SearchForm select
+  SET_CHARACTERS_SELECT(state, characterSelect) {
+    state.characterSelect = characterSelect;
   }
 };
 
@@ -20,6 +28,7 @@ export const actions = {
     const rows = response.data.values;
     const properties = rows.shift();
     const articles = [];
+
     for (const i in rows) {
       articles.push(_.zipObject(properties, rows[i]));
     }

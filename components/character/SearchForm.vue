@@ -2,9 +2,9 @@
 	//- TODO: Search Config
 	v-form(ref="formSearch").px-1
 		v-row
-			v-col.py-0
+			v-col
 				//- 검색 필터: 테이블 데이터와 동기화 중
-				v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="Search" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" clearable hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
+				v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" return-object prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
 					//- 선택 데이터 chip 형태로 표기
 					template(v-slot:selection="data")
 						v-chip.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -20,19 +20,27 @@
 								v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.png')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
-					
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   data: () => ({
-    characterSelect: "",
+
   }),
   mounted () {
-		this.$store.dispatch('spreadsheet/asyncData')
+		this.$store.dispatch('characters/asyncData')
   },
   computed: {
-    ...mapState("spreadsheet", ["characterData"]),
+		...mapState("characters", ["characterData"]),
+
+		characterSelect: {
+			get() {
+				return this.$store.state.characters.characterSelect
+			},
+			set(value) {
+				this.$store.commit('characters/SET_CHARACTERS_SELECT', value)
+			}
+		}
   },
   methods: {}
 };
