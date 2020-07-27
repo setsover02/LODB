@@ -1,23 +1,23 @@
 export const CONST = {
   // 아이템 및 캐릭터 랭크
-  RANK: {
-    SS: {
+  RANK: [
+    {
       text: "SS",
       color: "orange"
     },
-    S: {
+    {
       text: "S",
       color: "yellow"
     },
-    A: {
+    {
       text: "A",
       color: "blue"
     },
-    B: {
+    {
       text: "B",
       color: "mint"
     }
-  },
+  ],
   // 강화시 증가 스탯
   ENH: {
     DAMAGE: 1.5,

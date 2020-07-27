@@ -1,7 +1,7 @@
 <template lang="pug">
 v-row.fill-height(no-gutters)
   v-col.fill-height.removed-max-width.py-0
-    SearchForm
+    FormSelect
     v-divider
     DataTable
   v-divider(vertical).fill-height
@@ -14,7 +14,7 @@ v-row.fill-height(no-gutters)
 }
 </style>
 <script>
-import SearchForm from "~/components/character/SearchForm";
+import FormSelect from "~/components/simulator/FormSelect";
 import DataTable from "~/components/character/DataTable";
 import SimulatingForm from "~/components/character/SimulatingFormElder";
 // vuetify 데이터 테이블 계산식 적용 예시
@@ -23,7 +23,7 @@ import SimulatingForm from "~/components/character/SimulatingFormElder";
 export default {
   transition: "slide-y-transition",
   components: {
-    SearchForm,
+    FormSelect,
     DataTable,
     SimulatingForm
   }
