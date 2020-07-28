@@ -1,6 +1,7 @@
 // LODB 2.0 Character store
 // 01 Get Google Sheet
-// 02 SearchForm Component state
+// 02 FormSelect Component state
+// 03 and export selected character data
 export const state = () => ({
   characterData: [],
   characterSelect: [0] // require default value
@@ -11,7 +12,7 @@ export const mutations = {
   SET_CHARACTERS_DATA(state, payload) {
     state.characterData = payload;
   },
-  // SearchForm select
+  // FormSelect
   SET_CHARACTERS_SELECT(state, characterSelect) {
     state.characterSelect = characterSelect;
   }
@@ -33,5 +34,25 @@ export const actions = {
       articles.push(_.zipObject(properties, rows[i]));
     }
     commit("SET_CHARACTERS_DATA", articles);
+  }
+};
+
+export const getters = {
+  getCharacterId: state => {
+    if (state.characterSelect.id === undefined) {
+      return "undefined"; // undefined.png 반환
+    } else {
+      return state.characterSelect.id;
+    }
+  },
+
+  // TODO: 승급관련 테이블 작성후 재작업
+  getCharacterRank: state => {
+    return [
+      state.characterSelect.rankSS,
+      state.characterSelect.rankS,
+      state.characterSelect.rankA,
+      state.characterSelect.rankB
+    ];
   }
 };

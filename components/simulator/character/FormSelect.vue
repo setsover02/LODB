@@ -32,7 +32,6 @@ export default {
   },
   computed: {
 		...mapState("characters", ["characterData"]),
-
 		characterSelect: {
 			get() {
 				return this.$store.state.characters.characterSelect

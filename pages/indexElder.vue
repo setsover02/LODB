@@ -14,7 +14,7 @@ v-row.fill-height(no-gutters)
 }
 </style>
 <script>
-import FormSelect from "~/components/simulator/FormSelect";
+import FormSelect from "~/components/simulator/character/FormSelect";
 import DataTable from "~/components/character/DataTable";
 import SimulatingForm from "~/components/character/SimulatingFormElder";
 // vuetify 데이터 테이블 계산식 적용 예시

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
 import AppBar from "~/components/default/AppBar.vue";
 import NavigationDrawer from "~/components/default/NavigationDrawer.vue";
 
