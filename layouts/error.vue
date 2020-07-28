@@ -10,27 +10,28 @@ v-row(no-gutters).fill-height
 
 <script>
 export default {
-  layout: 'empty',
+  layout: "empty",
+  transition: "scale-transition",
   props: {
     error: {
       type: Object,
       default: null
     }
   },
-  head () {
+  head() {
     const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+      this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
     return {
       title
-    }
+    };
   },
-  data () {
+  data() {
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
+      pageNotFound: "404 Not Found",
+      otherError: "An error occurred"
+    };
   }
-}
+};
 </script>
 
 <style scoped>

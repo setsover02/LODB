@@ -20,7 +20,7 @@ export const mutations = {
 
 export const actions = {
   // Get Google Sheet data
-  async asyncData({ state, commit }) {
+  async asyncData({ commit }) {
     const axios = require("axios");
     const _ = require("lodash");
     const url =

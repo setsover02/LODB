@@ -12,14 +12,16 @@ v-sheet.fill-height(width="480" color="transparent")
   //- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
   v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile color="transparent" elevation="0")
     v-form(ref="form")
-      //- Status preview
-      //- FormPreview
-      //- Level, Enhance
+      //- Level, Rank
       FormAdvance
       v-divider
+
+      //- Point
       FormEnhance
-      //- Link, FullLink
-      //- FormLink
+      v-divider
+
+      //- Link
+      FormLink
       //- v-divider.mt-4
       //- //- Item Equip
       //- FormEquipment
@@ -29,15 +31,16 @@ import { mapGetters } from 'vuex'
 import FormSelect from '~/components/simulator/character/FormSelect'
 import FormAdvance from '~/components/simulator/character/FormAdvance'
 import FormEnhance from '~/components/simulator/character/FormEnhance'
+import FormLink from '~/components/simulator/character/FormLink'
 
 export default {
   components: {
     FormSelect,
     FormAdvance,
-    FormEnhance
+    FormEnhance, FormLink
   },
   computed: {
-    ...mapGetters('characters', ['getCharacterId']),
+    ...mapGetters('characters/data', ['getCharacterId']),
   }
 }
 </script>
