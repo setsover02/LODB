@@ -12,7 +12,7 @@ v-sheet(color="transparent")
 		//- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
 		v-col(v-for="(link, index) in linkSlot")
 			span {{ link.input }}
-			v-select(@input="updateLinkSlot(index, $event.target.value)" :items="linkSlotItem" solo flat dense attach append-icon="" hide-details)
+			v-select(@change="updateLinkSlot(index, $event.target.value)" :items="linkSlotItem" solo flat dense attach append-icon="" hide-details)
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
@@ -25,8 +25,7 @@ export default {
 	},
 	methods: {
 		updateLinkSlot(index, val) {
-			store.commit("characters/link/updateLinkSlot", { index, val })
-			// this.$store.commit.characters.link.updateLinkSlot, { index, val }
+			store.commit("characters/link/SET_LINK_SLOT", { index, val })
 		}
 	}
 }

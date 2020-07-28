@@ -27,7 +27,7 @@ export const state = () => ({
 });
 
 export const mutations = {
-  updateLinkSlot(state, payload) {
+  SET_LINK_SLOT(state, payload) {
     state.linkSlot[(payload, index)].input = payload.val;
   }
 };
