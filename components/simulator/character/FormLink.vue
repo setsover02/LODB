@@ -30,7 +30,8 @@ export default {
   computed: {
     ...mapState("characters/link", ["linkSlotItem"]),
     ...mapGetters("characters/link", ["getTotalLink"]),
-    // 링크 슬롯(퍼센티지 합산 해야 함)
+		
+		// 링크 슬롯(퍼센티지 합산 해야 함)
     linkSlot1: {
       get() {
         return this.$store.state.characters.link.linkSlot1;

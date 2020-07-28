@@ -5,9 +5,6 @@ export const state = () => ({
   lightTheme: false
 });
 
-export const getters = {
-};
-
 export const mutations = {
   SET_NAV_DRAWER(state, navDrawer) {
     state.navDrawer = navDrawer;
