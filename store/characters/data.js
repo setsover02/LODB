@@ -2,6 +2,8 @@
 // 01 Get Google Sheet
 // 02 FormSelect Component state
 // 03 and export selected character data
+
+import { CONST } from "~/static/const";
 export const state = () => ({
   characterData: [],
   characterSelect: [0] // require default value
@@ -54,5 +56,94 @@ export const getters = {
       state.characterSelect.rankA,
       state.characterSelect.rankB
     ];
+  },
+
+  getFullLinkRes: state => {
+    if (state.characterSelect.fullLinkRes == 0) {
+      return null;
+    } else {
+      // CONST: call text
+      return CONST.FULL_LINK_BONUS.RES + state.characterSelect.fullLinkRes;
+    }
+  },
+
+  getFullLinkAp: state => {
+    if (state.characterSelect.fullLinkAP == 0) {
+      return null;
+    } else {
+      // CONST: call text
+      return CONST.FULL_LINK_BONUS.AP + state.characterSelect.fullLinkAP;
+    }
+  },
+
+  getFullLinkSKill: state => {
+    if (state.characterSelect.fullLinkSkill == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.SKILL +
+        state.characterSelect.fullLinkSkill * 100 +
+        "%"
+      );
+    }
+  },
+
+  getFullLinkHit: state => {
+    if (state.characterSelect.fullLinkHit == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.HIT + state.characterSelect.fullLinkHit + "%"
+      );
+    }
+  },
+  getFullLinkCrit: state => {
+    if (state.characterSelect.fullLinkCrit == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.CRIT + state.characterSelect.fullLinkCrit + "%"
+      );
+    }
+  },
+  getFullLinkDodge: state => {
+    if (state.characterSelect.fullLinkDodge == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.DODGE +
+        state.characterSelect.fullLinkDodge +
+        "%"
+      );
+    }
+  },
+  getFullLinkHealth: state => {
+    if (state.characterSelect.fullLinkHealth == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.HEALTH + state.characterSelect.fullLinkHealth
+      );
+    }
+  },
+  getFullLinkBuff: state => {
+    if (state.characterSelect.fullLinkBuff == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.BUFF +
+        state.characterSelect.fullLinkBuff +
+        "레벨"
+      );
+    }
+  },
+  getFullLinkRange: state => {
+    if (state.characterSelect.fullLinkRange == 0) {
+      return null;
+    } else {
+      return (
+        CONST.FULL_LINK_BONUS.RANGE + state.characterSelect.fullLinkRange
+      );
+    }
   }
 };

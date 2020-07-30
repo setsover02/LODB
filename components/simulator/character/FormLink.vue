@@ -20,70 +20,72 @@ v-sheet(color="transparent")
 			v-select(v-model="linkSlot4" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
 		v-col
 			v-select(v-model="linkSlot5" :items="linkSlotItem" solo flat dense attach append-icon="" suffix="%" hide-details)
+		v-col(cols="12")
+			v-select(v-model="fullLinkBonus" :items="getFullLinkBonusFilters" solo flat dense append-icon="mdi-chevron-down" attach prefix="풀링크 보너스" hide-details)
 </template>
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
-  methods: {
-    ...mapMutations("characters/link", ["SET_LINK_MAX", "SET_LINK_MIN"])
-  },
-  computed: {
-    ...mapState("characters/link", ["linkSlotItem"]),
-    ...mapGetters("characters/link", ["getTotalLink"]),
+	methods: {
+		...mapMutations("characters/link", ["SET_LINK_MAX", "SET_LINK_MIN"])
+	},
+	computed: {
+		...mapState("characters/link", ["linkSlotItem"]),
+		...mapGetters("characters/link", ["getTotalLink", "getFullLinkBonusFilters"]),
 		
-		// 링크 슬롯(퍼센티지 합산 해야 함)
-    linkSlot1: {
-      get() {
-        return this.$store.state.characters.link.linkSlot1;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_LINK_SLOT1", value);
-      }
-    },
-    linkSlot2: {
-      get() {
-        return this.$store.state.characters.link.linkSlot2;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_LINK_SLOT2", value);
-      }
-    },
-    linkSlot3: {
-      get() {
-        return this.$store.state.characters.link.linkSlot3;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_LINK_SLOT3", value);
-      }
-    },
-    linkSlot4: {
-      get() {
-        return this.$store.state.characters.link.linkSlot4;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_LINK_SLOT4", value);
-      }
-    },
-    linkSlot5: {
-      get() {
-        return this.$store.state.characters.link.linkSlot5;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_LINK_SLOT5", value);
-      }
-    },
-    fullLinkBonus: {
-      get() {
-        return this.$store.state.enhance.fullLinkBonus;
-      },
-      set(value) {
-        this.$store.commit("characters/link/SET_FULLLINK_BONUS", value);
-      }
-    },
-    totalLinkColor() {
-      if (this.$store.getters["characters/link/getTotalLink"] < 5) return "red";
-      else return "primary";
-    }
-  }
+		// 링크 슬롯(퍼센티지 합산)
+		linkSlot1: {
+			get() {
+				return this.$store.state.characters.link.linkSlot1;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_LINK_SLOT1", value);
+			}
+		},
+		linkSlot2: {
+			get() {
+				return this.$store.state.characters.link.linkSlot2;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_LINK_SLOT2", value);
+			}
+		},
+		linkSlot3: {
+			get() {
+				return this.$store.state.characters.link.linkSlot3;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_LINK_SLOT3", value);
+			}
+		},
+		linkSlot4: {
+			get() {
+				return this.$store.state.characters.link.linkSlot4;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_LINK_SLOT4", value);
+			}
+		},
+		linkSlot5: {
+			get() {
+				return this.$store.state.characters.link.linkSlot5;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_LINK_SLOT5", value);
+			}
+		},
+		fullLinkBonus: {
+			get() {
+				return this.$store.state.enhance.fullLinkBonus;
+			},
+			set(value) {
+				this.$store.commit("characters/link/SET_FULLLINK_BONUS", value);
+			}
+		},
+		totalLinkColor() {
+			if (this.$store.getters["characters/link/getTotalLink"] < 5) return "red";
+			else return "primary";
+		}
+	}
 };
 </script>

@@ -19,6 +19,22 @@ export const getters = {
         state.linkSlot5) /
       100
     );
+  },
+
+  getFullLinkBonusFilters: (rootGetters) => {
+   const list = [
+     rootGetters["characters/data/getFullLinkRes"],
+     rootGetters["characters/data/getFullLinkAP"],
+     rootGetters["characters/data/getFullLinkSKill"],
+     rootGetters["characters/data/getFullLinkHit"],
+     rootGetters["characters/data/getFullLinkCrit"],
+     rootGetters["characters/data/getFullLinkDodge"],
+     rootGetters["characters/data/getFullLinkHealth"],
+     rootGetters["characters/data/getFullLinkBuff"],
+     rootGetters["characters/data/getFullLinkRange"]
+   ];
+   // 보너스 없으면 null값 반환하고 null 값 필터링
+   return list.filter(element => element !== null);
   }
 };
 
