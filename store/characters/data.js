@@ -58,6 +58,7 @@ export const getters = {
     ];
   },
 
+  // Get full link bonus
   getFullLinkRes: state => {
     if (state.characterSelect.fullLinkRes == 0) {
       return null;
