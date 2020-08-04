@@ -26,6 +26,9 @@ v-sheet(color="transparent")
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
+	  mounted () {
+		this.$store.dispatch('characters/data/asyncCharacterRank')
+  },
 	methods: {
 		...mapMutations("characters/link", ["SET_LINK_MAX", "SET_LINK_MIN"])
 	},

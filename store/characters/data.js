@@ -6,36 +6,61 @@
 import { CONST } from "~/static/const";
 export const state = () => ({
   characterData: [],
+  characterRank: [],
   characterSelect: [0] // require default value
 });
+
+export const config = {
+  baseUrl: "https://sheets.googleapis.com/v4/spreadsheets/",
+  sheedId: "1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg",
+  apiKey: "key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To"
+};
+
+const axios = require("axios");
+const _ = require("lodash");
+
+export const actions = {
+  // Get Google Sheet data
+  // 01: characterBase sheet
+  async asyncCharacterBase({ commit }) {
+    let sheetName = "characterBase";
+    const url = `${config.baseUrl}${config.sheedId}/values/${sheetName}!A1:AQ1000?${config.apiKey}`;
+    const response = await axios.get(url);
+    const rows = response.data.values;
+    const properties = rows.shift();
+    const articles = [];
+    for (const i in rows) {
+      articles.push(_.zipObject(properties, rows[i]));
+    }
+    commit("SET_CHARACTERS_DATA", articles);
+  },
+
+  // 02: characterRank sheet
+  async asyncCharacterRank({ commit }) {
+    let sheetName = "characterRank";
+    const url = `${config.baseUrl}${config.sheedId}/values/${sheetName}!A1:AQ1000?${config.apiKey}`;
+    const response = await axios.get(url);
+    const rows = response.data.values;
+    const properties = rows.shift();
+    const articles = [];
+    for (const i in rows) {
+      articles.push(_.zipObject(properties, rows[i]));
+    }
+    commit("SET_CHARACTERS_RANK", articles);
+  }
+};
 
 export const mutations = {
   // Google Sheet
   SET_CHARACTERS_DATA(state, payload) {
     state.characterData = payload;
   },
+  SET_CHARACTERS_RANK(state, payload) {
+    state.characterRank = payload;
+  },
   // FormSelect
   SET_CHARACTERS_SELECT(state, characterSelect) {
     state.characterSelect = characterSelect;
-  }
-};
-
-export const actions = {
-  // Get Google Sheet data
-  async asyncData({ commit }) {
-    const axios = require("axios");
-    const _ = require("lodash");
-    const url =
-      "https://sheets.googleapis.com/v4/spreadsheets/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/values/dataHeroes!A1:AQ1000?key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To";
-    const response = await axios.get(url);
-    const rows = response.data.values;
-    const properties = rows.shift();
-    const articles = [];
-
-    for (const i in rows) {
-      articles.push(_.zipObject(properties, rows[i]));
-    }
-    commit("SET_CHARACTERS_DATA", articles);
   }
 };
 
@@ -112,9 +137,7 @@ export const getters = {
       return null;
     } else {
       return (
-        CONST.FULL_LINK_BONUS.DODGE +
-        state.characterSelect.fullLinkDodge +
-        "%"
+        CONST.FULL_LINK_BONUS.DODGE + state.characterSelect.fullLinkDodge + "%"
       );
     }
   },
@@ -132,9 +155,7 @@ export const getters = {
       return null;
     } else {
       return (
-        CONST.FULL_LINK_BONUS.BUFF +
-        state.characterSelect.fullLinkBuff +
-        "레벨"
+        CONST.FULL_LINK_BONUS.BUFF + state.characterSelect.fullLinkBuff + "레벨"
       );
     }
   },
@@ -142,9 +163,7 @@ export const getters = {
     if (state.characterSelect.fullLinkRange == 0) {
       return null;
     } else {
-      return (
-        CONST.FULL_LINK_BONUS.RANGE + state.characterSelect.fullLinkRange
-      );
+      return CONST.FULL_LINK_BONUS.RANGE + state.characterSelect.fullLinkRange;
     }
   }
 };

@@ -23,7 +23,7 @@ v-row.px-1
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   mounted () {
-		this.$store.dispatch('characters/data/asyncData')
+		this.$store.dispatch('characters/data/asyncCharacterBase')
   },
   computed: {
 		...mapState("characters/data", ["characterData"]),
