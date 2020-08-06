@@ -8,10 +8,8 @@ v-navigation-drawer(v-model="navDrawer" color="transparent" width="240" clipped 
 					v-list-item-title.body-2.font-weight-black(v-text="item.title")
 		template(v-slot:append)
 			v-divider
-			v-list-item.py-4
-				v-checkbox.mt-0.pt-0(disabled v-model="lightTheme" hide-details inset color="orange" off-icon="mdi-weather-night" on-icon="mdi-weather-sunset")
-					template(v-slot:label)
-						span.overline Theme
+			v-list-item.overline 2020 Powered by 
+				a.primary--text.pl-1 Mimao
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";

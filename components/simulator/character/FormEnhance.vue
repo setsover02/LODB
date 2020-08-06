@@ -28,7 +28,7 @@ v-sheet(color="transparent").px-4.py-2
 		v-col(cols="12").pb-0
 			v-slider.align-center(v-model="pointDamage" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
-					span.caption.nowrap 공격력
+					span.caption.nowrap 공격
 				template(v-slot:append)
 					v-text-field.min-width(v-model="pointDamage" dense flat solo hide-details @wheel="pointDamage + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").py-0
