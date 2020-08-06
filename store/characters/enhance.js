@@ -10,21 +10,9 @@ export const state = () => ({
   pointDamage: 0, // * 1.5
   pointHealth: 0, // * 8
   pointDefense: 0, // * 1.5
-  pointHit: 0, // * 1.5%
+  pointAcc: 0, // * 1.5%
   pointCrit: 0, // * 0.4%
-  pointDodge: 0, // * 0.4%
-  // points: [
-  //   {
-  //     name: "damage",
-  //     input: 0,
-  //     suffix: "공격력"
-  //   },
-  //   {
-  //     name: "health",
-  //     input: 0,
-  //     suffix: "체력"
-  //   }
-  // ]
+  pointEva: 0, // * 0.4%
 });
 
 export const getters = {
@@ -34,9 +22,9 @@ export const getters = {
       (state.pointDamage +
         state.pointHealth +
         state.pointDefense +
-        state.pointHit +
+        state.pointAcc +
         state.pointCrit +
-        state.pointDodge)
+        state.pointEva)
     );
   }
 };
@@ -45,9 +33,6 @@ export const mutations = {
   SET_LEVEL(state, level) {
     state.level = level;
   },
-  // SET_POINT(state, payload) {
-  //   state.points[payload.index].input = payload.val;
-  // },
   SET_POINT_DAMAGE(state, response) {
     state.pointDamage = parseInt(response);
   },
@@ -57,13 +42,13 @@ export const mutations = {
   SET_POINT_DEFENSE(state, response) {
     state.pointDefense = parseInt(response);
   },
-  SET_POINT_HIT(state, response) {
-    state.pointHit = parseInt(response);
+  SET_POINT_ACC(state, response) {
+    state.pointAcc = parseInt(response);
   },
   SET_POINT_CRIT(state, response) {
     state.pointCrit = parseInt(response);
   },
-  SET_POINT_DODGE(state, response) {
-    state.pointDodge = parseInt(response);
+  SET_POINT_EVA(state, response) {
+    state.pointEva = parseInt(response);
   }
 };
