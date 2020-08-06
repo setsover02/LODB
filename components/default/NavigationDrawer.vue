@@ -1,5 +1,5 @@
 <template lang="pug">
-v-navigation-drawer(:mini-variant="navDrawer" color="transparent" width="240" clipped absolute app flat mobile-breakpoint="0")
+v-navigation-drawer(v-model="navDrawer" color="transparent" width="240" clipped absolute app flat mobile-breakpoint="0")
 		v-list.py-12.mt-4.py-lg-0.mt-lg-0
 			v-list-item(v-for="(item, i) in items" :key="i" :to="item.to" router exact)
 				v-list-item-icon 

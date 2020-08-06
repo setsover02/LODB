@@ -30,43 +30,42 @@ v-sheet(color="transparent").px-4.py-2
 				template(v-slot:prepend)
 					span.caption.nowrap 공격력
 				template(v-slot:append)
-					v-text-field(v-model="pointDamage" dense flat solo hide-details @wheel="pointDamage + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointDamage" dense flat solo hide-details @wheel="pointDamage + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").py-0
 			v-slider.align-center(v-model="pointHealth" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
 					span.caption.nowrap 체력
 				template(v-slot:append)
-					v-text-field(v-model="pointHealth" dense flat solo hide-details @wheel="pointHealth + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointHealth" dense flat solo hide-details @wheel="pointHealth + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").py-0
 			v-slider.align-center(v-model="pointDefense" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
 					span.caption.nowrap 방어
 				template(v-slot:append)
-					v-text-field(v-model="pointDefense" dense flat solo hide-details @wheel="pointDefense + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointDefense" dense flat solo hide-details @wheel="pointDefense + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").py-0
 			v-slider.align-center(v-model="pointAcc" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
 					span.caption.nowrap 적중
 				template(v-slot:append)
-					v-text-field(v-model="pointAcc" dense flat solo hide-details @wheel="pointAcc + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointAcc" dense flat solo hide-details @wheel="pointAcc + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").py-0
 			v-slider.align-center(v-model="pointCrit" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
 					span.caption.nowrap 치명
 				template(v-slot:append)
-					v-text-field(v-model="pointCrit" dense flat solo hide-details @wheel="pointCrit + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointCrit" dense flat solo hide-details @wheel="pointCrit + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 		v-col(cols="12").pt-0
 			v-slider.align-center(v-model="pointEva" thumb-label :max="300" hide-details)
 				template(v-slot:prepend)
 					span.caption.nowrap 회피
 				template(v-slot:append)
-					v-text-field(v-model="pointEva" dense flat solo hide-details @wheel="pointEva + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
+					v-text-field.min-width(v-model="pointEva" dense flat solo hide-details @wheel="pointEva + 1" type="number" counter maxlength="3" autocomplete="off" min="0" max="300")
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
 export default {
 	computed: {
-		...mapState("characters/enhance", ["points"]),
 		...mapGetters("characters/enhance", ["getRemainingPoint"]),
 
 		// 잔여스탯 색상
@@ -134,3 +133,7 @@ export default {
 	// }
 };
 </script>
+<style scoped lang="sass">
+.min-width
+	width: 44px
+</style>
