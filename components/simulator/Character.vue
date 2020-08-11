@@ -12,6 +12,9 @@ v-sheet.pa-0(color="transparent")
 				span.t100--text.text-h4.font-weight-bold Select Character first
 	v-row(v-else no-gutters)
 		v-col(cols="6")
+			CardPreview
+		v-divider(vertical)
+		v-col
 			//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 			v-card(tile color="transparent" elevation="0")
 				v-tabs(v-model="characterTabs" background-color="transparent" grow)
@@ -21,27 +24,23 @@ v-sheet.pa-0(color="transparent")
 					v-tab(disabled) 스쿼드
 				v-divider
 				v-tabs-items.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto.transparent(v-model="characterTabs")
-					v-tab-item.py-4
-						FormEnhance
-						v-divider
+					v-tab-item
 						FormLink
-					v-tab-item.py-4
+						v-divider
+						FormEnhance
+					v-tab-item
 						div 스킬
-		v-divider(vertical)
-		v-col(cols="5")
-			CardPreview
 </template>
 <script>
 import { mapGetters } from "vuex";
 import FormSelect from "~/components/simulator/character/FormSelect";
-import FormAdvance from "~/components/simulator/character/FormAdvance";
 import FormEnhance from "~/components/simulator/character/FormEnhance";
 import FormLink from "~/components/simulator/character/FormLink";
 import CardPreview from "~/components/simulator/character/CardPreview";
+
 export default {
   components: {
     FormSelect,
-    FormAdvance,
     FormEnhance,
 		FormLink,
 		CardPreview
