@@ -1,15 +1,15 @@
 <template lang="pug">
 v-navigation-drawer(v-model="navDrawer" color="transparent" width="240" clipped absolute app flat mobile-breakpoint="0")
-		v-list.py-12.mt-4.py-lg-0.mt-lg-0
-			v-list-item(v-for="(item, i) in items" :key="i" :to="item.to" router exact)
-				v-list-item-icon 
-					v-icon(v-text="item.icon")
-				v-list-item-content
-					v-list-item-title.body-2.font-weight-black(v-text="item.title")
-		template(v-slot:append)
-			v-divider
-			v-list-item.overline 2020 Powered by 
-				a.primary--text.pl-1 Mimao
+	v-list.py-12.mt-4.py-lg-0.mt-lg-0
+		v-list-item(v-for="(item, i) in items" :key="i" :to="item.to" router exact)
+			v-list-item-icon 
+				v-icon(v-text="item.icon")
+			v-list-item-content
+				v-list-item-title.body-2.font-weight-black(v-text="item.title")
+	template(v-slot:append)
+		v-divider
+		v-list-item.overline 2020 Powered by 
+			a.primary--text.pl-1 Mimao
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
@@ -27,7 +27,6 @@ export default {
 				{ icon: "mdi-update", title: "업데이트", to: "/release" },
 				{ icon: "mdi-wrench", title: "Test", to: "/test" }
 			],
-			title: "Last Origin"
 		};
 	},
 	opts: {
