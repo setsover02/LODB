@@ -1,11 +1,11 @@
 <template lang="pug">
   v-app(:light="getTheme")
-    AppBar
-    NavigationDrawer
-    //- v-card.dashboard.mx-auto.my-lg-8(shaped)
-    v-main.fill-height
-      v-container(fluid).fill-height.align-start.pa-0
-        nuxt
+    v-card.dashboard.mx-auto.my-lg-8(shaped)
+      AppBar
+      NavigationDrawer
+      v-main.fill-height
+        v-container(fluid).fill-height.align-start.pa-0
+          nuxt
     AppFooter
 </template>
 

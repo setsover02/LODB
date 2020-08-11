@@ -1,49 +1,56 @@
 <template lang="pug">
 //- Character Info
-v-sheet.fill-height(width="420" color="transparent")
-  FormSelect
-  v-divider
-  //- Card : 데이터 없을경우
-  v-card.fill-height.d-flex.flex-column.align-center.justify-center(v-if="getCharacterId === 'undefined'" tile color="transparent" elevation="0") 
-    //- v-avatar(size="144")
-    //-   v-icon(color="t200" size="144") mdi-account-group-outline
-      //- v-img(:src="require('~/assets/img/avatar/undefined.png')")
-    span.t100--text.text-h4.font-weight-bold Select Character first
-  //- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-  v-card.fill-height__vh-n16.overflow-x-hidden.overflow-y-auto(v-else tile color="transparent" elevation="0")
-    v-form(ref="form")
-      FormAvatar
-      v-divider
-      //- Level, Rank
-      FormAdvance
-      v-divider
-
-      //- Point
-      FormEnhance
-      v-divider
-
-      //- Link
-      FormLink
-      //- v-divider.mt-4
-      //- //- Item Equip
-      //- FormEquipment
+v-sheet.pa-0(color="transparent")
+	FormSelect
+	v-divider
+	v-row.fill-height(v-if="getCharacterId === 'undefined'" no-gutters)
+		v-col.fill-height(cols="12")
+			v-card.d-flex.flex-column.align-center.justify-center(tile color="transparent" elevation="0") 
+				//- v-avatar(size="144")
+				//-   v-icon(color="t200" size="144") mdi-account-group-outline
+					//- v-img(:src="require('~/assets/img/avatar/undefined.png')")
+				span.t100--text.text-h4.font-weight-bold Select Character first
+	v-row(v-else no-gutters)
+		v-col(cols="6")
+			//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
+			v-card(tile color="transparent" elevation="0")
+				v-tabs(v-model="characterTabs" background-color="transparent" grow)
+					v-tab 강화
+					v-tab 스킬
+					v-tab 아이템
+					v-tab(disabled) 스쿼드
+				v-divider
+				v-tabs-items.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto.transparent(v-model="characterTabs")
+					v-tab-item.py-4
+						FormEnhance
+						v-divider
+						FormLink
+					v-tab-item.py-4
+						div 스킬
+		v-divider(vertical)
+		v-col(cols="5")
+			CardPreview
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import FormAvatar from '~/components/simulator/character/FormAvatar'
-import FormSelect from '~/components/simulator/character/FormSelect'
-import FormAdvance from '~/components/simulator/character/FormAdvance'
-import FormEnhance from '~/components/simulator/character/FormEnhance'
-import FormLink from '~/components/simulator/character/FormLink'
-
+import { mapGetters } from "vuex";
+import FormSelect from "~/components/simulator/character/FormSelect";
+import FormAdvance from "~/components/simulator/character/FormAdvance";
+import FormEnhance from "~/components/simulator/character/FormEnhance";
+import FormLink from "~/components/simulator/character/FormLink";
+import CardPreview from "~/components/simulator/character/CardPreview";
 export default {
-  components: {FormAvatar,
+  components: {
     FormSelect,
     FormAdvance,
-    FormEnhance, FormLink
+    FormEnhance,
+		FormLink,
+		CardPreview
   },
   computed: {
-    ...mapGetters('characters/data', ['getCharacterId']),
-  }
-}
+    ...mapGetters("characters/data", ["getCharacterId"])
+  },
+  data: () => ({
+    characterTabs: null
+  })
+};
 </script>

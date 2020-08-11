@@ -1,3 +1,27 @@
+@mixin font-face($weight)
+	font-family: 'NEXON Lv2 Gothic'
+	src: url('../font/NEXON Lv2 Gothic #{$weight}.eot')
+	src: url('../font/NEXON Lv2 Gothic #{$weight}.eot?#iefix') format('embedded-opentype')
+	src: url('../font/NEXON Lv2 Gothic #{$weight}.woff') format('woff')
+	font-style: normal
+	font-display: swap
+	
+@font-face
+	@include font-face(Light)
+	font-weight: 300
+
+@font-face
+	@include font-face(Regular)
+	font-weight: 400
+
+@font-face
+	@include font-face(Medium)
+	font-weight: 500
+
+@font-face
+	@include font-face(Bold)
+	font-weight: 600
+	
 .v-application
 	kbd, code, pre
 		font-size: 0.975rem !important

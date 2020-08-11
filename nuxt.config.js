@@ -17,7 +17,6 @@ export default {
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    script: [{ src: "//script.sheetsu.com/" }] // Google Spreadsheet
   },
   /*
    ** Customize the progress-bar color
@@ -47,7 +46,6 @@ export default {
   webfontloader: {
     google: {
       families: [
-        "Noto Sans KR:100,300,400,500,700",
         "Quicksand: 300,400,500,600,700"
       ]
     }
