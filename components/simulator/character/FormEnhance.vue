@@ -47,11 +47,11 @@ v-expansion-panel.transparent
 import { mapState, mapGetters } from "vuex";
 export default {
 	computed: {
-		...mapGetters("characters/enhance", ["getRemainingPoint"]),
+		...mapGetters("enhance", ["getRemainingPoint"]),
 
 		// 잔여스탯 색상
 		remainingColor() {
-			if (this.$store.getters["characters/enhance/getRemainingPoint"] < 0)
+			if (this.$store.getters["enhance/getRemainingPoint"] < 0)
 				return "red";
 			else return "primary";
 		},
@@ -59,57 +59,57 @@ export default {
 		//- Point form text field
 		pointDamage: {
 			get() {
-				return this.$store.state.characters.enhance.pointDamage;
+				return this.$store.state.enhance.pointDamage;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_DAMAGE", value);
+				this.$store.commit("enhance/SET_POINT_DAMAGE", value);
 			}
 		},
 		pointHealth: {
 			get() {
-				return this.$store.state.characters.enhance.pointHealth;
+				return this.$store.state.enhance.pointHealth;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_HEALTH", value);
+				this.$store.commit("enhance/SET_POINT_HEALTH", value);
 			}
 		},
 		pointDefense: {
 			get() {
-				return this.$store.state.characters.enhance.pointDefense;
+				return this.$store.state.enhance.pointDefense;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_DEFENSE", value);
+				this.$store.commit("enhance/SET_POINT_DEFENSE", value);
 			}
 		},
 		pointAcc: {
 			get() {
-				return this.$store.state.characters.enhance.pointAcc;
+				return this.$store.state.enhance.pointAcc;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_ACC", value);
+				this.$store.commit("enhance/SET_POINT_ACC", value);
 			}
 		},
 		pointCrit: {
 			get() {
-				return this.$store.state.characters.enhance.pointCrit;
+				return this.$store.state.enhance.pointCrit;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_CRIT", value);
+				this.$store.commit("enhance/SET_POINT_CRIT", value);
 			}
 		},
 		pointEva: {
 			get() {
-				return this.$store.state.characters.enhance.pointEva;
+				return this.$store.state.enhance.pointEva;
 			},
 			set(value) {
-				this.$store.commit("characters/enhance/SET_POINT_EVA", value);
+				this.$store.commit("enhance/SET_POINT_EVA", value);
 			}
 		}
 	},
 	//- v-for point form:: not working
 	// methods: {
 	//   updatePoint(index, val) {
-	//     store.commit("characters/enhance/SET_POINT", { index, val });
+	//     store.commit("enhance/SET_POINT", { index, val });
 	//   }
 	// }
 };

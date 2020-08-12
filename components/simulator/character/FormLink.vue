@@ -29,54 +29,54 @@ v-expansion-panel.transparent
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
 	mounted () {
-		this.$store.dispatch('characters/data/asyncCharacterRank')
+		this.$store.dispatch('sheet/asyncCharacterRank')
   },
 	methods: {
-		...mapMutations("characters/link", ["SET_LINK_MAX", "SET_LINK_MIN"])
+		...mapMutations("link", ["SET_LINK_MAX", "SET_LINK_MIN"])
 	},
 	computed: {
-		...mapState("characters/link", ["linkSlotItem"]),
-		...mapGetters("characters/link", ["getTotalLink", "getFullLinkBonusFilters"]),
+		...mapState("link", ["linkSlotItem"]),
+		...mapGetters("link", ["getTotalLink", "getFullLinkBonusFilters"]),
 		
 		// 링크 슬롯(퍼센티지 합산)
 		linkSlot1: {
 			get() {
-				return this.$store.state.characters.link.linkSlot1;
+				return this.$store.state.link.linkSlot1;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_LINK_SLOT1", value);
+				this.$store.commit("link/SET_LINK_SLOT1", value);
 			}
 		},
 		linkSlot2: {
 			get() {
-				return this.$store.state.characters.link.linkSlot2;
+				return this.$store.state.link.linkSlot2;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_LINK_SLOT2", value);
+				this.$store.commit("link/SET_LINK_SLOT2", value);
 			}
 		},
 		linkSlot3: {
 			get() {
-				return this.$store.state.characters.link.linkSlot3;
+				return this.$store.state.link.linkSlot3;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_LINK_SLOT3", value);
+				this.$store.commit("link/SET_LINK_SLOT3", value);
 			}
 		},
 		linkSlot4: {
 			get() {
-				return this.$store.state.characters.link.linkSlot4;
+				return this.$store.state.link.linkSlot4;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_LINK_SLOT4", value);
+				this.$store.commit("link/SET_LINK_SLOT4", value);
 			}
 		},
 		linkSlot5: {
 			get() {
-				return this.$store.state.characters.link.linkSlot5;
+				return this.$store.state.link.linkSlot5;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_LINK_SLOT5", value);
+				this.$store.commit("link/SET_LINK_SLOT5", value);
 			}
 		},
 		fullLinkBonus: {
@@ -84,11 +84,11 @@ export default {
 				return this.$store.state.enhance.fullLinkBonus;
 			},
 			set(value) {
-				this.$store.commit("characters/link/SET_FULLLINK_BONUS", value);
+				this.$store.commit("link/SET_FULLLINK_BONUS", value);
 			}
 		},
 		totalLinkColor() {
-			if (this.$store.getters["characters/link/getTotalLink"] < 5) return "red";
+			if (this.$store.getters["link/getTotalLink"] < 5) return "red";
 			else return "primary";
 		}
 	}

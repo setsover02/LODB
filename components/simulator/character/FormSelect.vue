@@ -1,8 +1,8 @@
 <template lang="pug">
-v-row(align="center")
-	v-col.pl-3(cols="5")
+v-row.pl-3.pr-6(align="center")
+	v-col(cols="5")
 		//- 검색 필터: 테이블 데이터와 동기화 중
-		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" return-object eager prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" solo flat autocomplete="off")
+		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat autocomplete="off")
 			//- 선택 데이터 chip 형태로 표기
 			template(v-slot:selection="data")
 				v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -42,27 +42,27 @@ v-row(align="center")
 import { mapState, mapGetters } from "vuex";
 export default {
   mounted() {
-    this.$store.dispatch("characters/data/asyncCharacterBase");
+    this.$store.dispatch("sheet/asyncCharacterBase");
   },
   computed: {
-    ...mapState("characters/data", ["characterData"]),
-    ...mapState("characters/enhance", ["rankChip"]),
-		...mapGetters("characters/data", ["getCharacterRank"]),
+    ...mapState("sheet", ["characterData"]),
+    ...mapState("enhance", ["rankChip"]),
+		...mapGetters("sheet", ["getCharacterRank"]),
 		
     characterSelect: {
       get() {
-        return this.$store.state.characters.data.characterSelect;
+        return this.$store.state.sheet.characterSelect;
       },
       set(value) {
-        this.$store.commit("characters/data/SET_CHARACTERS_SELECT", value);
+        this.$store.commit("sheet/SET_CHARACTERS_SELECT", value);
       }
     },
     level: {
       get() {
-        return this.$store.state.characters.enhance.level;
+        return this.$store.state.enhance.level;
       },
       set(value) {
-        this.$store.commit("characters/enhance/SET_LEVEL", value);
+        this.$store.commit("enhance/SET_LEVEL", value);
       }
     }
   }

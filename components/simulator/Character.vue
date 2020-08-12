@@ -58,7 +58,7 @@ export default {
     FormSquad
   },
   computed: {
-    ...mapGetters("characters/data", ["getCharacterId"])
+    ...mapGetters("sheet", ["getCharacterId"])
   },
   data: () => ({
     characterTabs: null
