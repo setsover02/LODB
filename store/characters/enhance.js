@@ -1,7 +1,5 @@
 // LODB 2.0 Character Enhance Simulation
-// 1. Get SearchForm Object
-// 2. FormAdvance
-// 3. FormEnhance
+// Return value: FormEnhance
 
 import { CONST } from "~/static/const";
 export const state = () => ({

@@ -5,12 +5,48 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 			span.mint--text  (스탯창),
 			span.text--secondary  (인게임 모든버프 포함)
 	v-row
-		v-col(v-for="(item, i) in preview" cols="12" lg="3" md="3" sm="6")
+		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
-					v-list-item-title.caption {{ item.text }}
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold(v-text="item.inPanel")
-					v-list-item-subtitle.mt-n1(v-text="item.inGame")
+					v-list-item-title.caption 체력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getCharacterHealth }}
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 치명타
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 공격력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 적중
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 방어력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 회피
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 행동력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
+					v-list-item-subtitle.mt-n1 431
 	v-divider
 	v-row
 		v-col(cols="6")
@@ -72,14 +108,15 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 					v-list-item-subtitle.subtitle-1.t100--text.font-weight-bold 0%
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data: () => ({
     characterTabs: null
   }),
   computed: {
-    ...mapState("characters/preview", ["preview"])
+		...mapGetters("characters/preview", ["getCharacterHealth"])
+  //   ...mapState("characters/preview", ["preview"])
   }
 };
 </script>

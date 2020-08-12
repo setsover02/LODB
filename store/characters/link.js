@@ -34,7 +34,8 @@ export const getters = {
     //  rootGetters["characters/data/getFullLinkRange"]
    ];
    // 보너스 없으면 null값 반환하고 null 값 필터링
-   return list.filter(element => element !== null);
+  //  return list.filter(element => element !== null);
+   return rootGetters["characters/data/getFullLinkRes"];
   }
 };
 

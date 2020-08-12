@@ -15,6 +15,7 @@ import NavigationDrawer from "~/components/default/NavigationDrawer.vue";
 import AppFooter from "~/components/default/AppFooter.vue";
 
 export default {
+  name: 'Default',
   components: {
     AppBar,
     NavigationDrawer,
