@@ -22,10 +22,28 @@ export const getters = {
   },
 
   getFullLinkBonusFilters: (state, getters, rootState, rootGetters) => {
-    
-  //  보너스 없으면 null값 반환하고 null 값 필터링
-  //  return list.filter(element => element !== null);
-  // return list
+    const FullLinkRes = rootGetters["data/getFullLinkRes"];
+    const FullLinkAp = rootGetters["data/getFullLinkAp"];
+    const FullLinkAcc = rootGetters["data/getFullLinkAcc"];
+    const FullLinkSkill = rootGetters["data/getFullLinkSkill"];
+    const FullLinkCrit = rootGetters["data/getFullLinkCrit"];
+    const FullLinkEva = rootGetters["data/getFullLinkEva"];
+    const FullLinkHealth = rootGetters["data/getFullLinkHealth"];
+    const FullLinkBuff = rootGetters["data/getFullLinkBuff"];
+    const FullLinkRange = rootGetters["data/getFullLinkRange"];
+    const list = [
+      FullLinkRes,
+      FullLinkAp,
+      FullLinkAcc,
+      FullLinkSkill,
+      FullLinkCrit,
+      FullLinkEva,
+      FullLinkHealth,
+      FullLinkBuff,
+      FullLinkRange
+    ];
+    //  보너스 없으면 null값 반환하고 null 값 필터링
+    return list.filter(element => element !== null);
   }
 };
 

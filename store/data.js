@@ -85,44 +85,31 @@ export const getters = {
 
   // Get full link bonus
   getFullLinkRes: state => {
-    if (state.characterSelect.fullLinkRes == 0) {
-      return null;
-    } else {
-      // CONST: call text
-      return CONST.FULL_LINK_BONUS.RES + state.characterSelect.fullLinkRes;
-    }
+    // CONST: call text
+    return CONST.FULL_LINK_BONUS.RES + state.characterSelect.fullLinkRes;
   },
 
   getFullLinkAp: state => {
-    if (state.characterSelect.fullLinkAP == 0) {
+    return CONST.FULL_LINK_BONUS.AP + state.characterSelect.fullLinkAP;
+  },
+
+  getFullLinkAcc: state => {
+    if (state.characterSelect.fullLinkAcc == 0) {
       return null;
     } else {
       // CONST: call text
-      return CONST.FULL_LINK_BONUS.AP + state.characterSelect.fullLinkAP;
+      return CONST.FULL_LINK_BONUS.ACC + state.characterSelect.fullLinkAcc + "%";
     }
   },
 
-  getFullLinkSKill: state => {
-    if (state.characterSelect.fullLinkSkill == 0) {
-      return null;
-    } else {
-      return (
-        CONST.FULL_LINK_BONUS.SKILL +
-        state.characterSelect.fullLinkSkill * 100 +
-        "%"
-      );
-    }
+  getFullLinkSkill: state => {
+    return (
+      CONST.FULL_LINK_BONUS.SKILL +
+      state.characterSelect.fullLinkSkill * 100 +
+      "%"
+    );
   },
 
-  getFullLinkHit: state => {
-    if (state.characterSelect.fullLinkHit == 0) {
-      return null;
-    } else {
-      return (
-        CONST.FULL_LINK_BONUS.HIT + state.characterSelect.fullLinkHit + "%"
-      );
-    }
-  },
   getFullLinkCrit: state => {
     if (state.characterSelect.fullLinkCrit == 0) {
       return null;
@@ -132,12 +119,12 @@ export const getters = {
       );
     }
   },
-  getFullLinkDodge: state => {
-    if (state.characterSelect.fullLinkDodge == 0) {
+  getFullLinkEva: state => {
+    if (state.characterSelect.fullLinkEva == 0) {
       return null;
     } else {
       return (
-        CONST.FULL_LINK_BONUS.DODGE + state.characterSelect.fullLinkDodge + "%"
+        CONST.FULL_LINK_BONUS.EVA + state.characterSelect.fullLinkEva + "%"
       );
     }
   },

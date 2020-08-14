@@ -33,9 +33,9 @@ export const CONST = {
     RES: "출격비용 ",
     AP: "행동력 ",
     SKILL: "스킬피해 ",
-    HIT: "적중 ",
+    ACC: "적중 ",
     CRIT: "치명 ",
-    DODGE: "회피 ",
+    EVA: "회피 ",
     HEALTH: "체력 ",
     BUFF: "버프/디버프 + ",
     RANGE: "사거리 +"
