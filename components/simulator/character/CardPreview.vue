@@ -32,13 +32,13 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
-					v-list-item-title.caption 치명타
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
-					v-list-item-subtitle.mt-n1 431
+					v-list-item-title.caption 공격력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getDamage }}
+					v-list-item-subtitle.mt-n1 {{ getDamage }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
-					v-list-item-title.caption 공격력
+					v-list-item-title.caption 치명타
 					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
 					v-list-item-subtitle.mt-n1 431
 		v-col(cols="12" lg="3" md="3" sm="6")
@@ -116,7 +116,7 @@ export default {
     characterTabs: null
   }),
   computed: {
-    ...mapGetters("preview", ["getHealth", "getDefense", "getEva", "getSpeed","getCrit", "getDemage", "getAcc"])
+    ...mapGetters("preview", ["getHealth", "getDefense", "getEva", "getSpeed","getCrit", "getDamage", "getAcc"])
   }
 };
 </script>

@@ -1,4 +1,4 @@
-import { CONST } from "~/static/const";
+import {CONST} from '~/static/const';
 export const state = () => ({
   linkSlotItem: CONST.LINK_SLOT, // 링크 퍼센티지 선택
   linkSlot1: 100,
@@ -6,50 +6,35 @@ export const state = () => ({
   linkSlot3: 100,
   linkSlot4: 100,
   linkSlot5: 100,
-  fullLinkBonus: ""
+  fullLinkBonus: '',
 });
 
 export const getters = {
   getTotalLink: state => {
-    return (
-      (state.linkSlot1 +
-        state.linkSlot2 +
-        state.linkSlot3 +
-        state.linkSlot4 +
-        state.linkSlot5) /
-      100
-    );
+    return (state.linkSlot1 + state.linkSlot2 + state.linkSlot3 + state.linkSlot4 + state.linkSlot5) / 100;
   },
   getFullLinkBonusFilters: (state, getters, rootState, rootGetters) => {
     const list = [
-      rootGetters["data/getFullLinkRes"],
-      rootGetters["data/getFullLinkSpeed"],
-      rootGetters["data/getFullLinkAcc"],
-      rootGetters["data/getFullLinkSkill"],
-      rootGetters["data/getFullLinkCrit"],
-      rootGetters["data/getFullLinkEva"],
-      rootGetters["data/getFullLinkHealth"],
-      rootGetters["data/getFullLinkRange"]
+      rootGetters['data/getFullLinkRes'],
+      rootGetters['data/getFullLinkSpeed'],
+      rootGetters['data/getFullLinkAcc'],
+      rootGetters['data/getFullLinkSkill'],
+      rootGetters['data/getFullLinkCrit'],
+      rootGetters['data/getFullLinkEva'],
+      rootGetters['data/getFullLinkHealth'],
+      rootGetters['data/getFullLinkRange'],
     ];
     //  보너스 없으면 null값 반환하고 null 값 필터링
     return list.filter(element => element !== null);
-  }
+  },
 };
 
 export const mutations = {
   SET_LINK_MAX(state) {
-    (state.linkSlot1 = 100),
-      (state.linkSlot2 = 100),
-      (state.linkSlot3 = 100),
-      (state.linkSlot4 = 100),
-      (state.linkSlot5 = 100);
+    (state.linkSlot1 = 100), (state.linkSlot2 = 100), (state.linkSlot3 = 100), (state.linkSlot4 = 100), (state.linkSlot5 = 100);
   },
   SET_LINK_MIN(state) {
-    (state.linkSlot1 = 0),
-      (state.linkSlot2 = 0),
-      (state.linkSlot3 = 0),
-      (state.linkSlot4 = 0),
-      (state.linkSlot5 = 0);
+    (state.linkSlot1 = 0), (state.linkSlot2 = 0), (state.linkSlot3 = 0), (state.linkSlot4 = 0), (state.linkSlot5 = 0);
   },
   SET_LINK_SLOT1(state, linkSlot1) {
     state.linkSlot1 = linkSlot1;
@@ -69,5 +54,5 @@ export const mutations = {
   // 풀링 보너스 선택값
   SET_FULLLINK_BONUS(state, fullLinkBonus) {
     state.fullLinkBonus = fullLinkBonus;
-  }
+  },
 };
