@@ -20,27 +20,16 @@ export const getters = {
       100
     );
   },
-
   getFullLinkBonusFilters: (state, getters, rootState, rootGetters) => {
-    const FullLinkRes = rootGetters["data/getFullLinkRes"];
-    const FullLinkAp = rootGetters["data/getFullLinkAp"];
-    const FullLinkAcc = rootGetters["data/getFullLinkAcc"];
-    const FullLinkSkill = rootGetters["data/getFullLinkSkill"];
-    const FullLinkCrit = rootGetters["data/getFullLinkCrit"];
-    const FullLinkEva = rootGetters["data/getFullLinkEva"];
-    const FullLinkHealth = rootGetters["data/getFullLinkHealth"];
-    const FullLinkBuff = rootGetters["data/getFullLinkBuff"];
-    const FullLinkRange = rootGetters["data/getFullLinkRange"];
     const list = [
-      FullLinkRes,
-      FullLinkAp,
-      FullLinkAcc,
-      FullLinkSkill,
-      FullLinkCrit,
-      FullLinkEva,
-      FullLinkHealth,
-      FullLinkBuff,
-      FullLinkRange
+      rootGetters["data/getFullLinkRes"],
+      rootGetters["data/getFullLinkAp"],
+      rootGetters["data/getFullLinkAcc"],
+      rootGetters["data/getFullLinkSkill"],
+      rootGetters["data/getFullLinkCrit"],
+      rootGetters["data/getFullLinkEva"],
+      rootGetters["data/getFullLinkHealth"],
+      rootGetters["data/getFullLinkRange"]
     ];
     //  보너스 없으면 null값 반환하고 null 값 필터링
     return list.filter(element => element !== null);
@@ -55,7 +44,6 @@ export const mutations = {
       (state.linkSlot4 = 100),
       (state.linkSlot5 = 100);
   },
-  // 링크 미니멈
   SET_LINK_MIN(state) {
     (state.linkSlot1 = 0),
       (state.linkSlot2 = 0),

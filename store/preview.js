@@ -1,3 +1,5 @@
+// 캐릭터 시뮬레이션 최종 계산식
+
 import { CONST } from "~/static/const";
 
 export const getters = {
@@ -9,17 +11,19 @@ export const getters = {
   getHealth: (state, getters, rootState, rootGetters) => {
     const healthBase = Number(rootState.data.characterSelect.healthBase);
     const healthCoef = Number(rootState.data.characterSelect.healthCoef);
+    const linkHealth = Number(rootState.data.characterSelect.linkHealth)
     const pointHealth = rootState.enhance.pointHealth * CONST.ENH.HEALTH
     const equipHealth = 0 // TODO: 장비로 증가하는 체력
-
     if (healthBase == undefined || healthBase == null) {
       return "Not Load";
     } else {
       return Math.round(
-        (healthBase + (getters.getLevel - 1) * healthCoef + pointHealth + equipHealth) *
-        (1)
+        (healthBase +
+          (getters.getLevel - 1) * healthCoef +
+          pointHealth +
+          equipHealth) *
+          (1 + linkHealth * rootGetters["link/getTotalLink"])
       );
     }
   }
 };
-// (data.healthBase + (state.level - 1) * data.healthCoef + state.healthEnh * CONST.ENH.HEALTH + rootGetters["equip/getHealth"]) * (1 + data.linkHealth * getters.getTotalLink);

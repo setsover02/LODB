@@ -1,7 +1,7 @@
 // LODB 2.0 Character store
-// 01 Get Google Sheet
-// 02 FormSelect Component state
-// 03 and export selected character data
+// 01 구글 시트 데이터 받아옴
+// 02 FormSelect 변이
+// 03 캐릭터 데이터 포맷, 내보내기
 
 import { CONST } from "~/static/const";
 export const state = () => ({
