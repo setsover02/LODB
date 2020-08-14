@@ -27,7 +27,7 @@ v-row.pl-3.pr-6(align="center")
 			template(v-slot:label)
 				span.overline 서약
 	v-col(cols="auto")
-		v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100")
+		v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100" @wheel="level + 1")
 		
 	//- TODO: Rank Select, 승급관련 처리 필요
 	v-col(cols="auto")
@@ -42,19 +42,19 @@ v-row.pl-3.pr-6(align="center")
 import { mapState, mapGetters } from "vuex";
 export default {
   mounted() {
-    this.$store.dispatch("sheet/asyncCharacterBase");
+    this.$store.dispatch("data/asyncCharacterBase");
   },
   computed: {
-    ...mapState("sheet", ["characterData"]),
+    ...mapState("data", ["characterData"]),
     ...mapState("enhance", ["rankChip"]),
-		...mapGetters("sheet", ["getCharacterRank"]),
+		...mapGetters("data", ["getCharacterRank"]),
 		
     characterSelect: {
       get() {
-        return this.$store.state.sheet.characterSelect;
+        return this.$store.state.data.characterSelect;
       },
       set(value) {
-        this.$store.commit("sheet/SET_CHARACTERS_SELECT", value);
+        this.$store.commit("data/SET_CHARACTERS_SELECT", value);
       }
     },
     level: {

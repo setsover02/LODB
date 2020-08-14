@@ -9,8 +9,8 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 체력
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getCharacterHealth }}
-					v-list-item-subtitle.mt-n1 {{ getCharacterHealth }}
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getHealth }}
+					v-list-item-subtitle.mt-n1 {{ getHealth }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
@@ -115,8 +115,7 @@ export default {
     characterTabs: null
   }),
   computed: {
-    // ...mapGetters("sheet", ["getCharacterHealth"]),
-    ...mapGetters("preview", ["getCharacterHealth"])
+    ...mapGetters("preview", ["getHealth"])
   }
 };
 </script>

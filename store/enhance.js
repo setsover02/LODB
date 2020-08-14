@@ -1,5 +1,4 @@
-// LODB 2.0 Character Enhance Simulation
-// Return value: FormEnhance
+// 랭크, 레벨, 강화(포인트) 폼 입력값 변이
 
 import { CONST } from "~/static/const";
 export const state = () => ({

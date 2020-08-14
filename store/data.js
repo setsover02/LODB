@@ -83,14 +83,6 @@ export const getters = {
     ];
   },
 
-  getCharacterHealthBase: state => {
-    return state.characterSelect.healthBase;
-  },
-
-  getCharacterHealthCoef: state => {
-    return state.characterSelect.healthCoef;
-  },
-
   // Get full link bonus
   getFullLinkRes: state => {
     if (state.characterSelect.fullLinkRes == 0) {
