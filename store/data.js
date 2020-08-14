@@ -89,8 +89,8 @@ export const getters = {
     return CONST.FULL_LINK_BONUS.RES + state.characterSelect.fullLinkRes;
   },
 
-  getFullLinkAp: state => {
-    return CONST.FULL_LINK_BONUS.AP + state.characterSelect.fullLinkAP;
+  getFullLinkSpeed: state => {
+    return CONST.FULL_LINK_BONUS.SPEED + state.characterSelect.fullLinkSpeed;
   },
 
   getFullLinkAcc: state => {
@@ -133,7 +133,7 @@ export const getters = {
       return null;
     } else {
       return (
-        CONST.FULL_LINK_BONUS.HEALTH + state.characterSelect.fullLinkHealth
+        CONST.FULL_LINK_BONUS.HEALTH + state.characterSelect.fullLinkHealth * 100 + "%"
       );
     }
   },

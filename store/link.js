@@ -23,7 +23,7 @@ export const getters = {
   getFullLinkBonusFilters: (state, getters, rootState, rootGetters) => {
     const list = [
       rootGetters["data/getFullLinkRes"],
-      rootGetters["data/getFullLinkAp"],
+      rootGetters["data/getFullLinkSpeed"],
       rootGetters["data/getFullLinkAcc"],
       rootGetters["data/getFullLinkSkill"],
       rootGetters["data/getFullLinkCrit"],

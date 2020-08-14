@@ -14,6 +14,24 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
+					v-list-item-title.caption 방어력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getDefense }}
+					v-list-item-subtitle.mt-n1 {{ getDefense }}
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 회피
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getEva }}
+					v-list-item-subtitle.mt-n1 {{ getEva }}
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 행동력
+					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold {{ getSpeed }}
+					v-list-item-subtitle.mt-n1 {{ getSpeed }}
+		v-col(cols="12" lg="3" md="3" sm="6")
+			v-list-item(three-line dense).px-0
+				v-list-item-content
 					v-list-item-title.caption 치명타
 					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
 					v-list-item-subtitle.mt-n1 431
@@ -29,24 +47,7 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 					v-list-item-title.caption 적중
 					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
 					v-list-item-subtitle.mt-n1 431
-		v-col(cols="12" lg="3" md="3" sm="6")
-			v-list-item(three-line dense).px-0
-				v-list-item-content
-					v-list-item-title.caption 방어력
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
-					v-list-item-subtitle.mt-n1 431
-		v-col(cols="12" lg="3" md="3" sm="6")
-			v-list-item(three-line dense).px-0
-				v-list-item-content
-					v-list-item-title.caption 회피
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
-					v-list-item-subtitle.mt-n1 431
-		v-col(cols="12" lg="3" md="3" sm="6")
-			v-list-item(three-line dense).px-0
-				v-list-item-content
-					v-list-item-title.caption 행동력
-					v-list-item-subtitle.subtitle-1.mint--text.font-weight-bold 1232
-					v-list-item-subtitle.mt-n1 431
+
 	v-divider
 	v-row
 		v-col(cols="6")
@@ -115,7 +116,7 @@ export default {
     characterTabs: null
   }),
   computed: {
-    ...mapGetters("preview", ["getHealth"])
+    ...mapGetters("preview", ["getHealth", "getDefense", "getEva", "getSpeed","getCrit", "getDemage", "getAcc"])
   }
 };
 </script>
