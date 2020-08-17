@@ -10,12 +10,6 @@ export const state = () => ({
   characterSelect: [0], // require default value
 });
 
-export const config = {
-  baseUrl: 'https://sheets.googleapis.com/v4/spreadsheets/',
-  sheedId: '1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg',
-  apiKey: 'key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To',
-};
-
 const axios = require('axios');
 const _ = require('lodash');
 
@@ -24,7 +18,7 @@ export const actions = {
   // 01: characterBase sheet
   async asyncCharacterBase({commit}) {
     let sheetName = 'characterBase';
-    const url = `${config.baseUrl}${config.sheedId}/values/${sheetName}!A1:AQ1000?${config.apiKey}`;
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AQ1000?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();

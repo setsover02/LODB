@@ -13,7 +13,7 @@
 	"tabWidth": 2,
 	"trailingComma": "all",
 	"useTabs": false,
-	"vueIndentScriptAndStyle": true,
+	"vueIndentScriptAndStyle": false,
 	"rangeStart": 0,
 	"requirePragma": false,
 	"insertPragma": false,

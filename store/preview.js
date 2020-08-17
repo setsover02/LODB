@@ -8,74 +8,106 @@ export const getters = {
   },
   // getStat 이름을 가진 getter는 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다
   getHealth: (state, getters, rootState, rootGetters) => {
-    const healthBase = Number(rootState.data.characterSelect.healthBase);
-    const healthCoef = Number(rootState.data.characterSelect.healthCoef);
-    const linkHealth = Number(1 + rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
-    const fullLinkHealth = Number(rootState.data.characterSelect.fullLinkHealth);
-    const pointHealth = rootState.enhance.pointHealth * CONST.ENH.HEALTH;
-    const equipHealth = 0; // TODO: 장비로 증가하는 체력
-    const final = (healthBase + (getters.getLevel - 1) * healthCoef + pointHealth + equipHealth) * linkHealth;
-    if (healthBase == undefined || healthBase == null) {
+    const b = Number(rootState.data.characterSelect.healthBase);
+    const c = Number(rootState.data.characterSelect.healthCoef);
+    const l = Number(1 + rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
+    const f = Number(rootState.data.characterSelect.fullLinkHealth);
+    const p = rootState.enhance.pointHealth * CONST.ENH.HEALTH;
+    const eq = 0; // TODO: 장비로 증가하는 체력
+    const F = (b + (getters.getLevel - 1) * c + p + eq) * l;
+    if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '체력 20%' || rootState.link.fullLinkBonus == '체력 25%') {
-      return Math.round(final * (1 + fullLinkHealth));
+      return Math.round(F * (1 + f));
     } else {
-      return Math.round(final);
+      return Math.round(F);
     }
   },
   getDefense: (state, getters, rootState, rootGetters) => {
-    const defenseBase = Number(rootState.data.characterSelect.defenseBase);
-    const defenseCoef = Number(rootState.data.characterSelect.defenseCoef);
-    const linkDefense = Number(1 + rootState.data.characterSelect.linkDefense * rootGetters['link/getTotalLink']);
-    const pointDefense = rootState.enhance.pointDefense * CONST.ENH.DEFENSE;
-    const equipDefense = 0; // TODO: 장비로 증가하는 체력
-    const final = (defenseBase + (getters.getLevel - 1) * defenseCoef + pointDefense + equipDefense) * linkDefense;
-    if (defenseBase == undefined || defenseBase == null) {
+    const b = Number(rootState.data.characterSelect.defenseBase);
+    const c = Number(rootState.data.characterSelect.defenseCoef);
+    const l = Number(1 + rootState.data.characterSelect.linkDefense * rootGetters['link/getTotalLink']);
+    const p = rootState.enhance.pointDefense * CONST.ENH.DEFENSE;
+    const eq = 0; // TODO: 장비로 증가하는 체력
+    const F = (b + (getters.getLevel - 1) * c + p + eq) * l;
+    if (b == undefined || b == null) {
       return 'Not Load';
     } else {
-      return Math.round(final);
+      return Math.round(F);
     }
   },
   getEva: (state, getters, rootState, rootGetters) => {
-    const eva = Number(rootState.data.characterSelect.eva);
-    const linkEva = Number(rootState.data.characterSelect.linkEva * rootGetters['link/getTotalLink']);
-    const fullLinkEva = Number(rootState.data.characterSelect.fullLinkEva);
-    const pointEva = rootState.enhance.pointEva * CONST.ENH.EVA;
-    const equipEva = 0; // TODO: 장비로 증가하는
-    const final = eva + pointEva + linkEva + equipEva;
-    if (eva == undefined || eva == null) {
+    const b = Number(rootState.data.characterSelect.eva);
+    const l = Number(rootState.data.characterSelect.linkEva * rootGetters['link/getTotalLink']);
+    const f = Number(rootState.data.characterSelect.fullLinkEva);
+    const p = rootState.enhance.pointEva * CONST.ENH.EVA;
+    const eq = 0; // TODO: 장비로 증가하는
+    const F = b + p + l + eq;
+    if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '회피 20%') {
-      return (final + fullLinkEva).toFixed(1) + '%';
+      return (F + f).toFixed(1) + '%';
     } else {
-      return final.toFixed(1) + '%';
+      return F.toFixed(1) + '%';
     }
   },
   getSpeed: (state, getters, rootState, rootGetters) => {
-    const speed = Number(rootState.data.characterSelect.speed);
-    const linkSpeed = Number(rootState.data.characterSelect.linkSpeed * rootGetters['link/getTotalLink']);
-    const fullLinkSpeed = Number(rootState.data.characterSelect.fullLinkSpeed);
-    const equipSpeed = 0;
-    const final = speed + linkSpeed + equipSpeed;
-    if (speed == undefined || speed == null) {
+    const b = Number(rootState.data.characterSelect.speed);
+    const l = Number(rootState.data.characterSelect.linkSpeed * rootGetters['link/getTotalLink']);
+    const f = Number(rootState.data.characterSelect.fullLinkSpeed);
+    const eq = 0;
+    const F = b + l + eq;
+    if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '행동력 0.10' || rootState.link.fullLinkBonus == '행동력 0.15' || rootState.link.fullLinkBonus == '행동력 0.20') {
-      return (final + fullLinkSpeed).toFixed(3);
+      return (F + f).toFixed(3);
     } else {
-      return final.toFixed(3);
+      return F.toFixed(3);
     }
   },
   getDamage: (state, getters, rootState, rootGetters) => {
-    const damageBase = Number(rootState.data.characterSelect.damageBase);
-    const damageCoef = Number(rootState.data.characterSelect.damageCoef);
-    const linkDamage = Number(1 + rootState.data.characterSelect.linkDamage * rootGetters['link/getTotalLink']);
-    const pointDamage = rootState.enhance.pointDamage * CONST.ENH.DAMAGE;
-    const equipDamage = 0; // TODO: 장비로 증가하는 체력
-    const final = (damageBase + (getters.getLevel - 1) * damageCoef + pointDamage + equipDamage) * linkDamage;
-    if (damageBase == undefined || damageBase == null) {
+    const b = Number(rootState.data.characterSelect.damageBase);
+    const c = Number(rootState.data.characterSelect.damageCoef);
+    const l = Number(1 + rootState.data.characterSelect.linkDamage * rootGetters['link/getTotalLink']);
+    const p = rootState.enhance.pointDamage * CONST.ENH.DAMAGE;
+    const eq = 0; // TODO: 장비로 증가하는 체력
+    const F = (b + (getters.getLevel - 1) * c + p + eq) * l;
+    if (b == undefined || b == null) {
       return 'Not Load';
     } else {
-      return Math.round(final);
+      return Math.round(F);
     }
   },
+  getCrit: (state, getters, rootState, rootGetters) => {
+    const b = Number(rootState.data.characterSelect.crit);
+    const l = Number(rootState.data.characterSelect.linkCrit * rootGetters['link/getTotalLink']);
+    const f = Number(rootState.data.characterSelect.fullLinkCrit);
+    const p = rootState.enhance.pointCrit * CONST.ENH.CRIT;
+    const eq = 0; // TODO: 장비로 증가하는
+    const F = b + p + l + eq;
+    if (b == undefined || b == null) {
+      return 'Not Load';
+    } else if (rootState.link.fullLinkBonus == '치명 20%') {
+      return (F + f).toFixed(1) + '%';
+    } else {
+      return F.toFixed(1) + '%';
+    }
+  },
+  getAcc: (state, getters, rootState, rootGetters) => {
+    const b = Number(rootState.data.characterSelect.acc);
+    const l = Number(rootState.data.characterSelect.linkAcc * rootGetters['link/getTotalLink']);
+    const f = Number(rootState.data.characterSelect.fullLinkAcc);
+    const p = rootState.enhance.pointAcc * CONST.ENH.ACC;
+    const eq = 0; // TODO: 장비로 증가하는
+    const F = b + p + l + eq;
+    if (b == undefined || b == null) {
+      return 'Not Load';
+    } else if (rootState.link.fullLinkBonus == '적중 75%') {
+      return (F + f).toFixed(1) + '%';
+    } else {
+      return F.toFixed(1) + '%';
+    }
+  },
+  
+  // 이 이하 버프 및 아이템으로 증가하는 스탯
 };

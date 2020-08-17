@@ -23,6 +23,7 @@ export const getters = {
       rootGetters['data/getFullLinkEva'],
       rootGetters['data/getFullLinkHealth'],
       rootGetters['data/getFullLinkRange'],
+      rootGetters['data/getFullLinkBuff'],
     ];
     //  보너스 없으면 null값 반환하고 null 값 필터링
     return list.filter(element => element !== null);

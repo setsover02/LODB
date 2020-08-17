@@ -2,7 +2,7 @@
 v-row.pl-3.pr-6(align="center")
 	v-col(cols="5")
 		//- 검색 필터: 테이블 데이터와 동기화 중
-		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat autocomplete="off")
+		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat auto-select-first autocomplete="off")
 			//- 선택 데이터 chip 형태로 표기
 			template(v-slot:selection="data")
 				v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -39,33 +39,33 @@ v-row.pl-3.pr-6(align="center")
 				v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import {mapState, mapGetters} from 'vuex';
 export default {
   mounted() {
-    this.$store.dispatch("data/asyncCharacterBase");
+    this.$store.dispatch('data/asyncCharacterBase');
   },
   computed: {
-    ...mapState("data", ["characterData"]),
-    ...mapState("enhance", ["rankChip"]),
-		...mapGetters("data", ["getCharacterRank"]),
-		
+    ...mapState('data', ['characterData']),
+    ...mapState('enhance', ['rankChip']),
+    ...mapGetters('data', ['getCharacterRank']),
+
     characterSelect: {
       get() {
         return this.$store.state.data.characterSelect;
       },
       set(value) {
-        this.$store.commit("data/SET_CHARACTERS_SELECT", value);
-      }
+        this.$store.commit('data/SET_CHARACTERS_SELECT', value);
+      },
     },
     level: {
       get() {
         return this.$store.state.enhance.level;
       },
       set(value) {
-        this.$store.commit("enhance/SET_LEVEL", value);
-      }
-    }
-  }
+        this.$store.commit('enhance/SET_LEVEL', value);
+      },
+    },
+  },
 };
 </script>
 <style scoped lang="sass">
