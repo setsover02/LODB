@@ -5,7 +5,9 @@ v-expansion-panel.transparent
 			v-col.subtitle-1.font-weight-bold 장비
 	v-expansion-panel-content
 		v-row
-			v-col(cols="9")
+			v-col(cols="3")
+				v-select(dense solo flat hide-details append-icon="mdi-chevron-down" )
+			v-col(cols="6")
 				v-autocomplete(:items="itemsData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: false }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
 					template(v-slot:selection="data")
 						v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")

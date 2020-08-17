@@ -2,8 +2,8 @@
 v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 	v-row(align="center")
 		v-col.subtitle-1.font-weight-bold 최종 스탯
-			span.mint--text  (스탯창),
-			span.text--secondary  (인게임 모든버프 포함)
+			span.mint--text  (인게임 모든버프),
+			span.text--secondary  (스탯창 기준)
 	v-row
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
