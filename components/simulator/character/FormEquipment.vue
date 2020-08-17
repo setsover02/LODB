@@ -4,35 +4,172 @@ v-expansion-panel.transparent
 		v-row.mr-2(align="center")
 			v-col.subtitle-1.font-weight-bold 장비
 	v-expansion-panel-content
+		//- BEGIN: Chip1
 		v-row
 			v-col(cols="3")
-				v-select(dense solo flat hide-details append-icon="mdi-chevron-down" )
-			v-col(cols="6")
-				v-autocomplete(:items="itemsData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: false }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+				v-select(v-model="chip1Rank" :items="itemRank" attach small-chips dense solo flat hide-details append-icon="mdi-chevron-down" )
 					template(v-slot:selection="data")
-						v-chip.white--text(small v-bind="data.attrs" :input-value="data.selected" color="transparent")
-							v-avatar.border-4(size="48" left tile)
+						v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
+					template(v-slot:item="data")
+						//- span(small v-if="data.item == null")
+						v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
+			v-col(cols="7")
+				v-autocomplete(v-model="chip1Slot" :items="filterChip1Rank" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: false }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+					template(v-slot:selection="data")
+						v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
+							v-list-item-avatar(tile size="48")
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
-							| {{ data.item.name + ' / ' + data.item.rank }}
+							v-list-item-content
+								v-list-item-title {{ data.item.name }}
 					template(v-slot:item="data")
 						template(v-if="typeof data.item !== 'object'")
 							v-list-item-content(v-text="data.item.name")
 						template(v-else)
-							v-list-item-avatar.border-4(size="32" tile)
+							v-list-item-avatar.border-4(size="48" tile)
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
 							v-list-item-content
-								v-list-item-title(v-html="data.item.name + '/' + data.item.rank")
+								v-list-item-title(v-html="data.item.name")
+			v-col(cols="2")
+				v-text-field(v-model="chip1Enh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
+		//- END: CHiP1
+		//- BEGIN: Chip2
+		v-row
 			v-col(cols="3")
-				v-text-field(value="10" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
+				v-select(v-model="chip2Rank" :items="itemRank" attach small-chips dense solo flat hide-details append-icon="mdi-chevron-down" )
+					template(v-slot:selection="data")
+						v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
+					template(v-slot:item="data")
+						//- span(small v-if="data.item == null")
+						v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
+			v-col(cols="7")
+				v-autocomplete(v-model="chip2Slot" :items="filterChip2Rank" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: false }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+					template(v-slot:selection="data")
+						v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
+							v-list-item-avatar(tile size="48")
+								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
+							v-list-item-content
+								v-list-item-title {{ data.item.name }}
+					template(v-slot:item="data")
+						template(v-if="typeof data.item !== 'object'")
+							v-list-item-content(v-text="data.item.name")
+						template(v-else)
+							v-list-item-avatar.border-4(size="48" tile)
+								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
+							v-list-item-content
+								v-list-item-title(v-html="data.item.name")
+			v-col(cols="2")
+				v-text-field(v-model="chip2Enh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
+		//- END: CHiP2
+		//- BEGIN: OS
+		v-row
+			v-col(cols="3")
+				v-select(v-model="osRank" :items="itemRank" attach small-chips dense solo flat hide-details append-icon="mdi-chevron-down" )
+					template(v-slot:selection="data")
+						v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
+					template(v-slot:item="data")
+						//- span(small v-if="data.item == null")
+						v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
+			v-col(cols="7")
+				v-autocomplete(v-model="os" :items="filterOsData" item-text="name" item-value="id" dense solo flat hide-details prefix="칩" attach :menu-props="{ top: false }" return-object auto-select-first append-icon="mdi-chevron-down" autocomplete="off")
+					template(v-slot:selection="data")
+						v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
+							v-list-item-avatar(tile size="48")
+								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
+							v-list-item-content
+								v-list-item-title {{ data.item.name }}
+					template(v-slot:item="data")
+						template(v-if="typeof data.item !== 'object'")
+							v-list-item-content(v-text="data.item.name")
+						template(v-else)
+							v-list-item-avatar.border-4(size="48" tile)
+								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
+							v-list-item-content
+								v-list-item-title(v-html="data.item.name")
+			v-col(cols="2")
+				v-text-field(v-model="osEnh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
+		//- END: OS
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 export default {
   mounted() {
     this.$store.dispatch('equipment/asyncItems');
   },
   computed: {
-    ...mapState('equipment', ['itemsData']),
+    ...mapState('equipment', ['itemRank']),
+    ...mapGetters('equipment', ['filterChip1Rank', 'filterChip2Rank', 'filterOsData']),
+    chip1Rank: {
+      get() {
+        return this.$store.state.equipment.chip1Rank;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP1_RANK', value);
+      },
+    },
+    chip1Slot: {
+      get() {
+        return this.$store.state.equipment.chip1Slot;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP1_SLOT', value);
+      },
+    },
+    chip1Enh: {
+      get() {
+        return this.$store.state.equipment.chip1Enh;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP1_ENH', value);
+      },
+    },
+    chip2Rank: {
+      get() {
+        return this.$store.state.equipment.chip2Rank;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP2_RANK', value);
+      },
+    },
+    chip2Slot: {
+      get() {
+        return this.$store.state.equipment.chip2Slot;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP2_SLOT', value);
+      },
+    },
+    chip2Enh: {
+      get() {
+        return this.$store.state.equipment.chip2Enh;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_CHIP2_ENH', value);
+      },
+		},
+		osRank: {
+      get() {
+        return this.$store.state.equipment.osRank;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_OS_RANK', value);
+      },
+    },
+    osSlot: {
+      get() {
+        return this.$store.state.equipment.osSlot;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_OS_SLOT', value);
+      },
+    },
+    osEnh: {
+      get() {
+        return this.$store.state.equipment.osEnh;
+      },
+      set(value) {
+        this.$store.commit('equipment/SET_os_ENH', value);
+      },
+    },
   },
 };
 </script>
