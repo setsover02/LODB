@@ -70,7 +70,7 @@ export const getters = {
     const c = Number(rootState.data.characterSelect.damageCoef);
     const l = Number(1 + rootState.data.characterSelect.linkDamage * rootGetters['link/getTotalLink']);
     const p = rootState.enhance.pointDamage * CONST.ENH.DAMAGE;
-    const eq = 0; // TODO: 장비로 증가하는 체력
+    const eq = rootGetters["equipment/getDamage"];
     const F = (b + (getters.getLevel - 1) * c + p + eq) * l;
     if (b == undefined || b == null) {
       return 'Not Load';

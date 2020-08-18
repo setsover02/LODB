@@ -2,7 +2,7 @@
 v-card.px-6.py-4(tile color="transparent" elevation="0")
 	v-row(align="center")
 		v-col.subtitle-1.font-weight-bold 최종 스탯
-			span.mint--text  (인게임 모든버프),
+			span.mint--text  (버프 총합),
 			span.text--secondary  (스탯창 기준)
 	v-row
 		v-col(cols="12" lg="3" md="3" sm="6")
@@ -10,7 +10,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 				v-list-item-content
 					v-list-item-title.caption 체력
 					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getHealth }}
-					v-list-item-subtitle {{ getHealth }}
+					v-list-item-subtitle.subtitle-1.mt-n1 {{ getHealth }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
@@ -109,14 +109,14 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import {mapState, mapGetters} from 'vuex';
 
 export default {
   data: () => ({
-    characterTabs: null
+    characterTabs: null,
   }),
   computed: {
-    ...mapGetters("preview", ["getHealth", "getDefense", "getEva", "getSpeed","getCrit", "getDamage", "getAcc"])
-  }
+    ...mapGetters('preview', ['getHealth', 'getDefense', 'getEva', 'getSpeed', 'getCrit', 'getDamage', 'getAcc']),
+  },
 };
 </script>
