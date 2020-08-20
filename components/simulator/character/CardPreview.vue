@@ -33,7 +33,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 공격력
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamage }}
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageBuff }}
 					v-list-item-subtitle.subtitle-1.mt-n1 {{ getDamage }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
@@ -61,20 +61,23 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 					v-list-item-title.caption 사거리
 					v-list-item-subtitle.text-h6.mint--text.font-weight-bold +1
 		v-col(cols="4")
-			v-list-item(dense).px-0
+			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 중장형 추가피해
-					v-list-item-subtitle.text-h6.primary--text.font-weight-bold 43%
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToHeavy }}
+					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarHeavy }}
 		v-col(cols="4")
-			v-list-item(dense).px-0
+			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 경장형 추가피해
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToLight }}
+					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarLight }}
 		v-col(cols="4")
-			v-list-item(dense).px-0
+			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 기동형 추가피해
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToFlyer }}
+					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarFlyer }}
 	v-divider
 	v-row
 		v-col(cols="4")
@@ -116,7 +119,13 @@ export default {
     characterTabs: null,
   }),
   computed: {
-    ...mapGetters('preview', ['getHealth', 'getDefense', 'getEva', 'getSpeed', 'getCrit', 'getDamage', 'getAcc']),
+    ...mapGetters('previews/health', ['getHealth']),
+    ...mapGetters('previews/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getDamageToLight', 'getEquipmentDamageVarHeavy', 'getDamageToHeavy', 'getEquipmentDamageVarFlyer', 'getDamageToFlyer']),
+    ...mapGetters('previews/defense', ['getDefense']),
+    ...mapGetters('previews/evasion', ['getEva']),
+    ...mapGetters('previews/speed', ['getSpeed']),
+    ...mapGetters('previews/critical', ['getCrit']),
+    ...mapGetters('previews/accuracy', ['getAcc']),
   },
 };
 </script>
