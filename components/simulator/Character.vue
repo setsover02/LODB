@@ -1,9 +1,9 @@
 <template lang="pug">
 //- Character Info
-v-sheet.pa-0(color="transparent")
+v-sheet.pa-0(width="881" color="transparent")
 	FormSelect
 	v-divider
-	v-row.fill-height(v-if="getCharacterId === 'undefined'" no-gutters)
+	v-row.fill-height(v-if="characterSelect === undefined || characterSelect == 0" no-gutters)
 		v-col.fill-height(cols="12")
 			v-card.d-flex.flex-column.align-center.justify-center.pt-12(tile color="transparent" elevation="0") 
 				//- v-avatar(size="144")
@@ -11,12 +11,12 @@ v-sheet.pa-0(color="transparent")
 					//- v-img(:src="require('~/assets/img/avatar/undefined.png')")
 				span.t100--text.text-h5.font-weight-bold Select Character first
 	v-row(v-else no-gutters)
-		v-col(cols="6")
+		v-col(cols="auto")
 			CardPreview
 		v-divider(vertical)
-		v-col
+		v-col(cols="auto")
 			//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
-			v-card.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto(tile color="transparent" elevation="0")
+			v-card.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto(width="440" tile color="transparent" elevation="0")
 				//- v-tabs(v-model="characterTabs" background-color="transparent" grow)
 				//- 	v-tab 강화
 				//- 	v-tab 스킬
@@ -38,7 +38,7 @@ v-sheet.pa-0(color="transparent")
 					FormSquad
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import CardPreview from "~/components/simulator/character/CardPreview";
 import FormSelect from "~/components/simulator/character/FormSelect";
 import FormEnhance from "~/components/simulator/character/FormEnhance";
@@ -58,6 +58,7 @@ export default {
     FormSquad
   },
   computed: {
+		...mapState("data", ["characterSelect"]),
     ...mapGetters("data", ["getCharacterId"])
   },
   data: () => ({

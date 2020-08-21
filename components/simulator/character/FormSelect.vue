@@ -1,8 +1,8 @@
 <template lang="pug">
 v-row.pl-3.pr-6(align="center")
-	v-col(cols="5")
+	v-col(cols="6")
 		//- 검색 필터: 테이블 데이터와 동기화 중
-		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat auto-select-first autocomplete="off")
+		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat auto-select-first autocomplete="off" clearable @click:clear="value = Array[1]")
 			//- 선택 데이터 chip 형태로 표기
 			template(v-slot:selection="data")
 				v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
@@ -22,21 +22,23 @@ v-row.pl-3.pr-6(align="center")
 						v-list-item-title(v-html="data.item.name")
 	//- TODO: 서약 관련
 	v-spacer
-	v-col(cols="auto")
-		v-checkbox(disabled color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
-			template(v-slot:label)
-				span.overline 서약
-	v-col(cols="auto")
-		v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100" @wheel="level + 1")
-		
-	//- TODO: Rank Select, 승급관련 처리 필요
-	v-col(cols="auto")
-		v-select.min-width(disabled :items="rankChip" :value="characterSelect.rank" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
-			template(v-slot:selection="data")
-				v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
-			template(v-slot:item="data")
-				//- span(small v-if="data.item == null")
-				v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
+	v-col(cols="6").pa-0
+		v-row(justify="end" align="center")
+			v-col(cols="auto")
+				v-checkbox(disabled color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
+					template(v-slot:label)
+						span.overline 서약
+			v-col(cols="auto")
+				v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100" @wheel="level + 1")
+				
+			//- TODO: Rank Select, 승급관련 처리 필요
+			v-col(cols="auto")
+				v-select.min-width(disabled :items="rankChip" :value="characterSelect.rank" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
+					template(v-slot:selection="data")
+						v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
+					template(v-slot:item="data")
+						//- span(small v-if="data.item == null")
+						v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
 </template>
 <script>
 import {mapState, mapGetters} from 'vuex';
@@ -45,7 +47,7 @@ export default {
     this.$store.dispatch('data/asyncCharacterBase');
   },
   computed: {
-    ...mapState('data', ['characterData']),
+    ...mapState('data', ['characterData', 'characterSelect']),
     ...mapState('enhance', ['rankChip']),
     ...mapGetters('data', ['getCharacterRank']),
 

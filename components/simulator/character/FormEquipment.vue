@@ -100,115 +100,118 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.png')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
+								v-list-item-subtitle.mt-1
+									v-chip.mr-1(x-small) 적중 15%
+									v-chip.mr-1(x-small) 치명
 				v-text-field.mb-2(v-model="gearEnh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
 		//- END: GRAR
 </template>
 <script>
 import {mapState, mapGetters} from 'vuex';
 export default {
-  mounted() {
-    this.$store.dispatch('equipment/asyncItems');
-  },
-  computed: {
-    ...mapState('equipment', ['itemRank']),
-    ...mapGetters('equipment', ['filterChip1Rank', 'filterChip2Rank', 'filterOs', 'filterGear']),
-    chip1Rank: {
-      get() {
-        return this.$store.state.equipment.chip1Rank;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP1_RANK', value);
-      },
-    },
-    chip1Slot: {
-      get() {
-        return this.$store.state.equipment.chip1Slot;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP1_SLOT', value);
-      },
-    },
-    chip1Enh: {
-      get() {
-        return this.$store.state.equipment.chip1Enh;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP1_ENH', value);
-      },
-    },
-    chip2Rank: {
-      get() {
-        return this.$store.state.equipment.chip2Rank;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP2_RANK', value);
-      },
-    },
-    chip2Slot: {
-      get() {
-        return this.$store.state.equipment.chip2Slot;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP2_SLOT', value);
-      },
-    },
-    chip2Enh: {
-      get() {
-        return this.$store.state.equipment.chip2Enh;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_CHIP2_ENH', value);
-      },
-    },
-    osRank: {
-      get() {
-        return this.$store.state.equipment.osRank;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_OS_RANK', value);
-      },
-    },
-    osSlot: {
-      get() {
-        return this.$store.state.equipment.osSlot;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_OS_SLOT', value);
-      },
-    },
-    osEnh: {
-      get() {
-        return this.$store.state.equipment.osEnh;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_OS_ENH', value);
-      },
-    },
-    gearRank: {
-      get() {
-        return this.$store.state.equipment.gearRank;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_GEAR_RANK', value);
-      },
-    },
-    gearSlot: {
-      get() {
-        return this.$store.state.equipment.gearSlot;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_GEAR_SLOT', value);
-      },
-    },
-    gearEnh: {
-      get() {
-        return this.$store.state.equipment.gearEnh;
-      },
-      set(value) {
-        this.$store.commit('equipment/SET_GEAR_ENH', value);
-      },
-    },
-  },
+	mounted() {
+		this.$store.dispatch('equipment/asyncItems');
+	},
+	computed: {
+		...mapState('equipment', ['itemRank']),
+		...mapGetters('equipment', ['filterChip1Rank', 'filterChip2Rank', 'filterOs', 'filterGear']),
+		chip1Rank: {
+			get() {
+				return this.$store.state.equipment.chip1Rank;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP1_RANK', value);
+			},
+		},
+		chip1Slot: {
+			get() {
+				return this.$store.state.equipment.chip1Slot;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP1_SLOT', value);
+			},
+		},
+		chip1Enh: {
+			get() {
+				return this.$store.state.equipment.chip1Enh;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP1_ENH', value);
+			},
+		},
+		chip2Rank: {
+			get() {
+				return this.$store.state.equipment.chip2Rank;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP2_RANK', value);
+			},
+		},
+		chip2Slot: {
+			get() {
+				return this.$store.state.equipment.chip2Slot;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP2_SLOT', value);
+			},
+		},
+		chip2Enh: {
+			get() {
+				return this.$store.state.equipment.chip2Enh;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_CHIP2_ENH', value);
+			},
+		},
+		osRank: {
+			get() {
+				return this.$store.state.equipment.osRank;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_OS_RANK', value);
+			},
+		},
+		osSlot: {
+			get() {
+				return this.$store.state.equipment.osSlot;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_OS_SLOT', value);
+			},
+		},
+		osEnh: {
+			get() {
+				return this.$store.state.equipment.osEnh;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_OS_ENH', value);
+			},
+		},
+		gearRank: {
+			get() {
+				return this.$store.state.equipment.gearRank;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_GEAR_RANK', value);
+			},
+		},
+		gearSlot: {
+			get() {
+				return this.$store.state.equipment.gearSlot;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_GEAR_SLOT', value);
+			},
+		},
+		gearEnh: {
+			get() {
+				return this.$store.state.equipment.gearEnh;
+			},
+			set(value) {
+				this.$store.commit('equipment/SET_GEAR_ENH', value);
+			},
+		},
+	},
 };
 </script>
 <style scoped lang="sass">

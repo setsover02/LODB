@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app(:light="getTheme")
-    v-card.dashboard.mx-auto.my-lg-8(shaped)
+    v-card.dashboard.mx-auto.my-lg-8(shaped max-width="1408")
       AppBar
       NavigationDrawer
       v-main.fill-height

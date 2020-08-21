@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card.px-6.py-4(tile color="transparent" elevation="0")
+v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 	v-row(align="center")
 		v-col.subtitle-1.font-weight-bold 최종 스탯
 			span.mint--text  (버프 총합),
