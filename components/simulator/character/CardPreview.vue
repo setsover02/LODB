@@ -83,19 +83,25 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 	v-row
 		v-col(cols="4")
 			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="red" small) mdi-fire
 				v-list-item-content
 					v-list-item-title.caption 화염저항
-					v-list-item-subtitle.text-h6.red--text.font-weight-bold 43%
+					v-list-item-subtitle(:class="{'red--text': getFireResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFireResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="blue" small) mdi-water
 				v-list-item-content
 					v-list-item-title.caption 냉기저항
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle(:class="{'blue--text': getFrostResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFrostResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="yellow" small) mdi-flash
 				v-list-item-content
 					v-list-item-title.caption 전기저항
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle(:class="{'yellow--text': getElectricResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getElectricResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-content
@@ -128,7 +134,14 @@ export default {
     ...mapGetters('previews/critical', ['getCrit']),
 		...mapGetters('previews/accuracy', ['getAcc']),
 		...mapGetters('previews/penetration', ['getPenetrationBuff']),
-		...mapGetters('previews/range', ['getRange'])
-  },
+		...mapGetters('previews/range', ['getRange']),
+		...mapGetters('previews/resist', ['getFireResist', 'getFrostResist', 'getElectricResist'])
+	},
+	// methods: {
+	// 	fireResistColor (getFireResist) {
+	// 		if (getFireResist > 0) return 'red--text'
+	// 		else return 't100--text'
+	// 	}
+	// }
 };
 </script>
