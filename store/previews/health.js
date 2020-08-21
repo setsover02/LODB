@@ -52,7 +52,7 @@ export const getters = {
       return Number(v[e]);
     }
   },
-  getEquipment: (state, getters) => {
+  getEquipmentHealth: (state, getters) => {
     return 1 + (getters.getChip1Health + getters.getChip2Health + getters.getOsHealth + getters.getGearHealth);
   },
   // 버프를 제외한 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다.
@@ -62,14 +62,14 @@ export const getters = {
     const l = Number(1 + rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkHealth);
     const p = rootState.enhance.pointHealth * CONST.ENH.HEALTH;
-    const eq = getters.getEquipment; // TODO: 장비로 증가하는 체력
+    const eq = getters.getEquipmentHealth;
     const F = (b + (rootState.enhance.level - 1) * c + p + eq) * l; // final
     if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '체력 20%' || rootState.link.fullLinkBonus == '체력 25%') {
-      return Math.round(F * (1 + f));
+      return Math.floor(F * (1 + f));
     } else {
-      return Math.round(F);
+      return Math.floor(F);
     }
   },
 };

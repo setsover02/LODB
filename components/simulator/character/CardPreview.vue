@@ -4,6 +4,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 		v-col.subtitle-1.font-weight-bold 최종 스탯
 			span.mint--text  (버프 총합),
 			span.text--secondary  (스탯창 기준)
+	v-alert.mt-2(border="left" colored-border color="yellow" dense icon="mdi-alert").caption OS의 경우 적용범위가 게임과 조금 다릅니다. 일부 능력치는 스탯창과 값이 다를 수 있습니다. 버프 총합(인게임) 값을 참조하세요.
 	v-row
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
@@ -15,7 +16,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 방어력
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDefense }}
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDefenseBuff }}
 					v-list-item-subtitle.subtitle-1.mt-n1 {{ getDefense }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
@@ -27,7 +28,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 행동력
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getSpeed }}
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getSpeedBuff }}
 					v-list-item-subtitle.subtitle-1.mt-n1 {{ getSpeed }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
@@ -54,12 +55,12 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 방어구 관통력
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold 43%
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ 100 * getPenetrationBuff + "%" }}
 		v-col(cols="6")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 사거리
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold +1
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getRange }}
 		v-col(cols="4")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
@@ -121,11 +122,13 @@ export default {
   computed: {
     ...mapGetters('previews/health', ['getHealth']),
     ...mapGetters('previews/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getDamageToLight', 'getEquipmentDamageVarHeavy', 'getDamageToHeavy', 'getEquipmentDamageVarFlyer', 'getDamageToFlyer']),
-    ...mapGetters('previews/defense', ['getDefense']),
+    ...mapGetters('previews/defense', ['getDefense', 'getDefenseBuff']),
     ...mapGetters('previews/evasion', ['getEva']),
-    ...mapGetters('previews/speed', ['getSpeed']),
+    ...mapGetters('previews/speed', ['getSpeed', 'getSpeedBuff']),
     ...mapGetters('previews/critical', ['getCrit']),
-    ...mapGetters('previews/accuracy', ['getAcc']),
+		...mapGetters('previews/accuracy', ['getAcc']),
+		...mapGetters('previews/penetration', ['getPenetrationBuff']),
+		...mapGetters('previews/range', ['getRange'])
   },
 };
 </script>

@@ -204,7 +204,7 @@ export const getters = {
       return Math.round(F);
     }
   },
-  // Os, 버프가 포함된 최종데미지
+  // Os, 버프가 포함된 최종 공격력(스탯)
   getDamageBuff: (state, getters) => {
     const skillBuff = 0;
     return Math.round(getters.getDamage * getters.getEquipmentDamageVar + skillBuff);
