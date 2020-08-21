@@ -105,17 +105,17 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 피해감소
-					v-list-item-subtitle.text-h6.primary--text.font-weight-bold 43%
+					v-list-item-subtitle(:class="{'mint--text': getReduce > 0, 'red--text': getReduce < 0}").text-h6.t100--text.font-weight-bold {{ getReduce + '%' }}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 효과저항
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle(:class="{'mint--text': getEffectResist > 0, 'red--text': getEffectResist < 0}").text-h6.t100--text.font-weight-bold {{ getEffectResist + '%' }}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 효과해제
-					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+					v-list-item-subtitle(:class="{'mint--text': getEffectCancel > 0, 'red--text': getEffectCancel < 0}").text-h6.t100--text.font-weight-bold {{ getEffectCancel + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-content
@@ -140,16 +140,15 @@ export default {
     characterTabs: null,
   }),
   computed: {
-    ...mapGetters('previews/health', ['getHealth']),
-    ...mapGetters('previews/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getEquipmentDamageVarHeavy', 'getEquipmentDamageVarFlying']),
-    ...mapGetters('previews/defense', ['getDefense', 'getDefenseBuff']),
-    ...mapGetters('previews/evasion', ['getEva', 'getEvaBuff', 'getEvaRelBuff']),
-    ...mapGetters('previews/speed', ['getSpeed', 'getSpeedBuff']),
-    ...mapGetters('previews/critical', ['getCrit', 'getCritBuff']),
-    ...mapGetters('previews/accuracy', ['getAcc', 'getAccBuff', 'getAccRelBuff']),
-    ...mapGetters('previews/penetration', ['getPenetrationBuff']),
-    ...mapGetters('previews/range', ['getRange', 'getRangeRelBuff']),
-    ...mapGetters('previews/resist', ['getFireResist', 'getFrostResist', 'getElectricResist']),
+    ...mapGetters('character/health', ['getHealth']),
+    ...mapGetters('character/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getEquipmentDamageVarHeavy', 'getEquipmentDamageVarFlying', 'getPenetrationBuff']),
+    ...mapGetters('character/defense', ['getDefense', 'getDefenseBuff']),
+    ...mapGetters('character/evasion', ['getEva', 'getEvaBuff', 'getEvaRelBuff']),
+    ...mapGetters('character/speed', ['getSpeed', 'getSpeedBuff']),
+    ...mapGetters('character/critical', ['getCrit', 'getCritBuff']),
+    ...mapGetters('character/accuracy', ['getAcc', 'getAccBuff', 'getAccRelBuff']),
+    ...mapGetters('character/range', ['getRange', 'getRangeRelBuff']),
+    ...mapGetters('character/defensive', ['getFireResist', 'getFrostResist', 'getElectricResist', 'getReduce', 'getEffectResist', 'getEffectCancel']),
   },
   // methods: {
   //   healthColor: function() {

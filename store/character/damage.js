@@ -1,3 +1,4 @@
+// 데미지, 타입별 데미지, 방관
 import {CONST} from '~/static/const';
 
 export const getters = {
@@ -209,14 +210,22 @@ export const getters = {
     const skillBuff = 0;
     return Math.round(getters.getDamage * getters.getEquipmentDamageVar + skillBuff);
   },
-  // 타입별 추가 데미지(실데미지 계산)
-  getDamageToLight: (state, getters) => {
-    return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarLight + getters.getGearDamageVarLight));
-  },
-  getDamageToHeavy: (state, getters) => {
-    return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarHeavy + getters.getGearDamageVarHeavy));
-  },
-  getDamageToFlying: (state, getters) => {
-    return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarFlying + getters.getGearDamageVarFlying));
+
+  // 방관
+  getGearPenetration: (state, getters, rootState) => {
+    const c = rootState.equipment.gearSlot;
+    const e = rootState.equipment.gearEnh;
+    const v = (c.penetration || '').split(', ');
+    if (c == 0 || c.penetration == undefined || c.penetration == '') {
+      return 0;
+    } else if (isNaN(v[e])) {
+      return Number(v[0]);
+    } else {
+      return Number(v[e]);
+    }
+	},
+	getPenetrationBuff: (state, getters) => {
+    const skillBuff = 0;
+    return (getters.getGearPenetration + skillBuff);
   },
 };
