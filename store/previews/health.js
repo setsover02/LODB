@@ -53,7 +53,7 @@ export const getters = {
     }
   },
   getEquipmentHealth: (state, getters) => {
-    return 1 + (getters.getChip1Health + getters.getChip2Health + getters.getOsHealth + getters.getGearHealth);
+    return (getters.getChip1Health + getters.getChip2Health + getters.getOsHealth + getters.getGearHealth);
   },
   // 버프를 제외한 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다.
   getHealth: (state, getters, rootState, rootGetters) => {

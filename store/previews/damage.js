@@ -157,11 +157,11 @@ export const getters = {
       return Number(v[e]);
     }
   },
-  getOsDamageVarFlyer: (state, getters, rootState) => {
+  getOsDamageVarFlying: (state, getters, rootState) => {
     const c = rootState.equipment.osSlot;
     const e = rootState.equipment.osEnh;
-    const v = (c.damageVarFlyer || '').split(', ');
-    if (c == 0 || c.damageVarFlyer == undefined || c.damageVarFlyer == '') {
+    const v = (c.damageVarFlying || '').split(', ');
+    if (c == 0 || c.damageVarFlying == undefined || c.damageVarFlying == '') {
       return 0;
     } else if (isNaN(v[e])) {
       return Number(v[0]);
@@ -169,11 +169,11 @@ export const getters = {
       return Number(v[e]);
     }
   },
-  getGearDamageVarFlyer: (state, getters, rootState) => {
+  getGearDamageVarFlying: (state, getters, rootState) => {
     const c = rootState.equipment.gearSlot;
     const e = rootState.equipment.gearEnh;
-    const v = (c.damageVarFlyer || '').split(', ');
-    if (c == 0 || c.damageVarFlyer == undefined || c.damageVarFlyer == '') {
+    const v = (c.damageVarFlying || '').split(', ');
+    if (c == 0 || c.damageVarFlying == undefined || c.damageVarFlying == '') {
       return 0;
     } else if (isNaN(v[e])) {
       return Number(v[0]);
@@ -182,13 +182,13 @@ export const getters = {
     }
   },
   getEquipmentDamageVarLight: (state, getters) => {
-    return 100 * (getters.getOsDamageVarLight + getters.getGearDamageVarLight) + '%';
+    return (100 * (getters.getOsDamageVarLight + getters.getGearDamageVarLight)).toFixed(1) + '%';
   },
   getEquipmentDamageVarHeavy: (state, getters) => {
-    return 100 * (getters.getOsDamageVarHeavy + getters.getGearDamageVarHeavy) + '%';
+    return (100 * (getters.getOsDamageVarHeavy + getters.getGearDamageVarHeavy)).toFixed(1) + '%';
   },
-  getEquipmentDamageVarFlyer: (state, getters) => {
-    return 100 * (getters.getOsDamageVarFlyer + getters.getGearDamageVarFlyer) + '%';
+  getEquipmentDamageVarFlying: (state, getters) => {
+    return (100 * (getters.getOsDamageVarFlying + getters.getGearDamageVarFlying)).toFixed(1) + '%';
   },
   // 버프를 제외한 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다
   getDamage: (state, getters, rootState, rootGetters) => {
@@ -216,7 +216,7 @@ export const getters = {
   getDamageToHeavy: (state, getters) => {
     return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarHeavy + getters.getGearDamageVarHeavy));
   },
-  getDamageToFlyer: (state, getters) => {
-    return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarFlyer + getters.getGearDamageVarFlyer));
+  getDamageToFlying: (state, getters) => {
+    return Math.round(getters.getDamage * (getters.getEquipmentDamageVar + getters.getOsDamageVarFlying + getters.getGearDamageVarFlying));
   },
 };

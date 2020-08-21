@@ -27,7 +27,7 @@ export const actions = {
   // Get Google Sheet data:items
   async asyncItems({commit}) {
     let sheetName = 'items';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AP300?${CONST.SHEET.API}`;
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AP1000?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();

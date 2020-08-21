@@ -1,4 +1,4 @@
-// 효과저항, 효과해제 및 원소저항
+// 원소저항
 export const getters = {
   getGearFireResist: (state, getters, rootState) => {
     const c = rootState.equipment.gearSlot;

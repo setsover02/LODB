@@ -72,4 +72,8 @@ export const getters = {
       return F.toFixed(1) + '%';
     }
   },
+  getCritBuff: (state, getters) => {
+    const skillBuff = 0;
+    return getters.getCrit;
+  },
 };

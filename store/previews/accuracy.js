@@ -71,4 +71,36 @@ export const getters = {
       return F.toFixed(1) + '%';
     }
   },
+  getAccBuff: (state, getters) => {
+    return getters.getAcc;
+  },
+
+  // 적중 감소 해제
+  getOsAccRel: (state, getters, rootState) => {
+    const c = rootState.equipment.osSlot;
+    const e = rootState.equipment.osEnh;
+    const v = (c.accRel || '').split(', ');
+    if (c == 0 || c.accRel == undefined || c.accRel == '') {
+      return 0;
+    } else if (isNaN(v[e])) {
+      return Number(v[0]);
+    } else {
+      return Number(v[e]);
+    }
+  },
+  getGearAccRel: (state, getters, rootState) => {
+    const c = rootState.equipment.gearSlot;
+    const e = rootState.equipment.gearEnh;
+    const v = (c.accRel || '').split(', ');
+    if (c == 0 || c.accRel == undefined || c.accRel == '') {
+      return 0;
+    } else if (isNaN(v[e])) {
+      return Number(v[0]);
+    } else {
+      return Number(v[e]);
+    }
+  },
+  getAccRelBuff: (state, getters) => {
+    return (100 * (getters.getOsAccRel + getters.getGearAccRel)).toFixed(1) + '%'
+  }
 };

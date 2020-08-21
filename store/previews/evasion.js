@@ -70,4 +70,25 @@ export const getters = {
       return F.toFixed(1) + '%';
     }
   },
+  getEvaBuff: (state, getters) => {
+    const skillBuff = 0;
+    return getters.getEva;
+  },
+
+  // 회피감소해제
+  getGearEvaRel: (state, getters, rootState) => {
+    const c = rootState.equipment.gearSlot;
+    const e = rootState.equipment.gearEnh;
+    const v = (c.evaRel || '').split(', ');
+    if (c == 0 || c.evaRel == undefined || c.evaRel == '') {
+      return 0;
+    } else if (isNaN(v[e])) {
+      return Number(v[0]);
+    } else {
+      return Number(v[e]);
+    }
+  },
+  getEvaRelBuff: (state, getters) => {
+    return (100 * (getters.getGearEvaRel)).toFixed(1) + '%';
+  },
 };

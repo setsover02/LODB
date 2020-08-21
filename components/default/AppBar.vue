@@ -14,12 +14,8 @@
     v-toolbar-items(v-for="(item, i) in navigation")
       v-btn(:to="item.to" text) {{ item.title }}
     v-spacer
-    v-btn(icon target="blank" href="https://github.com/setsover02/LODB" color="t000")
-      v-icon mdi-github
-    v-btn.ml-2(icon target="blank" href="https://discord.gg/RR8W9Dp" color="t000")
+    v-btn.mr-1(icon target="blank" href="https://discord.gg/RR8W9Dp" color="t000")
       v-icon mdi-discord
-    v-btn.ml-2.mr-n2(icon target="blank" href="https://docs.google.com/spreadsheets/d/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/edit?usp=sharing" color="t000")
-      v-icon mdi-google-spreadsheet
 </template>
 <script>
 export default {
@@ -30,14 +26,7 @@ export default {
         title: "캐릭터",
         to: "/"
       },
-      {
-        icon: "mdi-account-supervisor-outline",
-        title: "캐릭터(old)",
-        to: "/indexElder"
-      },
-      { icon: "mdi-sword-cross", title: "아이템", to: "/items" },
       { icon: "mdi-update", title: "업데이트", to: "/release" },
-      { icon: "mdi-wrench", title: "Test", to: "/test" }
     ]
   }),
 

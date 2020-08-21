@@ -28,9 +28,26 @@ export const getters = {
 		const skillBuff = 0;
 		const F = getters.getOsRange + getters.getGearRange + skillBuff
 		if (rootState.link.fullLinkBonus == "사거리 +1") {
-			return '+ ' + (1 + F)
+			return (1 + F)
 		} else {
-			return '+ ' + F
+			return F
 		}
-	},
+  },
+  
+  // 사거리감소 해제
+  getGearRangeRel: (state, getters, rootState) => {
+    const c = rootState.equipment.gearSlot;
+    const e = rootState.equipment.gearEnh;
+    const v = (c.rangeRel || '').split(', ');
+    if (c == 0 || c.rangeRel == undefined || c.rangeRel == '') {
+      return 0;
+    } else if (isNaN(v[e])) {
+      return Number(v[0]);
+    } else {
+      return Number(v[e]);
+    }
+  },
+  getRangeRelBuff: (state, getters) => {
+    return (100 * (getters.getGearRangeRel)).toFixed(1) + '%';
+  },
 };

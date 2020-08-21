@@ -6,6 +6,29 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			span.text--secondary  (스탯창 기준)
 	v-alert.mt-2(border="left" colored-border color="yellow" dense icon="mdi-alert").caption OS의 경우 적용범위가 게임과 조금 다릅니다. 일부 능력치는 스탯창과 값이 다를 수 있습니다. 버프 총합(인게임) 값을 참조하세요.
 	v-row
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="red" small) mdi-fire
+				v-list-item-content
+					v-list-item-title.caption 화염저항
+					v-list-item-subtitle(:class="{'red--text': getFireResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFireResist + '%'}}
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="blue" small) mdi-water
+				v-list-item-content
+					v-list-item-title.caption 냉기저항
+					v-list-item-subtitle(:class="{'blue--text': getFrostResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFrostResist + '%'}}
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-icon.mr-0
+					v-icon(color="yellow" small) mdi-flash
+				v-list-item-content
+					v-list-item-title.caption 전기저항
+					v-list-item-subtitle(:class="{'yellow--text': getElectricResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getElectricResist + '%'}}
+	v-divider
+	v-row
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
@@ -22,7 +45,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 회피
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getEva }}
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getEvaBuff }}
 					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEva }}
 		v-col(cols="12" lg="3" md="3" sm="6")
 			v-list-item(three-line dense).px-0
@@ -46,7 +69,7 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(three-line dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 적중
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getAcc }}
+					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getAccBuff }}
 					v-list-item-subtitle.subtitle-1.mt-n1 {{ getAcc }}
 
 	v-divider
@@ -55,53 +78,29 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 방어구 관통력
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ 100 * getPenetrationBuff + "%" }}
+					v-list-item-subtitle(:class="{'mint--text': getPenetrationBuff > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getPenetrationBuff + "%" }}
 		v-col(cols="6")
 			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 사거리
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getRange }}
+					v-list-item-subtitle(:class="{'mint--text': getRange > 0, 'red--text': getRange < 0}").text-h6.t100--text.font-weight-bold {{ getRange }}
 		v-col(cols="4")
-			v-list-item(three-line dense).px-0
+			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 중장형 추가피해
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToHeavy }}
-					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarHeavy }}
+					v-list-item-subtitle(:class="{'mint--text': getEquipmentDamageVarHeavy != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getEquipmentDamageVarHeavy }}
 		v-col(cols="4")
-			v-list-item(three-line dense).px-0
+			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 경장형 추가피해
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToLight }}
-					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarLight }}
+					v-list-item-subtitle(:class="{'mint--text': getEquipmentDamageVarLight != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getEquipmentDamageVarLight }}
 		v-col(cols="4")
-			v-list-item(three-line dense).px-0
+			v-list-item(dense).px-0
 				v-list-item-content
 					v-list-item-title.caption 기동형 추가피해
-					v-list-item-subtitle.text-h6.mint--text.font-weight-bold {{ getDamageToFlyer }}
-					v-list-item-subtitle.subtitle-1.mt-n1 {{ getEquipmentDamageVarFlyer }}
+					v-list-item-subtitle(:class="{'mint--text': getEquipmentDamageVarFlying != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getEquipmentDamageVarFlying }}
 	v-divider
 	v-row
-		v-col(cols="4")
-			v-list-item(dense).px-0
-				v-list-item-icon.mr-0
-					v-icon(color="red" small) mdi-fire
-				v-list-item-content
-					v-list-item-title.caption 화염저항
-					v-list-item-subtitle(:class="{'red--text': getFireResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFireResist + '%'}}
-		v-col(cols="4")
-			v-list-item(dense).px-0
-				v-list-item-icon.mr-0
-					v-icon(color="blue" small) mdi-water
-				v-list-item-content
-					v-list-item-title.caption 냉기저항
-					v-list-item-subtitle(:class="{'blue--text': getFrostResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFrostResist + '%'}}
-		v-col(cols="4")
-			v-list-item(dense).px-0
-				v-list-item-icon.mr-0
-					v-icon(color="yellow" small) mdi-flash
-				v-list-item-content
-					v-list-item-title.caption 전기저항
-					v-list-item-subtitle(:class="{'yellow--text': getElectricResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getElectricResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-content
@@ -117,6 +116,21 @@ v-card.px-6.py-4(tile color="transparent" elevation="0")
 				v-list-item-content
 					v-list-item-title.caption 효과해제
 					v-list-item-subtitle.text-h6.t100--text.font-weight-bold 0%
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 적중감소해제 확률
+					v-list-item-subtitle(:class="{'mint--text': getAccRelBuff != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getAccRelBuff }}
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 회피감소해제 확률
+					v-list-item-subtitle(:class="{'mint--text': getEvaRelBuff != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getEvaRelBuff }}
+		v-col(cols="4")
+			v-list-item(dense).px-0
+				v-list-item-content
+					v-list-item-title.caption 사거리감소해제 확률
+					v-list-item-subtitle(:class="{'mint--text': getRangeRelBuff != '0.0%'}").text-h6.t100--text.font-weight-bold {{ getRangeRelBuff }}
 </template>
 <script>
 import {mapState, mapGetters} from 'vuex';
@@ -127,21 +141,21 @@ export default {
   }),
   computed: {
     ...mapGetters('previews/health', ['getHealth']),
-    ...mapGetters('previews/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getDamageToLight', 'getEquipmentDamageVarHeavy', 'getDamageToHeavy', 'getEquipmentDamageVarFlyer', 'getDamageToFlyer']),
+    ...mapGetters('previews/damage', ['getDamage', 'getDamageBuff', 'getEquipmentDamageVarLight', 'getEquipmentDamageVarHeavy', 'getEquipmentDamageVarFlying']),
     ...mapGetters('previews/defense', ['getDefense', 'getDefenseBuff']),
-    ...mapGetters('previews/evasion', ['getEva']),
+    ...mapGetters('previews/evasion', ['getEva', 'getEvaBuff', 'getEvaRelBuff']),
     ...mapGetters('previews/speed', ['getSpeed', 'getSpeedBuff']),
-    ...mapGetters('previews/critical', ['getCrit']),
-		...mapGetters('previews/accuracy', ['getAcc']),
-		...mapGetters('previews/penetration', ['getPenetrationBuff']),
-		...mapGetters('previews/range', ['getRange']),
-		...mapGetters('previews/resist', ['getFireResist', 'getFrostResist', 'getElectricResist'])
-	},
-	// methods: {
-	// 	fireResistColor (getFireResist) {
-	// 		if (getFireResist > 0) return 'red--text'
-	// 		else return 't100--text'
-	// 	}
-	// }
+    ...mapGetters('previews/critical', ['getCrit', 'getCritBuff']),
+    ...mapGetters('previews/accuracy', ['getAcc', 'getAccBuff', 'getAccRelBuff']),
+    ...mapGetters('previews/penetration', ['getPenetrationBuff']),
+    ...mapGetters('previews/range', ['getRange', 'getRangeRelBuff']),
+    ...mapGetters('previews/resist', ['getFireResist', 'getFrostResist', 'getElectricResist']),
+  },
+  // methods: {
+  //   healthColor: function() {
+  //     if (this.$store.state.enhance.pointHealth > 0) return true;
+  //     else false;
+	// 	},
+  // },
 };
 </script>
