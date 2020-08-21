@@ -23,7 +23,7 @@ v-row.pl-3.pr-6(align="center")
 	//- TODO: 서약 관련
 	v-spacer
 	v-col(cols="auto")
-		v-checkbox(color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
+		v-checkbox(disabled color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
 			template(v-slot:label)
 				span.overline 서약
 	v-col(cols="auto")
@@ -31,7 +31,7 @@ v-row.pl-3.pr-6(align="center")
 		
 	//- TODO: Rank Select, 승급관련 처리 필요
 	v-col(cols="auto")
-		v-select.min-width(:items="rankChip" :value="characterSelect.rank" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
+		v-select.min-width(disabled :items="rankChip" :value="characterSelect.rank" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
 			template(v-slot:selection="data")
 				v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
 			template(v-slot:item="data")

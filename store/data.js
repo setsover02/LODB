@@ -32,7 +32,7 @@ export const actions = {
   // 02: characterRank sheet
   async asyncCharacterRank({commit}) {
     let sheetName = 'characterRank';
-    const url = `${config.baseUrl}${config.sheedId}/values/${sheetName}!A1:AQ1000?${config.apiKey}`;
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AM300?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();

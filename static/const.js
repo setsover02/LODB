@@ -33,7 +33,7 @@ export const CONST = {
     EVA: 0.4,
   },
   // 링크별 퍼센티지 + '%', store에서 /100 처리됨
-  LINK_SLOT: [100, 80, 75, 25, 10, 0],
+  LINK_SLOT: [100, 80, 75, 60, 50, 45, 40, 30, 25, 20, 10, 0],
   FULL_LINK_BONUS: {
     RES: '출격비용 ',
     SPEED: '행동력 ',
