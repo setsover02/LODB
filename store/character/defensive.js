@@ -141,7 +141,7 @@ export const getters = {
     const b = Number(rootState.data.characterSelect.fireResist);
     const eq = getters.getGearFireResist;
     const skillBuff = 0;
-    return b + eq + skillBuff;
+    return (100 * (b + eq + skillBuff)).toFixed(1);
   },
   getGearFrostResist: (state, getters, rootState) => {
     const c = rootState.equipment.gearSlot;
@@ -159,7 +159,7 @@ export const getters = {
     const b = Number(rootState.data.characterSelect.frostResist);
     const eq = getters.getGearFrostResist;
     const skillBuff = 0;
-    return b + eq + skillBuff;
+    return (100 * (b + eq + skillBuff)).toFixed(1);
   },
   getGearElectricResist: (state, getters, rootState) => {
     const c = rootState.equipment.gearSlot;
@@ -177,6 +177,6 @@ export const getters = {
     const b = Number(rootState.data.characterSelect.electricResist);
     const eq = getters.getGearElectricResist;
     const skillBuff = 0;
-    return b + eq + skillBuff;
+    return (100 * (b + eq + skillBuff)).toFixed(1);
   },
 };

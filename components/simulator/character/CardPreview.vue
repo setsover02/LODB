@@ -12,21 +12,21 @@ v-card.px-6.py-4(width="440" tile color="transparent" elevation="0")
 					v-icon(color="red" small) mdi-fire
 				v-list-item-content
 					v-list-item-title.caption 화염저항
-					v-list-item-subtitle(:class="{'red--text': getFireResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFireResist + '%'}}
+					v-list-item-subtitle(:class="{'red--text': getFireResist > 0}").text-h6.t100--text.font-weight-bold {{ getFireResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-icon.mr-0
 					v-icon(color="blue" small) mdi-water
 				v-list-item-content
 					v-list-item-title.caption 냉기저항
-					v-list-item-subtitle(:class="{'blue--text': getFrostResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getFrostResist + '%'}}
+					v-list-item-subtitle(:class="{'blue--text': getFrostResist > 0}").text-h6.t100--text.font-weight-bold {{ getFrostResist + '%'}}
 		v-col(cols="4")
 			v-list-item(dense).px-0
 				v-list-item-icon.mr-0
 					v-icon(color="yellow" small) mdi-flash
 				v-list-item-content
 					v-list-item-title.caption 전기저항
-					v-list-item-subtitle(:class="{'yellow--text': getElectricResist > 0}").text-h6.t100--text.font-weight-bold {{ 100 * getElectricResist + '%'}}
+					v-list-item-subtitle(:class="{'yellow--text': getElectricResist > 0}").text-h6.t100--text.font-weight-bold {{ getElectricResist + '%'}}
 	v-divider
 	v-row
 		v-col(cols="12" lg="3" md="3" sm="6")

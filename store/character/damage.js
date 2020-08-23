@@ -198,7 +198,7 @@ export const getters = {
     const l = Number(1 + rootState.data.characterSelect.linkDamage * rootGetters['link/getTotalLink']);
     const p = rootState.enhance.pointDamage * CONST.ENH.DAMAGE;
     const eq = getters.getEquipmentDamage;
-    const F = (b + (rootState.enhance.level - 1) * c + p + eq) * l;
+    const F = (b + (rootState.enhance.level - 1) * c + p + eq) * l; // TODO:
     if (b == undefined || b == null) {
       return 'Not Load';
     } else {
