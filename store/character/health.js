@@ -67,9 +67,9 @@ export const getters = {
     if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '체력 20%' || rootState.link.fullLinkBonus == '체력 25%') {
-      return Math.floor(F * (1 + l + f));
+      return Math.round(F * (1 + l + f));
     } else {
-      return Math.floor(F * (1 + l));
+      return Math.round(F * (1 + l));
     }
   },
 };

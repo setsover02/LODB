@@ -13,6 +13,7 @@ export const state = () => ({
 const axios = require('axios');
 const _ = require('lodash');
 
+// https://sheets.googleapis.com/v4/spreadsheets/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/values/characterBase!A1:AQ1000?key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To
 export const actions = {
   // Get Google Sheet data
   // 01: characterBase sheet
