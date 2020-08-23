@@ -59,17 +59,17 @@ export const getters = {
   getHealth: (state, getters, rootState, rootGetters) => {
     const b = Number(rootState.data.characterSelect.healthBase);
     const c = Number(rootState.data.characterSelect.healthCoef);
-    const l = Number(1 + rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
+    const l = Number(rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkHealth);
     const p = rootState.enhance.pointHealth * CONST.ENH.HEALTH;
     const eq = getters.getEquipmentHealth;
-    const F = (b + (rootState.enhance.level - 1) * c + p + eq) * l; // final
+    const F = (b + (rootState.enhance.level - 1) * c + p + eq); // final
     if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '체력 20%' || rootState.link.fullLinkBonus == '체력 25%') {
-      return Math.floor(F * (1 + f));
+      return Math.floor(F * (1 + l + f));
     } else {
-      return Math.floor(F);
+      return Math.floor(F * (1 + l));
     }
   },
 };
