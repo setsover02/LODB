@@ -6,7 +6,6 @@
 import {CONST} from '~/static/const';
 export const state = () => ({
   characterData: [],
-  characterRank: [],
   characterSelect: [0], // require default value
 });
 
@@ -19,7 +18,7 @@ export const actions = {
   // 01: characterBase sheet
   async asyncCharacterBase({commit}) {
     let sheetName = 'characterBase';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AQ1000?${CONST.SHEET.API}`;
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:BK1000?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();
@@ -29,29 +28,12 @@ export const actions = {
     }
     commit('SET_CHARACTERS_DATA', articles);
   },
-
-  // 02: characterRank sheet
-  async asyncCharacterRank({commit}) {
-    let sheetName = 'characterRank';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:AM300?${CONST.SHEET.API}`;
-    const response = await axios.get(url);
-    const rows = response.data.values;
-    const properties = rows.shift();
-    const articles = [];
-    for (const i in rows) {
-      articles.push(_.zipObject(properties, rows[i]));
-    }
-    commit('SET_CHARACTERS_RANK', articles);
-  },
 };
 
 export const mutations = {
   // Google Sheet
   SET_CHARACTERS_DATA(state, payload) {
     state.characterData = payload;
-  },
-  SET_CHARACTERS_RANK(state, payload) {
-    state.characterRank = payload;
   },
   // FormSelect
   SET_CHARACTERS_SELECT(state, characterSelect) {
@@ -69,8 +51,35 @@ export const getters = {
   },
 
   // TODO: 승급관련 테이블 작성후 재작업
-  getCharacterRank: state => {
-    return [state.characterSelect.rankSS, state.characterSelect.rankS, state.characterSelect.rankA, state.characterSelect.rankB];
+  getRankSS: state => {
+    if (state.characterSelect.ss == 'TRUE') {
+      return 'SS';
+    } else {
+      return null
+    }
+  },
+
+  getRankS: state => {
+    if (state.characterSelect.s == 'TRUE') {
+      return 'S';
+    } else {
+      return null
+    }
+  },
+
+  getRankA: state => {
+    if (state.characterSelect.a == 'TRUE') {
+      return 'A';
+    } else {
+      return null
+    }
+  },
+  getRankB: state => {
+    if (state.characterSelect.b == 'TRUE') {
+      return 'B';
+    } else {
+      return null
+    }
   },
 
   // Get full link bonus

@@ -2,6 +2,21 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  getRankCrit: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssCrit);
+    const s = Number(rootState.data.characterSelect.sCrit);
+    const a = Number(rootState.data.characterSelect.aCrit);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Crit: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -58,7 +73,7 @@ export const getters = {
   },
   // getStat 이름을 가진 getter는 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다
   getCrit: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.crit);
+    const b = Number(rootState.data.characterSelect.crit) + getters.getRankCrit;
     const l = Number(rootState.data.characterSelect.linkCrit * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkCrit);
     const p = rootState.enhance.pointCrit * CONST.ENH.CRIT;

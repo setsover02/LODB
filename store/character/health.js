@@ -1,6 +1,22 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  // rank up
+  getRankHealth: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssHealth);
+    const s = Number(rootState.data.characterSelect.sHealth);
+    const a = Number(rootState.data.characterSelect.aHealth);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Health: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -53,17 +69,17 @@ export const getters = {
     }
   },
   getEquipmentHealth: (state, getters) => {
-    return (getters.getChip1Health + getters.getChip2Health + getters.getOsHealth + getters.getGearHealth);
+    return getters.getChip1Health + getters.getChip2Health + getters.getOsHealth + getters.getGearHealth;
   },
   // 버프를 제외한 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다.
   getHealth: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.healthBase);
+    const b = Number(rootState.data.characterSelect.healthBase) + getters.getRankHealth;
     const c = Number(rootState.data.characterSelect.healthCoef);
     const l = Number(rootState.data.characterSelect.linkHealth * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkHealth);
     const p = rootState.enhance.pointHealth * CONST.ENH.HEALTH;
     const eq = getters.getEquipmentHealth;
-    const F = (b + (rootState.enhance.level - 1) * c + p + eq); // final
+    const F = b + (rootState.enhance.level - 1) * c + p + eq; // final
     if (b == undefined || b == null) {
       return 'Not Load';
     } else if (rootState.link.fullLinkBonus == '체력 20%' || rootState.link.fullLinkBonus == '체력 25%') {

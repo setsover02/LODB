@@ -28,9 +28,6 @@ v-expansion-panel.transparent
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
-	mounted () {
-		this.$store.dispatch('data/asyncCharacterRank')
-  },
 	methods: {
 		...mapMutations("link", ["SET_LINK_MAX", "SET_LINK_MIN"])
 	},

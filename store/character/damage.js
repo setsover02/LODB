@@ -2,6 +2,22 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+    // rank up
+  getRankDamage: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssDamage);
+    const s = Number(rootState.data.characterSelect.sDamage);
+    const a = Number(rootState.data.characterSelect.aDamage);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   getChip1Damage: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
     const e = rootState.equipment.chip1Enh;
@@ -193,7 +209,7 @@ export const getters = {
   },
   // 버프를 제외한 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다
   getDamage: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.damageBase);
+    const b = Number(rootState.data.characterSelect.damageBase) + getters.getRankDamage;
     const c = Number(rootState.data.characterSelect.damageCoef);
     const l = Number(1 + rootState.data.characterSelect.linkDamage * rootGetters['link/getTotalLink']);
     const p = rootState.enhance.pointDamage * CONST.ENH.DAMAGE;

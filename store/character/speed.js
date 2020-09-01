@@ -2,6 +2,21 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  getRankSpeed: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssSpeed);
+    const s = Number(rootState.data.characterSelect.sSpeed);
+    const a = Number(rootState.data.characterSelect.aSpeed);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Speed: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -74,7 +89,7 @@ export const getters = {
   },
   // getStat 이름을 가진 getter는 강화, 링크, 풀링보너스, 칩, 보조장비 까지만 합산한다
   getSpeed: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.speed);
+    const b = Number(rootState.data.characterSelect.speed) + getters.getRankSpeed;
     const l = Number(rootState.data.characterSelect.linkSpeed * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkSpeed);
     const eq = getters.getEquipmentSpeed;

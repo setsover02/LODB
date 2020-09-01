@@ -30,15 +30,18 @@ v-row.pl-3.pr-6(align="center")
 						span.overline 서약
 			v-col(cols="auto")
 				v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100" @wheel="level + 1")
-				
-			//- TODO: Rank Select, 승급관련 처리 필요
 			v-col(cols="auto")
-				v-select.min-width(disabled :items="rankChip" :value="characterSelect.rank" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
+				v-select.min-width(v-model="rank" :items="getRankItems" dense small-chips flat hide-details attach solo append-icon="mdi-chevron-down")
 					template(v-slot:selection="data")
-						v-chip(:input-value="data.selected" small :color="data.item.color") {{ data.item.text }}
+						v-chip(v-if="data.item == 'SS'" :input-value="data.selected" small color="orange") {{ data.item }}
+						v-chip(v-else-if="data.item == 'S'" :input-value="data.selected" small color="yellow") {{ data.item }}
+						v-chip(v-else-if="data.item == 'A'" :input-value="data.selected" small color="blue") {{ data.item }}
+						v-chip(v-else :input-value="data.selected" small color="mint") {{ data.item }}
 					template(v-slot:item="data")
-						//- span(small v-if="data.item == null")
-						v-chip(small v-if="data.item.text !== 'null'" :color="data.item.color") {{ data.item.text }}
+						v-chip(v-if="data.item == 'SS'" small color="orange") {{ data.item }}
+						v-chip(v-else-if="data.item == 'S'" small color="yellow") {{ data.item }}
+						v-chip(v-else-if="data.item == 'A'" small color="blue") {{ data.item }}
+						v-chip(v-else small color="mint") {{ data.item }}
 </template>
 <script>
 import {mapState, mapGetters} from 'vuex';
@@ -49,14 +52,21 @@ export default {
   computed: {
     ...mapState('data', ['characterData', 'characterSelect']),
     ...mapState('enhance', ['rankChip']),
-    ...mapGetters('data', ['getCharacterRank']),
-
+		...mapGetters('enhance', ['getRankItems']),
     characterSelect: {
       get() {
         return this.$store.state.data.characterSelect;
       },
       set(value) {
         this.$store.commit('data/SET_CHARACTERS_SELECT', value);
+      },
+    },
+    rank: {
+      get() {
+        return this.$store.state.enhance.rank;
+      },
+      set(value) {
+        this.$store.commit('enhance/SET_RANK', value);
       },
     },
     level: {

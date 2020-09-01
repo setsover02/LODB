@@ -1,6 +1,21 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  getRankEva: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssEva);
+    const s = Number(rootState.data.characterSelect.sEva);
+    const a = Number(rootState.data.characterSelect.aEva);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Evasion: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -56,7 +71,7 @@ export const getters = {
     return getters.getChip1Evasion + getters.getChip2Evasion + getters.getOsEvasion + getters.getGearEvasion;
   },
   getEva: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.eva);
+    const b = Number(rootState.data.characterSelect.eva) + getters.getRankEva;
     const l = Number(rootState.data.characterSelect.linkEva * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkEva);
     const p = rootState.enhance.pointEva * CONST.ENH.EVA;
@@ -89,6 +104,6 @@ export const getters = {
     }
   },
   getEvaRelBuff: (state, getters) => {
-    return (100 * (getters.getGearEvaRel)).toFixed(1) + '%';
+    return (100 * getters.getGearEvaRel).toFixed(1) + '%';
   },
 };

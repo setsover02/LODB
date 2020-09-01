@@ -2,6 +2,21 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  getRankAcc: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssAcc);
+    const s = Number(rootState.data.characterSelect.sAcc);
+    const a = Number(rootState.data.characterSelect.aAcc);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Acc: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -57,7 +72,7 @@ export const getters = {
     return getters.getChip1Acc + getters.getChip2Acc + getters.getOsAcc + getters.getGearAcc;
   },
   getAcc: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.acc);
+    const b = Number(rootState.data.characterSelect.acc) + getters.getRankAcc;
     const l = Number(rootState.data.characterSelect.linkAcc * rootGetters['link/getTotalLink']);
     const f = Number(rootState.data.characterSelect.fullLinkAcc);
     const p = rootState.enhance.pointAcc * CONST.ENH.ACC;
@@ -101,6 +116,6 @@ export const getters = {
     }
   },
   getAccRelBuff: (state, getters) => {
-    return (100 * (getters.getOsAccRel + getters.getGearAccRel)).toFixed(1) + '%'
-  }
+    return (100 * (getters.getOsAccRel + getters.getGearAccRel)).toFixed(1) + '%';
+  },
 };

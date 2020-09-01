@@ -1,6 +1,22 @@
 import {CONST} from '~/static/const';
 
 export const getters = {
+  // rank up
+  getRankDefense: (state, getters, rootState, rootGetters) => {
+    const r = rootState.enhance.rank;
+    const ss = Number(rootState.data.characterSelect.ssDefense);
+    const s = Number(rootState.data.characterSelect.sDefense);
+    const a = Number(rootState.data.characterSelect.aDefense);
+    if (r == 'A') {
+      return a;
+    } else if (r == 'S') {
+      return s + a;
+    } else if (r == 'SS') {
+      return ss + s + a;
+    } else {
+      return 0;
+    }
+  },
   // 칩, 장비 체력 데이터 불러옴
   getChip1Defense: (state, getters, rootState) => {
     const c = rootState.equipment.chip1Slot;
@@ -85,7 +101,7 @@ export const getters = {
     return 1 + (getters.getOsDefenseVar + getters.getGearDefenseVar);
   },
   getDefense: (state, getters, rootState, rootGetters) => {
-    const b = Number(rootState.data.characterSelect.defenseBase);
+    const b = Number(rootState.data.characterSelect.defenseBase) + getters.getRankDefense;
     const c = Number(rootState.data.characterSelect.defenseCoef);
     const l = Number(1 + rootState.data.characterSelect.linkDefense * rootGetters['link/getTotalLink']);
     const p = rootState.enhance.pointDefense * CONST.ENH.DEFENSE;
@@ -99,6 +115,6 @@ export const getters = {
   },
   getDefenseBuff: (state, getters) => {
     const skillBuff = 0;
-    return Math.round(getters.getDefense * getters.getEquipmentDefenseVar + skillBuff)
-  }
+    return Math.round(getters.getDefense * getters.getEquipmentDefenseVar + skillBuff);
+  },
 };
