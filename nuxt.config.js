@@ -1,43 +1,43 @@
-import colors from "vuetify/es5/util/colors";
+import colors from 'vuetify/es5/util/colors';
 
 export default {
-  mode: "spa",
+  mode: 'spa',
   /*
    ** Headers of the page
    */
   head: {
-    title: "Last Origin Simulator",
+    title: 'Last Origin Simulator',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {
-        hid: "description",
-        name: "description",
-        content: process.env.npm_package_description || ""
-      }
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: {color: '#fff'},
   /*
    ** Global CSS
    */
-  css: [{ src: "~assets/scss/main.scss" }],
+  css: [{src: '~assets/scss/main.scss'}],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["~/plugins/axios"],
+  plugins: ['~/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ['@nuxtjs/vuetify'],
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "nuxt-webfontloader"],
+  modules: ['@nuxtjs/axios', 'nuxt-webfontloader'],
 
   // axios: {
   //   baseURL: process.env.BASE_URL
@@ -45,8 +45,8 @@ export default {
   // },
   webfontloader: {
     google: {
-      families: ["Quicksand: 300,400,500,600,700"]
-    }
+      families: ['Quicksand: 300,400,500,600,700'],
+    },
   },
   /*
    ** vuetify module configuration
@@ -54,52 +54,52 @@ export default {
    */
   vuetify: {
     treeShake: true, // If use variable.scss
-    customVariables: ["~/assets/variables.scss"],
+    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {
         dark: {
           // Basic theme color
-          t000: "#d2d6ef",
-          t100: "#5D658E",
-          t200: "#4D557A",
-          t300: "#444A6D",
-          t400: "#2D324D",
-          t500: "#272B45",
+          t000: '#d2d6ef',
+          t100: '#5D658E',
+          t200: '#4D557A',
+          t300: '#444A6D',
+          t400: '#2D324D',
+          t500: '#272B45',
           // Key color
-          primary: "#647EFF", // Lilac
-          secondary: "#7C60F7", // Purple
-          accent: "#F8D4A1", // Yellow
+          primary: '#647EFF', // Lilac
+          secondary: '#7C60F7', // Purple
+          accent: '#F8D4A1', // Yellow
           // Optional color
-          purple: "#7C60F7",
-          lilac: "#647EFF",
-          blue: "#78A7F8",
-          skyblue: "#7FCBEC",
-          cyan: "#0AD8DD",
-          mint: "#7BE9CD",
-          green: "#C7F5A5",
-          yellow: "#F8D4A1",
-          orange: "#f4b771",
-          red: "#E36A98",
-          pink: "#E875C7"
+          purple: '#7C60F7',
+          lilac: '#647EFF',
+          blue: '#78A7F8',
+          skyblue: '#7FCBEC',
+          cyan: '#0AD8DD',
+          mint: '#7BE9CD',
+          green: '#C7F5A5',
+          yellow: '#F8D4A1',
+          orange: '#f4b771',
+          red: '#E36A98',
+          pink: '#E875C7',
         },
         light: {
-          primary: "#647EFF", // Lilac
-          secondary: "#7C60F7", // Purple
-          accent: "#E36A98", // red
+          primary: '#647EFF', // Lilac
+          secondary: '#7C60F7', // Purple
+          accent: '#E36A98', // red
           // Optional color
-          purple: "#7C60F7",
-          lilac: "#647EFF",
-          blue: "#78A7F8",
-          skyblue: "#7FCBEC",
-          cyan: "#0AD8DD",
-          yellow: "#F8D4A1",
-          orange: "#f4b771",
-          red: "#E36A98",
-          pink: "#E875C7"
-        }
-      }
-    }
+          purple: '#7C60F7',
+          lilac: '#647EFF',
+          blue: '#78A7F8',
+          skyblue: '#7FCBEC',
+          cyan: '#0AD8DD',
+          yellow: '#F8D4A1',
+          orange: '#f4b771',
+          red: '#E36A98',
+          pink: '#E875C7',
+        },
+      },
+    },
   },
   /*
    ** Build configuration
@@ -108,6 +108,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 };
