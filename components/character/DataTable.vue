@@ -7,7 +7,7 @@ v-card(color="transparent" elevation="0").fill-height__n7
   v-data-table(v-model="characterSelect" :headers="charactersCol" :items="getCharactersData" item-key="id" hide-default-footer :page.sync="page" :items-per-page="itemsPerPage" @page-count="pageCount = $event" fixed-header :search="characterName" sort-by="id" height="100%" single-select show-select @click:row="itemSelected($event)").fill-height__n7
     template(v-slot:item.avatar="{ item }")
       v-avatar(size="32" color="t500")
-        v-img(:src="require('~/assets/img/avatar/' + item.id + '.png')")
+        v-img(:src="require('~/assets/img/avatar/' + item.id + '.webp')")
     template(v-slot:item.rank="{ item }")
       RankChip(v-bind:rank="item.rank")
     template(v-slot:item.level="{ item }")
