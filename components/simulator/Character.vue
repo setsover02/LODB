@@ -12,6 +12,12 @@ v-sheet.pa-0(width="881" color="transparent")
 				span.t100--text.text-h5.font-weight-bold Select Character first
 	v-row(v-else no-gutters)
 		v-col(cols="auto")
+			//- TODO: full body image
+			//- v-img(width="200%" :src="require('~/assets/img/full/181.png')")
+			//-	position: absolute;
+			//- bottom: -15%;
+			//- left: 45%;
+			//- opacity: 0.25;
 			CardPreview
 		v-divider(vertical)
 		v-col(cols="auto")
