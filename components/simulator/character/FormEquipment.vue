@@ -40,7 +40,8 @@ v-expansion-panel.transparent
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
-									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defenseVar != '' && data.item.defenseVar != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 체력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
@@ -89,7 +90,8 @@ v-expansion-panel.transparent
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
-									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defenseVar != '' && data.item.defenseVar != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 체력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
@@ -138,7 +140,8 @@ v-expansion-panel.transparent
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
-									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defenseVar != '' && data.item.defenseVar != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 체력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
@@ -188,7 +191,8 @@ v-expansion-panel.transparent
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
-									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defenseVar != '' && data.item.defenseVar != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 체력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
 									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
