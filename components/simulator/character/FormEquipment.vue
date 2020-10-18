@@ -27,6 +27,31 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.webp')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
+																//- 아이템 리스트 효과 미리보기 칩
+								v-list-item-subtitle.mt-1
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small v-html="'중장형 ' + 100 * (data.item.damageVarHeavy || '').split(', ')[gearEnh] + '%'")
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small v-html="'적중 ' + (data.item.acc || '').split(', ')[gearEnh] + '%'")
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damage != '' && data.item.damage != undefined" x-small) 공격력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVar != '' && data.item.damageVar != undefined" x-small) 공격력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarLight != '' && data.item.damageVarLight != undefined" x-small) 경장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarFlying != '' && data.item.damageVarFlying != undefined" x-small) 기동형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small) 중장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small) 적중
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.penetration != '' && data.item.penetration != undefined" x-small) 방어관통
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.reduce != '' && data.item.reduce != undefined" x-small) 피해감소
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.range != '' && data.item.range != undefined" x-small ) 사거리
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectResist != '' && data.item.effectResist != undefined" x-small) 효과저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectCancel != '' && data.item.effectCancel != undefined" x-small) 효과해제
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.frostResist != '' && data.item.frostResist != undefined" x-small) 냉기저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.fireResist != '' && data.item.fireResist != undefined" x-small) 화염저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.electricResist != '' && data.item.electricResist != undefined" x-small) 전기저항
 				v-text-field.mb-2(v-model="chip1Enh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
 			//- END: CHiP1
 			//- BEGIN: Chip2
@@ -51,6 +76,31 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.webp')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
+																//- 아이템 리스트 효과 미리보기 칩
+								v-list-item-subtitle.mt-1
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small v-html="'중장형 ' + 100 * (data.item.damageVarHeavy || '').split(', ')[gearEnh] + '%'")
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small v-html="'적중 ' + (data.item.acc || '').split(', ')[gearEnh] + '%'")
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damage != '' && data.item.damage != undefined" x-small) 공격력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVar != '' && data.item.damageVar != undefined" x-small) 공격력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarLight != '' && data.item.damageVarLight != undefined" x-small) 경장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarFlying != '' && data.item.damageVarFlying != undefined" x-small) 기동형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small) 중장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small) 적중
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.penetration != '' && data.item.penetration != undefined" x-small) 방어관통
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.reduce != '' && data.item.reduce != undefined" x-small) 피해감소
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.range != '' && data.item.range != undefined" x-small ) 사거리
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectResist != '' && data.item.effectResist != undefined" x-small) 효과저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectCancel != '' && data.item.effectCancel != undefined" x-small) 효과해제
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.frostResist != '' && data.item.frostResist != undefined" x-small) 냉기저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.fireResist != '' && data.item.fireResist != undefined" x-small) 화염저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.electricResist != '' && data.item.electricResist != undefined" x-small) 전기저항
 				v-text-field.mb-2(v-model="chip2Enh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
 			//- END: CHiP2
 			//- BEGIN: OS
@@ -75,6 +125,31 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.webp')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
+																//- 아이템 리스트 효과 미리보기 칩
+								v-list-item-subtitle.mt-1
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small v-html="'중장형 ' + 100 * (data.item.damageVarHeavy || '').split(', ')[gearEnh] + '%'")
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small v-html="'적중 ' + (data.item.acc || '').split(', ')[gearEnh] + '%'")
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damage != '' && data.item.damage != undefined" x-small) 공격력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVar != '' && data.item.damageVar != undefined" x-small) 공격력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarLight != '' && data.item.damageVarLight != undefined" x-small) 경장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarFlying != '' && data.item.damageVarFlying != undefined" x-small) 기동형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small) 중장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small) 적중
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.penetration != '' && data.item.penetration != undefined" x-small) 방어관통
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.reduce != '' && data.item.reduce != undefined" x-small) 피해감소
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.range != '' && data.item.range != undefined" x-small ) 사거리
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectResist != '' && data.item.effectResist != undefined" x-small) 효과저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectCancel != '' && data.item.effectCancel != undefined" x-small) 효과해제
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.frostResist != '' && data.item.frostResist != undefined" x-small) 냉기저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.fireResist != '' && data.item.fireResist != undefined" x-small) 화염저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.electricResist != '' && data.item.electricResist != undefined" x-small) 전기저항
 				v-text-field.mb-2(v-model="osEnh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
 			//- END: OS
 			//- BEGIN: GEAR
@@ -100,9 +175,31 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.webp')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
+								//- 아이템 리스트 효과 미리보기 칩
 								v-list-item-subtitle.mt-1
-									v-chip.mr-1(x-small) 적중 15%
-									v-chip.mr-1(x-small) 치명
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small v-html="'중장형 ' + 100 * (data.item.damageVarHeavy || '').split(', ')[gearEnh] + '%'")
+									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small v-html="'적중 ' + (data.item.acc || '').split(', ')[gearEnh] + '%'")
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damage != '' && data.item.damage != undefined" x-small) 공격력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVar != '' && data.item.damageVar != undefined" x-small) 공격력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarLight != '' && data.item.damageVarLight != undefined" x-small) 경장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarFlying != '' && data.item.damageVarFlying != undefined" x-small) 기동형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small) 중장형 추가피해
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small) 적중
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.crit != '' && data.item.crit != undefined" x-small) 치명
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.eva != '' && data.item.eva != undefined" x-small) 회피
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.defense != '' && data.item.defense != undefined" x-small) 방어
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.health != '' && data.item.health != undefined" x-small) 방어 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speed != '' && data.item.speed != undefined" x-small) 행동력
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.speedVar != '' && data.item.speedVar != undefined" x-small) 행동력 %
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.ap != '' && data.item.ap != undefined" x-small) AP
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.penetration != '' && data.item.penetration != undefined" x-small) 방어관통
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.reduce != '' && data.item.reduce != undefined" x-small) 피해감소
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.range != '' && data.item.range != undefined" x-small ) 사거리
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectResist != '' && data.item.effectResist != undefined" x-small) 효과저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.effectCancel != '' && data.item.effectCancel != undefined" x-small) 효과해제
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.frostResist != '' && data.item.frostResist != undefined" x-small) 냉기저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.fireResist != '' && data.item.fireResist != undefined" x-small) 화염저항
+									v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.electricResist != '' && data.item.electricResist != undefined" x-small) 전기저항
 				v-text-field.mb-2(v-model="gearEnh" solo flat dense hide-details type="number" suffix="강화" min="0" max="10")
 		//- END: GRAR
 </template>
@@ -214,6 +311,3 @@ export default {
 	},
 };
 </script>
-<style scoped lang="sass">
-
-</style>

@@ -71,7 +71,7 @@ export const getters = {
       .filter(check)
       .filter(slot)
       .filter(rank);
-  }
+  },
 };
 
 export const mutations = {

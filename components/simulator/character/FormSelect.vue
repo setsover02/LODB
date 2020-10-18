@@ -3,7 +3,7 @@ v-row.pl-3.pr-6(align="center")
 	v-col(cols="6")
 		//- 검색 필터: 테이블 데이터와 동기화 중
 		v-autocomplete(v-model="characterSelect" :items="characterData" item-text="name" item-value="name" label="검색 혹은 선택" prepend-inner-icon="mdi-magnify" append-icon="mdi-chevron-down" hide-details color="primary" background-color="transparent" return-object solo flat auto-select-first autocomplete="off" clearable @click:clear="value = Array[1]")
-			//- 선택 데이터 chip 형태로 표기
+			//- 선택 데이터 표기
 			template(v-slot:selection="data")
 				v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
 					v-list-item-avatar.radius-8(size="56")
