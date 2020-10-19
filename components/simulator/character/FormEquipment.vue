@@ -1,5 +1,6 @@
 <template lang="pug">
 v-expansion-panel.transparent
+	v-divider
 	v-expansion-panel-header
 		v-row.mr-2(align="center")
 			v-col.subtitle-1.font-weight-bold 장비
@@ -339,9 +340,9 @@ export default {
 		getGearSlotColor() {
 			const r = this.$store.state.equipment.gearRank
 			const s = this.$store.state.equipment.gearSlot
-			if (r == 'SS' && s != Array[0])  return 'orange'
+			if (r == 'SS' && s != Array[0]) return 'orange'
 			else if (r == 'S') return 'yellow'
-			else if (r == 'A') return 'blue'
+			else if (r == 'A') return 'blue' 
 			else if (r == 'B') return 'mint'
 			else return 't100'
 		}

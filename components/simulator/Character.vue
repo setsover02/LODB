@@ -36,7 +36,7 @@ v-sheet.pa-0(width="881" color="transparent")
 				//- 		FormEnhance
 				//- 	v-tab-item
 				//- 		div 스킬
-				v-expansion-panels(flat tile accordion multiple)
+				v-expansion-panels(flat tile accordion multiple active-class="t400" elevation="0")
 					FormEnhance
 					FormLink
 					FormSkill
