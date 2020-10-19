@@ -113,6 +113,7 @@ export const getters = {
       return Math.round(F);
     }
   },
+  // TODO: 음수값 처리
   getDefenseBuff: (state, getters) => {
     const skillBuff = 0;
     return Math.round(getters.getDefense * getters.getEquipmentDefenseVar + skillBuff);
