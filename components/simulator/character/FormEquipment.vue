@@ -3,6 +3,28 @@ v-expansion-panel.transparent
 	v-expansion-panel-header
 		v-row.mr-2(align="center")
 			v-col.subtitle-1.font-weight-bold 장비
+			v-col.pl-5(cols="auto")
+				//- TODO: equipment Preview
+				v-icon(v-if="chip1Rank == 'SS'" color="orange") mdi-circle-medium
+				v-icon(v-else-if="chip1Rank == 'S'" color="yellow") mdi-circle-medium
+				v-icon(v-else-if="chip1Rank == 'A'" color="blue") mdi-circle-medium
+				v-icon(v-else-if="chip1Rank == 'B'" color="mint") mdi-circle-medium
+
+				v-icon(v-if="chip2Rank == 'SS'" color="orange") mdi-circle-medium
+				v-icon(v-else-if="chip2Rank == 'S'" color="yellow") mdi-circle-medium
+				v-icon(v-else-if="chip2Rank == 'A'" color="blue") mdi-circle-medium
+				v-icon(v-else-if="chip2Rank == 'B'" color="mint") mdi-circle-medium
+				
+				v-icon(v-if="osRank == 'SS'" color="orange") mdi-circle-medium
+				v-icon(v-else-if="osRank == 'S'" color="yellow") mdi-circle-medium
+				v-icon(v-else-if="osRank == 'A'" color="blue") mdi-circle-medium
+				v-icon(v-else-if="osRank == 'B'" color="mint") mdi-circle-medium
+				
+				v-icon(:color="getGearSlotColor()") mdi-circle-medium
+				//- v-icon(v-else-if="gearRank == 'S' && gearSlot == Object" color="yellow") mdi-circle-medium
+				//- v-icon(v-else-if="gearRank == 'A' && gearSlot == Object" color="blue") mdi-circle-medium
+				//- v-icon(v-else-if="gearRank == 'B' && gearSlot == Object" color="mint") mdi-circle-medium
+				//- v-icon(v-else color="t100") mdi-circle-medium
 	v-expansion-panel-content
 		//- BEGIN: Chip1
 		v-row
@@ -313,5 +335,16 @@ export default {
 			},
 		},
 	},
+	methods: {
+		getGearSlotColor() {
+			const r = this.$store.state.equipment.gearRank
+			const s = this.$store.state.equipment.gearSlot
+			if (r == 'SS' && s != Array[0])  return 'orange'
+			else if (r == 'S') return 'yellow'
+			else if (r == 'A') return 'blue'
+			else if (r == 'B') return 'mint'
+			else return 't100'
+		}
+	}
 };
 </script>

@@ -8,7 +8,6 @@ v-expansion-panel.transparent
 			v-col(cols="auto")
 				v-btn(v-if="getTotalLink < 5" @click="SET_LINK_MAX" small text color="primary") Max
 				v-btn(v-else @click="SET_LINK_MIN" small text color="red") Min
-
 	v-expansion-panel-content
 		v-row
 			//- TODO: select 5개 모두 값이 있을 경우 풀링 보너스 선택
