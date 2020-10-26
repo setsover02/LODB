@@ -24,10 +24,10 @@ v-row.pl-3.pr-6(align="center")
 	v-spacer
 	v-col(cols="6").pa-0
 		v-row(justify="end" align="center")
-			v-col(cols="auto")
-				v-checkbox(disabled color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
-					template(v-slot:label)
-						span.overline 서약
+			//- v-col(cols="auto")
+			//- 	v-checkbox(disabled color="red" off-icon="mdi-heart-outline" on-icon="mdi-heart")
+			//- 		template(v-slot:label)
+			//- 			span.overline 서약
 			v-col(cols="auto")
 				v-text-field(v-model="level" dense flat solo hide-details suffix="레벨" type="number" autocomplete="off" min="1" max="100" append-icon="mdi-chevron-double-up" prepend-inner-icon="mdi-chevron-double-down" @click:prepend-inner="level = 1" @click:append="level = 100" @wheel="level + 1")
 			v-col(cols="auto")
