@@ -23,6 +23,11 @@ v-card(color="transparent" elevation="0")
 					v-list-item-title.subtitle-2 {{ item.name }}
 					v-list-item-subtitle {{ item.nameEn }}
 				//- v-img(v-if="")
+		template(v-slot:item.rank="{ item }")
+			v-chip(v-if="item.b == 'TRUE'" small color="mint") B
+			v-chip(v-else-if="item.a == 'TRUE'" small color="blue") A
+			v-chip(v-else-if="item.s == 'TRUE'" small color="yellow") S
+			v-chip(v-else small color="orange") SS
 		template(v-slot:item.squad="{ item }")
 			v-list-item.px-0
 				v-list-item-avatar.my-1(tile size="32" color="transparent")

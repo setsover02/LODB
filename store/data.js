@@ -11,6 +11,7 @@ export const state = () => ({
     // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
     {text: '번호', align: 'right', sortable: true, value: 'id'},
     {text: '이름', sortable: true, value: 'name'},
+    {text: '등급', sortable: true, value: 'rank'},
     {text: '스쿼드', sortable: true, value: 'squad'},
     {text: '기업/제조사', sortable: true, value: 'company'},
     {text: '제조국', sortable: true, value: 'madeIn'},
