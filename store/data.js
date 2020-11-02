@@ -16,7 +16,7 @@ export const state = () => ({
     {text: '제조국', sortable: true, value: 'madeIn'},
     {text: '키(cm)', align: 'right', sortable: true, value: 'height'},
     {text: '무게(kg)', align: 'right', sortable: true, value: 'weight'},
-    {text: '나이(만)', align: 'right', sortable: true, value: 'age'},
+    {text: '신체나이(만)', align: 'right', sortable: true, value: 'age'},
     {text: '전투스타일/무기', sortable: false, value: 'battleStyle'},
   ],
 });
