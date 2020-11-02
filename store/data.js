@@ -10,16 +10,14 @@ export const state = () => ({
   charactersCol: [
     // REVIEW: Sorting 기능이 계산식 적용될 경우에도 item 데이터에 맞추어 정렬됨
     {text: '번호', align: 'right', sortable: true, value: 'id'},
-    {text: '아바타', sortable: false, value: 'avatar'},
     {text: '이름', sortable: true, value: 'name'},
     {text: '스쿼드', sortable: true, value: 'squad'},
-    {text: '회사', sortable: true, value: 'company'},
+    {text: '기업/제조사', sortable: true, value: 'company'},
+    {text: '제조국', sortable: true, value: 'madeIn'},
     {text: '키(cm)', align: 'right', sortable: true, value: 'height'},
     {text: '무게(kg)', align: 'right', sortable: true, value: 'weight'},
     {text: '나이(만)', align: 'right', sortable: true, value: 'age'},
-    {text: '제조국', sortable: true, value: 'madeIn'},
-    {text: '전투스타일', sortable: false, value: 'battleStyle'},
-    {text: '무기', sortable: false, value: 'weapon'},
+    {text: '전투스타일/무기', sortable: false, value: 'battleStyle'},
   ],
 });
 
@@ -32,7 +30,7 @@ export const actions = {
   // 01: characterBase sheet
   async asyncCharacterBase({commit}) {
     let sheetName = 'characterBase';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:BR1000?${CONST.SHEET.API}`;
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:BS1000?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();
