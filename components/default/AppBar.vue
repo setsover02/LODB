@@ -20,12 +20,12 @@
 export default {
   data: () => ({
     navigation: [
-      {
-        icon: "mdi-account-supervisor-circle",
-        title: "시뮬레이터",
-        to: "/"
-      },
-      { icon: "mdi-update", title: "스펙", to: "/characters" },
+      // {
+      //   icon: "mdi-account-supervisor-circle",
+      //   title: "시뮬레이터",
+      //   to: "/"
+      // },
+      // { icon: "mdi-update", title: "스펙", to: "/characters" },
     ]
   }),
 
