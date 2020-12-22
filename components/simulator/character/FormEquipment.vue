@@ -150,7 +150,7 @@ v-expansion-panel.transparent
 								v-img(:src="require('~/assets/img/items/' + data.item.id + '.webp')")
 							v-list-item-content
 								v-list-item-title(v-html="data.item.name")
-																//- 아이템 리스트 효과 미리보기 칩
+									//- 아이템 리스트 효과 미리보기 칩
 								v-list-item-subtitle.mt-1
 									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.damageVarHeavy != '' && data.item.damageVarHeavy != undefined" x-small v-html="'중장형 ' + 100 * (data.item.damageVarHeavy || '').split(', ')[gearEnh] + '%'")
 									//- v-chip.font-weight-medium.px-2.mr-1(v-if="data.item.acc != '' && data.item.acc != undefined" x-small v-html="'적중 ' + (data.item.acc || '').split(', ')[gearEnh] + '%'")

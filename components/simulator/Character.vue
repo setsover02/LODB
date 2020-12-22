@@ -12,30 +12,11 @@ v-sheet.pa-0(width="881" color="transparent")
 				span.t100--text.text-h5.font-weight-bold Select Character first
 	v-row(v-else no-gutters)
 		v-col(cols="auto")
-			//- TODO: full body image
-			//- v-img(width="200%" :src="require('~/assets/img/full/181.png')")
-			//-	position: absolute;
-			//- bottom: -15%;
-			//- left: 45%;
-			//- opacity: 0.25;
 			CardPreview
 		v-divider(vertical)
 		v-col(cols="auto")
 			//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
 			v-card.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto(width="440" tile color="transparent" elevation="0")
-				//- v-tabs(v-model="characterTabs" background-color="transparent" grow)
-				//- 	v-tab 강화
-				//- 	v-tab 스킬
-				//- 	v-tab 아이템
-				//- 	v-tab(disabled) 스쿼드
-				//- v-divider
-				//- v-tabs-items.fill-height__vh-n33.overflow-x-hidden.overflow-y-auto.transparent(v-model="characterTabs")
-				//- 	v-tab-item
-				//- 		FormLink
-				//- 		v-divider
-				//- 		FormEnhance
-				//- 	v-tab-item
-				//- 		div 스킬
 				v-expansion-panels(flat tile accordion multiple active-class="t400" elevation="0")
 					FormEnhance
 					FormLink

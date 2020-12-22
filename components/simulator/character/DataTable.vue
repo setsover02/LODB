@@ -39,11 +39,6 @@ v-card(color="transparent" elevation="0")
 				v-list-item-content
 					v-list-item-title.subtitle-2 {{ item.company }}
 					v-list-item-subtitle {{ item.menufacturer }}
-		template(v-slot:item.height="{ item }")
-			span {{ (item.height).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-		template(v-slot:item.weight="{ item }")
-			//- span(v-if="item.height > 100") {{ (item.weight) / 1000 + 't' }}
-			span {{ (item.weight).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
 		template(v-slot:item.battleStyle="{ item }")
 			v-list-item.px-0
 				v-list-item-content

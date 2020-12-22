@@ -24,7 +24,6 @@ export default {
 				},
 				{ icon: "mdi-account-supervisor-outline", title: "캐릭터(old)", to: "/indexElder" },
 				{ icon: "mdi-sword-cross", title: "아이템", to: "/items" },
-				{ icon: "mdi-update", title: "업데이트", to: "/release" },
 				{ icon: "mdi-wrench", title: "Test", to: "/test" }
 			],
 		};
