@@ -29,7 +29,7 @@ const _ = require('lodash');
 // https://sheets.googleapis.com/v4/spreadsheets/1sDINaswIduO1OWDB0tAtwHa6v53j3Ye_ZVe6uLkhkhg/values/characterBase!A1:AQ1000?key=AIzaSyC2PieL5U28k0z3V1PLo-daw3Dt6Ju61To
 export const actions = {
   // Get Google Sheet data
-  // 01: characterBase sheet
+  // characterBase sheet
   async asyncCharacterBase({commit}) {
     let sheetName = 'characterBase';
     const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:BT1000?${CONST.SHEET.API}`;
@@ -42,7 +42,6 @@ export const actions = {
     }
     commit('SET_CHARACTERS_DATA', articles);
   },
-  // 02: characterSkill sheet
   async asyncCharacterSkill({commit}) {
     let sheetName = 'characterSkill';
     const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:H1000?${CONST.SHEET.API}`;
@@ -66,7 +65,6 @@ export const mutations = {
   SET_CHARACTERS_SELECT(state, characterSelect) {
     state.characterSelect = characterSelect;
   },
-
   SET_CHARACTERS_SKILL(state, payload) {
     state.characterSkill = payload;
   },
@@ -74,10 +72,11 @@ export const mutations = {
 
 export const getters = {
   getCharacterCode: state => {
-    if (state.characterSelect.code === undefined) {
+    const C = state.characterSelect.code;
+    if (C === undefined || C === null) {
       return 'undefined'; // undefined.png 반환
     } else {
-      return state.characterSelect.code;
+      return C;
     }
   },
 
