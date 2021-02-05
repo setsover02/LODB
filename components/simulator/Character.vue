@@ -46,7 +46,7 @@ export default {
   },
   computed: {
 		...mapState("data", ["characterSelect"]),
-    ...mapGetters("data", ["getCharacterId"])
+    ...mapGetters("data", ["getCharacterCode"])
   },
   data: () => ({
     characterTabs: null

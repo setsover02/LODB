@@ -7,7 +7,7 @@ v-row.pl-3.pr-6(align="center")
 			template(v-slot:selection="data")
 				v-list-item.white--text(v-bind="data.attrs" :input-value="data.selected")
 					v-list-item-avatar.radius-8(size="56")
-						v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.webp')")
+						v-img(:src="require('~/assets/img/avatar/' + data.item.code + '.webp')")
 					v-list-item-content
 						v-list-item-title.text-h6 {{ data.item.name }}
 						v-list-item-subtitle.caption.t000--text {{ data.item.squad }} • {{ data.item.type }} • {{ data.item.role }}
@@ -17,7 +17,7 @@ v-row.pl-3.pr-6(align="center")
 					v-list-item-content(v-text="data.item")
 				template(v-else)
 					v-list-item-avatar.radius-8(size="24")
-						v-img(:src="require('~/assets/img/avatar/' + data.item.id + '.webp')")
+						v-img(:src="require('~/assets/img/avatar/' + data.item.code + '.webp')")
 					v-list-item-content
 						v-list-item-title(v-html="data.item.name")
 	//- TODO: 서약 관련

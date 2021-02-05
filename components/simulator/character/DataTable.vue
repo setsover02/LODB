@@ -14,7 +14,7 @@ v-card(color="transparent" elevation="0")
 			v-col(cols="auto")
 				label.overline AGS 비활성
 				v-switch.ma-0(disabled inset hide-details)
-	v-data-table(:headers="charactersCol" :items="characterData" item-key="id" hide-default-footer :items-per-page="itemsPerPage" fixed-header sort-by="id" height="calc(100vh - 232px)")
+	v-data-table(:headers="charactersCol" :items="characterData" item-key="code" hide-default-footer :items-per-page="itemsPerPage" fixed-header sort-by="code" height="calc(100vh - 232px)")
 		template(v-slot:item.name="{ item }")
 			v-list-item.px-0
 				v-list-item-avatar.radius-8.my-1(size="40" color="t500")
