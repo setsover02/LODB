@@ -48,11 +48,13 @@ import {mapState, mapGetters} from 'vuex';
 export default {
   mounted() {
     this.$store.dispatch('data/asyncCharacterBase');
+    this.$store.dispatch('skill/asyncCharacterSkill');
   },
   computed: {
     ...mapState('data', ['characterData', 'characterSelect']),
+    ...mapState('skill', ['characterSkill']),
     ...mapState('enhance', ['rankChip']),
-		...mapGetters('enhance', ['getRankItems']),
+    ...mapGetters('enhance', ['getRankItems']),
     characterSelect: {
       get() {
         return this.$store.state.data.characterSelect;

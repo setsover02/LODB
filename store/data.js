@@ -20,7 +20,6 @@ export const state = () => ({
     {text: '신체나이(만)', align: 'right', sortable: true, value: 'age'},
     {text: '전투스타일/무기', sortable: false, value: 'battleStyle'},
   ],
-  characterSkill: [],
 });
 
 const axios = require('axios');
@@ -31,8 +30,8 @@ export const actions = {
   // Get Google Sheet data
   // 01: characterBase sheet
   async asyncCharacterBase({commit}) {
-    let sheetName = 'characterBase';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:BT1000?${CONST.SHEET.API}`;
+    let sheet = 'characterBase';
+    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheet}!A1:BT1000?${CONST.SHEET.API}`;
     const response = await axios.get(url);
     const rows = response.data.values;
     const properties = rows.shift();
@@ -41,20 +40,7 @@ export const actions = {
       articles.push(_.zipObject(properties, rows[i]));
     }
     commit('SET_CHARACTERS_DATA', articles);
-  },
-  // 02: characterSkill sheet
-  async asyncCharacterSkill({commit}) {
-    let sheetName = 'characterSkill';
-    const url = `${CONST.SHEET.URL}${CONST.SHEET.ID}/values/${sheetName}!A1:H1000?${CONST.SHEET.API}`;
-    const response = await axios.get(url);
-    const rows = response.data.values;
-    const properties = rows.shift();
-    const articles = [];
-    for (const i in rows) {
-      articles.push(_.zipObject(properties, rows[i]));
-    }
-    commit('SET_CHARACTERS_SKILL', articles);
-  },
+  }
 };
 
 export const mutations = {
@@ -65,11 +51,7 @@ export const mutations = {
   // FormSelect
   SET_CHARACTERS_SELECT(state, characterSelect) {
     state.characterSelect = characterSelect;
-  },
-
-  SET_CHARACTERS_SKILL(state, payload) {
-    state.characterSkill = payload;
-  },
+  }
 };
 
 export const getters = {
@@ -78,6 +60,14 @@ export const getters = {
       return 'undefined'; // undefined.png 반환
     } else {
       return state.characterSelect.code;
+    }
+  },
+
+  getCharacterId: state => {
+    if (state.characterSelect.id === undefined) {
+      return 'No character ID'
+    } else {
+      return state.characterSelect.id
     }
   },
 

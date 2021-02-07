@@ -1,5 +1,5 @@
 <template lang="pug">
-v-expansion-panel.transparent(disabled)
+v-expansion-panel.transparent
 	v-divider
 	v-expansion-panel-header
 		v-row.mr-2(align="center")

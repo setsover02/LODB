@@ -18,7 +18,7 @@ v-card(color="transparent" elevation="0")
 		template(v-slot:item.name="{ item }")
 			v-list-item.px-0
 				v-list-item-avatar.radius-8.my-1(size="40" color="t500")
-					v-img(:src="require('~/assets/img/avatar/' + item.id + '.webp')")
+					v-img(:src="require('~/assets/img/avatar/' + item.code + '.webp')")
 				v-list-item-content
 					v-list-item-title.subtitle-2 {{ item.name }}
 					v-list-item-subtitle {{ item.nameEn }}
