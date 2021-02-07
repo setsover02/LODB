@@ -16,12 +16,12 @@
       // Normal
       & > .v-input__control > .v-input__slot
         border: 1px solid color(lilac)
-        @include box-shadow(0 0 4px 4px (color(lilac, 30)))
+        @include box-shadow(0 0 0px 4px (color(lilac, 30)))
 
       // Error
       &.v-input--has-state > .v-input__control > .v-input__slot
         border: 1px solid color(red)
-        @include box-shadow(0 0 4px 4px (color(red, 30)))
+        @include box-shadow(0 0 0px 4px (color(red, 30)))
 
     // 4. Disabled, Readonly
     &.v-input--is-disabled > .v-input__control > .v-input__slot,
@@ -31,15 +31,15 @@
   // 5. if has Color
   &.v-text-field--solo.v-input--is-focused.blue--text > .v-input__control > .v-input__slot
     border: 1px solid color(blue)
-    @include box-shadow(0 0 4px 4px (color(blue, 30)))
+    @include box-shadow(0 0 0px 4px (color(blue, 30)))
 
   &.v-text-field--solo.v-input--is-focused.red--text > .v-input__control > .v-input__slot
     border: 1px solid color(red)
-    @include box-shadow(0 0 4px 4px (color(red, 30)))
+    @include box-shadow(0 0 0px 4px (color(red, 30)))
   
   &.v-text-field--solo.v-input--is-focused.yellow--text > .v-input__control > .v-input__slot
     border: 1px solid color(yellow)
-    @include box-shadow(0 0 4px 4px (color(yellow, 30)))
+    @include box-shadow(0 0 0px 4px (color(yellow, 30)))
 
 // block
 // Textfield Dense > font-size modify

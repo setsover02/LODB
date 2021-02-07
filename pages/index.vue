@@ -4,17 +4,17 @@ v-row.fill-height
 		Character
 	v-divider(vertical).fill-height
 	v-col
-		Enemy
+		Result
 </template>
 <script>
 import Character from "~/components/simulator/Character";
-import Enemy from "~/components/simulator/Enemy";
+import Result from "~/components/simulator/Result";
 
 export default {
 	transition: "slide-y-transition",
 	components: {
 		Character,
-		Enemy
+		Result
 	}
 };
 </script>

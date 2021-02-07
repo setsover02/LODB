@@ -39,6 +39,18 @@ export const getters = {
     const id = element => element.id === rootGetters['data/getCharacterId'];
     return state.characterSkill.filter(id);
   },
+
+  getActive1Rate: (state, getters) => {
+    const Obj = getters.getCharacterSkillFilters[0].buffs;
+    return Obj
+  },
+
+  // 1스킬 최종결과 계산
+  getActive1Result: (state, getters, rootState, rootGetters) => {
+    const a = rootGetters['character/damage/getDamage'];
+    const sc = getters.getActive1Rate;
+    return a;
+  },
 };
 
 export const mutations = {

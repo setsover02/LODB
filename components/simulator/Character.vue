@@ -12,7 +12,7 @@ v-sheet.pa-0(width="881" color="transparent")
 				span.t100--text.text-h5.font-weight-bold Select Character first
 	v-row(v-else no-gutters)
 		v-col(cols="auto")
-			CardPreview
+			CardStatus
 		v-divider(vertical)
 		v-col(cols="auto")
 			//- Card : DataTable > row 선택 시 선택된 캐릭터 정보 불러옴
@@ -26,7 +26,7 @@ v-sheet.pa-0(width="881" color="transparent")
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
-import CardPreview from "~/components/simulator/character/CardPreview";
+import CardStatus from "~/components/simulator/character/CardStatus";
 import FormSelect from "~/components/simulator/character/FormSelect";
 import FormEnhance from "~/components/simulator/character/FormEnhance";
 import FormLink from "~/components/simulator/character/FormLink";
@@ -36,7 +36,7 @@ import FormSquad from "~/components/simulator/character/FormSquad";
 
 export default {
   components: {
-    CardPreview,
+    CardStatus,
     FormSelect,
     FormEnhance,
     FormLink,
