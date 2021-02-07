@@ -25,7 +25,7 @@ export default {
         title: "스킬",
         to: "/skill"
       },
-      { icon: "mdi-update", title: "스펙", to: "/characters" },
+      // { icon: "mdi-update", title: "스펙", to: "/characters" },
     ]
   }),
 
