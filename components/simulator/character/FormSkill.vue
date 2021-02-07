@@ -5,55 +5,48 @@ v-expansion-panel.transparent
 		v-row.mr-2(align="center")
 			v-col.subtitle-1.font-weight-bold 스킬
 			v-col.pl-5(cols="auto")
-				v-icon(color="primary") mdi-circle-medium
-				v-icon(color="primary") mdi-circle-medium
-				v-icon(color="yellow") mdi-circle-medium
-				v-icon(color="yellow") mdi-circle-medium
-				v-icon(color="t100") mdi-circle-medium
+				v-chip.ml-2(small color="yellow") 10
+				v-chip.ml-2(small color="yellow") 10
+				v-chip.ml-2(small color="primary") 9
+				v-chip.ml-2(small color="primary") 8
+				v-chip.ml-2(small color="t100") 10
 	v-expansion-panel-content
 		v-row.mb-4(align="center")
 			v-spacer
 			v-col(cols="auto")
-				v-btn-toggle(dense mandatory color="yellow")
+				v-btn-toggle(dense mandatory color="yellow" :show-arrow="false")
 					v-btn(small) Normal
 					v-btn(small) F.Change
-		v-row
-			v-col()
+		v-tabs(v-model="skillTabs" height="56" hide-slider)
+			v-tab(v-for="item in getCharacterSkillFilters")
 				v-badge(overlap content="10")
-					v-avatar
-						v-img(:src="require('~/assets/img/skill/AirStrike_active.webp')")
-			v-col()
-				v-badge(overlap content="10")
-					v-avatar
-						v-img(:src="require('~/assets/img/skill/AirStrike_active.webp')")
-			v-col()
-				v-badge(overlap content="8")
-					v-avatar
-						v-img(:src="require('~/assets/img/skill/AntiArmorShot_passive.webp')")
-			v-col()
-				v-badge(overlap content="7")
-					v-avatar
-						v-img(:src="require('~/assets/img/skill/AntiArmorShot_passive.webp')")
+					v-avatar(size="40")
+						v-img(:src="require('~/assets/img/skill/' + item.icon + '_' + item.type + '.webp')")
+		v-tabs-items(v-model="skillTabs" )
+			v-tab-item(v-for="item in getCharacterSkillFilters")
+				v-card(flat)
+					v-card-title.px-0 {{ item.name }}
+						v-switch.pt-0.mt-0.ml-auto(inset hide-details)
+						v-text-field.min-width(value="10" dense flat solo hide-details type="number" counter autocomplete="off" min="0" max="3" suffix="레벨")
+					v-card-text.t000--text.body-1.px-0(v-text="item.description")
+		v-row.mb-2(align="center")
+			v-spacer
 			v-col(cols="auto")
-				v-avatar(color="t400")
-		v-card.mb-4(flat color="transparent")
-			v-card-title.px-0 대검공격
-				v-switch.pt-0.mt-0.ml-auto(inset hide-details)
-				v-text-field.min-width(value="10" dense flat solo hide-details type="number" counter autocomplete="off" min="0" max="3" suffix="레벨")
-			v-card-text.px-0 대검으로 강하게 내리쳐 목표 지점에 [@:공격력 :1.85~0.125:배 보호 무시 피해]를 줍니다. <플라즈마 제네레이터> 중첩을 1 소모하며, 중첩이 최대면 [피해량 +:60~3:%]가 증가합니다.
-		v-card.px-1.t300(flat)
-			v-row.mb-2(align="center")
-				v-spacer
-				v-col(cols="auto")
-					p.body-1.font-weight-bold.mb-0 플라즈마 제네레이터
-				v-col(cols="auto")
-					v-text-field.min-width(value="1" dense flat solo hide-details type="number" counter autocomplete="off" min="0" max="3" suffix="중첩")
+				p.body-1.font-weight-bold.mb-0 플라즈마 제네레이터
+			v-col(cols="auto")
+				v-text-field.min-width(value="1" dense flat solo hide-details type="number" counter autocomplete="off" min="0" max="3" suffix="중첩")
 </template>
 <script>
+import {mapState, mapGetters} from 'vuex';
+
 export default {
   data: () => ({
-    skillTab: null,
+    skillTabs: null,
   }),
+  computed: {
+		...mapState('enhance', ['rank']),
+    ...mapGetters('skill', ['getCharacterSkillFilters']),
+  },
 };
 </script>
 <style scoped lang="sass">
